@@ -2,7 +2,7 @@ package co.edu.unbosque.model;
 
 import java.io.Serializable;
 
-public class CiclistaDTO implements Serializable {
+public class CiclistaDTO extends UsuarioDTO implements Serializable {
 	private int identificador;
 	private String nombre;
 	private double tiempoAcumuladoMin;
@@ -12,7 +12,8 @@ public class CiclistaDTO implements Serializable {
 	public CiclistaDTO() {
 	}
 
-	public CiclistaDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura) {
+	public CiclistaDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad,
+			String contextura) {
 		super();
 		this.identificador = identificador;
 		this.nombre = nombre;
@@ -23,6 +24,24 @@ public class CiclistaDTO implements Serializable {
 
 	public CiclistaDTO(int identificador, String nombre, double tiempoAcumuladoMin) {
 		super();
+		this.identificador = identificador;
+		this.nombre = nombre;
+		this.tiempoAcumuladoMin = tiempoAcumuladoMin;
+	}
+
+	public CiclistaDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura) {
+		super(imagen, correo, usuario, id, contrasena, genero);
+		this.identificador = identificador;
+		this.nombre = nombre;
+		this.tiempoAcumuladoMin = tiempoAcumuladoMin;
+		this.especialidad = especialidad;
+		this.contextura = contextura;
+	}
+
+	public CiclistaDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin) {
+		super(imagen, correo, usuario, id, contrasena, genero);
 		this.identificador = identificador;
 		this.nombre = nombre;
 		this.tiempoAcumuladoMin = tiempoAcumuladoMin;
@@ -70,7 +89,8 @@ public class CiclistaDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "identificador: " + identificador + "\nNombre: " + nombre + "\nTiempo Acumulado Minutos: " + tiempoAcumuladoMin
-				+ "\nEspecialidad: " + especialidad + "\nContextura: " + contextura + "\n";
+		return super.toString() + "identificador: " + identificador + "\nNombre: " + nombre
+				+ "\nTiempo Acumulado Minutos: " + tiempoAcumuladoMin + "\nEspecialidad: " + especialidad
+				+ "\nContextura: " + contextura + "\n";
 	}
 }

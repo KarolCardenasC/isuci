@@ -3,6 +3,7 @@ package co.edu.unbosque.model;
 import java.io.Serializable;
 
 public class SprinterDTO extends CiclistaDTO implements Serializable {
+
 	private double explosionMetrosFinales;
 	private double potenciaPromVatios;
 	private double velocidadPromSprintKm;
@@ -33,6 +34,25 @@ public class SprinterDTO extends CiclistaDTO implements Serializable {
 		this.velocidadPromSprintKm = velocidadPromSprintKm;
 	}
 
+	public SprinterDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura,
+			double explosionMetrosFinales, double potenciaPromVatios, double velocidadPromSprintKm) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
+				contextura);
+		this.explosionMetrosFinales = explosionMetrosFinales;
+		this.potenciaPromVatios = potenciaPromVatios;
+		this.velocidadPromSprintKm = velocidadPromSprintKm;
+	}
+
+	public SprinterDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin, double explosionMetrosFinales,
+			double potenciaPromVatios, double velocidadPromSprintKm) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
+		this.explosionMetrosFinales = explosionMetrosFinales;
+		this.potenciaPromVatios = potenciaPromVatios;
+		this.velocidadPromSprintKm = velocidadPromSprintKm;
+	}
+
 	public SprinterDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad,
 			String contextura) {
 		super(identificador, nombre, tiempoAcumuladoMin, especialidad, contextura);
@@ -40,6 +60,17 @@ public class SprinterDTO extends CiclistaDTO implements Serializable {
 
 	public SprinterDTO(int identificador, String nombre, double tiempoAcumuladoMin) {
 		super(identificador, nombre, tiempoAcumuladoMin);
+	}
+
+	public SprinterDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
+				contextura);
+	}
+
+	public SprinterDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
 	}
 
 	public double getExplosionMetrosFinales() {

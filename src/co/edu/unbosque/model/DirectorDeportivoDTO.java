@@ -2,7 +2,7 @@ package co.edu.unbosque.model;
 
 import java.io.Serializable;
 
-public class DirectorDeportivoDTO implements Serializable {
+public class DirectorDeportivoDTO extends UsuarioDTO implements Serializable {
 	private long cedula;
 	private String nacionalidad;
 
@@ -13,6 +13,18 @@ public class DirectorDeportivoDTO implements Serializable {
 		super();
 		this.cedula = cedula;
 		this.nacionalidad = nacionalidad;
+	}
+
+	public DirectorDeportivoDTO(String imagen, String correo, String usuario, String id, String contrasena,
+			String genero, long cedula, String nacionalidad) {
+		super(imagen, correo, usuario, id, contrasena, genero);
+		this.cedula = cedula;
+		this.nacionalidad = nacionalidad;
+	}
+
+	public DirectorDeportivoDTO(String imagen, String correo, String usuario, String id, String contrasena,
+			String genero) {
+		super(imagen, correo, usuario, id, contrasena, genero);
 	}
 
 	public long getCedula() {
@@ -33,7 +45,7 @@ public class DirectorDeportivoDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cedula: " + cedula + "\nNacionalidad: " + nacionalidad + "\n";
+		return super.toString() + "Cedula: " + cedula + "\nNacionalidad: " + nacionalidad + "\n";
 	}
 
 }

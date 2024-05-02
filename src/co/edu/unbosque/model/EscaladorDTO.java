@@ -30,6 +30,23 @@ public class EscaladorDTO extends CiclistaDTO implements Serializable {
 		this.gradoRampaSoportada = gradoRampaSoportada;
 	}
 
+	public EscaladorDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura,
+			double aceleracionPromSubida, double gradoRampaSoportada) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
+				contextura);
+		this.aceleracionPromSubida = aceleracionPromSubida;
+		this.gradoRampaSoportada = gradoRampaSoportada;
+	}
+
+	public EscaladorDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin, double aceleracionPromSubida,
+			double gradoRampaSoportada) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
+		this.aceleracionPromSubida = aceleracionPromSubida;
+		this.gradoRampaSoportada = gradoRampaSoportada;
+	}
+
 	public EscaladorDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad,
 			String contextura) {
 		super(identificador, nombre, tiempoAcumuladoMin, especialidad, contextura);
@@ -37,6 +54,17 @@ public class EscaladorDTO extends CiclistaDTO implements Serializable {
 
 	public EscaladorDTO(int identificador, String nombre, double tiempoAcumuladoMin) {
 		super(identificador, nombre, tiempoAcumuladoMin);
+	}
+
+	public EscaladorDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
+				contextura);
+	}
+
+	public EscaladorDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
 	}
 
 	public double getAceleracionPromSubida() {

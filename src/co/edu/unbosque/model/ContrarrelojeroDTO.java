@@ -3,6 +3,7 @@ package co.edu.unbosque.model;
 import java.io.Serializable;
 
 public class ContrarrelojeroDTO extends CiclistaDTO implements Serializable {
+	
 	private double velocidadMaxima;
 
 	public ContrarrelojeroDTO() {
@@ -24,6 +25,20 @@ public class ContrarrelojeroDTO extends CiclistaDTO implements Serializable {
 		this.velocidadMaxima = velocidadMaxima;
 	}
 
+	public ContrarrelojeroDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura,
+			double velocidadMaxima) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
+				contextura);
+		this.velocidadMaxima = velocidadMaxima;
+	}
+
+	public ContrarrelojeroDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin, double velocidadMaxima) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
+		this.velocidadMaxima = velocidadMaxima;
+	}
+
 	public ContrarrelojeroDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad,
 			String contextura) {
 		super(identificador, nombre, tiempoAcumuladoMin, especialidad, contextura);
@@ -31,6 +46,17 @@ public class ContrarrelojeroDTO extends CiclistaDTO implements Serializable {
 
 	public ContrarrelojeroDTO(int identificador, String nombre, double tiempoAcumuladoMin) {
 		super(identificador, nombre, tiempoAcumuladoMin);
+	}
+
+	public ContrarrelojeroDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
+				contextura);
+	}
+
+	public ContrarrelojeroDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			int identificador, String nombre, double tiempoAcumuladoMin) {
+		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
 	}
 
 	public double getVelocidadMaxima() {

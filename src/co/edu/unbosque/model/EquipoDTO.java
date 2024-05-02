@@ -3,7 +3,8 @@ package co.edu.unbosque.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class EquipoDTO implements Serializable {
+public class EquipoDTO extends UsuarioDTO implements Serializable {
+
 	private String nombre;
 	private double tiempoCarrera;
 	private String pais;
@@ -25,12 +26,20 @@ public class EquipoDTO implements Serializable {
 		this.directorDep = directorDep;
 	}
 
-	public EquipoDTO(String nombre, double tiempoCarrera, String pais, ArrayList<CiclistaDTO> listaCiclistas) {
-		super();
+	public EquipoDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
+			String nombre, double tiempoCarrera, String pais, ArrayList<CiclistaDTO> listaCiclistas,
+			MasajistaDTO masajista, DirectorDeportivoDTO directorDep) {
+		super(imagen, correo, usuario, id, contrasena, genero);
 		this.nombre = nombre;
 		this.tiempoCarrera = tiempoCarrera;
 		this.pais = pais;
 		this.listaCiclistas = listaCiclistas;
+		this.masajista = masajista;
+		this.directorDep = directorDep;
+	}
+
+	public EquipoDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero) {
+		super(imagen, correo, usuario, id, contrasena, genero);
 	}
 
 	public String getNombre() {
@@ -84,6 +93,7 @@ public class EquipoDTO implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
 		sb.append("Nombre: " + nombre);
 		sb.append("\nTiempo Carrera: " + tiempoCarrera);
 		sb.append("\nPais: " + pais);
