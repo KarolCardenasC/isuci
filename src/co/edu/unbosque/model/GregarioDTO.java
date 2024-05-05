@@ -14,49 +14,41 @@ public class GregarioDTO extends CiclistaDTO implements Serializable {
 		this.funcionPeloton = funcionPeloton;
 	}
 
-	public GregarioDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad,
+	public GregarioDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
 			String contextura, String funcionPeloton) {
-		super(identificador, nombre, tiempoAcumuladoMin, especialidad, contextura);
+		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura);
 		this.funcionPeloton = funcionPeloton;
 	}
 
-	public GregarioDTO(int identificador, String nombre, double tiempoAcumuladoMin, String funcionPeloton) {
-		super(identificador, nombre, tiempoAcumuladoMin);
+	public GregarioDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
+			String especialidad, String contextura, String funcionPeloton) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero, identificador, aniosExperiencia,
+				tiempoAcumuladoMin, especialidad, contextura);
 		this.funcionPeloton = funcionPeloton;
 	}
 
-	public GregarioDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura,
-			String funcionPeloton) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
-				contextura);
+	public GregarioDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, String funcionPeloton) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 		this.funcionPeloton = funcionPeloton;
 	}
 
-	public GregarioDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin, String funcionPeloton) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
-		this.funcionPeloton = funcionPeloton;
-	}
-
-	public GregarioDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad,
+	public GregarioDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
 			String contextura) {
-		super(identificador, nombre, tiempoAcumuladoMin, especialidad, contextura);
+		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura);
 	}
 
-	public GregarioDTO(int identificador, String nombre, double tiempoAcumuladoMin) {
-		super(identificador, nombre, tiempoAcumuladoMin);
+	public GregarioDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
+			String especialidad, String contextura) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero, identificador, aniosExperiencia,
+				tiempoAcumuladoMin, especialidad, contextura);
 	}
 
-	public GregarioDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
-				contextura);
-	}
-
-	public GregarioDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
+	public GregarioDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 	}
 
 	public String getFuncionPeloton() {

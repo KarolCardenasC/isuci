@@ -14,49 +14,41 @@ public class ClasicomanoDTO extends CiclistaDTO implements Serializable {
 		this.numeroClasicosganados = numeroClasicosganados;
 	}
 
-	public ClasicomanoDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad,
+	public ClasicomanoDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
 			String contextura, int numeroClasicosganados) {
-		super(identificador, nombre, tiempoAcumuladoMin, especialidad, contextura);
+		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura);
 		this.numeroClasicosganados = numeroClasicosganados;
 	}
 
-	public ClasicomanoDTO(int identificador, String nombre, double tiempoAcumuladoMin, int numeroClasicosganados) {
-		super(identificador, nombre, tiempoAcumuladoMin);
+	public ClasicomanoDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
+			String especialidad, String contextura, int numeroClasicosganados) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero, identificador, aniosExperiencia,
+				tiempoAcumuladoMin, especialidad, contextura);
 		this.numeroClasicosganados = numeroClasicosganados;
 	}
 
-	public ClasicomanoDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura,
-			int numeroClasicosganados) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
-				contextura);
+	public ClasicomanoDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, int numeroClasicosganados) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 		this.numeroClasicosganados = numeroClasicosganados;
 	}
 
-	public ClasicomanoDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin, int numeroClasicosganados) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
-		this.numeroClasicosganados = numeroClasicosganados;
-	}
-
-	public ClasicomanoDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad,
+	public ClasicomanoDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
 			String contextura) {
-		super(identificador, nombre, tiempoAcumuladoMin, especialidad, contextura);
+		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura);
 	}
 
-	public ClasicomanoDTO(int identificador, String nombre, double tiempoAcumuladoMin) {
-		super(identificador, nombre, tiempoAcumuladoMin);
+	public ClasicomanoDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
+			String especialidad, String contextura) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero, identificador, aniosExperiencia,
+				tiempoAcumuladoMin, especialidad, contextura);
 	}
 
-	public ClasicomanoDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
-				contextura);
-	}
-
-	public ClasicomanoDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
+	public ClasicomanoDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 	}
 
 	public int getNumeroClasicosganados() {

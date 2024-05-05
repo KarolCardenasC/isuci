@@ -18,59 +18,49 @@ public class SprinterDTO extends CiclistaDTO implements Serializable {
 		this.velocidadPromSprintKm = velocidadPromSprintKm;
 	}
 
-	public SprinterDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad,
+	public SprinterDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
 			String contextura, double explosionMetrosFinales, double potenciaPromVatios, double velocidadPromSprintKm) {
-		super(identificador, nombre, tiempoAcumuladoMin, especialidad, contextura);
+		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura);
 		this.explosionMetrosFinales = explosionMetrosFinales;
 		this.potenciaPromVatios = potenciaPromVatios;
 		this.velocidadPromSprintKm = velocidadPromSprintKm;
 	}
 
-	public SprinterDTO(int identificador, String nombre, double tiempoAcumuladoMin, double explosionMetrosFinales,
-			double potenciaPromVatios, double velocidadPromSprintKm) {
-		super(identificador, nombre, tiempoAcumuladoMin);
+	public SprinterDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
+			String especialidad, String contextura, double explosionMetrosFinales, double potenciaPromVatios,
+			double velocidadPromSprintKm) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero, identificador, aniosExperiencia,
+				tiempoAcumuladoMin, especialidad, contextura);
 		this.explosionMetrosFinales = explosionMetrosFinales;
 		this.potenciaPromVatios = potenciaPromVatios;
 		this.velocidadPromSprintKm = velocidadPromSprintKm;
 	}
 
-	public SprinterDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura,
-			double explosionMetrosFinales, double potenciaPromVatios, double velocidadPromSprintKm) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
-				contextura);
+	public SprinterDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, double explosionMetrosFinales, double potenciaPromVatios,
+			double velocidadPromSprintKm) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 		this.explosionMetrosFinales = explosionMetrosFinales;
 		this.potenciaPromVatios = potenciaPromVatios;
 		this.velocidadPromSprintKm = velocidadPromSprintKm;
 	}
 
-	public SprinterDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin, double explosionMetrosFinales,
-			double potenciaPromVatios, double velocidadPromSprintKm) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
-		this.explosionMetrosFinales = explosionMetrosFinales;
-		this.potenciaPromVatios = potenciaPromVatios;
-		this.velocidadPromSprintKm = velocidadPromSprintKm;
-	}
-
-	public SprinterDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad,
+	public SprinterDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
 			String contextura) {
-		super(identificador, nombre, tiempoAcumuladoMin, especialidad, contextura);
+		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura);
 	}
 
-	public SprinterDTO(int identificador, String nombre, double tiempoAcumuladoMin) {
-		super(identificador, nombre, tiempoAcumuladoMin);
+	public SprinterDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
+			String especialidad, String contextura) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero, identificador, aniosExperiencia,
+				tiempoAcumuladoMin, especialidad, contextura);
 	}
 
-	public SprinterDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin, especialidad,
-				contextura);
-	}
-
-	public SprinterDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin) {
-		super(imagen, correo, usuario, id, contrasena, genero, identificador, nombre, tiempoAcumuladoMin);
+	public SprinterDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 	}
 
 	public double getExplosionMetrosFinales() {
@@ -102,6 +92,14 @@ public class SprinterDTO extends CiclistaDTO implements Serializable {
 		return super.toString() + "Explosion Metros Finales: " + explosionMetrosFinales
 				+ "\nPotencia Promedio en Vatios: " + potenciaPromVatios + "\nVelocidad Promedio Sprint Km/h: "
 				+ velocidadPromSprintKm + "\n";
+	}
+	
+	public String aumentarRitmo() {
+		return "EL sprinter ha aumentado el ritmo";
+	}
+	
+	public String disminuirRitmo() {
+		return "EL sprinter ha disminuido el ritmo";
 	}
 
 }

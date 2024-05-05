@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class UsuarioDTO implements Serializable {
 	private String imagen;
+	private String nombre;
+	private long cedula;
 	private String correo;
 	private String usuario;
 	private String id;
@@ -13,9 +15,12 @@ public class UsuarioDTO implements Serializable {
 	public UsuarioDTO() {
 	}
 
-	public UsuarioDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero) {
+	public UsuarioDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero) {
 		super();
 		this.imagen = imagen;
+		this.nombre = nombre;
+		this.cedula = cedula;
 		this.correo = correo;
 		this.usuario = usuario;
 		this.id = id;
@@ -29,6 +34,22 @@ public class UsuarioDTO implements Serializable {
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public long getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(long cedula) {
+		this.cedula = cedula;
 	}
 
 	public String getCorreo() {
@@ -73,8 +94,9 @@ public class UsuarioDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Imagen: " + imagen + "\nCorreo: " + correo + "\nUsuario: " + usuario + "\nId: " + id
-				+ "\nContraseña: " + contrasena + "\nGenero: " + genero + "\n";
+		return "Imagen: " + imagen + "\nNombre: " + nombre + "\nCedula: " + cedula + "\nCorreo: " + correo
+				+ "\nUsuario: " + usuario + "\nId: " + id + "\nContraseña: " + contrasena + "\nGenero: " + genero
+				+ "\n";
 	}
 
 }

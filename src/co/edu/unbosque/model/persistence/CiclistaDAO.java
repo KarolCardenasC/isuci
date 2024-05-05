@@ -44,11 +44,11 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 	}
 
 	@Override
-	public String actualizarPorIdentificador(int id, CiclistaDTO newData) {
-		String msj = "No existe un Ciclista con ese identificador";
+	public String actualizarPorCedula(long id, CiclistaDTO newData) {
+		String msj = "No existe un Ciclista con esa cédula";
 
 		for (int i = 0; i < listaCiclistas.size(); i++) {
-			if (listaCiclistas.get(i).getIdentificador() == id) {
+			if (listaCiclistas.get(i).getCedula() == id) {
 				listaCiclistas.set(i, newData);
 				FileHandler.abrirEscribirSerializable(SERIALIZED_FILE_NAME, listaCiclistas);
 				msj = "El Ciclista se ha actualizado con exito";
@@ -73,10 +73,10 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 	}
 
 	@Override
-	public CiclistaDTO buscarIdentificador(int id) {
+	public CiclistaDTO buscarCedula(long id) {
 
 		for (int i = 0; i < listaCiclistas.size(); i++) {
-			if (listaCiclistas.get(i).getIdentificador() == id) {
+			if (listaCiclistas.get(i).getCedula() == id) {
 				return listaCiclistas.get(i);
 
 			}
@@ -85,14 +85,14 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 	}
 
 	@Override
-	public String eliminarPorIdentificador(int id) {
-		String msj = "No existe un Ciclista con ese identificador";
+	public String eliminarPorCedula(long id) {
+		String msj = "No existe un Ciclista con esa cédula";
 
 		for (int i = 0; i < listaCiclistas.size(); i++) {
-			if (listaCiclistas.get(i).getIdentificador() == id) {
+			if (listaCiclistas.get(i).getCedula() == id) {
 				listaCiclistas.remove(i);
 				FileHandler.abrirEscribirSerializable(SERIALIZED_FILE_NAME, listaCiclistas);
-				msj = "El Ciclista se ha eliminado con exito";
+				msj = "El Ciclista se ha eliminado con éxito";
 				break;
 			}
 		}
@@ -102,8 +102,16 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 
 	@Override
 	public ArrayList<CiclistaDTO> mostrarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CiclistaDTO> listaMostrar = new ArrayList<>();
+		listaCiclistas.forEach(c -> {
+			CiclistaDTO ciclistaTemp = new CiclistaDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(), c.getUsuario(), c.getId(),
+					c.getContrasena(), c.getGenero(), c.getIdentificador(), c.getAniosExperiencia(), c.getTiempoAcumuladoMin(),
+					c.getEspecialidad(), c.getContextura());
+
+			listaMostrar.add(ciclistaTemp);
+		});
+
+		return listaMostrar;
 	}
 
 }

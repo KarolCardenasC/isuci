@@ -3,36 +3,26 @@ package co.edu.unbosque.model;
 import java.io.Serializable;
 
 public class MasajistaDTO extends UsuarioDTO implements Serializable {
-	
-	private long cedula;
+
 	private int aniosExperiencia;
 
 	public MasajistaDTO() {
 	}
 
-	public MasajistaDTO(long cedula, int aniosExperiencia) {
+	public MasajistaDTO(int aniosExperiencia) {
 		super();
-		this.cedula = cedula;
 		this.aniosExperiencia = aniosExperiencia;
 	}
 
-	public MasajistaDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			long cedula, int aniosExperiencia) {
-		super(imagen, correo, usuario, id, contrasena, genero);
-		this.cedula = cedula;
+	public MasajistaDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, int aniosExperiencia) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 		this.aniosExperiencia = aniosExperiencia;
 	}
 
-	public MasajistaDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero) {
-		super(imagen, correo, usuario, id, contrasena, genero);
-	}
-
-	public long getCedula() {
-		return cedula;
-	}
-
-	public void setCedula(long cedula) {
-		this.cedula = cedula;
+	public MasajistaDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 	}
 
 	public int getAniosExperiencia() {
@@ -45,7 +35,7 @@ public class MasajistaDTO extends UsuarioDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return super.toString() + "Cedula: " + cedula + "\nAños Experiencia: " + aniosExperiencia + "\n";
+		return super.toString() + "Años Experiencia: " + aniosExperiencia + "\n";
 	}
 
 }

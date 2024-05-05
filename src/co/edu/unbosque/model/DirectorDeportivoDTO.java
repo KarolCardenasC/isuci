@@ -3,36 +3,26 @@ package co.edu.unbosque.model;
 import java.io.Serializable;
 
 public class DirectorDeportivoDTO extends UsuarioDTO implements Serializable {
-	private long cedula;
+
 	private String nacionalidad;
 
 	public DirectorDeportivoDTO() {
 	}
 
-	public DirectorDeportivoDTO(long cedula, String nacionalidad) {
+	public DirectorDeportivoDTO(String nacionalidad) {
 		super();
-		this.cedula = cedula;
 		this.nacionalidad = nacionalidad;
 	}
 
-	public DirectorDeportivoDTO(String imagen, String correo, String usuario, String id, String contrasena,
-			String genero, long cedula, String nacionalidad) {
-		super(imagen, correo, usuario, id, contrasena, genero);
-		this.cedula = cedula;
+	public DirectorDeportivoDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, String nacionalidad) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 		this.nacionalidad = nacionalidad;
 	}
 
-	public DirectorDeportivoDTO(String imagen, String correo, String usuario, String id, String contrasena,
-			String genero) {
-		super(imagen, correo, usuario, id, contrasena, genero);
-	}
-
-	public long getCedula() {
-		return cedula;
-	}
-
-	public void setCedula(long cedula) {
-		this.cedula = cedula;
+	public DirectorDeportivoDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 	}
 
 	public String getNacionalidad() {
@@ -45,7 +35,7 @@ public class DirectorDeportivoDTO extends UsuarioDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return super.toString() + "Cedula: " + cedula + "\nNacionalidad: " + nacionalidad + "\n";
+		return super.toString() + "Nacionalidad: " + nacionalidad + "\n";
 	}
 
 }

@@ -3,8 +3,9 @@ package co.edu.unbosque.model;
 import java.io.Serializable;
 
 public class CiclistaDTO extends UsuarioDTO implements Serializable {
+
 	private int identificador;
-	private String nombre;
+	private int aniosExperiencia;
 	private double tiempoAcumuladoMin;
 	private String especialidad;
 	private String contextura;
@@ -12,39 +13,30 @@ public class CiclistaDTO extends UsuarioDTO implements Serializable {
 	public CiclistaDTO() {
 	}
 
-	public CiclistaDTO(int identificador, String nombre, double tiempoAcumuladoMin, String especialidad,
+	public CiclistaDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
 			String contextura) {
 		super();
 		this.identificador = identificador;
-		this.nombre = nombre;
+		this.aniosExperiencia = aniosExperiencia;
 		this.tiempoAcumuladoMin = tiempoAcumuladoMin;
 		this.especialidad = especialidad;
 		this.contextura = contextura;
 	}
 
-	public CiclistaDTO(int identificador, String nombre, double tiempoAcumuladoMin) {
-		super();
+	public CiclistaDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
+			String especialidad, String contextura) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 		this.identificador = identificador;
-		this.nombre = nombre;
-		this.tiempoAcumuladoMin = tiempoAcumuladoMin;
-	}
-
-	public CiclistaDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin, String especialidad, String contextura) {
-		super(imagen, correo, usuario, id, contrasena, genero);
-		this.identificador = identificador;
-		this.nombre = nombre;
+		this.aniosExperiencia = aniosExperiencia;
 		this.tiempoAcumuladoMin = tiempoAcumuladoMin;
 		this.especialidad = especialidad;
 		this.contextura = contextura;
 	}
 
-	public CiclistaDTO(String imagen, String correo, String usuario, String id, String contrasena, String genero,
-			int identificador, String nombre, double tiempoAcumuladoMin) {
-		super(imagen, correo, usuario, id, contrasena, genero);
-		this.identificador = identificador;
-		this.nombre = nombre;
-		this.tiempoAcumuladoMin = tiempoAcumuladoMin;
+	public CiclistaDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
+			String contrasena, String genero) {
+		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 	}
 
 	public int getIdentificador() {
@@ -55,12 +47,12 @@ public class CiclistaDTO extends UsuarioDTO implements Serializable {
 		this.identificador = identificador;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public int getAniosExperiencia() {
+		return aniosExperiencia;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setAniosExperiencia(int aniosExperiencia) {
+		this.aniosExperiencia = aniosExperiencia;
 	}
 
 	public double getTiempoAcumuladoMin() {
@@ -89,8 +81,12 @@ public class CiclistaDTO extends UsuarioDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return super.toString() + "identificador: " + identificador + "\nNombre: " + nombre
+		return super.toString() + "identificador: " + identificador + "\nAños Experiencia: " + aniosExperiencia
 				+ "\nTiempo Acumulado Minutos: " + tiempoAcumuladoMin + "\nEspecialidad: " + especialidad
 				+ "\nContextura: " + contextura + "\n";
+	}
+	
+	public String pedalear(int pedaleos) {
+		return "El ciclista tiene una cadencia de pedaleo de " + pedaleos + " RPM";
 	}
 }

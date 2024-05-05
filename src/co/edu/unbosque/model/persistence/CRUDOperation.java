@@ -20,13 +20,13 @@ public interface CRUDOperation<E> {
 
 	public void crear(E data);
 
-	public String actualizarPorIdentificador(int id, E newData);
+	public String actualizarPorCedula(long id, E newData);
 
 	public ArrayList<E> buscarNombre(String n);
 
-	public E buscarIdentificador(int id);
+	public E buscarCedula(long id);
 
-	public String eliminarPorIdentificador(int id);
+	public String eliminarPorCedula(long id);
 
 	public ArrayList<E> mostrarTodos();
 
