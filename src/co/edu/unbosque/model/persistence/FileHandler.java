@@ -3,10 +3,12 @@ package co.edu.unbosque.model.persistence;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -120,5 +122,27 @@ public class FileHandler {
 		escritorArchivo.close();
 
 	}
-
+	//Valores claves a la derecha
+		public static Properties cargarArchivoPropiedades(String url) {
+			Properties prop = null;
+			try {
+				
+				prop = new Properties();
+				prop.load(new FileInputStream(url));
+			} catch (IOException e) {
+				System.out.println("Error al cargar el archivo de propiedades");
+				e.printStackTrace();
+			}
+			return prop;
+		}
+		public static void guardarArchivoPropiedades(String url, Properties prop) {
+			try {
+				prop.store(new FileWriter(url), "Escribiendo datos de propiedades");
+			} catch (IOException e) {
+				System.out.println("Error al guardar el archivo propiedades");
+				e.printStackTrace();
+			}
+		}
+	
 }
+
