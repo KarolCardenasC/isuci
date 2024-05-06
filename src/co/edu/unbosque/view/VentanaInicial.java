@@ -48,11 +48,11 @@ public class VentanaInicial extends JFrame {
 	
 	public void panelLogin()
 	{
-		nuevoPanel(new VentanaLogin(this));
+		nuevoPanel(new PanelLogin(this));
 	}
 	
 	public void panelRegistro()
 	{
-		nuevoPanel(new VentanaRol(this));
+		nuevoPanel(new PanelRol(this));
 	}	
 }
