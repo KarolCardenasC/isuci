@@ -62,14 +62,14 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 	@Override
 	public ArrayList<ClasicomanoDTO> buscarNombre(String n) {
 
-		ArrayList<ClasicomanoDTO> Clasicomanos = null;
+		ArrayList<ClasicomanoDTO> clasicomanos = null;
 
 		for (int i = 0; i < listaClasicomanos.size(); i++) {
 			if (listaClasicomanos.get(i).getNombre().toLowerCase().equals(n.toLowerCase())) {
-				Clasicomanos.add(listaClasicomanos.get(i));
+				clasicomanos.add(listaClasicomanos.get(i));
 			}
 		}
-		return Clasicomanos;
+		return clasicomanos;
 	}
 
 	@Override
@@ -104,14 +104,25 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 	public ArrayList<ClasicomanoDTO> mostrarTodos() {
 		ArrayList<ClasicomanoDTO> listaMostrar = new ArrayList<>();
 		listaClasicomanos.forEach(c -> {
-			ClasicomanoDTO ClasicomanoTemp = new ClasicomanoDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(), c.getUsuario(), c.getId(),
+			ClasicomanoDTO clasicomanoTemp = new ClasicomanoDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(), c.getUsuario(), c.getId(),
 					c.getContrasena(), c.getGenero(), c.getIdentificador(), c.getAniosExperiencia(), c.getTiempoAcumuladoMin(),
 					c.getEspecialidad(), c.getContextura(), c.getNumeroClasicosganados());
 
-			listaMostrar.add(ClasicomanoTemp);
+			listaMostrar.add(clasicomanoTemp);
 		});
 
 		return listaMostrar;
 	}
 
+	@Override
+	public ClasicomanoDTO verificarUsuario(String u, String c) {
+		for (ClasicomanoDTO clasicomano : listaClasicomanos) {
+			if(clasicomano.getUsuario().equals(u)) {
+				if(clasicomano.getContrasena().equals(c)) {
+					return clasicomano;
+				}
+			}
+		}
+		return null;
+	}
 }

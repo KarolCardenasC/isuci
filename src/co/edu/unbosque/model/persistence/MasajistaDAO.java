@@ -3,7 +3,6 @@ package co.edu.unbosque.model.persistence;
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.MasajistaDTO;
-import co.edu.unbosque.model.MasajistaDTO;
 
 public class MasajistaDAO implements CRUDOperation<MasajistaDTO> {
 
@@ -63,14 +62,14 @@ public class MasajistaDAO implements CRUDOperation<MasajistaDTO> {
 	@Override
 	public ArrayList<MasajistaDTO> buscarNombre(String n) {
 
-		ArrayList<MasajistaDTO> Masajistas = null;
+		ArrayList<MasajistaDTO> masajistas = null;
 
 		for (int i = 0; i < listaMasajistas.size(); i++) {
 			if (listaMasajistas.get(i).getNombre().toLowerCase().equals(n.toLowerCase())) {
-				Masajistas.add(listaMasajistas.get(i));
+				masajistas.add(listaMasajistas.get(i));
 			}
 		}
-		return Masajistas;
+		return masajistas;
 	}
 
 	@Override
@@ -105,13 +104,25 @@ public class MasajistaDAO implements CRUDOperation<MasajistaDTO> {
 	public ArrayList<MasajistaDTO> mostrarTodos() {
 		ArrayList<MasajistaDTO> listaMostrar = new ArrayList<>();
 		listaMasajistas.forEach(c -> {
-			MasajistaDTO MasajistaTemp = new MasajistaDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(),
+			MasajistaDTO masajistaTemp = new MasajistaDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(),
 					c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getAniosExperiencia());
 
-			listaMostrar.add(MasajistaTemp);
+			listaMostrar.add(masajistaTemp);
 		});
 
 		return listaMostrar;
+	}
+	
+	@Override
+	public MasajistaDTO verificarUsuario(String u, String c) {
+		for (MasajistaDTO masajista : listaMasajistas) {
+			if(masajista.getUsuario().equals(u)) {
+				if(masajista.getContrasena().equals(c)) {
+					return masajista;
+				}
+			}
+		}
+		return null;
 	}
 
 }

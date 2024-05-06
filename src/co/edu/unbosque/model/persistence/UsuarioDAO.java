@@ -62,14 +62,14 @@ public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 	@Override
 	public ArrayList<UsuarioDTO> buscarNombre(String n) {
 
-		ArrayList<UsuarioDTO> Usuarios = null;
+		ArrayList<UsuarioDTO> usuarios = null;
 
 		for (int i = 0; i < listaUsuarios.size(); i++) {
 			if (listaUsuarios.get(i).getNombre().toLowerCase().equals(n.toLowerCase())) {
-				Usuarios.add(listaUsuarios.get(i));
+				usuarios.add(listaUsuarios.get(i));
 			}
 		}
-		return Usuarios;
+		return usuarios;
 	}
 
 	@Override
@@ -104,13 +104,25 @@ public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 	public ArrayList<UsuarioDTO> mostrarTodos() {
 		ArrayList<UsuarioDTO> listaMostrar = new ArrayList<>();
 		listaUsuarios.forEach(c -> {
-			UsuarioDTO UsuarioTemp = new UsuarioDTO(c.getImagen(), c.getNombre(), c.getCedula(),
+			UsuarioDTO usuarioTemp = new UsuarioDTO(c.getImagen(), c.getNombre(), c.getCedula(),
 					c.getCorreo(), c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero());
 
-			listaMostrar.add(UsuarioTemp);
+			listaMostrar.add(usuarioTemp);
 		});
 
 		return listaMostrar;
+	}
+	
+	@Override
+	public UsuarioDTO verificarUsuario(String u, String c) {
+		for (UsuarioDTO usuario : listaUsuarios) {
+			if(usuario.getUsuario().equals(u)) {
+				if(usuario.getContrasena().equals(c)) {
+					return usuario;
+				}
+			}
+		}
+		return null;
 	}
 
 }

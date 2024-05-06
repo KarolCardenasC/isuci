@@ -62,14 +62,14 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 	@Override
 	public ArrayList<GregarioDTO> buscarNombre(String n) {
 
-		ArrayList<GregarioDTO> Gregarios = null;
+		ArrayList<GregarioDTO> gregarios = null;
 
 		for (int i = 0; i < listaGregarios.size(); i++) {
 			if (listaGregarios.get(i).getNombre().toLowerCase().equals(n.toLowerCase())) {
-				Gregarios.add(listaGregarios.get(i));
+				gregarios.add(listaGregarios.get(i));
 			}
 		}
-		return Gregarios;
+		return gregarios;
 	}
 
 	@Override
@@ -104,15 +104,27 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 	public ArrayList<GregarioDTO> mostrarTodos() {
 		ArrayList<GregarioDTO> listaMostrar = new ArrayList<>();
 		listaGregarios.forEach(c -> {
-			GregarioDTO GregarioTemp = new GregarioDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(),
+			GregarioDTO gregarioTemp = new GregarioDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(),
 					c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getIdentificador(),
 					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura(),
 					c.getFuncionPeloton());
 
-			listaMostrar.add(GregarioTemp);
+			listaMostrar.add(gregarioTemp);
 		});
 
 		return listaMostrar;
+	}
+	
+	@Override
+	public GregarioDTO verificarUsuario(String u, String c) {
+		for (GregarioDTO gregario : listaGregarios) {
+			if(gregario.getUsuario().equals(u)) {
+				if(gregario.getContrasena().equals(c)) {
+					return gregario;
+				}
+			}
+		}
+		return null;
 	}
 
 }

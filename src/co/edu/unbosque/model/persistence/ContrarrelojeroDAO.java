@@ -62,14 +62,14 @@ public class ContrarrelojeroDAO implements CRUDOperation<ContrarrelojeroDTO> {
 	@Override
 	public ArrayList<ContrarrelojeroDTO> buscarNombre(String n) {
 
-		ArrayList<ContrarrelojeroDTO> Contrarrelojeros = null;
+		ArrayList<ContrarrelojeroDTO> contrarrelojeros = null;
 
 		for (int i = 0; i < listaContrarrelojeros.size(); i++) {
 			if (listaContrarrelojeros.get(i).getNombre().toLowerCase().equals(n.toLowerCase())) {
-				Contrarrelojeros.add(listaContrarrelojeros.get(i));
+				contrarrelojeros.add(listaContrarrelojeros.get(i));
 			}
 		}
-		return Contrarrelojeros;
+		return contrarrelojeros;
 	}
 
 	@Override
@@ -104,15 +104,27 @@ public class ContrarrelojeroDAO implements CRUDOperation<ContrarrelojeroDTO> {
 	public ArrayList<ContrarrelojeroDTO> mostrarTodos() {
 		ArrayList<ContrarrelojeroDTO> listaMostrar = new ArrayList<>();
 		listaContrarrelojeros.forEach(c -> {
-			ContrarrelojeroDTO ContrarrelojeroTemp = new ContrarrelojeroDTO(c.getImagen(), c.getNombre(), c.getCedula(),
+			ContrarrelojeroDTO contrarrelojeroTemp = new ContrarrelojeroDTO(c.getImagen(), c.getNombre(), c.getCedula(),
 					c.getCorreo(), c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getIdentificador(),
 					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura(),
 					c.getVelocidadMaxima());
 
-			listaMostrar.add(ContrarrelojeroTemp);
+			listaMostrar.add(contrarrelojeroTemp);
 		});
 
 		return listaMostrar;
 	}
-
+	
+	@Override
+	public ContrarrelojeroDTO verificarUsuario(String u, String c) {
+		for (ContrarrelojeroDTO contrarrelojero : listaContrarrelojeros) {
+			if(contrarrelojero.getUsuario().equals(u)) {
+				if(contrarrelojero.getContrasena().equals(c)) {
+					return contrarrelojero;
+				}
+			}
+		}
+		return null;
+	}
+	
 }

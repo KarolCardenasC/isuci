@@ -114,4 +114,16 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 		return listaMostrar;
 	}
 
+	@Override
+	public CiclistaDTO verificarUsuario(String u, String c) {
+		for (CiclistaDTO ciclista : listaCiclistas) {
+			if(ciclista.getUsuario().equals(u)) {
+				if(ciclista.getContrasena().equals(c)) {
+					return ciclista;
+				}
+			}
+		}
+		return null;
+	}
+
 }

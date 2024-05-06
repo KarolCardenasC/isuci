@@ -62,14 +62,14 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 	@Override
 	public ArrayList<SprinterDTO> buscarNombre(String n) {
 
-		ArrayList<SprinterDTO> Sprinters = null;
+		ArrayList<SprinterDTO> sprinters = null;
 
 		for (int i = 0; i < listaSprinters.size(); i++) {
 			if (listaSprinters.get(i).getNombre().toLowerCase().equals(n.toLowerCase())) {
-				Sprinters.add(listaSprinters.get(i));
+				sprinters.add(listaSprinters.get(i));
 			}
 		}
-		return Sprinters;
+		return sprinters;
 	}
 
 	@Override
@@ -104,15 +104,27 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 	public ArrayList<SprinterDTO> mostrarTodos() {
 		ArrayList<SprinterDTO> listaMostrar = new ArrayList<>();
 		listaSprinters.forEach(c -> {
-			SprinterDTO SprinterTemp = new SprinterDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(),
+			SprinterDTO sprinterTemp = new SprinterDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(),
 					c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getIdentificador(),
 					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura(),
 					c.getExplosionMetrosFinales(), c.getPotenciaPromVatios(), c.getVelocidadPromSprintKm());
 
-			listaMostrar.add(SprinterTemp);
+			listaMostrar.add(sprinterTemp);
 		});
 
 		return listaMostrar;
+	}
+	
+	@Override
+	public SprinterDTO verificarUsuario(String u, String c) {
+		for (SprinterDTO sprinter : listaSprinters) {
+			if(sprinter.getUsuario().equals(u)) {
+				if(sprinter.getContrasena().equals(c)) {
+					return sprinter;
+				}
+			}
+		}
+		return null;
 	}
 
 }

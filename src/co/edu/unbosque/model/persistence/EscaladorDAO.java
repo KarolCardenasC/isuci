@@ -62,14 +62,14 @@ public class EscaladorDAO implements CRUDOperation<EscaladorDTO> {
 	@Override
 	public ArrayList<EscaladorDTO> buscarNombre(String n) {
 
-		ArrayList<EscaladorDTO> Escaladors = null;
+		ArrayList<EscaladorDTO> escaladores = null;
 
 		for (int i = 0; i < listaEscaladores.size(); i++) {
 			if (listaEscaladores.get(i).getNombre().toLowerCase().equals(n.toLowerCase())) {
-				Escaladors.add(listaEscaladores.get(i));
+				escaladores.add(listaEscaladores.get(i));
 			}
 		}
-		return Escaladors;
+		return escaladores;
 	}
 
 	@Override
@@ -104,14 +104,26 @@ public class EscaladorDAO implements CRUDOperation<EscaladorDTO> {
 	public ArrayList<EscaladorDTO> mostrarTodos() {
 		ArrayList<EscaladorDTO> listaMostrar = new ArrayList<>();
 		listaEscaladores.forEach(c -> {
-			EscaladorDTO EscaladorTemp = new EscaladorDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(), c.getUsuario(), c.getId(),
+			EscaladorDTO escaladorTemp = new EscaladorDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(), c.getUsuario(), c.getId(),
 					c.getContrasena(), c.getGenero(), c.getIdentificador(), c.getAniosExperiencia(), c.getTiempoAcumuladoMin(),
 					c.getEspecialidad(), c.getContextura(), c.getAceleracionPromSubida(), c.getGradoRampaSoportada());
 
-			listaMostrar.add(EscaladorTemp);
+			listaMostrar.add(escaladorTemp);
 		});
 
 		return listaMostrar;
+	}
+	
+	@Override
+	public EscaladorDTO verificarUsuario(String u, String c) {
+		for (EscaladorDTO escalador : listaEscaladores) {
+			if(escalador.getUsuario().equals(u)) {
+				if(escalador.getContrasena().equals(c)) {
+					return escalador;
+				}
+			}
+		}
+		return null;
 	}
 
 }

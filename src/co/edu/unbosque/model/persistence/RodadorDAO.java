@@ -62,14 +62,14 @@ public class RodadorDAO implements CRUDOperation<RodadorDTO> {
 	@Override
 	public ArrayList<RodadorDTO> buscarNombre(String n) {
 
-		ArrayList<RodadorDTO> Rodadors = null;
+		ArrayList<RodadorDTO> rodadores = null;
 
 		for (int i = 0; i < listaRodadores.size(); i++) {
 			if (listaRodadores.get(i).getNombre().toLowerCase().equals(n.toLowerCase())) {
-				Rodadors.add(listaRodadores.get(i));
+				rodadores.add(listaRodadores.get(i));
 			}
 		}
-		return Rodadors;
+		return rodadores;
 	}
 
 	@Override
@@ -104,15 +104,27 @@ public class RodadorDAO implements CRUDOperation<RodadorDTO> {
 	public ArrayList<RodadorDTO> mostrarTodos() {
 		ArrayList<RodadorDTO> listaMostrar = new ArrayList<>();
 		listaRodadores.forEach(c -> {
-			RodadorDTO RodadorTemp = new RodadorDTO(c.getImagen(), c.getNombre(), c.getCedula(),
+			RodadorDTO rodadorTemp = new RodadorDTO(c.getImagen(), c.getNombre(), c.getCedula(),
 					c.getCorreo(), c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getIdentificador(),
 					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura(),
 					c.getVelocidadPromPedaleo());
 
-			listaMostrar.add(RodadorTemp);
+			listaMostrar.add(rodadorTemp);
 		});
 
 		return listaMostrar;
+	}
+	
+	@Override
+	public RodadorDTO verificarUsuario(String u, String c) {
+		for (RodadorDTO rodador : listaRodadores) {
+			if(rodador.getUsuario().equals(u)) {
+				if(rodador.getContrasena().equals(c)) {
+					return rodador;
+				}
+			}
+		}
+		return null;
 	}
 
 }

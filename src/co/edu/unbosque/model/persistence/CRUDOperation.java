@@ -30,4 +30,5 @@ public interface CRUDOperation<E> {
 
 	public ArrayList<E> mostrarTodos();
 
+	public E verificarUsuario(String u, String c);
 }
