@@ -3,6 +3,7 @@
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
@@ -13,8 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import co.edu.unbosque.model.persistence.FileHandler;
+import co.edu.unbosque.utils.MainPanel;
 
-public class PanelRol extends JPanel implements ActionListener {	
+public class PanelRol extends MainPanel implements ActionListener {	
 
 	private Properties properties;
 	private JPanel pnlDerecha;
@@ -54,7 +56,7 @@ public class PanelRol extends JPanel implements ActionListener {
 	private JButton btnIniciarSesion;
 	private VentanaInicial mainPanel;
 
-	private String opcion = "";
+	private String opcion = "Ciclista";
 	
 	public PanelRol(VentanaInicial inicial) {
 		properties = FileHandler.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/login.properties");
@@ -105,18 +107,22 @@ public class PanelRol extends JPanel implements ActionListener {
 		Integer.parseInt(properties.getProperty("ventanaRol.pnlderecha.vertical")),Integer.parseInt(properties.getProperty("ventanaRol.pnlderecha.ancho")), Integer.parseInt(properties.getProperty("ventanaRol.pnlderecha.alto")));
 		pnlDerecha.setLayout(null);
 		
-		lblNombre = new JLabel();
-		lblNombre.setText(properties.getProperty("lblNombre.titulo"));
-		lblNombre.setBounds(40, 18, 150, 40);
-		lblNombre.setFont(new Font("Segoe UI", 1, 20));
-		lblNombre.setForeground(Color.black);
+		
+		lblNombre = this.createLabel("lblNombre.titulo",new Rectangle(40, 18, 150, 40));
+		
+//		lblNombre = new JLabel();
+//		lblNombre.setText(properties.getProperty("lblNombre.titulo"));
+//		lblNombre.setBounds(40, 18, 150, 40);
+//		lblNombre.setFont(new Font("Segoe UI", 1, 20));
+//		lblNombre.setForeground(Color.black);
 		pnlDerecha.add(lblNombre);
 
-		jtNombre = new JTextField();
-		jtNombre.setBounds(130, 30, 220, 20);
-		jtNombre.setFont(jtNombre.getFont().deriveFont(jtNombre.getFont().getSize() + 2f));
-		jtNombre.setForeground(new Color(0, 0, 0));
-		jtNombre.setBorder(null);
+		jtNombre = this.createTextField(new Rectangle(130, 30, 220, 20));
+//		jtNombre = new JTextField();
+//		jtNombre.setBounds(130, 30, 220, 20);
+//		jtNombre.setFont(jtNombre.getFont().deriveFont(jtNombre.getFont().getSize() + 2f));
+//		jtNombre.setForeground(new Color(0, 0, 0));
+//		jtNombre.setBorder(null);
 		pnlDerecha.add(jtNombre);
 		
 		lblCedula = new JLabel();
@@ -294,27 +300,20 @@ public class PanelRol extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
-			case "login":
-				mainPanel.panelLogin();
-				break;
-				
-			case "Ciclista":
-				opcion = "Ciclista";
-				iniciarPanelDerecho();
-				pnlDerecha.repaint();
-				break;
-				
-			case "Masajista":
-				opcion = "Masajista";
-				iniciarPanelDerecho();
-				pnlDerecha.repaint();
-				break;
-				
-			case "Director":
-				opcion = "Director";
-				iniciarPanelDerecho();
-				pnlDerecha.repaint();
-				break;				
+		case "login":
+			mainPanel.panelLogin();
+			break;
+		default:
+			opcion = e.getActionCommand();
+			break;
+//		case "Ciclista":
+//		case "Masajista":
+//		case "Director":
+//			opcion = e.getActionCommand();
+//			break;
+
 		}
+		iniciarPanelDerecho();
+		pnlDerecha.repaint();
 	}
 }
