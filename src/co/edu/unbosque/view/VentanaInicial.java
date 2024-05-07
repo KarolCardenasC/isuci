@@ -23,14 +23,14 @@ public class VentanaInicial extends JFrame {
 
 		setTitle("Login");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(Integer.parseInt(properties.getProperty("ventana.ancho")), Integer.parseInt(properties.getProperty("ventana.alto")));
+		setSize(Integer.parseInt(properties.getProperty("ventanaInicial.ancho")), Integer.parseInt(properties.getProperty("ventanaInicial.alto")));
 		setLocationRelativeTo(null);
         setResizable(false);
 		setLayout(new BorderLayout());
 		
 		pnlFondo = new JPanel();
 		pnlFondo.setLayout(null);
-		pnlFondo.setSize(Integer.parseInt(properties.getProperty("ventana.ancho")), Integer.parseInt(properties.getProperty("ventana.alto")));
+		pnlFondo.setSize(Integer.parseInt(properties.getProperty("ventanaInicial.ancho")), Integer.parseInt(properties.getProperty("ventanaInicial.alto")));
 		pnlFondo.setLayout(new BorderLayout(0, 0));
 		setContentPane(pnlFondo);
 	}

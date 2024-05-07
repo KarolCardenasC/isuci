@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.util.Properties;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -36,5 +37,11 @@ public class MainPanel extends JPanel {
 		textBox.setForeground(new Color(0, 0, 0));
 		textBox.setBorder(null);
 		return textBox;
+	}
+	public JButton createButton(String text, Rectangle bounds) {
+		JButton button = new JButton();
+		button.setText(text);
+		button.setBounds(bounds);
+		return button;
 	}
 }

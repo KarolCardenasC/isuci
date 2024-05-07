@@ -3,11 +3,13 @@ package co.edu.unbosque.view;
 public class ViewFacade {
 
 	private VentanaInicial vL;
+	private VentanaUsuario vU;	
 	private Consola con;
 	
 	public ViewFacade() {
 		
 		vL = new VentanaInicial();
+		vU = new VentanaUsuario();		
 		con = new Consola();
 		
 	}
@@ -20,6 +22,16 @@ public class ViewFacade {
 
 	public void setvL(VentanaInicial vL) {
 		this.vL = vL;
+	}
+
+
+	public VentanaUsuario getvU() {
+		return vU;
+	}
+
+
+	public void setvU(VentanaUsuario vU) {
+		this.vU = vU;
 	}
 
 

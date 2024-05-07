@@ -8,6 +8,7 @@ public class Controller {
 	
 	public Controller() {
 		vf = new ViewFacade();
-		vf.getvL().setVisible(true);
+//		vf.getvL().setVisible(true);
+		vf.getvU().setVisible(true);		
 	}
 }
