@@ -17,19 +17,20 @@ public class MainPanel extends JPanel {
 	private Properties properties;
 
 	public MainPanel() {
-		properties = FileHandler.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/login.properties");
+		properties = FileHandler.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties");
 
 	}
 
 	public JLabel createLabel(String text, Rectangle bounds) {
 		JLabel label = new JLabel();
-		label.setText(properties.getProperty(text));
+		label.setText("<html>" + properties.getProperty(text));
 		label.setBounds(bounds);
 		label.setFont(new Font("Segoe UI", 1, 20));
 		label.setForeground(Color.black);
 
 		return label;
 	}
+	
 	public JTextField createTextField( Rectangle bounds) {
 		JTextField textBox = new JTextField();
 		textBox.setBounds(bounds);
@@ -38,10 +39,21 @@ public class MainPanel extends JPanel {
 		textBox.setBorder(null);
 		return textBox;
 	}
+	
 	public JButton createButton(String text, Rectangle bounds) {
 		JButton button = new JButton();
 		button.setText(text);
 		button.setBounds(bounds);
 		return button;
 	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+	
+	
 }

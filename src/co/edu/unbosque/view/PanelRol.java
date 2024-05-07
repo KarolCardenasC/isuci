@@ -18,7 +18,6 @@ import co.edu.unbosque.utils.MainPanel;
 
 public class PanelRol extends MainPanel implements ActionListener {	
 
-	private Properties properties;
 	private JPanel pnlDerecha;
 	private JPanel pnlIzquierda;
 	
@@ -56,7 +55,7 @@ public class PanelRol extends MainPanel implements ActionListener {
 	private String opcion = "Ciclista";
 	
 	public PanelRol(VentanaInicial inicial) {
-		properties = FileHandler.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/login.properties");
+		this.setProperties(FileHandler.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/login.properties"));
 		mainPanel = inicial;
 		setLayout(null);
 		initComponents();
@@ -72,8 +71,8 @@ public class PanelRol extends MainPanel implements ActionListener {
 	private void iniciarPanelIzquierdo()
 	{
 		pnlIzquierda = new JPanel();
-		pnlIzquierda.setBounds(Integer.parseInt(properties.getProperty("panelRol.pnlizquierda.horizontal")),
-		Integer.parseInt(properties.getProperty("panelRol.pnlizquierda.vertical")),Integer.parseInt(properties.getProperty("panelRol.pnlizquierda.ancho")), Integer.parseInt(properties.getProperty("panelRol.pnlizquierda.alto")));
+		pnlIzquierda.setBounds(Integer.parseInt(this.getProperties().getProperty("panelRol.pnlizquierda.horizontal")),
+		Integer.parseInt(this.getProperties().getProperty("panelRol.pnlizquierda.vertical")),Integer.parseInt(this.getProperties().getProperty("panelRol.pnlizquierda.ancho")), Integer.parseInt(this.getProperties().getProperty("panelRol.pnlizquierda.alto")));
 		pnlIzquierda.setLayout(null);
 		
 		btnCiclista = this.createButton("Ciclista",new Rectangle(84, 80, 100, 100));
@@ -97,8 +96,8 @@ public class PanelRol extends MainPanel implements ActionListener {
 	private void iniciarPanelDerecho()
 	{
 		pnlDerecha = new JPanel();
-		pnlDerecha.setBounds(Integer.parseInt(properties.getProperty("panelRol.pnlderecha.horizontal")),
-		Integer.parseInt(properties.getProperty("panelRol.pnlderecha.vertical")),Integer.parseInt(properties.getProperty("panelRol.pnlderecha.ancho")), Integer.parseInt(properties.getProperty("panelRol.pnlderecha.alto")));
+		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panelRol.pnlderecha.horizontal")),
+		Integer.parseInt(this.getProperties().getProperty("panelRol.pnlderecha.vertical")),Integer.parseInt(this.getProperties().getProperty("panelRol.pnlderecha.ancho")), Integer.parseInt(this.getProperties().getProperty("panelRol.pnlderecha.alto")));
 		pnlDerecha.setLayout(null);
 		
 		

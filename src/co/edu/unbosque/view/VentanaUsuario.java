@@ -16,13 +16,13 @@ public class VentanaUsuario extends JFrame {
 	public VentanaUsuario() {
 		properties = FileHandler
 				.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties");
-		panelDirectorDeportivo();
 		initComponents();
+		panelDirectorDeportivo();
 	}
 
 	public void initComponents() {
 
-		setTitle("Login");
+		setTitle("Usuario");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(Integer.parseInt(properties.getProperty("ventanaUsuario.ancho")),
 				Integer.parseInt(properties.getProperty("ventanaUsuario.alto")));
@@ -48,6 +48,10 @@ public class VentanaUsuario extends JFrame {
 		pnlFondo.revalidate();
 	}
 
+	public void panelDirectorDeportivo() {
+		nuevoPanel(new PanelDirector(this));
+	}
+	
 //	public void panelAdministrador()
 //	{
 //		nuevoPanel(new PanelAdministrador(this));
@@ -57,9 +61,5 @@ public class VentanaUsuario extends JFrame {
 //	{
 //		nuevoPanel(new PanelCiclista(this));
 //	}	
-	
-	public void panelDirectorDeportivo() 
-	{
-		nuevoPanel(new PanelDirectorDeportivo(this));
-	}
+
 }

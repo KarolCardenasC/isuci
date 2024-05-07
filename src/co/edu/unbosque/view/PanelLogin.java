@@ -2,6 +2,8 @@ package co.edu.unbosque.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Properties;
@@ -12,8 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import co.edu.unbosque.model.persistence.FileHandler;
+import co.edu.unbosque.utils.MainPanel;
 
-public class PanelLogin extends JPanel {
+public class PanelLogin extends MainPanel implements ActionListener {
 	
 	private JLabel lblRegistro;
 	private JLabel lblUsuario;
@@ -21,12 +24,11 @@ public class PanelLogin extends JPanel {
 	private JButton btnIniciarSesion;
 	private JTextField jtUsuario;
 	private JTextField jtContrasena;
-	private Properties properties;
 	private VentanaInicial mainPanel;
 	
 	public PanelLogin(VentanaInicial inicial) {
 		mainPanel = inicial;
-		properties = FileHandler.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/login.properties");
+		this.setProperties(FileHandler.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/login.properties"));
 		setLayout(null);
 		initComponents();
 	}
@@ -36,7 +38,7 @@ public class PanelLogin extends JPanel {
 		removeAll();
 		
 		lblUsuario = new JLabel();
-		lblUsuario.setText(properties.getProperty("lblUsuario.titulo"));
+		lblUsuario.setText(this.getProperties().getProperty("lblUsuario.titulo"));
 		lblUsuario.setBounds(300, 240, 150, 40);
 		lblUsuario.setFont(new Font("Segoe UI", 1, 15));
 		lblUsuario.setForeground(Color.black);
@@ -50,7 +52,7 @@ public class PanelLogin extends JPanel {
 		add(jtUsuario);
 	
 		lblContrasena = new JLabel();
-		lblContrasena.setText(properties.getProperty("lblContrasena.titulo"));		
+		lblContrasena.setText(this.getProperties().getProperty("lblContrasena.titulo"));		
 		lblContrasena.setBounds(275, 280, 150, 40);
 		lblContrasena.setFont(new Font("Segoe UI", 1, 15));
 		lblContrasena.setForeground(Color.black);
@@ -80,6 +82,12 @@ public class PanelLogin extends JPanel {
 				mainPanel.panelRegistro();
 		    }  
 		});		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
