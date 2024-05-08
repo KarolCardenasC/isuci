@@ -232,18 +232,8 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 			break;
 		
 		case "perfilmasajista":
-			opcion = e.getActionCommand();
-			pnlDerecha.removeAll();
-			iniciarPanelDerecho();
-			pnlDerecha.repaint();
-			break;
 			
 		case "actualizarperfilmasajista":
-			opcion = e.getActionCommand();
-			pnlDerecha.removeAll();
-			iniciarPanelDerecho();
-			pnlDerecha.repaint();
-			break;
 			
 		case "eliminarperfilmasajista":
 			opcion = e.getActionCommand();

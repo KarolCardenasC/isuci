@@ -274,18 +274,8 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 			break;
 		
 		case "perfilciclista":
-			opcion = e.getActionCommand();
-			pnlDerecha.removeAll();
-			iniciarPanelDerecho();
-			pnlDerecha.repaint();
-			break;
 			
 		case "actualizarperfilciclista":
-			opcion = e.getActionCommand();
-			pnlDerecha.removeAll();
-			iniciarPanelDerecho();
-			pnlDerecha.repaint();
-			break;
 			
 		case "eliminarperfilciclista":
 			opcion = e.getActionCommand();
