@@ -67,39 +67,25 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.vertical")),Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.ancho")), Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.alto")));
 		pnlIzquierda.setLayout(null);
 		
-		lblImagen = new JLabel();
-		lblImagen.setBounds(84, 80, 100, 120);
-		ImageIcon img = new ImageIcon("imgs/" + imagen);
-		ImageIcon imageIcon = new ImageIcon(img.getImage().getScaledInstance(100, 120, Image.SCALE_DEFAULT));
-		lblImagen.setIcon(imageIcon);
+		lblImagen = this.crearLabel("", new Rectangle(55, 50, 150, 150), imagen);
 		pnlIzquierda.add(lblImagen);
 		
-		lblNombrePerfil = this.createLabel("lblNombre.perfil",new Rectangle(50, 210, 150, 80));
+		lblNombrePerfil = this.crearLabel("lblNombre.perfilDirector", 60, 210);
 		pnlIzquierda.add(lblNombrePerfil);
 		
-		btnPerfil = this.createButton("Perfil", new Rectangle(20, 350, 200, 50));
-		btnPerfil.addActionListener(this);
-		btnPerfil.setActionCommand("Perfil");
+		btnPerfil = this.crearBoton("Perfil Director", 20, 350, "");
 		pnlIzquierda.add(btnPerfil);
 
-		btnActualizar = this.createButton("Actualizar", new Rectangle(20, 400, 200, 50));
-		btnActualizar.addActionListener(this);
-		btnActualizar.setActionCommand("Actualizar");
+		btnActualizar = this.crearBoton("Actualizar Director", 20, 400, "");
 		pnlIzquierda.add(btnActualizar);
 		
-		btnEquipo = this.createButton("Equipo", new Rectangle(20, 450, 200, 50));
-		btnEquipo.addActionListener(this);
-		btnEquipo.setActionCommand("Equipo");
+		btnEquipo = this.crearBoton("Equipo", 20, 450, "");
 		pnlIzquierda.add(btnEquipo);
 		
-		btnEliminar = this.createButton("Eliminar", new Rectangle(20, 500, 200, 50));
-		btnEliminar.addActionListener(this);
-		btnEliminar.setActionCommand("Eliminar");
+		btnEliminar = this.crearBoton("Eliminar Director", 20, 500, "");
 		pnlIzquierda.add(btnEliminar);
 		
-		btnCerrar = this.createButton("Cerrar Sesión", new Rectangle(20, 680, 150, 30));
-		btnCerrar.addActionListener(this);
-		btnCerrar.setActionCommand("Cerrar");
+		btnCerrar = this.crearBoton("Cerrar Sesión", 20, 600, "");
 		pnlIzquierda.add(btnCerrar);
 		
 		add(pnlIzquierda);
@@ -110,14 +96,12 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.vertical")),Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.ancho")), Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.alto")));
 		pnlDerecha.setLayout(null);
 		
-		lblNombreAct = this.createLabel("lblNombre.titulo",new Rectangle(40, 18, 150, 40));
-		jtNombre = this.createTextField(new Rectangle(130, 30, 220, 20));
+		lblNombreAct = this.crearLabel("lblNombre.titulo", 40, 18);
+		jtNombre = this.crearTextField("", 130, 30);
 		pnlDerecha.add(lblNombreAct);
 		pnlDerecha.add(jtNombre);
 		
-		btnImagen = this.createButton("Imagen",new Rectangle(100, 610, 200, 20));
-		btnImagen.addActionListener(this);
-		btnImagen.setActionCommand("ImagenPerfil");
+		btnImagen = this.crearBoton("Imagen Perfil Director", 100, 600, "");
 		pnlDerecha.add(btnImagen);
 		
 		add(pnlDerecha);
@@ -128,7 +112,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		
 		switch (e.getActionCommand()) {
 		
-		case "ImagenPerfil": {
+		case "imagenperfildirector": {
 			JFileChooser chooser = new JFileChooser();
 			// Establecer el directorio inicial
 			chooser.setCurrentDirectory(new File("imgs"));

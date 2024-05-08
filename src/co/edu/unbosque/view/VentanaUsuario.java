@@ -18,6 +18,7 @@ public class VentanaUsuario extends JFrame {
 				.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties");
 		initComponents();
 		panelDirectorDeportivo();
+		//panelMasajista();
 	}
 
 	public void initComponents() {
@@ -50,6 +51,10 @@ public class VentanaUsuario extends JFrame {
 
 	public void panelDirectorDeportivo() {
 		nuevoPanel(new PanelDirector(this));
+	}
+	
+	public void panelMasajista() {
+		nuevoPanel(new PanelMasajista(this));
 	}
 	
 //	public void panelAdministrador()

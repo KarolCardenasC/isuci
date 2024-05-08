@@ -37,42 +37,22 @@ public class PanelLogin extends MainPanel implements ActionListener {
 
 		removeAll();
 		
-		lblUsuario = new JLabel();
-		lblUsuario.setText(this.getProperties().getProperty("lblUsuario.titulo"));
-		lblUsuario.setBounds(300, 240, 150, 40);
-		lblUsuario.setFont(new Font("Segoe UI", 1, 15));
-		lblUsuario.setForeground(Color.black);
+		lblUsuario = this.crearLabel("lblUsuario.titulo", 300, 240);
 		add(lblUsuario);
 
-		jtUsuario = new JTextField();
-		jtUsuario.setBounds(370, 253, 200, 20);
-		jtUsuario.setFont(jtUsuario.getFont().deriveFont(jtUsuario.getFont().getSize() + 2f));
-		jtUsuario.setForeground(new Color(0, 0, 0));
-		jtUsuario.setBorder(null);
+		jtUsuario = this.crearTextField("", 370, 253);
 		add(jtUsuario);
 	
-		lblContrasena = new JLabel();
-		lblContrasena.setText(this.getProperties().getProperty("lblContrasena.titulo"));		
-		lblContrasena.setBounds(275, 280, 150, 40);
-		lblContrasena.setFont(new Font("Segoe UI", 1, 15));
-		lblContrasena.setForeground(Color.black);
+		lblContrasena = this.crearLabel("lblContrasena.titulo", 275, 280);
 		add(lblContrasena);
 		
-		jtContrasena = new JTextField();
-		jtContrasena.setBounds(370, 293, 200, 20);
-		jtContrasena.setFont(jtContrasena.getFont().deriveFont(jtContrasena.getFont().getSize() + 4f));
-		jtContrasena.setForeground(new Color(0, 0, 0));
-		jtContrasena.setBorder(null);
+		jtContrasena = this.crearPasswordField("", 370, 293);
 		add(jtContrasena);
 		
-		btnIniciarSesion = new JButton("Iniciar Sesión");
-		btnIniciarSesion.setBounds(370, 350, 200, 20);
+		btnIniciarSesion = this.crearBoton("Iniciar Sesión", 370, 350, "");
 		add(btnIniciarSesion);
 
-		lblRegistro = new JLabel("Registar Usuario");
-		lblRegistro.setBounds(10, 10, 150, 40);
-		lblRegistro.setFont(new Font("Segoe UI", 1, 15));
-		lblRegistro.setForeground(Color.black);
+		lblRegistro = this.crearLabel("lblRegistro.titulo", 10, 10);
 		add(lblRegistro);
 		
 		lblRegistro.addMouseListener(new MouseAdapter()  
