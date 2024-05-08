@@ -70,7 +70,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		lblImagen = this.crearLabel("", new Rectangle(55, 50, 150, 150), imagen);
 		pnlIzquierda.add(lblImagen);
 		
-		lblNombrePerfil = this.crearLabel("lblNombre.perfilDirector", 60, 210);
+		lblNombrePerfil = this.crearLabel("lblNombre.perfil", 60, 210);
 		pnlIzquierda.add(lblNombrePerfil);
 		
 		btnPerfil = this.crearBoton("Perfil Director", 20, 350, "");
