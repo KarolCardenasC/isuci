@@ -2,6 +2,8 @@ package co.edu.unbosque.view;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class Consola {
 	private Scanner sc;
 
@@ -57,6 +59,18 @@ public class Consola {
 	}
 	public void printSameLine(String text) {
 		System.out.print(text);
+	}
+	
+	/*
+	 * ========== DATOS EN VENTANAS EMERGENTES =================
+	 */
+	
+	public void imprimirTextoVE(String cadena) {
+		JOptionPane.showMessageDialog(null, cadena);
+	}
+	
+	public int confirmarTextoVE(String cadena) {
+		return JOptionPane.showConfirmDialog(null, cadena, "CONFIRMACION", JOptionPane.YES_NO_OPTION);
 	}
 }
 

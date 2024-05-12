@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import co.edu.unbosque.model.persistence.FileHandler;
-import co.edu.unbosque.utils.MainPanel;
 
 public class PanelCiclista extends MainPanel implements ActionListener {
 	
@@ -59,7 +58,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 	private JPanel pnlIzquierda;
 	
 	private String imagen = "ciclista.png";
-	private String opcion = "perfilciclista";
+	private String opcion = "perfilinicial";
 	
 	
 	private VentanaUsuario usuarioPanel;
@@ -74,14 +73,14 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		
 	}
 	
-	private void initComponents() {
+	public void initComponents() {
 		removeAll();
 		iniciarPanelDerecho();
 		iniciarPanelIzquierdo();
 
 	}
 	
-	private void iniciarPanelIzquierdo() {
+	public void iniciarPanelIzquierdo() {
 		
 		pnlIzquierda = new JPanel();
 		pnlIzquierda.setBounds(Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.horizontal")),
@@ -111,7 +110,8 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		
 		add(pnlIzquierda);
 	}
-	private void iniciarPanelDerecho() {
+	
+	public void iniciarPanelDerecho() {
 		pnlDerecha = new JPanel();
 		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.horizontal")),
 		Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.vertical")),Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.ancho")), Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.alto")));
@@ -119,6 +119,11 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		
 		
 		switch (opcion) {
+		
+		case "perfilinicial":
+			lblImagen = this.crearLabel("", new Rectangle(200, 20, 600, 600), "ciclistaIni.png");
+			pnlDerecha.add(lblImagen);
+			break;
 		
 		case "perfilciclista":
 			
@@ -211,23 +216,23 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 			pnlDerecha.add(jtGenero);
 			
 			
-			lblIdentificador = this.crearLabel("lblIdentificador.titulo", 560, 250);
-			jtIdentificador = this.crearTextField("", 700, 250);
+			lblIdentificador = this.crearLabel("lblIdentificador.titulo", 550, 250);
+			jtIdentificador = this.crearTextField("", 720, 250);
 			pnlDerecha.add(lblIdentificador);
 			pnlDerecha.add(jtIdentificador);
 			
-			lblTiempoAcumulado = this.crearLabel("lblTiempoAcumuladoMin.titulo", 560, 300);
-			jtTiempoAcumulado = this.crearTextField("", 700, 300);
+			lblTiempoAcumulado = this.crearLabel("lblTiempoAcumuladoMin.titulo", 550, 300);
+			jtTiempoAcumulado = this.crearTextField("", 720, 300);
 			pnlDerecha.add(lblTiempoAcumulado);
 			pnlDerecha.add(jtTiempoAcumulado);
 			
-			lblEspecialidad = this.crearLabel("lblEspecialidad.titulo", 560, 350);
-			jtEspecialidad = this.crearTextField("", 700, 350);
+			lblEspecialidad = this.crearLabel("lblEspecialidad.titulo", 550, 350);
+			jtEspecialidad = this.crearTextField("", 720, 350);
 			pnlDerecha.add(lblEspecialidad);
 			pnlDerecha.add(jtEspecialidad);
 			
-			lblContextura = this.crearLabel("lblContextura.titulo", 560, 400);
-			jtContextura = this.crearTextField("", 700, 400);
+			lblContextura = this.crearLabel("lblContextura.titulo", 550, 400);
+			jtContextura = this.crearTextField("", 720, 400);
 			pnlDerecha.add(lblContextura);
 			pnlDerecha.add(jtContextura);
 			
@@ -286,5 +291,317 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 		}
 		
+	}
+
+	public JButton getBtnImagen() {
+		return btnImagen;
+	}
+
+	public void setBtnImagen(JButton btnImagen) {
+		this.btnImagen = btnImagen;
+	}
+
+	public JButton getBtnActualizar() {
+		return btnActualizar;
+	}
+
+	public void setBtnActualizar(JButton btnActualizar) {
+		this.btnActualizar = btnActualizar;
+	}
+
+	public JButton getBtnEliminar() {
+		return btnEliminar;
+	}
+
+	public void setBtnEliminar(JButton btnEliminar) {
+		this.btnEliminar = btnEliminar;
+	}
+
+	public JButton getBtnCerrar() {
+		return btnCerrar;
+	}
+
+	public void setBtnCerrar(JButton btnCerrar) {
+		this.btnCerrar = btnCerrar;
+	}
+
+	public JButton getBtnPerfil() {
+		return btnPerfil;
+	}
+
+	public void setBtnPerfil(JButton btnPerfil) {
+		this.btnPerfil = btnPerfil;
+	}
+
+	public JButton getBtnGuardar() {
+		return btnGuardar;
+	}
+
+	public void setBtnGuardar(JButton btnGuardar) {
+		this.btnGuardar = btnGuardar;
+	}
+
+	public JLabel getLblImagenPerfil() {
+		return lblImagenPerfil;
+	}
+
+	public void setLblImagenPerfil(JLabel lblImagenPerfil) {
+		this.lblImagenPerfil = lblImagenPerfil;
+	}
+
+	public JLabel getLblNombrePerfil() {
+		return lblNombrePerfil;
+	}
+
+	public void setLblNombrePerfil(JLabel lblNombrePerfil) {
+		this.lblNombrePerfil = lblNombrePerfil;
+	}
+
+	public JLabel getLblRol() {
+		return lblRol;
+	}
+
+	public void setLblRol(JLabel lblRol) {
+		this.lblRol = lblRol;
+	}
+
+	public JLabel getLblImagen() {
+		return lblImagen;
+	}
+
+	public void setLblImagen(JLabel lblImagen) {
+		this.lblImagen = lblImagen;
+	}
+
+	public JLabel getLblNombre() {
+		return lblNombre;
+	}
+
+	public void setLblNombre(JLabel lblNombre) {
+		this.lblNombre = lblNombre;
+	}
+
+	public JLabel getLblCedula() {
+		return lblCedula;
+	}
+
+	public void setLblCedula(JLabel lblCedula) {
+		this.lblCedula = lblCedula;
+	}
+
+	public JLabel getLblAniosExp() {
+		return lblAniosExp;
+	}
+
+	public void setLblAniosExp(JLabel lblAniosExp) {
+		this.lblAniosExp = lblAniosExp;
+	}
+
+	public JLabel getLblCorreo() {
+		return lblCorreo;
+	}
+
+	public void setLblCorreo(JLabel lblCorreo) {
+		this.lblCorreo = lblCorreo;
+	}
+
+	public JLabel getLblUsuario() {
+		return lblUsuario;
+	}
+
+	public void setLblUsuario(JLabel lblUsuario) {
+		this.lblUsuario = lblUsuario;
+	}
+
+	public JLabel getLblId() {
+		return lblId;
+	}
+
+	public void setLblId(JLabel lblId) {
+		this.lblId = lblId;
+	}
+
+	public JLabel getLblContrasena() {
+		return lblContrasena;
+	}
+
+	public void setLblContrasena(JLabel lblContrasena) {
+		this.lblContrasena = lblContrasena;
+	}
+
+	public JLabel getLblGenero() {
+		return lblGenero;
+	}
+
+	public void setLblGenero(JLabel lblGenero) {
+		this.lblGenero = lblGenero;
+	}
+
+	public JLabel getLblIdentificador() {
+		return lblIdentificador;
+	}
+
+	public void setLblIdentificador(JLabel lblIdentificador) {
+		this.lblIdentificador = lblIdentificador;
+	}
+
+	public JLabel getLblTiempoAcumulado() {
+		return lblTiempoAcumulado;
+	}
+
+	public void setLblTiempoAcumulado(JLabel lblTiempoAcumulado) {
+		this.lblTiempoAcumulado = lblTiempoAcumulado;
+	}
+
+	public JLabel getLblEspecialidad() {
+		return lblEspecialidad;
+	}
+
+	public void setLblEspecialidad(JLabel lblEspecialidad) {
+		this.lblEspecialidad = lblEspecialidad;
+	}
+
+	public JLabel getLblContextura() {
+		return lblContextura;
+	}
+
+	public void setLblContextura(JLabel lblContextura) {
+		this.lblContextura = lblContextura;
+	}
+
+	public JTextField getJtNombre() {
+		return jtNombre;
+	}
+
+	public void setJtNombre(JTextField jtNombre) {
+		this.jtNombre = jtNombre;
+	}
+
+	public JTextField getJtCedula() {
+		return jtCedula;
+	}
+
+	public void setJtCedula(JTextField jtCedula) {
+		this.jtCedula = jtCedula;
+	}
+
+	public JTextField getJtAniosExp() {
+		return jtAniosExp;
+	}
+
+	public void setJtAniosExp(JTextField jtAniosExp) {
+		this.jtAniosExp = jtAniosExp;
+	}
+
+	public JTextField getJtCorreo() {
+		return jtCorreo;
+	}
+
+	public void setJtCorreo(JTextField jtCorreo) {
+		this.jtCorreo = jtCorreo;
+	}
+
+	public JTextField getJtUsuario() {
+		return jtUsuario;
+	}
+
+	public void setJtUsuario(JTextField jtUsuario) {
+		this.jtUsuario = jtUsuario;
+	}
+
+	public JTextField getJtId() {
+		return jtId;
+	}
+
+	public void setJtId(JTextField jtId) {
+		this.jtId = jtId;
+	}
+
+	public JTextField getJtContrasena() {
+		return jtContrasena;
+	}
+
+	public void setJtContrasena(JTextField jtContrasena) {
+		this.jtContrasena = jtContrasena;
+	}
+
+	public JTextField getJtGenero() {
+		return jtGenero;
+	}
+
+	public void setJtGenero(JTextField jtGenero) {
+		this.jtGenero = jtGenero;
+	}
+
+	public JTextField getJtIdentificador() {
+		return jtIdentificador;
+	}
+
+	public void setJtIdentificador(JTextField jtIdentificador) {
+		this.jtIdentificador = jtIdentificador;
+	}
+
+	public JTextField getJtTiempoAcumulado() {
+		return jtTiempoAcumulado;
+	}
+
+	public void setJtTiempoAcumulado(JTextField jtTiempoAcumulado) {
+		this.jtTiempoAcumulado = jtTiempoAcumulado;
+	}
+
+	public JTextField getJtEspecialidad() {
+		return jtEspecialidad;
+	}
+
+	public void setJtEspecialidad(JTextField jtEspecialidad) {
+		this.jtEspecialidad = jtEspecialidad;
+	}
+
+	public JTextField getJtContextura() {
+		return jtContextura;
+	}
+
+	public void setJtContextura(JTextField jtContextura) {
+		this.jtContextura = jtContextura;
+	}
+
+	public JPanel getPnlDerecha() {
+		return pnlDerecha;
+	}
+
+	public void setPnlDerecha(JPanel pnlDerecha) {
+		this.pnlDerecha = pnlDerecha;
+	}
+
+	public JPanel getPnlIzquierda() {
+		return pnlIzquierda;
+	}
+
+	public void setPnlIzquierda(JPanel pnlIzquierda) {
+		this.pnlIzquierda = pnlIzquierda;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+	public String getOpcion() {
+		return opcion;
+	}
+
+	public void setOpcion(String opcion) {
+		this.opcion = opcion;
+	}
+
+	public VentanaUsuario getUsuarioPanel() {
+		return usuarioPanel;
+	}
+
+	public void setUsuarioPanel(VentanaUsuario usuarioPanel) {
+		this.usuarioPanel = usuarioPanel;
 	}
 }

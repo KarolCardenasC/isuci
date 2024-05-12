@@ -1,5 +1,7 @@
 package co.edu.unbosque.view;
 
+import co.edu.unbosque.controller.Controller;
+
 public class ViewFacade {
 
 	private VentanaInicial vL;
@@ -11,7 +13,6 @@ public class ViewFacade {
 		vL = new VentanaInicial();
 		vU = new VentanaUsuario();		
 		con = new Consola();
-		
 	}
 
 
