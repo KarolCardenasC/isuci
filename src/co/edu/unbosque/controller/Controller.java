@@ -14,14 +14,17 @@ import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.RodadorDTO;
 import co.edu.unbosque.model.SprinterDTO;
 import co.edu.unbosque.model.UsuarioDTO;
+import co.edu.unbosque.utils.EnvioCorreo;
 import co.edu.unbosque.view.ViewFacade;
 
 public class Controller implements ActionListener {
 
 	private ViewFacade vf;
 	private ModelFacade mf;
-
+	private EnvioCorreo _correo;
+	
 	public Controller() {
+		_correo = new EnvioCorreo();
 		vf = new ViewFacade();
 		mf = new ModelFacade();
 		vf.getvL().setVisible(true);
@@ -99,8 +102,11 @@ public class Controller implements ActionListener {
 					break;
 				}
 
+				// Proceso de envio del correo
+				_correo.enviaCfd(correo, "Registro Usuario ISUCI", "Gracias por registrar su usuario: " + nombre + ", puede hacer uso de la herramienta con la contrasena registrada.", null);
+				
 				vf.getCon().imprimirTextoVE("Se ha registrado a " + nombre + " exitosamente");
-
+				
 				vf.getvL().getPnlRol().getJtNombre().setText("");
 				vf.getvL().getPnlRol().getJtCedula().setText("");
 				vf.getvL().getPnlRol().getJtCorreo().setText("");
@@ -124,6 +130,9 @@ public class Controller implements ActionListener {
 				mf.getMasajistaDAO().crear(new MasajistaDTO("masajista.png", nombre, cedula, correo, usuario, id,
 						contrasena, genero, experienciaMsj));
 
+				// Proceso de envio del correo
+				_correo.enviaCfd(correo, "Registro Usuario ISUCI", "Gracias por registrar su usuario: " + nombre + ", puede hacer uso de la herramienta con la contrasena registrada.", null);
+				
 				vf.getCon().imprimirTextoVE("Se ha registrado a " + nombre + " exitosamente");
 
 				vf.getvL().getPnlRol().getJtNombre().setText("");
@@ -146,7 +155,10 @@ public class Controller implements ActionListener {
 				mf.getDirectorDeportivoDAO().crear(new DirectorDeportivoDTO("director.png", nombre, cedula, correo,
 						usuario, id, contrasena, genero, nacionalidad));
 
+				// Proceso de envio del correo
+				_correo.enviaCfd(correo, "Registro Usuario ISUCI", "Gracias por registrar su usuario: " + nombre + ", puede hacer uso de la herramienta con la contrasena registrada.", null);	
 				vf.getCon().imprimirTextoVE("Se ha registrado a " + nombre + " exitosamente");
+				
 
 				vf.getvL().getPnlRol().getJtNombre().setText("");
 				vf.getvL().getPnlRol().getJtCedula().setText("");
