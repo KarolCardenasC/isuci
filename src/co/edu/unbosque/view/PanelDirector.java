@@ -331,7 +331,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.alto")));
 		pnlInferior.setLayout(null);
 
-		btnGuardar = this.crearBoton("Guardar", 750, 10, "");
+		btnGuardar = this.crearBoton("Guardar Director", 750, 10, "");
 		pnlInferior.add(btnGuardar);
 
 		add(pnlInferior);
@@ -412,15 +412,11 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 		case "actualizarperfildirector":
 
-		case "eliminarperfildirector":
-
 		case "equipo":
 			opcion = e.getActionCommand();
 			pnlDerecha.removeAll();
 			iniciarPanelDerecho();
 			pnlDerecha.repaint();
-//			iniciarPanelIzquierdo();
-//			pnlIzquierda.repaint();
 			break;
 
 		}

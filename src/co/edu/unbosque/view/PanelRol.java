@@ -25,10 +25,10 @@ public class PanelRol extends MainPanel implements ActionListener {
 	private JLabel lblGenero;
 	private JLabel lblIdentificador;
 	private JLabel lblAniosExperiencia;
-	private JLabel lblTiempoAcumuladoMin;
 	private JLabel lblEspecialidad;
 	private JLabel lblContextura;
 	private JLabel lblNacionalidad;
+	private JLabel imagen;
 
 	private JButton btnCiclista;
 	private JButton btnMasajista;
@@ -42,7 +42,6 @@ public class PanelRol extends MainPanel implements ActionListener {
 	private JTextField jtCedula;
 	private JTextField jtIdentificador;
 	private JTextField jtAniosExperiencia;
-	private JTextField jtTiempoAcumuladoMin;
 	private JTextField jtNacionalidad;
 
 	private JComboBox<String> jcGenero;
@@ -77,14 +76,17 @@ public class PanelRol extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panelRol.pnlizquierda.alto")));
 		pnlIzquierda.setLayout(null);
 
-		btnCiclista = this.crearBotonInvisible("Ciclista", new Rectangle(84, 40, 150, 150), "cicla.png");
+		btnCiclista = this.crearBotonInvisible("Ciclista", new Rectangle(92, 53, 135, 172), "");
 		pnlIzquierda.add(btnCiclista);
 
-		btnMasajista = this.crearBotonInvisible("Masajista", new Rectangle(84, 250, 150, 150), "masajista.png");
+		btnMasajista = this.crearBotonInvisible("Masajista", new Rectangle(88, 260, 140, 179), "");
 		pnlIzquierda.add(btnMasajista);
 
-		btnDirector = this.crearBotonInvisible("Director", new Rectangle(84, 460, 150, 150), "director.png");
+		btnDirector = this.crearBotonInvisible("Director", new Rectangle(89, 474, 140, 179), "");
 		pnlIzquierda.add(btnDirector);
+		
+		imagen = this.crearLabel("", new Rectangle(0, 0, 300, 700), "roles.jpg");
+		pnlIzquierda.add(imagen);
 
 		add(pnlIzquierda);
 	}
@@ -97,85 +99,91 @@ public class PanelRol extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panelRol.pnlderecha.alto")));
 		pnlDerecha.setLayout(null);
 
-		lblNombre = this.crearLabel("lblNombre.titulo", 40, 18);
-		jtNombre = this.crearTextField("", 130, 30);
+		lblNombre = this.crearLabel("lblNombre.titulo", 90, 105);
+		jtNombre = this.crearTextFieldInvisible("", new Rectangle(95, 138, 180, 30));
 		pnlDerecha.add(lblNombre);
 		pnlDerecha.add(jtNombre);
 
-		lblCedula = this.crearLabel("lblCedula.titulo", 360, 78);
-		jtCedula = this.crearTextField("", 435, 90);
+		lblCedula = this.crearLabel("lblCedula.titulo", 415, 105);
+		jtCedula = this.crearTextFieldInvisible("", new Rectangle(420, 138, 180, 30));
 		pnlDerecha.add(lblCedula);
 		pnlDerecha.add(jtCedula);
 
 		String[] listaGenero = { "Hombre", "Mujer" };
 
-		lblGenero = this.crearLabel("lblGenero.titulo", 50, 138);
-		jcGenero = this.crearComboBox(listaGenero, 130, 150);
+		lblGenero = this.crearLabel("lblGenero.titulo", 90, 205);
+		jcGenero = this.crearComboBoxInvisible(listaGenero, new Rectangle(95,238, 180, 30));
 		pnlDerecha.add(lblGenero);
 		pnlDerecha.add(jcGenero);
 
-		lblCorreo = this.crearLabel("lblCorreo.titulo", 360, 198);
-		jtCorreo = this.crearTextField("", 435, 210);
+		lblCorreo = this.crearLabel("lblCorreo.titulo", 415, 205);
+		jtCorreo = this.crearTextFieldInvisible("", new Rectangle(420, 238, 180, 30));
 		pnlDerecha.add(lblCorreo);
 		pnlDerecha.add(jtCorreo);
 
-		lblContrasena = this.crearLabel("lblContrasena.titulo", 40, 258);
-		jtContrasena = this.crearTextField("", 160, 270);
+		lblContrasena = this.crearLabel("lblContrasena.titulo", 90, 305);
+		jtContrasena = this.crearTextFieldInvisible("", new Rectangle(95, 339, 180, 30));
 		pnlDerecha.add(lblContrasena);
 		pnlDerecha.add(jtContrasena);
+		
+		String imgDatos = "";
 
 		switch (opcion) {
 		case "ciclista":
 
-			lblIdentificador = this.crearLabel("lblIdentificador.titulo", 300, 318);
-			jtIdentificador = this.crearTextField("", 435, 330);
+			lblIdentificador = this.crearLabel("lblIdentificador.titulo", 415, 304);
+			jtIdentificador = this.crearTextFieldInvisible("", new Rectangle(420, 336, 180, 30));
 			pnlDerecha.add(lblIdentificador);
 			pnlDerecha.add(jtIdentificador);
 
-			lblAniosExperiencia = this.crearLabel("lblAniosExperiencia.titulo", 40, 378);
-			jtAniosExperiencia = this.crearTextField("", 215, 390);
+			lblAniosExperiencia = this.crearLabel("lblAniosExperiencia.titulo", 90, 408);
+			jtAniosExperiencia = this.crearTextFieldInvisible("", new Rectangle(95, 443, 180, 30));
 			pnlDerecha.add(lblAniosExperiencia);
 			pnlDerecha.add(jtAniosExperiencia);
-
-			lblTiempoAcumuladoMin = this.crearLabel("lblTiempoAcumuladoMin.titulo", 240, 438);
-			jtTiempoAcumuladoMin = this.crearTextField("", 435, 450);
-			pnlDerecha.add(lblTiempoAcumuladoMin);
-			pnlDerecha.add(jtTiempoAcumuladoMin);
 
 			String[] listaEspecialidad = { "", "Clasicomano", "Contrarrelojero", "Escalador", "Gregario", "Rodador",
 					"Sprinter" };
 			String[] listaContextura = { "", "Delgado", "Medio", "Grueso" };
 
-			lblEspecialidad = this.crearLabel("lblEspecialidad.titulo", 40, 498);
-			jcEspecialidad = this.crearComboBox(listaEspecialidad, 170, 510);
+			lblEspecialidad = this.crearLabel("lblEspecialidad.titulo", 90, 510);
+			jcEspecialidad = this.crearComboBoxInvisible(listaEspecialidad, new Rectangle(95,548, 180, 30));
 			pnlDerecha.add(lblEspecialidad);
 			pnlDerecha.add(jcEspecialidad);
 
-			lblContextura = this.crearLabel("lblContextura.titulo", 315, 548);
-			jcContextura = this.crearComboBox(listaContextura, 435, 560);
+			lblContextura = this.crearLabel("lblContextura.titulo", 415, 407);
+			jcContextura = this.crearComboBoxInvisible(listaContextura, new Rectangle(420,443, 180, 30));
 			pnlDerecha.add(lblContextura);
 			pnlDerecha.add(jcContextura);
+			
+			imgDatos = "datosCic.jpg";
 
 			break;
 
 		case "masajista":
 
-			lblAniosExperiencia = this.crearLabel("lblAniosExperiencia.titulo", 260, 348);
-			jtAniosExperiencia = this.crearTextField("", 435, 360);
+			lblAniosExperiencia = this.crearLabel("lblAniosExperiencia.titulo", 415, 303);
+			jtAniosExperiencia = this.crearTextFieldInvisible("", new Rectangle(420, 335, 180, 30));
 			pnlDerecha.add(lblAniosExperiencia);
 			pnlDerecha.add(jtAniosExperiencia);
+			
+			imgDatos = "datosGeneral.jpg";
 
 			break;
 
 		case "director":
 
-			lblNacionalidad = this.crearLabel("lblNacionalidad.titulo", 260, 348);
-			jtNacionalidad = this.crearTextField("", 435, 360);
+			lblNacionalidad = this.crearLabel("lblNacionalidad.titulo", 415, 303);
+			jtNacionalidad = this.crearTextFieldInvisible("", new Rectangle(420, 335, 180, 30));
 			pnlDerecha.add(lblNacionalidad);
 			pnlDerecha.add(jtNacionalidad);
+			
+			imgDatos = "datosGeneral.jpg";
 
 			break;
 		}
+		
+		imagen = this.crearLabel("", new Rectangle(0, 0, 700, 600), imgDatos);
+		pnlDerecha.add(imagen);
 
 		add(pnlDerecha);
 	}
@@ -188,11 +196,14 @@ public class PanelRol extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panelRol.pnlinferior.alto")));
 		pnlInferior.setLayout(null);
 		
-		btnRegistro = this.crearBoton("Registro", 320, 10, "");
+		btnRegistro = this.crearBotonInvisible("Registro", new Rectangle(481, 5, 60, 53), "");
 		pnlInferior.add(btnRegistro);
 		
-		btnVolver = this.crearBoton("Volver Login", 80, 10, "");
+		btnVolver = this.crearBotonInvisible("Volver Login", new Rectangle(191, 5, 60, 53), "");
 		pnlInferior.add(btnVolver);
+		
+		imagen = this.crearLabel("", new Rectangle(0, 0, 700, 65), "botonesRol.jpg");
+		pnlInferior.add(imagen);
 		
 		add(pnlInferior);
 	}
@@ -215,6 +226,7 @@ public class PanelRol extends MainPanel implements ActionListener {
 		
 		iniciarPanelDerecho();
 		pnlDerecha.repaint();
+		pnlDerecha.validate();
 
 	}
 
@@ -296,14 +308,6 @@ public class PanelRol extends MainPanel implements ActionListener {
 
 	public void setLblAniosExperiencia(JLabel lblAniosExperiencia) {
 		this.lblAniosExperiencia = lblAniosExperiencia;
-	}
-
-	public JLabel getLblTiempoAcumuladoMin() {
-		return lblTiempoAcumuladoMin;
-	}
-
-	public void setLblTiempoAcumuladoMin(JLabel lblTiempoAcumuladoMin) {
-		this.lblTiempoAcumuladoMin = lblTiempoAcumuladoMin;
 	}
 
 	public JLabel getLblEspecialidad() {
@@ -400,14 +404,6 @@ public class PanelRol extends MainPanel implements ActionListener {
 
 	public void setJtAniosExperiencia(JTextField jtAniosExperiencia) {
 		this.jtAniosExperiencia = jtAniosExperiencia;
-	}
-
-	public JTextField getJtTiempoAcumuladoMin() {
-		return jtTiempoAcumuladoMin;
-	}
-
-	public void setJtTiempoAcumuladoMin(JTextField jtTiempoAcumuladoMin) {
-		this.jtTiempoAcumuladoMin = jtTiempoAcumuladoMin;
 	}
 
 	public JTextField getJtNacionalidad() {

@@ -24,8 +24,6 @@ public class PanelLogin extends MainPanel implements ActionListener {
 	private JTextField jtUsuario;
 	private JTextField jtContrasena;
 	private VentanaInicial mainPanel;
-	
-	//private String rolUser = "ciclista";
 
 	public PanelLogin(VentanaInicial inicial) {
 		mainPanel = inicial;
@@ -42,22 +40,22 @@ public class PanelLogin extends MainPanel implements ActionListener {
 		lblUsuario = this.crearLabel("lblUsuario.titulo", 610, 235);
 		add(lblUsuario);
 
-		jtUsuario = this.crearTextFieldInvisible("", new Rectangle(620, 275, 280, 30));
+		jtUsuario = this.crearTextFieldInvisible("", new Rectangle(620, 275, 250, 30));
 		add(jtUsuario);
 
 		lblContrasena = this.crearLabel("lblContrasena.titulo", 610, 342);
 		add(lblContrasena);
 
-		jtContrasena = this.crearPasswordFieldInvisible(new Rectangle(620, 382, 260, 30));
+		jtContrasena = this.crearPasswordFieldInvisible(new Rectangle(620, 382, 230, 30));
 		add(jtContrasena);
 
-		btnIniciarSesion = this.crearBotonInvisible("login", new Rectangle(603, 457, 315, 42), "");
+		btnIniciarSesion = this.crearBotonInvisible("login", new Rectangle(606, 457, 278, 42), "");
 		add(btnIniciarSesion);
 
-		lblRegistro = this.crearLabel("lblRegistro.titulo", 705, 515);
+		lblRegistro = this.crearLabel("lblRegistro.titulo", 685, 515);
 		add(lblRegistro);
 
-		imagen = this.crearLabel("", new Rectangle(0, 0, 1000, 700), "Ingresar.png");
+		imagen = this.crearLabel("", new Rectangle(0, 0, 1000, 700), "Ingresar.jpg");
 		add(imagen);
 
 		lblRegistro.addMouseListener(new MouseAdapter() {

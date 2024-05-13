@@ -33,12 +33,14 @@ public class Controller implements ActionListener {
 		vf.getvL().getPnlLogin().getBtnIniciarSesion().addActionListener(this);
 		vf.getvL().getPnlRol().getBtnRegistro().addActionListener(this);
 
+		// vf.getvU().getPnlCiclista().getBtnGuardar().addActionListener(this);
+		vf.getvU().getPnlMasajista().getBtnGuardar().addActionListener(this);
 		vf.getvU().getPnlDirector().getBtnGuardar().addActionListener(this);
 
 		vf.getvU().getPnlCiclista().getBtnEliminar().addActionListener(this);
 		vf.getvU().getPnlMasajista().getBtnEliminar().addActionListener(this);
 		vf.getvU().getPnlDirector().getBtnEliminar().addActionListener(this);
-		
+
 		vf.getvU().getPnlCiclista().getBtnCerrar().addActionListener(this);
 		vf.getvU().getPnlMasajista().getBtnCerrar().addActionListener(this);
 		vf.getvU().getPnlDirector().getBtnCerrar().addActionListener(this);
@@ -58,7 +60,6 @@ public class Controller implements ActionListener {
 		case "ciclista":
 			int identificador = Integer.parseInt(vf.getvL().getPnlRol().getJtIdentificador().getText());
 			int experiencia = Integer.parseInt(vf.getvL().getPnlRol().getJtAniosExperiencia().getText());
-			double tiempo = Double.parseDouble(vf.getvL().getPnlRol().getJtTiempoAcumuladoMin().getText());
 			String especialidad = vf.getvL().getPnlRol().getJcEspecialidad().getSelectedItem().toString();
 			String contextura = vf.getvL().getPnlRol().getJcContextura().getSelectedItem().toString();
 
@@ -66,36 +67,35 @@ public class Controller implements ActionListener {
 				switch (especialidad) {
 				case "":
 					mf.getCiclistaDAO().crear(new CiclistaDTO("ciclista.png", nombre, cedula, correo, usuario, id,
-							contrasena, genero, identificador, experiencia, tiempo, especialidad, contextura));
+							contrasena, genero, identificador, experiencia, 0, especialidad, contextura));
 					break;
 				case "Clasicomano":
 					mf.getClasicomanoDAO().crear(new ClasicomanoDTO("ciclista.png", nombre, cedula, correo, usuario, id,
-							contrasena, genero, identificador, experiencia, tiempo, especialidad, contextura));
+							contrasena, genero, identificador, experiencia, 0, especialidad, contextura));
 					break;
 				case "Contrarrelojero":
-					mf.getContrarrelojeroDAO()
-							.crear(new ContrarrelojeroDTO("ciclista.png", nombre, cedula, correo, usuario, id,
-									contrasena, genero, identificador, experiencia, tiempo, especialidad, contextura));
+					mf.getContrarrelojeroDAO().crear(new ContrarrelojeroDTO("ciclista.png", nombre, cedula, correo,
+							usuario, id, contrasena, genero, identificador, experiencia, 0, especialidad, contextura));
 					break;
 				case "Escalador":
 					mf.getEscaladorDAO().crear(new EscaladorDTO("ciclista.png", nombre, cedula, correo, usuario, id,
-							contrasena, genero, identificador, experiencia, tiempo, especialidad, contextura));
+							contrasena, genero, identificador, experiencia, 0, especialidad, contextura));
 					break;
 				case "Gregario":
 					mf.getGregarioDAO().crear(new GregarioDTO("ciclista.png", nombre, cedula, correo, usuario, id,
-							contrasena, genero, identificador, experiencia, tiempo, especialidad, contextura));
+							contrasena, genero, identificador, experiencia, 0, especialidad, contextura));
 					break;
 				case "Rodador":
 					mf.getRodadorDAO().crear(new RodadorDTO("ciclista.png", nombre, cedula, correo, usuario, id,
-							contrasena, genero, identificador, experiencia, tiempo, especialidad, contextura));
+							contrasena, genero, identificador, experiencia, 0, especialidad, contextura));
 					break;
 				case "Sprinter":
 					mf.getSprinterDAO().crear(new SprinterDTO("ciclista.png", nombre, cedula, correo, usuario, id,
-							contrasena, genero, identificador, experiencia, tiempo, especialidad, contextura));
+							contrasena, genero, identificador, experiencia, 0, especialidad, contextura));
 					break;
 				default:
 					mf.getCiclistaDAO().crear(new CiclistaDTO("ciclista.png", nombre, cedula, correo, usuario, id,
-							contrasena, genero, identificador, experiencia, tiempo, especialidad, contextura));
+							contrasena, genero, identificador, experiencia, 0, especialidad, contextura));
 					break;
 				}
 
@@ -110,7 +110,6 @@ public class Controller implements ActionListener {
 				vf.getvL().getPnlRol().getJcGenero().setSelectedItem(-1);
 				vf.getvL().getPnlRol().getJtIdentificador().setText("");
 				vf.getvL().getPnlRol().getJtAniosExperiencia().setText("");
-				vf.getvL().getPnlRol().getJtTiempoAcumuladoMin().setText("");
 				vf.getvL().getPnlRol().getJcEspecialidad().setSelectedItem(1);
 				vf.getvL().getPnlRol().getJcContextura().setSelectedItem(1);
 
@@ -203,8 +202,6 @@ public class Controller implements ActionListener {
 			vf.getvU().getPnlMasajista().getProperties().setProperty("lblAniosExperiencia.perfil",
 					Integer.toString(masajista.getAniosExperiencia()));
 
-			//vf.getvU().getPnlMasajista().initComponents();
-
 		} else if (director != null) {
 
 			vf.getvU().setRol("director");
@@ -220,8 +217,6 @@ public class Controller implements ActionListener {
 			vf.getvU().getPnlDirector().getProperties().setProperty("lblGenero.perfil", director.getGenero());
 			vf.getvU().getPnlDirector().getProperties().setProperty("lblNacionalidad.perfil",
 					director.getNacionalidad());
-
-			//vf.getvU().getPnlDirector().initComponents();
 
 		} else if (ciclista != null) {
 
@@ -292,7 +287,6 @@ public class Controller implements ActionListener {
 			vf.getvU().getPnlCiclista().getProperties().setProperty("lblContextura.perfil",
 					ciclistaProps.getContextura());
 
-			//vf.getvU().getPnlCiclista().initComponents();
 		}
 
 		if (vf.getvU().getRol() != "incorrecto") {
@@ -364,9 +358,9 @@ public class Controller implements ActionListener {
 				+ vf.getvU().getPnlDirector().getProperties().getProperty("lblNombre.perfil") + "?") == 0) {
 
 			String img;
-			if(vf.getvU().getPnlDirector().isImgCambio()) {
+			if (vf.getvU().getPnlDirector().isImgCambio()) {
 				img = vf.getvU().getPnlDirector().getImagen();
-			}else {
+			} else {
 				img = vf.getvU().getPnlDirector().getProperties().getProperty("lblImagen.perfil");
 			}
 			String nombre = vf.getvU().getPnlDirector().getJtNombre().getText();
@@ -395,12 +389,57 @@ public class Controller implements ActionListener {
 			vf.getvU().getPnlDirector().getProperties().setProperty("lblGenero.perfil", director.getGenero());
 			vf.getvU().getPnlDirector().getProperties().setProperty("lblNacionalidad.perfil",
 					director.getNacionalidad());
-			
+
 			vf.getvU().getPnlDirector().iniciarPanelIzquierdo();
 			vf.getvU().getPnlDirector().getPnlIzquierda().repaint();
 		}
 
 	}
+	
+	public void actualizarMasajista() {
+
+		if (vf.getCon().confirmarTextoVE("Esta seguro que quiere actualizar al masajista "
+				+ vf.getvU().getPnlMasajista().getProperties().getProperty("lblNombre.perfil") + "?") == 0) {
+
+			String img;
+			if (vf.getvU().getPnlMasajista().isImgCambio()) {
+				img = vf.getvU().getPnlMasajista().getImagen();
+			} else {
+				img = vf.getvU().getPnlMasajista().getProperties().getProperty("lblImagen.perfil");
+			}
+			String nombre = vf.getvU().getPnlMasajista().getJtNombre().getText();
+			long cedula = Long.parseLong(vf.getvU().getPnlMasajista().getJtCedula().getText());
+			String correo = vf.getvU().getPnlMasajista().getJtCorreo().getText();
+			String usuario = vf.getvU().getPnlMasajista().getJtCorreo().getText();
+			String id = vf.getvU().getPnlMasajista().getJtCorreo().getText();
+			String contrasena = vf.getvU().getPnlMasajista().getJtContrasena().getText();
+			String genero = vf.getvU().getPnlMasajista().getJcGenero().getSelectedItem().toString();
+			int anios = Integer.parseInt(vf.getvU().getPnlMasajista().getJtAniosExp().getText()) ;
+
+			vf.getCon().imprimirTextoVE(
+					mf.getMasajistaDAO().actualizarPorCedula(cedula, new MasajistaDTO(img, nombre,
+							cedula, correo, usuario, id, contrasena, genero, anios)));
+
+			MasajistaDTO masajista = mf.getMasajistaDAO().buscarCedula(cedula);
+
+			vf.getvU().getPnlMasajista().getProperties().setProperty("lblImagen.perfil", masajista.getImagen());
+			vf.getvU().getPnlMasajista().getProperties().setProperty("lblNombre.perfil", masajista.getNombre());
+			vf.getvU().getPnlMasajista().getProperties().setProperty("lblCedula.perfil",
+					Long.toString(masajista.getCedula()));
+			vf.getvU().getPnlMasajista().getProperties().setProperty("lblCorreo.perfil", masajista.getCorreo());
+			vf.getvU().getPnlMasajista().getProperties().setProperty("lblUsuario.perfil", masajista.getUsuario());
+			vf.getvU().getPnlMasajista().getProperties().setProperty("lblId.perfil", masajista.getId());
+			vf.getvU().getPnlMasajista().getProperties().setProperty("lblContrasena.perfil", masajista.getContrasena());
+			vf.getvU().getPnlMasajista().getProperties().setProperty("lblGenero.perfil", masajista.getGenero());
+			vf.getvU().getPnlMasajista().getProperties().setProperty("lblAniosExperiencia.perfil",
+					Integer.toString(masajista.getAniosExperiencia()));
+
+			vf.getvU().getPnlMasajista().iniciarPanelIzquierdo();
+			vf.getvU().getPnlMasajista().getPnlIzquierda().repaint();
+		}
+
+	}
+
 
 	public void cerrarSesion() {
 		String rol = vf.getvU().getRol();
@@ -424,7 +463,7 @@ public class Controller implements ActionListener {
 			vf.getvL().setVisible(true);
 		}
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
@@ -436,8 +475,11 @@ public class Controller implements ActionListener {
 			registro();
 			break;
 
-		case "guardar":
+		case "guardardirector":
 			actualizarDirector();
+			break;
+		case "guardarmasajista":
+			actualizarMasajista();
 			break;
 
 		case "eliminarperfilciclista":
@@ -445,7 +487,7 @@ public class Controller implements ActionListener {
 		case "eliminarperfildirector":
 			eliminar();
 			break;
-			
+
 		case "cerrarsesiónciclista":
 		case "cerrarsesiónmasajista":
 		case "cerrarsesióndirector":

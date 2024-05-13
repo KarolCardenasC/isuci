@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import co.edu.unbosque.model.persistence.FileHandler;
 
@@ -144,10 +145,20 @@ public class MainPanel extends JPanel implements ActionListener {
 	public JComboBox<String> crearComboBox(String[] lista, int posX, int posY) {
 		JComboBox<String> jComboBox = new JComboBox<>(lista);
 		jComboBox.setBounds(new Rectangle(posX, posY, 200, 30));
-		jComboBox.setBackground(colorTextField);
 		jComboBox.setFont(fuenteTextFieldPrincipal.deriveFont(fuenteTextFieldPrincipal.getSize() + 2f));
 		jComboBox.setSelectedIndex(-1);
 
+		return jComboBox;
+	}
+	
+	public JComboBox<String> crearComboBoxInvisible(String[] lista, Rectangle bounds) {
+		JComboBox<String> jComboBox = new JComboBox<>(lista);
+		jComboBox.setBounds(bounds);
+		jComboBox.setBackground(new Color(205, 161, 98));
+		jComboBox.setBorder(new LineBorder(new Color(205, 161, 98), -2));
+		jComboBox.setFont(fuenteTextFieldPrincipal.deriveFont(fuenteTextFieldPrincipal.getSize() + 2f));
+		jComboBox.setSelectedIndex(-1);
+		
 		return jComboBox;
 	}
 
