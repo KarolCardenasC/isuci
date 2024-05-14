@@ -8,6 +8,7 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,14 +17,14 @@ import javax.swing.JTextField;
 import co.edu.unbosque.model.persistence.FileHandler;
 
 public class PanelCiclista extends MainPanel implements ActionListener {
-	
+
 	private JButton btnImagen;
 	private JButton btnActualizar;
 	private JButton btnEliminar;
 	private JButton btnCerrar;
 	private JButton btnPerfil;
 	private JButton btnGuardar;
-	
+
 	private JLabel lblImagenPerfil;
 	private JLabel lblNombrePerfil;
 	private JLabel lblRol;
@@ -40,7 +41,24 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 	private JLabel lblTiempoAcumulado;
 	private JLabel lblEspecialidad;
 	private JLabel lblContextura;
-	
+	private JLabel lblCaract1;
+	private JLabel lblCaract2;
+	private JLabel lblCaract3;
+	private JLabel lblCedulaTit;
+	private JLabel lblAniosExpTit;
+	private JLabel lblCorreoTit;
+	private JLabel lblUsuarioTit;
+	private JLabel lblIdTit;
+	private JLabel lblContrasenaTit;
+	private JLabel lblGeneroTit;
+	private JLabel lblIdentificadorTit;
+	private JLabel lblTiempoAcumuladoTit;
+	private JLabel lblEspecialidadTit;
+	private JLabel lblContexturaTit;
+	private JLabel lblCaract1Tit;
+	private JLabel lblCaract2Tit;
+	private JLabel lblCaract3Tit;
+
 	private JTextField jtNombre;
 	private JTextField jtCedula;
 	private JTextField jtAniosExp;
@@ -48,52 +66,62 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 	private JTextField jtUsuario;
 	private JTextField jtId;
 	private JTextField jtContrasena;
-	private JTextField jtGenero;
 	private JTextField jtIdentificador;
 	private JTextField jtTiempoAcumulado;
-	private JTextField jtEspecialidad;
-	private JTextField jtContextura;
-	
+	private JTextField jtCaract1;
+	private JTextField jtCaract2;
+	private JTextField jtCaract3;
+
+	private JComboBox<String> jcGenero;
+	private JComboBox<String> jcEspecialidad;
+	private JComboBox<String> jcContextura;
+
 	private JPanel pnlDerecha;
 	private JPanel pnlIzquierda;
-	
-	private String imagen = "ciclista.png";
+	private JPanel pnlInferior;
+
+	private String imagen = this.getProperties().getProperty("lblImagen.perfil");
 	private String opcion = "perfilinicial";
-	
-	
+	private boolean imgCambio = false;
+
 	private VentanaUsuario usuarioPanel;
 
-	
 	public PanelCiclista(VentanaUsuario inicial) {
-		
-		this.setProperties(FileHandler.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties")) ;
+
+		this.setProperties(FileHandler
+				.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties"));
 		usuarioPanel = inicial;
 		setLayout(null);
 		initComponents();
-		
+
 	}
-	
+
 	public void initComponents() {
 		removeAll();
 		iniciarPanelDerecho();
 		iniciarPanelIzquierdo();
+		iniciarPanelInferior();
 
 	}
-	
+
 	public void iniciarPanelIzquierdo() {
-		
+
 		pnlIzquierda = new JPanel();
-		pnlIzquierda.setBounds(Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.horizontal")),
-		Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.vertical")),Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.ancho")), Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.alto")));
+		pnlIzquierda.setBounds(
+				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.horizontal")),
+				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.vertical")),
+				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.ancho")),
+				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.alto")));
 		pnlIzquierda.setLayout(null);
-		
-		lblImagenPerfil = this.crearLabel("", new Rectangle(55, 50, 150, 150), imagen);
+
+		lblImagenPerfil = this.crearLabel("", new Rectangle(55, 50, 150, 150),
+				this.getProperties().getProperty("lblImagen.perfil"));
 		pnlIzquierda.add(lblImagenPerfil);
-		
+
 		lblNombrePerfil = this.crearLabel("lblNombre.perfil", 25, 210);
 		pnlIzquierda.add(lblNombrePerfil);
-		
-		lblRol = this.crearLabel("lblRol.ciclista", 25, 240);
+
+		lblRol = this.crearLabel("lblRol.ciclista", 90, 240);
 		pnlIzquierda.add(lblRol);
 
 		btnPerfil = this.crearBoton("Perfil Ciclista", 20, 350, "");
@@ -101,196 +129,408 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 		btnActualizar = this.crearBoton("Actualizar Perfil Ciclista", 20, 400, "");
 		pnlIzquierda.add(btnActualizar);
-		
+
 		btnEliminar = this.crearBoton("Eliminar Perfil Ciclista", 20, 450, "");
 		pnlIzquierda.add(btnEliminar);
-		
+
 		btnCerrar = this.crearBoton("Cerrar Sesión Ciclista", 20, 600, "");
 		pnlIzquierda.add(btnCerrar);
-		
+
 		add(pnlIzquierda);
 	}
-	
+
 	public void iniciarPanelDerecho() {
 		pnlDerecha = new JPanel();
 		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.horizontal")),
-		Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.vertical")),Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.ancho")), Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.alto")));
+				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.vertical")),
+				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.ancho")),
+				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.alto")));
 		pnlDerecha.setLayout(null);
-		
-		
+
 		switch (opcion) {
-		
+
 		case "perfilinicial":
 			lblImagen = this.crearLabel("", new Rectangle(200, 20, 600, 600), "ciclistaIni.png");
 			pnlDerecha.add(lblImagen);
 			break;
-		
+
 		case "perfilciclista":
-			
-			lblImagen = this.crearLabel("", new Rectangle(425, 50, 150, 150), imagen);
+
+			lblImagen = this.crearLabel("", new Rectangle(425, 50, 150, 150),
+					this.getProperties().getProperty("lblImagen.perfil"));
 			pnlDerecha.add(lblImagen);
-			
+
 			lblNombre = this.crearLabel("lblNombre.perfil", 425, 230);
 			pnlDerecha.add(lblNombre);
-			
-			lblCedula = this.crearLabel("lblCedula.perfil", 200, 300);
+
+			lblCedulaTit = this.crearLabel("lblCedula.titulo", 100, 280);
+			pnlDerecha.add(lblCedulaTit);
+
+			lblAniosExpTit = this.crearLabel("lblAniosExperiencia.titulo", 100, 330);
+			pnlDerecha.add(lblAniosExpTit);
+
+			lblCorreoTit = this.crearLabel("lblCorreo.titulo", 100, 380);
+			pnlDerecha.add(lblCorreoTit);
+
+			lblUsuarioTit = this.crearLabel("lblUsuario.titulo", 100, 430);
+			pnlDerecha.add(lblUsuarioTit);
+
+			lblIdTit = this.crearLabel("lblId.titulo", 100, 480);
+			pnlDerecha.add(lblIdTit);
+
+			lblContrasenaTit = this.crearLabel("lblContrasena.titulo", 100, 530);
+			pnlDerecha.add(lblContrasenaTit);
+
+			lblGeneroTit = this.crearLabel("lblGenero.titulo", 410, 280);
+			pnlDerecha.add(lblGeneroTit);
+
+			lblIdentificadorTit = this.crearLabel("lblIdentificador.titulo", 410, 330);
+			pnlDerecha.add(lblIdentificadorTit);
+
+			lblTiempoAcumuladoTit = this.crearLabel("lblTiempoAcumuladoMin.titulo", 410, 380);
+			pnlDerecha.add(lblTiempoAcumuladoTit);
+
+			lblEspecialidadTit = this.crearLabel("lblEspecialidad.titulo", 410, 430);
+			pnlDerecha.add(lblEspecialidadTit);
+
+			lblContexturaTit = this.crearLabel("lblContextura.titulo", 410, 480);
+			pnlDerecha.add(lblContexturaTit);
+
+			lblCedula = this.crearLabel("lblCedula.perfil", 100, 300);
 			pnlDerecha.add(lblCedula);
-			
-			lblAniosExp = this.crearLabel("lblAniosExperiencia.perfil", 200, 350);
+
+			lblAniosExp = this.crearLabel("lblAniosExperiencia.perfil", 100, 350);
 			pnlDerecha.add(lblAniosExp);
-			
-			lblCorreo = this.crearLabel("lblCorreo.perfil", 200, 400);
+
+			lblCorreo = this.crearLabel("lblCorreo.perfil", 100, 400);
 			pnlDerecha.add(lblCorreo);
-			
-			lblUsuario = this.crearLabel("lblUsuario.perfil", 200, 450);
+
+			lblUsuario = this.crearLabel("lblUsuario.perfil", 100, 450);
 			pnlDerecha.add(lblUsuario);
-			
-			lblId = this.crearLabel("lblId.perfil", 200, 500);
+
+			lblId = this.crearLabel("lblId.perfil", 100, 500);
 			pnlDerecha.add(lblId);
-			
-			lblContrasena = this.crearLabel("lblContrasena.perfil", 200, 550);
+
+			lblContrasena = this.crearLabel("lblContrasena.perfil", 100, 550);
 			pnlDerecha.add(lblContrasena);
-			
-			lblGenero = this.crearLabel("lblGenero.perfil", 200, 600);
+
+			lblGenero = this.crearLabel("lblGenero.perfil", 410, 300);
 			pnlDerecha.add(lblGenero);
-			
-			lblIdentificador = this.crearLabel("lblIdentificador.perfil", 600, 300);
+
+			lblIdentificador = this.crearLabel("lblIdentificador.perfil", 410, 350);
 			pnlDerecha.add(lblIdentificador);
-			
-			lblTiempoAcumulado = this.crearLabel("lblTiempoAcumuladoMin.perfil", 600, 350);
+
+			lblTiempoAcumulado = this.crearLabel("lblTiempoAcumuladoMin.perfil", 410, 400);
 			pnlDerecha.add(lblTiempoAcumulado);
-			
-			lblEspecialidad = this.crearLabel("lblEspecialidad.perfil", 600, 400);
+
+			lblEspecialidad = this.crearLabel("lblEspecialidad.perfil", 410, 450);
 			pnlDerecha.add(lblEspecialidad);
-			
-			lblContextura = this.crearLabel("lblContextura.perfil", 600, 450);
+
+			lblContextura = this.crearLabel("lblContextura.perfil", 410, 500);
 			pnlDerecha.add(lblContextura);
-			
+
+			switch (this.getProperties().getProperty("lblEspecialidad.perfil")) {
+			case "Ninguna":
+				break;
+
+			case "Clasicomano":
+				lblCaract1Tit = this.crearLabel("lblClasicosGanados.titulo", 410, 530);
+				pnlDerecha.add(lblCaract1Tit);
+
+				lblCaract1 = this.crearLabel("lblClasicosGanados.perfil", 410, 550);
+				pnlDerecha.add(lblCaract1);
+				break;
+
+			case "Contrarrelojero":
+				lblCaract1Tit = this.crearLabel("lblVelocidadMaxima.titulo", 410, 530);
+				pnlDerecha.add(lblCaract1Tit);
+
+				lblCaract1 = this.crearLabel("lblVelocidadMaxima.perfil", 410, 550);
+				pnlDerecha.add(lblCaract1);
+				break;
+
+			case "Escalador":
+				lblCaract1Tit = this.crearLabel("lblAceleracionSubida.titulo", 410, 530);
+				pnlDerecha.add(lblCaract1Tit);
+				lblCaract2Tit = this.crearLabel("lblRampaSoportada.titulo", 720, 280);
+				pnlDerecha.add(lblCaract2Tit);
+
+				lblCaract1 = this.crearLabel("lblAceleracionSubida.perfil", 410, 550);
+				pnlDerecha.add(lblCaract1);
+				lblCaract2 = this.crearLabel("lblRampaSoportada.perfil", 720, 300);
+				pnlDerecha.add(lblCaract2);
+				break;
+
+			case "Gregario":
+				lblCaract1Tit = this.crearLabel("lblFuncionPeloton.titulo", 410, 530);
+				pnlDerecha.add(lblCaract1Tit);
+
+				lblCaract1 = this.crearLabel("lblFuncionPeloton.perfil", 410, 550);
+				pnlDerecha.add(lblCaract1);
+				break;
+
+			case "Rodador":
+				lblCaract1Tit = this.crearLabel("lblVelocidadPedaleo.titulo", 410, 530);
+				pnlDerecha.add(lblCaract1Tit);
+
+				lblCaract1 = this.crearLabel("lblVelocidadPedaleo.perfil", 410, 550);
+				pnlDerecha.add(lblCaract1);
+				break;
+
+			case "Sprinter":
+				lblCaract1Tit = this.crearLabel("lblExplosion.titulo", 410, 530);
+				pnlDerecha.add(lblCaract1Tit);
+				lblCaract2Tit = this.crearLabel("lblPotenciaVatios.titulo", 720, 280);
+				pnlDerecha.add(lblCaract2Tit);
+				lblCaract3Tit = this.crearLabel("lblVelocidadSprint.titulo", 720, 330);
+				pnlDerecha.add(lblCaract3Tit);
+
+				lblCaract1 = this.crearLabel("lblExplosion.perfil", 410, 550);
+				pnlDerecha.add(lblCaract1);
+				lblCaract2 = this.crearLabel("lblPotenciaVatios.perfil", 720, 300);
+				pnlDerecha.add(lblCaract2);
+				lblCaract3 = this.crearLabel("lblVelocidadSprint.perfil", 720, 350);
+				pnlDerecha.add(lblCaract3);
+				break;
+			}
+
 			break;
-			
+
 		case "actualizarperfilciclista":
-			
-			lblImagen = this.crearLabel("", new Rectangle(425, 20, 150, 150), "actualizarImagen.png");
-			btnImagen = this.crearBoton("Imagen Ciclista", 400, 180, "");
+
+			lblImagen = this.crearLabel("", new Rectangle(445, 10, 120, 120), "actualizarImagen.png");
+			btnImagen = this.crearBoton("Imagen Ciclista", 400, 140, "");
 			pnlDerecha.add(lblImagen);
 			pnlDerecha.add(btnImagen);
-			
-			lblNombre = this.crearLabel("lblNombre.titulo", 150, 250);
-			jtNombre = this.crearTextField("", 290, 250);
+
+			lblNombre = this.crearLabel("lblNombre.titulo", 100, 220);
+			jtNombre = this.crearTextField("lblNombre.perfil", 100, 250);
 			pnlDerecha.add(lblNombre);
 			pnlDerecha.add(jtNombre);
-			
-			lblCedula = this.crearLabel("lblCedula.titulo", 150, 300);
-			jtCedula = this.crearTextField("", 290, 300);
+
+			lblCedula = this.crearLabel("lblCedula.titulo", 100, 300);
+			jtCedula = this.crearTextField("lblCedula.perfil", 100, 330);
 			pnlDerecha.add(lblCedula);
 			pnlDerecha.add(jtCedula);
-			
-			lblAniosExp = this.crearLabel("lblAniosExperiencia.titulo", 150, 350);
-			jtAniosExp = this.crearTextField("", 290, 350);
+
+			lblAniosExp = this.crearLabel("lblAniosExperiencia.titulo", 100, 380);
+			jtAniosExp = this.crearTextField("lblAniosExperiencia.perfil", 100, 410);
 			pnlDerecha.add(lblAniosExp);
 			pnlDerecha.add(jtAniosExp);
-			
-			lblCorreo = this.crearLabel("lblCorreo.titulo", 150, 400);
-			jtCorreo = this.crearTextField("", 290, 400);
+
+			lblCorreo = this.crearLabel("lblCorreo.titulo", 100, 460);
+			jtCorreo = this.crearTextField("lblCorreo.perfil", 100, 490);
 			pnlDerecha.add(lblCorreo);
 			pnlDerecha.add(jtCorreo);
-			
-			lblUsuario = this.crearLabel("lblUsuario.titulo", 150, 450);
-			jtUsuario = this.crearTextField("", 290, 450);
+
+			lblUsuario = this.crearLabel("lblUsuario.titulo", 100, 540);
+			jtUsuario = this.crearTextField("lblUsuario.perfil", 100, 570);
 			pnlDerecha.add(lblUsuario);
 			pnlDerecha.add(jtUsuario);
-			
-			lblId = this.crearLabel("lblId.titulo", 150, 500);
-			jtId = this.crearTextField("", 290, 500);
+
+			lblId = this.crearLabel("lblId.titulo", 410, 220);
+			jtId = this.crearTextField("lblId.perfil", 410, 250);
 			pnlDerecha.add(lblId);
 			pnlDerecha.add(jtId);
-			
-			lblContrasena = this.crearLabel("lblContrasena.titulo", 150, 550);
-			jtContrasena = this.crearTextField("", 290, 550);
+
+			lblContrasena = this.crearLabel("lblContrasena.titulo", 410, 300);
+			jtContrasena = this.crearTextField("lblContrasena.perfil", 410, 330);
 			pnlDerecha.add(lblContrasena);
 			pnlDerecha.add(jtContrasena);
-			
-			lblGenero = this.crearLabel("lblGenero.titulo", 150, 600);
-			jtGenero = this.crearTextField("", 290, 600);
+
+			String[] listaGenero = { "Hombre", "Mujer" };
+
+			lblGenero = this.crearLabel("lblGenero.titulo", 410, 380);
+			jcGenero = this.crearComboBox(listaGenero, 410, 410);
+			if (this.getProperties().getProperty("lblGenero.perfil").contains("Hombre")) {
+				jcGenero.setSelectedIndex(0);
+			} else {
+				jcGenero.setSelectedIndex(1);
+			}
 			pnlDerecha.add(lblGenero);
-			pnlDerecha.add(jtGenero);
-			
-			
-			lblIdentificador = this.crearLabel("lblIdentificador.titulo", 550, 250);
-			jtIdentificador = this.crearTextField("", 720, 250);
+			pnlDerecha.add(jcGenero);
+
+			lblIdentificador = this.crearLabel("lblIdentificador.titulo", 410, 460);
+			jtIdentificador = this.crearTextField("lblIdentificador.perfil", 410, 490);
 			pnlDerecha.add(lblIdentificador);
 			pnlDerecha.add(jtIdentificador);
-			
-			lblTiempoAcumulado = this.crearLabel("lblTiempoAcumuladoMin.titulo", 550, 300);
-			jtTiempoAcumulado = this.crearTextField("", 720, 300);
+
+			lblTiempoAcumulado = this.crearLabel("lblTiempoAcumuladoMin.titulo", 410, 540);
+			jtTiempoAcumulado = this.crearTextField("lblTiempoAcumuladoMin.perfil", 410, 570);
 			pnlDerecha.add(lblTiempoAcumulado);
 			pnlDerecha.add(jtTiempoAcumulado);
-			
-			lblEspecialidad = this.crearLabel("lblEspecialidad.titulo", 550, 350);
-			jtEspecialidad = this.crearTextField("", 720, 350);
+
+			String[] listaEspecialidad = { "Ninguna", "Clasicomano", "Contrarrelojero", "Escalador", "Gregario",
+					"Rodador", "Sprinter" };
+			String[] listaContextura = { "Ninguna", "Delgado", "Medio", "Grueso" };
+
+			lblEspecialidad = this.crearLabel("lblEspecialidad.titulo", 720, 220);
+			jcEspecialidad = this.crearComboBox(listaEspecialidad, 720, 250);
 			pnlDerecha.add(lblEspecialidad);
-			pnlDerecha.add(jtEspecialidad);
-			
-			lblContextura = this.crearLabel("lblContextura.titulo", 550, 400);
-			jtContextura = this.crearTextField("", 720, 400);
+			pnlDerecha.add(jcEspecialidad);
+
+			lblContextura = this.crearLabel("lblContextura.titulo", 720, 300);
+			jcContextura = this.crearComboBox(listaContextura, 720, 330);
+
+			switch (this.getProperties().getProperty("lblContextura.perfil")) {
+			case "Ninguna":
+				jcContextura.setSelectedIndex(0);
+				break;
+			case "Delgado":
+				jcContextura.setSelectedIndex(1);
+				break;
+			case "Medio":
+				jcContextura.setSelectedIndex(2);
+				break;
+			case "Grueso":
+				jcContextura.setSelectedIndex(3);
+				break;
+			}
 			pnlDerecha.add(lblContextura);
-			pnlDerecha.add(jtContextura);
-			
-			
-			btnGuardar = this.crearBoton("Guardar", 750, 600, "");
-			pnlDerecha.add(btnGuardar);
-			
+			pnlDerecha.add(jcContextura);
+
+			switch (this.getProperties().getProperty("lblEspecialidad.perfil")) {
+			case "Ninguna":
+				jcEspecialidad.setSelectedIndex(0);
+				break;
+
+			case "Clasicomano":
+				jcEspecialidad.setSelectedIndex(1);
+
+				lblCaract1 = this.crearLabel("lblClasicosGanados.titulo", 720, 380);
+				jtCaract1 = this.crearTextField("lblClasicosGanados.perfil", 720, 410);
+				pnlDerecha.add(lblCaract1);
+				pnlDerecha.add(jtCaract1);
+				break;
+
+			case "Contrarrelojero":
+				jcEspecialidad.setSelectedIndex(2);
+
+				lblCaract1 = this.crearLabel("lblVelocidadMaxima.titulo", 720, 380);
+				jtCaract1 = this.crearTextField("lblVelocidadMaxima.perfil", 720, 410);
+				pnlDerecha.add(lblCaract1);
+				pnlDerecha.add(jtCaract1);
+				break;
+
+			case "Escalador":
+				jcEspecialidad.setSelectedIndex(3);
+
+				lblCaract1 = this.crearLabel("lblAceleracionSubida.titulo", 720, 380);
+				jtCaract1 = this.crearTextField("lblAceleracionSubida.perfil", 720, 410);
+				pnlDerecha.add(lblCaract1);
+				pnlDerecha.add(jtCaract1);
+
+				lblCaract2 = this.crearLabel("lblRampaSoportada.titulo", 720, 460);
+				jtCaract2 = this.crearTextField("lblRampaSoportada.perfil", 720, 490);
+				pnlDerecha.add(lblCaract2);
+				pnlDerecha.add(jtCaract2);
+				break;
+
+			case "Gregario":
+				jcEspecialidad.setSelectedIndex(4);
+
+				lblCaract1 = this.crearLabel("lblFuncionPeloton.titulo", 720, 380);
+				jtCaract1 = this.crearTextField("lblFuncionPeloton.perfil", 720, 410);
+				pnlDerecha.add(lblCaract1);
+				pnlDerecha.add(jtCaract1);
+				break;
+
+			case "Rodador":
+				jcEspecialidad.setSelectedIndex(5);
+
+				lblCaract1 = this.crearLabel("lblVelocidadPedaleo.titulo", 720, 380);
+				jtCaract1 = this.crearTextField("lblVelocidadPedaleo.perfil", 720, 410);
+				pnlDerecha.add(lblCaract1);
+				pnlDerecha.add(jtCaract1);
+				break;
+
+			case "Sprinter":
+				jcEspecialidad.setSelectedIndex(6);
+
+				lblCaract1 = this.crearLabel("lblExplosion.titulo", 720, 380);
+				jtCaract1 = this.crearTextField("lblExplosion.perfil", 720, 410);
+				pnlDerecha.add(lblCaract1);
+				pnlDerecha.add(jtCaract1);
+
+				lblCaract2 = this.crearLabel("lblPotenciaVatios.titulo", 720, 460);
+				jtCaract2 = this.crearTextField("lblPotenciaVatios.perfil", 720, 490);
+				pnlDerecha.add(lblCaract2);
+				pnlDerecha.add(jtCaract2);
+
+				lblCaract3 = this.crearLabel("lblVelocidadSprint.titulo", 720, 540);
+				jtCaract3 = this.crearTextField("lblVelocidadSprint.perfil", 720, 570);
+				pnlDerecha.add(lblCaract3);
+				pnlDerecha.add(jtCaract3);
+				break;
+			}
+
+			imgCambio = false;
 			break;
 		}
-		
+
 		add(pnlDerecha);
+	}
+
+	public void iniciarPanelInferior() {
+		pnlInferior = new JPanel();
+		pnlInferior.setBounds(Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.horizontal")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.vertical")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.ancho")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.alto")));
+		pnlInferior.setLayout(null);
+
+		btnGuardar = this.crearBoton("Guardar Ciclista", 750, 10, "");
+		pnlInferior.add(btnGuardar);
+
+		add(pnlInferior);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		switch (e.getActionCommand()) {
-		
-		case "imagenciclista": 
+
+		case "imagenciclista":
 			JFileChooser eleccion = new JFileChooser();
-			
+
 			eleccion.setCurrentDirectory(new File("imgs"));
 			eleccion.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			
+
 			eleccion.addPropertyChangeListener(JFileChooser.DIRECTORY_CHANGED_PROPERTY, new PropertyChangeListener() {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
 					File folderSelec = eleccion.getCurrentDirectory();
 					if (!folderSelec.getAbsolutePath().equals("imgs")) {
-						
+
 						eleccion.setCurrentDirectory(new File("imgs"));
 					}
 				}
 			});
-			
+
 			int resultado = eleccion.showOpenDialog(this);
 			if (resultado == JFileChooser.APPROVE_OPTION) {
 				String nombreArchivo = eleccion.getSelectedFile().getName();
 				imagen = nombreArchivo;
+				imgCambio = true;
 			}
-			
+
 			iniciarPanelIzquierdo();
 			pnlIzquierda.repaint();
 			break;
-		
+
 		case "perfilciclista":
-			
+
 		case "actualizarperfilciclista":
-			
-		case "eliminarperfilciclista":
 			opcion = e.getActionCommand();
 			pnlDerecha.removeAll();
 			iniciarPanelDerecho();
 			pnlDerecha.repaint();
+			iniciarPanelIzquierdo();
+			pnlIzquierda.repaint();
 			break;
 
 		}
-		
+
 	}
 
 	public JButton getBtnImagen() {
@@ -525,14 +765,6 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		this.jtContrasena = jtContrasena;
 	}
 
-	public JTextField getJtGenero() {
-		return jtGenero;
-	}
-
-	public void setJtGenero(JTextField jtGenero) {
-		this.jtGenero = jtGenero;
-	}
-
 	public JTextField getJtIdentificador() {
 		return jtIdentificador;
 	}
@@ -547,22 +779,6 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 	public void setJtTiempoAcumulado(JTextField jtTiempoAcumulado) {
 		this.jtTiempoAcumulado = jtTiempoAcumulado;
-	}
-
-	public JTextField getJtEspecialidad() {
-		return jtEspecialidad;
-	}
-
-	public void setJtEspecialidad(JTextField jtEspecialidad) {
-		this.jtEspecialidad = jtEspecialidad;
-	}
-
-	public JTextField getJtContextura() {
-		return jtContextura;
-	}
-
-	public void setJtContextura(JTextField jtContextura) {
-		this.jtContextura = jtContextura;
 	}
 
 	public JPanel getPnlDerecha() {
@@ -603,5 +819,205 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 	public void setUsuarioPanel(VentanaUsuario usuarioPanel) {
 		this.usuarioPanel = usuarioPanel;
+	}
+
+	public JLabel getLblCaract1() {
+		return lblCaract1;
+	}
+
+	public void setLblCaract1(JLabel lblCaract1) {
+		this.lblCaract1 = lblCaract1;
+	}
+
+	public JLabel getLblCaract2() {
+		return lblCaract2;
+	}
+
+	public void setLblCaract2(JLabel lblCaract2) {
+		this.lblCaract2 = lblCaract2;
+	}
+
+	public JLabel getLblCaract3() {
+		return lblCaract3;
+	}
+
+	public void setLblCaract3(JLabel lblCaract3) {
+		this.lblCaract3 = lblCaract3;
+	}
+
+	public JLabel getLblCedulaTit() {
+		return lblCedulaTit;
+	}
+
+	public void setLblCedulaTit(JLabel lblCedulaTit) {
+		this.lblCedulaTit = lblCedulaTit;
+	}
+
+	public JLabel getLblAniosExpTit() {
+		return lblAniosExpTit;
+	}
+
+	public void setLblAniosExpTit(JLabel lblAniosExpTit) {
+		this.lblAniosExpTit = lblAniosExpTit;
+	}
+
+	public JLabel getLblCorreoTit() {
+		return lblCorreoTit;
+	}
+
+	public void setLblCorreoTit(JLabel lblCorreoTit) {
+		this.lblCorreoTit = lblCorreoTit;
+	}
+
+	public JLabel getLblUsuarioTit() {
+		return lblUsuarioTit;
+	}
+
+	public void setLblUsuarioTit(JLabel lblUsuarioTit) {
+		this.lblUsuarioTit = lblUsuarioTit;
+	}
+
+	public JLabel getLblIdTit() {
+		return lblIdTit;
+	}
+
+	public void setLblIdTit(JLabel lblIdTit) {
+		this.lblIdTit = lblIdTit;
+	}
+
+	public JLabel getLblContrasenaTit() {
+		return lblContrasenaTit;
+	}
+
+	public void setLblContrasenaTit(JLabel lblContrasenaTit) {
+		this.lblContrasenaTit = lblContrasenaTit;
+	}
+
+	public JLabel getLblGeneroTit() {
+		return lblGeneroTit;
+	}
+
+	public void setLblGeneroTit(JLabel lblGeneroTit) {
+		this.lblGeneroTit = lblGeneroTit;
+	}
+
+	public JLabel getLblIdentificadorTit() {
+		return lblIdentificadorTit;
+	}
+
+	public void setLblIdentificadorTit(JLabel lblIdentificadorTit) {
+		this.lblIdentificadorTit = lblIdentificadorTit;
+	}
+
+	public JLabel getLblTiempoAcumuladoTit() {
+		return lblTiempoAcumuladoTit;
+	}
+
+	public void setLblTiempoAcumuladoTit(JLabel lblTiempoAcumuladoTit) {
+		this.lblTiempoAcumuladoTit = lblTiempoAcumuladoTit;
+	}
+
+	public JLabel getLblEspecialidadTit() {
+		return lblEspecialidadTit;
+	}
+
+	public void setLblEspecialidadTit(JLabel lblEspecialidadTit) {
+		this.lblEspecialidadTit = lblEspecialidadTit;
+	}
+
+	public JLabel getLblContexturaTit() {
+		return lblContexturaTit;
+	}
+
+	public void setLblContexturaTit(JLabel lblContexturaTit) {
+		this.lblContexturaTit = lblContexturaTit;
+	}
+
+	public JLabel getLblCaract1Tit() {
+		return lblCaract1Tit;
+	}
+
+	public void setLblCaract1Tit(JLabel lblCaract1Tit) {
+		this.lblCaract1Tit = lblCaract1Tit;
+	}
+
+	public JLabel getLblCaract2Tit() {
+		return lblCaract2Tit;
+	}
+
+	public void setLblCaract2Tit(JLabel lblCaract2Tit) {
+		this.lblCaract2Tit = lblCaract2Tit;
+	}
+
+	public JLabel getLblCaract3Tit() {
+		return lblCaract3Tit;
+	}
+
+	public void setLblCaract3Tit(JLabel lblCaract3Tit) {
+		this.lblCaract3Tit = lblCaract3Tit;
+	}
+
+	public JTextField getJtCaract1() {
+		return jtCaract1;
+	}
+
+	public void setJtCaract1(JTextField jtCaract1) {
+		this.jtCaract1 = jtCaract1;
+	}
+
+	public JTextField getJtCaract2() {
+		return jtCaract2;
+	}
+
+	public void setJtCaract2(JTextField jtCaract2) {
+		this.jtCaract2 = jtCaract2;
+	}
+
+	public JTextField getJtCaract3() {
+		return jtCaract3;
+	}
+
+	public void setJtCaract3(JTextField jtCaract3) {
+		this.jtCaract3 = jtCaract3;
+	}
+
+	public JComboBox<String> getJcGenero() {
+		return jcGenero;
+	}
+
+	public void setJcGenero(JComboBox<String> jcGenero) {
+		this.jcGenero = jcGenero;
+	}
+
+	public JComboBox<String> getJcEspecialidad() {
+		return jcEspecialidad;
+	}
+
+	public void setJcEspecialidad(JComboBox<String> jcEspecialidad) {
+		this.jcEspecialidad = jcEspecialidad;
+	}
+
+	public JComboBox<String> getJcContextura() {
+		return jcContextura;
+	}
+
+	public void setJcContextura(JComboBox<String> jcContextura) {
+		this.jcContextura = jcContextura;
+	}
+
+	public JPanel getPnlInferior() {
+		return pnlInferior;
+	}
+
+	public void setPnlInferior(JPanel pnlInferior) {
+		this.pnlInferior = pnlInferior;
+	}
+
+	public boolean isImgCambio() {
+		return imgCambio;
+	}
+
+	public void setImgCambio(boolean imgCambio) {
+		this.imgCambio = imgCambio;
 	}
 }

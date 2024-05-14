@@ -137,46 +137,46 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 			lblNombre = this.crearLabel("lblNombre.perfil", 425, 230);
 			pnlDerecha.add(lblNombre);
 
-			lblCedulaTit = this.crearLabel("lblCedula.titulo", 150, 300);
+			lblCedulaTit = this.crearLabel("lblCedula.titulo", 200, 300);
 			pnlDerecha.add(lblCedulaTit);
 
-			lblAniosTit = this.crearLabel("lblAniosExperiencia.titulo", 150, 350);
+			lblAniosTit = this.crearLabel("lblAniosExperiencia.titulo", 200, 370);
 			pnlDerecha.add(lblAniosTit);
 
-			lblCorreoTit = this.crearLabel("lblCorreo.titulo", 150, 400);
+			lblCorreoTit = this.crearLabel("lblCorreo.titulo", 200, 440);
 			pnlDerecha.add(lblCorreoTit);
 
-			lblUsuarioTit = this.crearLabel("lblUsuario.titulo", 150, 450);
+			lblUsuarioTit = this.crearLabel("lblUsuario.titulo", 200, 510);
 			pnlDerecha.add(lblUsuarioTit);
 
-			lblIdTit = this.crearLabel("lblId.titulo", 150, 500);
+			lblIdTit = this.crearLabel("lblId.titulo", 600, 300);
 			pnlDerecha.add(lblIdTit);
 
-			lblContrasenaTit = this.crearLabel("lblContrasena.titulo", 150, 550);
+			lblContrasenaTit = this.crearLabel("lblContrasena.titulo", 600, 370);
 			pnlDerecha.add(lblContrasenaTit);
 
-			lblGeneroTit = this.crearLabel("lblGenero.titulo", 150, 600);
+			lblGeneroTit = this.crearLabel("lblGenero.titulo", 600, 440);
 			pnlDerecha.add(lblGeneroTit);
 
-			lblCedula = this.crearLabel("lblCedula.perfil", 400, 300);
+			lblCedula = this.crearLabel("lblCedula.perfil", 200, 320);
 			pnlDerecha.add(lblCedula);
 
-			lblAniosExp = this.crearLabel("lblAniosExperiencia.perfil", 400, 350);
+			lblAniosExp = this.crearLabel("lblAniosExperiencia.perfil", 200, 390);
 			pnlDerecha.add(lblAniosExp);
 
-			lblCorreo = this.crearLabel("lblCorreo.perfil", 400, 400);
+			lblCorreo = this.crearLabel("lblCorreo.perfil", 200, 460);
 			pnlDerecha.add(lblCorreo);
 
-			lblUsuario = this.crearLabel("lblUsuario.perfil", 400, 450);
+			lblUsuario = this.crearLabel("lblUsuario.perfil", 200, 530);
 			pnlDerecha.add(lblUsuario);
 
-			lblId = this.crearLabel("lblId.perfil", 400, 500);
+			lblId = this.crearLabel("lblId.perfil", 600, 320);
 			pnlDerecha.add(lblId);
 
-			lblContrasena = this.crearLabel("lblContrasena.perfil", 400, 550);
+			lblContrasena = this.crearLabel("lblContrasena.perfil", 600, 390);
 			pnlDerecha.add(lblContrasena);
 
-			lblGenero = this.crearLabel("lblGenero.perfil", 400, 600);
+			lblGenero = this.crearLabel("lblGenero.perfil", 600, 460);
 			pnlDerecha.add(lblGenero);
 
 			break;
@@ -188,45 +188,45 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 			pnlDerecha.add(lblImagen);
 			pnlDerecha.add(btnImagen);
 
-			lblNombre = this.crearLabel("lblNombre.titulo", 200, 300);
-			jtNombre = this.crearTextField("lblNombre.perfil", 200, 330);
+			lblNombre = this.crearLabel("lblNombre.titulo", 200, 270);
+			jtNombre = this.crearTextField("lblNombre.perfil", 200, 300);
 			pnlDerecha.add(lblNombre);
 			pnlDerecha.add(jtNombre);
 
-			lblCedula = this.crearLabel("lblCedula.titulo", 200, 380);
-			jtCedula = this.crearTextField("lblCedula.perfil", 200, 410);
+			lblCedula = this.crearLabel("lblCedula.titulo", 200, 350);
+			jtCedula = this.crearTextField("lblCedula.perfil", 200, 380);
 			pnlDerecha.add(lblCedula);
 			pnlDerecha.add(jtCedula);
 
-			lblAniosExp = this.crearLabel("lblAniosExperiencia.titulo", 200, 460);
-			jtAniosExp = this.crearTextField("lblAniosExperiencia.perfil", 200, 490);
+			lblAniosExp = this.crearLabel("lblAniosExperiencia.titulo", 200, 430);
+			jtAniosExp = this.crearTextField("lblAniosExperiencia.perfil", 200, 460);
 			pnlDerecha.add(lblAniosExp);
 			pnlDerecha.add(jtAniosExp);
 
-			lblCorreo = this.crearLabel("lblCorreo.titulo", 200, 540);
-			jtCorreo = this.crearTextField("lblCorreo.perfil", 200, 570);
+			lblCorreo = this.crearLabel("lblCorreo.titulo", 200, 510);
+			jtCorreo = this.crearTextField("lblCorreo.perfil", 200, 540);
 			pnlDerecha.add(lblCorreo);
 			pnlDerecha.add(jtCorreo);
 
-			lblUsuario = this.crearLabel("lblUsuario.titulo", 500, 300);
-			jtUsuario = this.crearTextField("lblUsuario.perfil", 500, 330);
+			lblUsuario = this.crearLabel("lblUsuario.titulo", 600, 270);
+			jtUsuario = this.crearTextField("lblUsuario.perfil", 600, 300);
 			pnlDerecha.add(lblUsuario);
 			pnlDerecha.add(jtUsuario);
 
-			lblId = this.crearLabel("lblId.titulo", 500, 380);
-			jtId = this.crearTextField("lblId.perfil", 500, 410);
+			lblId = this.crearLabel("lblId.titulo", 600, 350);
+			jtId = this.crearTextField("lblId.perfil", 600, 380);
 			pnlDerecha.add(lblId);
 			pnlDerecha.add(jtId);
 
-			lblContrasena = this.crearLabel("lblContrasena.titulo", 500, 460);
-			jtContrasena = this.crearTextField("lblContrasena.perfil", 500, 490);
+			lblContrasena = this.crearLabel("lblContrasena.titulo", 600, 430);
+			jtContrasena = this.crearTextField("lblContrasena.perfil", 600, 460);
 			pnlDerecha.add(lblContrasena);
 			pnlDerecha.add(jtContrasena);
 
 			String[] listaGenero = { "Hombre", "Mujer" };
 
-			lblGenero = this.crearLabel("lblGenero.titulo", 500, 540);
-			jcGenero = this.crearComboBox(listaGenero, 500, 570);
+			lblGenero = this.crearLabel("lblGenero.titulo", 600, 510);
+			jcGenero = this.crearComboBox(listaGenero, 600, 540);
 			if (this.getProperties().getProperty("lblGenero.perfil").contains("Hombre")) {
 				jcGenero.setSelectedIndex(0);
 			} else {

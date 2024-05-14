@@ -2,6 +2,8 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.CiclistaDTO;
+import co.edu.unbosque.model.RodadorDTO;
 import co.edu.unbosque.model.RodadorDTO;
 
 public class RodadorDAO implements CRUDOperation<RodadorDTO> {
@@ -122,6 +124,27 @@ public class RodadorDAO implements CRUDOperation<RodadorDTO> {
 				if(rodador.getContrasena().equals(c)) {
 					return rodador;
 				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public RodadorDTO buscarGmail(String g) {
+		for (int i = 0; i < listaRodadores.size(); i++) {
+			if (listaRodadores.get(i).getCorreo().contains(g)) {
+				return listaRodadores.get(i);
+
+			}
+		}
+		return null;
+	}
+	
+	public RodadorDTO buscarIdentificador(int iden) {
+		for (int i = 0; i < listaRodadores.size(); i++) {
+			if (listaRodadores.get(i).getIdentificador() == iden) {
+				return listaRodadores.get(i);
+
 			}
 		}
 		return null;

@@ -2,6 +2,8 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.CiclistaDTO;
+import co.edu.unbosque.model.SprinterDTO;
 import co.edu.unbosque.model.SprinterDTO;
 
 public class SprinterDAO implements CRUDOperation<SprinterDTO> {
@@ -122,6 +124,27 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 				if(sprinter.getContrasena().equals(c)) {
 					return sprinter;
 				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public SprinterDTO buscarGmail(String g) {
+		for (int i = 0; i < listaSprinters.size(); i++) {
+			if (listaSprinters.get(i).getCorreo().contains(g)) {
+				return listaSprinters.get(i);
+
+			}
+		}
+		return null;
+	}
+	
+	public SprinterDTO buscarIdentificador(int iden) {
+		for (int i = 0; i < listaSprinters.size(); i++) {
+			if (listaSprinters.get(i).getIdentificador() == iden) {
+				return listaSprinters.get(i);
+
 			}
 		}
 		return null;

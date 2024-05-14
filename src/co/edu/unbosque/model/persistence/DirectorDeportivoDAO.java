@@ -2,6 +2,7 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.DirectorDeportivoDTO;
 
 public class DirectorDeportivoDAO implements CRUDOperation<DirectorDeportivoDTO> {
@@ -120,6 +121,17 @@ public class DirectorDeportivoDAO implements CRUDOperation<DirectorDeportivoDTO>
 				if(directorDeportivo.getContrasena().equals(c)) {
 					return directorDeportivo;
 				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public DirectorDeportivoDTO buscarGmail(String g) {
+		for (int i = 0; i < listaDirectoresDeportivos.size(); i++) {
+			if (listaDirectoresDeportivos.get(i).getCorreo().contains(g)) {
+				return listaDirectoresDeportivos.get(i);
+
 			}
 		}
 		return null;

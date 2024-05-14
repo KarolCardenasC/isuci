@@ -2,6 +2,7 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.GregarioDTO;
 
 public class GregarioDAO implements CRUDOperation<GregarioDTO> {
@@ -122,6 +123,27 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 				if(gregario.getContrasena().equals(c)) {
 					return gregario;
 				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public GregarioDTO buscarGmail(String g) {
+		for (int i = 0; i < listaGregarios.size(); i++) {
+			if (listaGregarios.get(i).getCorreo().contains(g)) {
+				return listaGregarios.get(i);
+
+			}
+		}
+		return null;
+	}
+	
+	public GregarioDTO buscarIdentificador(int iden) {
+		for (int i = 0; i < listaGregarios.size(); i++) {
+			if (listaGregarios.get(i).getIdentificador() == iden) {
+				return listaGregarios.get(i);
+
 			}
 		}
 		return null;

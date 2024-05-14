@@ -3,6 +3,7 @@ package co.edu.unbosque.model.persistence;
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.MasajistaDTO;
+import co.edu.unbosque.model.MasajistaDTO;
 
 public class MasajistaDAO implements CRUDOperation<MasajistaDTO> {
 
@@ -120,6 +121,17 @@ public class MasajistaDAO implements CRUDOperation<MasajistaDTO> {
 				if(masajista.getContrasena().equals(c)) {
 					return masajista;
 				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public MasajistaDTO buscarGmail(String g) {
+		for (int i = 0; i < listaMasajistas.size(); i++) {
+			if (listaMasajistas.get(i).getCorreo().contains(g)) {
+				return listaMasajistas.get(i);
+
 			}
 		}
 		return null;

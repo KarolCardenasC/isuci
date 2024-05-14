@@ -2,6 +2,7 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.ClasicomanoDTO;
 
 public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
@@ -121,6 +122,27 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 				if(clasicomano.getContrasena().equals(c)) {
 					return clasicomano;
 				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public ClasicomanoDTO buscarGmail(String g) {
+		for (int i = 0; i < listaClasicomanos.size(); i++) {
+			if (listaClasicomanos.get(i).getCorreo().contains(g)) {
+				return listaClasicomanos.get(i);
+
+			}
+		}
+		return null;
+	}
+	
+	public ClasicomanoDTO buscarIdentificador(int iden) {
+		for (int i = 0; i < listaClasicomanos.size(); i++) {
+			if (listaClasicomanos.get(i).getIdentificador() == iden) {
+				return listaClasicomanos.get(i);
+
 			}
 		}
 		return null;

@@ -104,9 +104,9 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 	public ArrayList<CiclistaDTO> mostrarTodos() {
 		ArrayList<CiclistaDTO> listaMostrar = new ArrayList<>();
 		listaCiclistas.forEach(c -> {
-			CiclistaDTO ciclistaTemp = new CiclistaDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(), c.getUsuario(), c.getId(),
-					c.getContrasena(), c.getGenero(), c.getIdentificador(), c.getAniosExperiencia(), c.getTiempoAcumuladoMin(),
-					c.getEspecialidad(), c.getContextura());
+			CiclistaDTO ciclistaTemp = new CiclistaDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(),
+					c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getIdentificador(),
+					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura());
 
 			listaMostrar.add(ciclistaTemp);
 		});
@@ -117,10 +117,31 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 	@Override
 	public CiclistaDTO verificarUsuario(String u, String c) {
 		for (CiclistaDTO ciclista : listaCiclistas) {
-			if(ciclista.getUsuario().equals(u)) {
-				if(ciclista.getContrasena().equals(c)) {
+			if (ciclista.getUsuario().equals(u)) {
+				if (ciclista.getContrasena().equals(c)) {
 					return ciclista;
 				}
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public CiclistaDTO buscarGmail(String g) {
+		for (int i = 0; i < listaCiclistas.size(); i++) {
+			if (listaCiclistas.get(i).getCorreo().contains(g)) {
+				return listaCiclistas.get(i);
+
+			}
+		}
+		return null;
+	}
+
+	public CiclistaDTO buscarIdentificador(int iden) {
+		for (int i = 0; i < listaCiclistas.size(); i++) {
+			if (listaCiclistas.get(i).getIdentificador() == iden) {
+				return listaCiclistas.get(i);
+
 			}
 		}
 		return null;

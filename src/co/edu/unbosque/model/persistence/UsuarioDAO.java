@@ -2,6 +2,7 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.UsuarioDTO;
 
 public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
@@ -120,6 +121,17 @@ public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 				if(usuario.getContrasena().equals(c)) {
 					return usuario;
 				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public UsuarioDTO buscarGmail(String g) {
+		for (int i = 0; i < listaUsuarios.size(); i++) {
+			if (listaUsuarios.get(i).getCorreo().contains(g)) {
+				return listaUsuarios.get(i);
+
 			}
 		}
 		return null;

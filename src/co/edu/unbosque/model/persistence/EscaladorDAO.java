@@ -2,6 +2,7 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.EscaladorDTO;
 
 public class EscaladorDAO implements CRUDOperation<EscaladorDTO> {
@@ -125,5 +126,25 @@ public class EscaladorDAO implements CRUDOperation<EscaladorDTO> {
 		}
 		return null;
 	}
+	
+	@Override
+	public EscaladorDTO buscarGmail(String g) {
+		for (int i = 0; i < listaEscaladores.size(); i++) {
+			if (listaEscaladores.get(i).getCorreo().contains(g)) {
+				return listaEscaladores.get(i);
 
+			}
+		}
+		return null;
+	}
+
+	public EscaladorDTO buscarIdentificador(int iden) {
+		for (int i = 0; i < listaEscaladores.size(); i++) {
+			if (listaEscaladores.get(i).getIdentificador() == iden) {
+				return listaEscaladores.get(i);
+
+			}
+		}
+		return null;
+	}
 }

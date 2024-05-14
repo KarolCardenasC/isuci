@@ -66,6 +66,8 @@ public class PanelRol extends MainPanel implements ActionListener {
 		iniciarPanelDerecho();
 		iniciarPanelIzquierdo();
 		iniciarPanelInferior();
+		aplicarFuncionesValidacion();
+
 	}
 
 	public void iniciarPanelIzquierdo() {
@@ -84,7 +86,7 @@ public class PanelRol extends MainPanel implements ActionListener {
 
 		btnDirector = this.crearBotonInvisible("Director", new Rectangle(89, 474, 140, 179), "");
 		pnlIzquierda.add(btnDirector);
-		
+
 		imagen = this.crearLabel("", new Rectangle(0, 0, 300, 700), "roles.jpg");
 		pnlIzquierda.add(imagen);
 
@@ -92,7 +94,11 @@ public class PanelRol extends MainPanel implements ActionListener {
 	}
 
 	public void iniciarPanelDerecho() {
-		pnlDerecha = new JPanel();
+		if (pnlDerecha == null) {
+			pnlDerecha = new JPanel();
+		} else {
+			pnlDerecha.removeAll();
+		}
 		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panelRol.pnlderecha.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panelRol.pnlderecha.vertical")),
 				Integer.parseInt(this.getProperties().getProperty("panelRol.pnlderecha.ancho")),
@@ -112,7 +118,7 @@ public class PanelRol extends MainPanel implements ActionListener {
 		String[] listaGenero = { "Hombre", "Mujer" };
 
 		lblGenero = this.crearLabel("lblGenero.titulo", 90, 205);
-		jcGenero = this.crearComboBoxInvisible(listaGenero, new Rectangle(95,238, 180, 30));
+		jcGenero = this.crearComboBoxInvisible(listaGenero, new Rectangle(95, 238, 180, 30));
 		pnlDerecha.add(lblGenero);
 		pnlDerecha.add(jcGenero);
 
@@ -125,7 +131,7 @@ public class PanelRol extends MainPanel implements ActionListener {
 		jtContrasena = this.crearTextFieldInvisible("", new Rectangle(95, 339, 180, 30));
 		pnlDerecha.add(lblContrasena);
 		pnlDerecha.add(jtContrasena);
-		
+
 		String imgDatos = "";
 
 		switch (opcion) {
@@ -141,20 +147,20 @@ public class PanelRol extends MainPanel implements ActionListener {
 			pnlDerecha.add(lblAniosExperiencia);
 			pnlDerecha.add(jtAniosExperiencia);
 
-			String[] listaEspecialidad = { "", "Clasicomano", "Contrarrelojero", "Escalador", "Gregario", "Rodador",
-					"Sprinter" };
-			String[] listaContextura = { "", "Delgado", "Medio", "Grueso" };
+			String[] listaEspecialidad = { "Ninguna", "Clasicomano", "Contrarrelojero", "Escalador", "Gregario",
+					"Rodador", "Sprinter" };
+			String[] listaContextura = { "Ninguna", "Delgado", "Medio", "Grueso" };
 
 			lblEspecialidad = this.crearLabel("lblEspecialidad.titulo", 90, 510);
-			jcEspecialidad = this.crearComboBoxInvisible(listaEspecialidad, new Rectangle(95,548, 180, 30));
+			jcEspecialidad = this.crearComboBoxInvisible(listaEspecialidad, new Rectangle(95, 548, 180, 30));
 			pnlDerecha.add(lblEspecialidad);
 			pnlDerecha.add(jcEspecialidad);
 
 			lblContextura = this.crearLabel("lblContextura.titulo", 415, 407);
-			jcContextura = this.crearComboBoxInvisible(listaContextura, new Rectangle(420,443, 180, 30));
+			jcContextura = this.crearComboBoxInvisible(listaContextura, new Rectangle(420, 443, 180, 30));
 			pnlDerecha.add(lblContextura);
 			pnlDerecha.add(jcContextura);
-			
+
 			imgDatos = "datosCic.jpg";
 
 			break;
@@ -162,10 +168,10 @@ public class PanelRol extends MainPanel implements ActionListener {
 		case "masajista":
 
 			lblAniosExperiencia = this.crearLabel("lblAniosExperiencia.titulo", 415, 303);
-			jtAniosExperiencia = this.crearTextFieldInvisible("", new Rectangle(420, 335, 180, 30));
+			jtAniosExperiencia = this.crearTextFieldInvisible("", new Rectangle(420, 336, 180, 30));
 			pnlDerecha.add(lblAniosExperiencia);
 			pnlDerecha.add(jtAniosExperiencia);
-			
+
 			imgDatos = "datosGeneral.jpg";
 
 			break;
@@ -176,18 +182,21 @@ public class PanelRol extends MainPanel implements ActionListener {
 			jtNacionalidad = this.crearTextFieldInvisible("", new Rectangle(420, 335, 180, 30));
 			pnlDerecha.add(lblNacionalidad);
 			pnlDerecha.add(jtNacionalidad);
-			
+
 			imgDatos = "datosGeneral.jpg";
 
 			break;
 		}
-		
+
 		imagen = this.crearLabel("", new Rectangle(0, 0, 700, 600), imgDatos);
 		pnlDerecha.add(imagen);
 
+		pnlDerecha.repaint();
+		pnlDerecha.validate();
+
 		add(pnlDerecha);
 	}
-	
+
 	public void iniciarPanelInferior() {
 		pnlInferior = new JPanel();
 		pnlInferior.setBounds(Integer.parseInt(this.getProperties().getProperty("panelRol.pnlinferior.horizontal")),
@@ -195,17 +204,52 @@ public class PanelRol extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panelRol.pnlinferior.ancho")),
 				Integer.parseInt(this.getProperties().getProperty("panelRol.pnlinferior.alto")));
 		pnlInferior.setLayout(null);
-		
+
 		btnRegistro = this.crearBotonInvisible("Registro", new Rectangle(481, 5, 60, 53), "");
 		pnlInferior.add(btnRegistro);
-		
+
 		btnVolver = this.crearBotonInvisible("Volver Login", new Rectangle(191, 5, 60, 53), "");
 		pnlInferior.add(btnVolver);
-		
+
 		imagen = this.crearLabel("", new Rectangle(0, 0, 700, 65), "botonesRol.jpg");
 		pnlInferior.add(imagen);
-		
+
 		add(pnlInferior);
+	}
+
+	public void aplicarFuncionesValidacion() {
+		
+		numeros(jtCedula);
+		
+		letras(jtNombre);
+		
+		limitarCaracter(jtCedula, 10);
+		limitarCaracter(jtCorreo, 40);
+		limitarCaracter(jtContrasena, 20);
+		limitarCaracter(jtNombre, 40);
+
+		switch (opcion) {
+		case "ciclista":
+			numeros(jtAniosExperiencia);
+			numeros(jtIdentificador);
+
+			limitarCaracter(jtAniosExperiencia, 2);
+			limitarCaracter(jtIdentificador, 5);
+			break;
+
+		case "masajista":
+			numeros(jtAniosExperiencia);
+
+			limitarCaracter(jtAniosExperiencia, 2);
+			limitarCaracter(jtIdentificador, 2);
+			break;
+
+		case "director":
+			letras(jtNacionalidad);
+			limitarCaracter(jtNacionalidad, 30);
+			break;
+		}
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -215,18 +259,16 @@ public class PanelRol extends MainPanel implements ActionListener {
 		case "volverlogin":
 			mainPanel.panelLogin();
 			break;
-			
+
 		case "ciclista":
 		case "masajista":
 		case "director":
 			opcion = e.getActionCommand();
-			pnlDerecha.removeAll();
 			break;
 		}
-		
+
 		iniciarPanelDerecho();
-		pnlDerecha.repaint();
-		pnlDerecha.validate();
+		aplicarFuncionesValidacion();
 
 	}
 

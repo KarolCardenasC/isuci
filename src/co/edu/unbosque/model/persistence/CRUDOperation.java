@@ -25,6 +25,8 @@ public interface CRUDOperation<E> {
 	public ArrayList<E> buscarNombre(String n);
 
 	public E buscarCedula(long id);
+	
+	public E buscarGmail(String g);
 
 	public String eliminarPorCedula(long id);
 

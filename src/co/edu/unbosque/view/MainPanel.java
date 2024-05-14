@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Properties;
 
 import javax.swing.ImageIcon;
@@ -18,6 +21,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 import co.edu.unbosque.model.persistence.FileHandler;
 
@@ -64,7 +71,8 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		if (!"".equals(icono)) {
 			Image imagen = new ImageIcon("imgs/" + icono).getImage();
-			ImageIcon img = new ImageIcon(imagen.getScaledInstance((int)bounds.getWidth(), (int)bounds.getHeight(), Image.SCALE_SMOOTH));
+			ImageIcon img = new ImageIcon(
+					imagen.getScaledInstance((int) bounds.getWidth(), (int) bounds.getHeight(), Image.SCALE_SMOOTH));
 			boton.setIcon(img);
 		}
 
@@ -91,7 +99,8 @@ public class MainPanel extends JPanel implements ActionListener {
 		JLabel label = new JLabel("<html>" + properties.getProperty(titulo));
 		if (!"".equals(icono)) {
 			Image imagen = new ImageIcon("imgs/" + icono).getImage();
-			ImageIcon fondo = new ImageIcon(imagen.getScaledInstance((int)bounds.getWidth(), (int)bounds.getHeight(), Image.SCALE_SMOOTH));
+			ImageIcon fondo = new ImageIcon(
+					imagen.getScaledInstance((int) bounds.getWidth(), (int) bounds.getHeight(), Image.SCALE_SMOOTH));
 			label.setIcon(fondo);
 			label.setAlignmentX(CENTER_ALIGNMENT);
 		}
@@ -141,7 +150,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		return textField;
 	}
-	
+
 	public JComboBox<String> crearComboBox(String[] lista, int posX, int posY) {
 		JComboBox<String> jComboBox = new JComboBox<>(lista);
 		jComboBox.setBounds(new Rectangle(posX, posY, 200, 30));
@@ -150,7 +159,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		return jComboBox;
 	}
-	
+
 	public JComboBox<String> crearComboBoxInvisible(String[] lista, Rectangle bounds) {
 		JComboBox<String> jComboBox = new JComboBox<>(lista);
 		jComboBox.setBounds(bounds);
@@ -158,7 +167,7 @@ public class MainPanel extends JPanel implements ActionListener {
 		jComboBox.setBorder(new LineBorder(new Color(205, 161, 98), -2));
 		jComboBox.setFont(fuenteTextFieldPrincipal.deriveFont(fuenteTextFieldPrincipal.getSize() + 2f));
 		jComboBox.setSelectedIndex(-1);
-		
+
 		return jComboBox;
 	}
 
@@ -166,6 +175,48 @@ public class MainPanel extends JPanel implements ActionListener {
 		JTable tabla = new JTable();
 
 		return tabla;
+	}
+
+	public static void numeros(JTextField a) {
+		a.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!Character.isDigit(c)) {
+					e.consume();
+				}
+				if (c == '.' && a.getText().contains(".")) {
+					e.consume();
+				}
+			}
+		});
+	}
+
+	public static void letras(JTextField a) {
+		a.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!Character.isLetter(c) && c != ' ') {
+					e.consume();
+				}
+				if (c == '.' && a.getText().contains(".")) {
+					e.consume();
+				}
+			}
+		});
+	}
+
+	public static void limitarCaracter(JTextField textField, int limit) {
+		AbstractDocument doc = (AbstractDocument) textField.getDocument();
+		doc.setDocumentFilter(new DocumentFilter() {
+			public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+					throws BadLocationException {
+				if (fb.getDocument().getLength() + text.length() - length > limit) {
+					Toolkit.getDefaultToolkit().beep();
+					return;
+				}
+				super.replace(fb, offset, length, text, attrs);
+			}
+		});
 	}
 
 	public Properties getProperties() {

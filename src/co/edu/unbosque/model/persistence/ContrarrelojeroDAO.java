@@ -2,6 +2,7 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.ContrarrelojeroDTO;
 
 public class ContrarrelojeroDAO implements CRUDOperation<ContrarrelojeroDTO> {
@@ -122,6 +123,27 @@ public class ContrarrelojeroDAO implements CRUDOperation<ContrarrelojeroDTO> {
 				if(contrarrelojero.getContrasena().equals(c)) {
 					return contrarrelojero;
 				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public ContrarrelojeroDTO buscarGmail(String g) {
+		for (int i = 0; i < listaContrarrelojeros.size(); i++) {
+			if (listaContrarrelojeros.get(i).getCorreo().contains(g)) {
+				return listaContrarrelojeros.get(i);
+
+			}
+		}
+		return null;
+	}
+	
+	public ContrarrelojeroDTO buscarIdentificador(int iden) {
+		for (int i = 0; i < listaContrarrelojeros.size(); i++) {
+			if (listaContrarrelojeros.get(i).getIdentificador() == iden) {
+				return listaContrarrelojeros.get(i);
+
 			}
 		}
 		return null;
