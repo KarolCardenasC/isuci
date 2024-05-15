@@ -1,4 +1,4 @@
-package co.edu.unbosque.utils;
+package co.edu.unbosque.util;
 
 import javax.mail.BodyPart;
 import javax.mail.Message;
