@@ -33,6 +33,13 @@ public class PanelLogin extends MainPanel implements ActionListener {
 		initComponents();
 	}
 
+	public void aplicarFuncionesValidacion() {
+
+		limitarCaracter(jtUsuario, 50);
+		limitarCaracter(jtContrasena, 30);
+
+	}
+
 	public void initComponents() {
 
 		removeAll();
@@ -63,6 +70,8 @@ public class PanelLogin extends MainPanel implements ActionListener {
 				mainPanel.panelRegistro();
 			}
 		});
+
+		aplicarFuncionesValidacion();
 
 	}
 
@@ -134,12 +143,10 @@ public class PanelLogin extends MainPanel implements ActionListener {
 		this.mainPanel = mainPanel;
 	}
 
-	/*public String getRolUser() {
-		return rolUser;
-	}
-
-	public void setRolUser(String rolUser) {
-		this.rolUser = rolUser;
-	}*/
+	/*
+	 * public String getRolUser() { return rolUser; }
+	 * 
+	 * public void setRolUser(String rolUser) { this.rolUser = rolUser; }
+	 */
 
 }

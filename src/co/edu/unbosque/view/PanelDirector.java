@@ -54,6 +54,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 	private JLabel lblContrasenaTit;
 	private JLabel lblGeneroTit;
 	private JLabel lblTiempo;
+	private JLabel lblNombrePerfil;
 
 	private JTextField jtNombre;
 	private JTextField jtCedula;
@@ -129,8 +130,10 @@ public class PanelDirector extends MainPanel implements ActionListener {
 	}
 
 	public void iniciarPanelIzquierdo() {
+		if (pnlIzquierda == null) {
+			pnlIzquierda = new JPanel();
+		}
 
-		pnlIzquierda = new JPanel();
 		pnlIzquierda.setBounds(
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.vertical")),
@@ -142,7 +145,10 @@ public class PanelDirector extends MainPanel implements ActionListener {
 				this.getProperties().getProperty("lblImagen.perfil"));
 		pnlIzquierda.add(lblImagenPerfil);
 
-		lblRol = this.crearLabel("lblRol.director", 55, 210);
+		lblNombrePerfil = this.crearLabel("lblNombre.perfil", 25, 210);
+		pnlIzquierda.add(lblNombrePerfil);
+
+		lblRol = this.crearLabel("lblRol.director", 50, 240);
 		pnlIzquierda.add(lblRol);
 
 		btnPerfil = this.crearBoton("Perfil Director", 20, 300, "");
@@ -160,11 +166,19 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		btnCerrar = this.crearBoton("Cerrar Sesión Director", 20, 600, "");
 		pnlIzquierda.add(btnCerrar);
 
+		pnlIzquierda.repaint();
+		pnlIzquierda.revalidate();
+
 		add(pnlIzquierda);
 	}
 
 	public void iniciarPanelDerecho() {
-		pnlDerecha = new JPanel();
+		if (pnlDerecha == null) {
+			pnlDerecha = new JPanel();
+		} else {
+			pnlDerecha.removeAll();
+		}
+
 		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.vertical")),
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.ancho")),
@@ -187,46 +201,46 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			lblNombre = this.crearLabel("lblNombre.perfil", 425, 230);
 			pnlDerecha.add(lblNombre);
 
-			lblCedulaTit = this.crearLabel("lblCedula.titulo", 150, 300);
+			lblCedulaTit = this.crearLabel("lblCedula.titulo", 200, 300);
 			pnlDerecha.add(lblCedulaTit);
 
-			lblNacionalidadTit = this.crearLabel("lblNacionalidad.titulo", 150, 350);
+			lblNacionalidadTit = this.crearLabel("lblNacionalidad.titulo", 200, 370);
 			pnlDerecha.add(lblNacionalidadTit);
 
-			lblCorreoTit = this.crearLabel("lblCorreo.titulo", 150, 400);
+			lblCorreoTit = this.crearLabel("lblCorreo.titulo", 200, 440);
 			pnlDerecha.add(lblCorreoTit);
 
-			lblUsuarioTit = this.crearLabel("lblUsuario.titulo", 150, 450);
+			lblUsuarioTit = this.crearLabel("lblUsuario.titulo", 200, 510);
 			pnlDerecha.add(lblUsuarioTit);
 
-			lblIdTit = this.crearLabel("lblId.titulo", 150, 500);
+			lblIdTit = this.crearLabel("lblId.titulo", 600, 300);
 			pnlDerecha.add(lblIdTit);
 
-			lblContrasenaTit = this.crearLabel("lblContrasena.titulo", 150, 550);
+			lblContrasenaTit = this.crearLabel("lblContrasena.titulo", 600, 370);
 			pnlDerecha.add(lblContrasenaTit);
 
-			lblGeneroTit = this.crearLabel("lblGenero.titulo", 150, 600);
+			lblGeneroTit = this.crearLabel("lblGenero.titulo", 600, 440);
 			pnlDerecha.add(lblGeneroTit);
 
-			lblCedula = this.crearLabel("lblCedula.perfil", 400, 300);
+			lblCedula = this.crearLabel("lblCedula.perfil", 200, 320);
 			pnlDerecha.add(lblCedula);
 
-			lblNacionalidad = this.crearLabel("lblNacionalidad.perfil", 400, 350);
+			lblNacionalidad = this.crearLabel("lblNacionalidad.perfil", 200, 390);
 			pnlDerecha.add(lblNacionalidad);
 
-			lblCorreo = this.crearLabel("lblCorreo.perfil", 400, 400);
+			lblCorreo = this.crearLabel("lblCorreo.perfil", 200, 460);
 			pnlDerecha.add(lblCorreo);
 
-			lblUsuario = this.crearLabel("lblUsuario.perfil", 400, 450);
+			lblUsuario = this.crearLabel("lblUsuario.perfil", 200, 530);
 			pnlDerecha.add(lblUsuario);
 
-			lblId = this.crearLabel("lblId.perfil", 400, 500);
+			lblId = this.crearLabel("lblId.perfil", 600, 320);
 			pnlDerecha.add(lblId);
 
-			lblContrasena = this.crearLabel("lblContrasena.perfil", 400, 550);
+			lblContrasena = this.crearLabel("lblContrasena.perfil", 600, 390);
 			pnlDerecha.add(lblContrasena);
 
-			lblGenero = this.crearLabel("lblGenero.perfil", 400, 600);
+			lblGenero = this.crearLabel("lblGenero.perfil", 600, 460);
 			pnlDerecha.add(lblGenero);
 
 			break;
@@ -245,6 +259,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 			lblCedula = this.crearLabel("lblCedula.titulo", 200, 380);
 			jtCedula = this.crearTextField("lblCedula.perfil", 200, 410);
+			jtCedula.setEnabled(false);
 			pnlDerecha.add(lblCedula);
 			pnlDerecha.add(jtCedula);
 
@@ -255,28 +270,31 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 			lblCorreo = this.crearLabel("lblCorreo.titulo", 200, 540);
 			jtCorreo = this.crearTextField("lblCorreo.perfil", 200, 570);
+			jtCorreo.setEnabled(false);
 			pnlDerecha.add(lblCorreo);
 			pnlDerecha.add(jtCorreo);
 
-			lblUsuario = this.crearLabel("lblUsuario.titulo", 500, 300);
-			jtUsuario = this.crearTextField("lblUsuario.perfil", 500, 330);
+			lblUsuario = this.crearLabel("lblUsuario.titulo", 600, 300);
+			jtUsuario = this.crearTextField("lblUsuario.perfil", 600, 330);
+			jtUsuario.setEnabled(false);
 			pnlDerecha.add(lblUsuario);
 			pnlDerecha.add(jtUsuario);
 
-			lblId = this.crearLabel("lblId.titulo", 500, 380);
-			jtId = this.crearTextField("lblId.perfil", 500, 410);
+			lblId = this.crearLabel("lblId.titulo", 600, 380);
+			jtId = this.crearTextField("lblId.perfil", 600, 410);
+			jtId.setEnabled(false);
 			pnlDerecha.add(lblId);
 			pnlDerecha.add(jtId);
 
-			lblContrasena = this.crearLabel("lblContrasena.titulo", 500, 460);
-			jtContrasena = this.crearTextField("lblContrasena.perfil", 500, 490);
+			lblContrasena = this.crearLabel("lblContrasena.titulo", 600, 460);
+			jtContrasena = this.crearTextField("lblContrasena.perfil", 600, 490);
 			pnlDerecha.add(lblContrasena);
 			pnlDerecha.add(jtContrasena);
 
 			String[] listaGenero = { "Hombre", "Mujer" };
 
-			lblGenero = this.crearLabel("lblGenero.titulo", 500, 540);
-			jcGenero = this.crearComboBox(listaGenero, 500, 570);
+			lblGenero = this.crearLabel("lblGenero.titulo", 600, 540);
+			jcGenero = this.crearComboBox(listaGenero, 600, 570);
 			if (this.getProperties().getProperty("lblGenero.perfil").contains("Hombre")) {
 				jcGenero.setSelectedIndex(0);
 			} else {
@@ -286,6 +304,8 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			pnlDerecha.add(jcGenero);
 
 			imgCambio = false;
+
+			aplicarFuncionesValidacion();
 
 			break;
 
@@ -319,6 +339,9 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 			break;
 		}
+
+		pnlDerecha.repaint();
+		pnlDerecha.revalidate();
 
 		add(pnlDerecha);
 	}
@@ -376,6 +399,21 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		pnlDerecha.add(scrollPane);
 	}
 
+	public void aplicarFuncionesValidacion() {
+
+		numeros(jtCedula);
+
+		letras(jtNombre);
+		letras(jtNacionalidad);
+
+		limitarCaracter(jtCedula, 10);
+		limitarCaracter(jtCorreo, 50);
+		limitarCaracter(jtContrasena, 30);
+		limitarCaracter(jtNombre, 50);
+		limitarCaracter(jtNacionalidad, 40);
+
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -414,9 +452,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 		case "equipo":
 			opcion = e.getActionCommand();
-			pnlDerecha.removeAll();
 			iniciarPanelDerecho();
-			pnlDerecha.repaint();
 			break;
 
 		}
@@ -797,6 +833,14 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 	public void setImgCambio(boolean imgCambio) {
 		this.imgCambio = imgCambio;
+	}
+
+	public JLabel getLblNombrePerfil() {
+		return lblNombrePerfil;
+	}
+
+	public void setLblNombrePerfil(JLabel lblNombrePerfil) {
+		this.lblNombrePerfil = lblNombrePerfil;
 	}
 
 }

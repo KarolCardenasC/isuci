@@ -43,6 +43,7 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 	private JLabel lblIdTit;
 	private JLabel lblContrasenaTit;
 	private JLabel lblGeneroTit;
+	private JLabel lblNombrePerfil;
 
 	private JTextField jtNombre;
 	private JTextField jtCedula;
@@ -82,8 +83,10 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 	}
 
 	public void iniciarPanelIzquierdo() {
+		if (pnlIzquierda == null) {
+			pnlIzquierda = new JPanel();
+		}
 
-		pnlIzquierda = new JPanel();
 		pnlIzquierda.setBounds(
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.vertical")),
@@ -95,7 +98,10 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 				this.getProperties().getProperty("lblImagen.perfil"));
 		pnlIzquierda.add(lblImagenPerfil);
 
-		lblRol = this.crearLabel("lblRol.masajista", 90, 210);
+		lblNombrePerfil = this.crearLabel("lblNombre.perfil", 25, 210);
+		pnlIzquierda.add(lblNombrePerfil);
+
+		lblRol = this.crearLabel("lblRol.masajista", 90, 240);
 		pnlIzquierda.add(lblRol);
 
 		btnPerfil = this.crearBoton("Perfil Masajista", 20, 350, "");
@@ -110,11 +116,19 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 		btnCerrar = this.crearBoton("Cerrar Sesión Masajista", 20, 600, "");
 		pnlIzquierda.add(btnCerrar);
 
+		pnlIzquierda.repaint();
+		pnlIzquierda.revalidate();
+
 		add(pnlIzquierda);
 	}
 
 	public void iniciarPanelDerecho() {
-		pnlDerecha = new JPanel();
+		if (pnlDerecha == null) {
+			pnlDerecha = new JPanel();
+		} else {
+			pnlDerecha.removeAll();
+		}
+
 		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.vertical")),
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.ancho")),
@@ -195,6 +209,7 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 
 			lblCedula = this.crearLabel("lblCedula.titulo", 200, 350);
 			jtCedula = this.crearTextField("lblCedula.perfil", 200, 380);
+			jtCedula.setEnabled(false);
 			pnlDerecha.add(lblCedula);
 			pnlDerecha.add(jtCedula);
 
@@ -205,16 +220,19 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 
 			lblCorreo = this.crearLabel("lblCorreo.titulo", 200, 510);
 			jtCorreo = this.crearTextField("lblCorreo.perfil", 200, 540);
+			jtCorreo.setEnabled(false);
 			pnlDerecha.add(lblCorreo);
 			pnlDerecha.add(jtCorreo);
 
 			lblUsuario = this.crearLabel("lblUsuario.titulo", 600, 270);
 			jtUsuario = this.crearTextField("lblUsuario.perfil", 600, 300);
+			jtUsuario.setEnabled(false);
 			pnlDerecha.add(lblUsuario);
 			pnlDerecha.add(jtUsuario);
 
 			lblId = this.crearLabel("lblId.titulo", 600, 350);
 			jtId = this.crearTextField("lblId.perfil", 600, 380);
+			jtId.setEnabled(false);
 			pnlDerecha.add(lblId);
 			pnlDerecha.add(jtId);
 
@@ -237,8 +255,13 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 
 			imgCambio = false;
 
+			aplicarFuncionesValidacion();
+			
 			break;
 		}
+
+		pnlDerecha.repaint();
+		pnlDerecha.revalidate();
 
 		add(pnlDerecha);
 	}
@@ -255,6 +278,21 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 		pnlInferior.add(btnGuardar);
 
 		add(pnlInferior);
+	}
+
+	public void aplicarFuncionesValidacion() {
+
+		numeros(jtCedula);
+		numeros(jtAniosExp);
+
+		letras(jtNombre);
+
+		limitarCaracter(jtCedula, 10);
+		limitarCaracter(jtCorreo, 50);
+		limitarCaracter(jtContrasena, 30);
+		limitarCaracter(jtNombre, 50);
+		limitarCaracter(jtAniosExp, 2);
+
 	}
 
 	@Override
@@ -292,11 +330,9 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 		case "perfilmasajista":
 
 		case "actualizarperfilmasajista":
-			
+
 			opcion = e.getActionCommand();
-			pnlDerecha.removeAll();
 			iniciarPanelDerecho();
-			pnlDerecha.repaint();
 			break;
 
 		}
@@ -557,5 +593,69 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 
 	public void setImgCambio(boolean imgCambio) {
 		this.imgCambio = imgCambio;
+	}
+
+	public JLabel getLblCedulaTit() {
+		return lblCedulaTit;
+	}
+
+	public void setLblCedulaTit(JLabel lblCedulaTit) {
+		this.lblCedulaTit = lblCedulaTit;
+	}
+
+	public JLabel getLblAniosTit() {
+		return lblAniosTit;
+	}
+
+	public void setLblAniosTit(JLabel lblAniosTit) {
+		this.lblAniosTit = lblAniosTit;
+	}
+
+	public JLabel getLblCorreoTit() {
+		return lblCorreoTit;
+	}
+
+	public void setLblCorreoTit(JLabel lblCorreoTit) {
+		this.lblCorreoTit = lblCorreoTit;
+	}
+
+	public JLabel getLblUsuarioTit() {
+		return lblUsuarioTit;
+	}
+
+	public void setLblUsuarioTit(JLabel lblUsuarioTit) {
+		this.lblUsuarioTit = lblUsuarioTit;
+	}
+
+	public JLabel getLblIdTit() {
+		return lblIdTit;
+	}
+
+	public void setLblIdTit(JLabel lblIdTit) {
+		this.lblIdTit = lblIdTit;
+	}
+
+	public JLabel getLblContrasenaTit() {
+		return lblContrasenaTit;
+	}
+
+	public void setLblContrasenaTit(JLabel lblContrasenaTit) {
+		this.lblContrasenaTit = lblContrasenaTit;
+	}
+
+	public JLabel getLblGeneroTit() {
+		return lblGeneroTit;
+	}
+
+	public void setLblGeneroTit(JLabel lblGeneroTit) {
+		this.lblGeneroTit = lblGeneroTit;
+	}
+
+	public JLabel getLblNombrePerfil() {
+		return lblNombrePerfil;
+	}
+
+	public void setLblNombrePerfil(JLabel lblNombrePerfil) {
+		this.lblNombrePerfil = lblNombrePerfil;
 	}
 }

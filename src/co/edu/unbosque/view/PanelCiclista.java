@@ -75,6 +75,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 	private JComboBox<String> jcGenero;
 	private JComboBox<String> jcEspecialidad;
 	private JComboBox<String> jcContextura;
+	private JComboBox<String> jcFuncion;
 
 	private JPanel pnlDerecha;
 	private JPanel pnlIzquierda;
@@ -105,8 +106,10 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 	}
 
 	public void iniciarPanelIzquierdo() {
+		if (pnlIzquierda == null) {
+			pnlIzquierda = new JPanel();
+		}
 
-		pnlIzquierda = new JPanel();
 		pnlIzquierda.setBounds(
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.vertical")),
@@ -136,11 +139,19 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		btnCerrar = this.crearBoton("Cerrar Sesión Ciclista", 20, 600, "");
 		pnlIzquierda.add(btnCerrar);
 
+		pnlIzquierda.repaint();
+		pnlIzquierda.revalidate();
+
 		add(pnlIzquierda);
 	}
 
 	public void iniciarPanelDerecho() {
-		pnlDerecha = new JPanel();
+		if (pnlDerecha == null) {
+			pnlDerecha = new JPanel();
+		} else {
+			pnlDerecha.removeAll();
+		}
+
 		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.vertical")),
 				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.ancho")),
@@ -310,6 +321,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 			lblCedula = this.crearLabel("lblCedula.titulo", 100, 300);
 			jtCedula = this.crearTextField("lblCedula.perfil", 100, 330);
+			jtCedula.setEnabled(false);
 			pnlDerecha.add(lblCedula);
 			pnlDerecha.add(jtCedula);
 
@@ -320,16 +332,19 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 			lblCorreo = this.crearLabel("lblCorreo.titulo", 100, 460);
 			jtCorreo = this.crearTextField("lblCorreo.perfil", 100, 490);
+			jtCorreo.setEnabled(false);
 			pnlDerecha.add(lblCorreo);
 			pnlDerecha.add(jtCorreo);
 
 			lblUsuario = this.crearLabel("lblUsuario.titulo", 100, 540);
 			jtUsuario = this.crearTextField("lblUsuario.perfil", 100, 570);
+			jtUsuario.setEnabled(false);
 			pnlDerecha.add(lblUsuario);
 			pnlDerecha.add(jtUsuario);
 
 			lblId = this.crearLabel("lblId.titulo", 410, 220);
 			jtId = this.crearTextField("lblId.perfil", 410, 250);
+			jtId.setEnabled(false);
 			pnlDerecha.add(lblId);
 			pnlDerecha.add(jtId);
 
@@ -352,6 +367,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 			lblIdentificador = this.crearLabel("lblIdentificador.titulo", 410, 460);
 			jtIdentificador = this.crearTextField("lblIdentificador.perfil", 410, 490);
+			jtIdentificador.setEnabled(false);
 			pnlDerecha.add(lblIdentificador);
 			pnlDerecha.add(jtIdentificador);
 
@@ -429,10 +445,33 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 			case "Gregario":
 				jcEspecialidad.setSelectedIndex(4);
 
+				String[] listaFuncion = { "Ninguna", "Abastecedor", "Mantener ritmo", "Captura fugas",
+						"Posicionar líder", "Proteger líder" };
+
 				lblCaract1 = this.crearLabel("lblFuncionPeloton.titulo", 720, 380);
-				jtCaract1 = this.crearTextField("lblFuncionPeloton.perfil", 720, 410);
+				jcFuncion = this.crearComboBox(listaFuncion, 720, 410);
+				switch (this.getProperties().getProperty("lblFuncionPeloton.perfil")) {
+				case "Ninguna":
+					jcFuncion.setSelectedIndex(0);
+					break;
+				case "Abastecedor":
+					jcFuncion.setSelectedIndex(1);
+					break;
+				case "Mantener ritmo":
+					jcFuncion.setSelectedIndex(2);
+					break;
+				case "Captura fugas":
+					jcFuncion.setSelectedIndex(3);
+					break;
+				case "Posicionar líder":
+					jcFuncion.setSelectedIndex(4);
+					break;
+				case "Proteger líder":
+					jcFuncion.setSelectedIndex(5);
+					break;
+				}
 				pnlDerecha.add(lblCaract1);
-				pnlDerecha.add(jtCaract1);
+				pnlDerecha.add(jcFuncion);
 				break;
 
 			case "Rodador":
@@ -465,8 +504,13 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 			}
 
 			imgCambio = false;
+
+			aplicarFuncionesValidacion();
 			break;
 		}
+
+		pnlDerecha.repaint();
+		pnlDerecha.revalidate();
 
 		add(pnlDerecha);
 	}
@@ -483,6 +527,61 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		pnlInferior.add(btnGuardar);
 
 		add(pnlInferior);
+	}
+
+	public void aplicarFuncionesValidacion() {
+
+		numeros(jtCedula);
+		numeros(jtAniosExp);
+		numeros(jtIdentificador);
+
+		letras(jtNombre);
+
+		limitarCaracter(jtAniosExp, 2);
+		limitarCaracter(jtIdentificador, 5);
+		limitarCaracter(jtCedula, 10);
+		limitarCaracter(jtCorreo, 50);
+		limitarCaracter(jtContrasena, 30);
+		limitarCaracter(jtNombre, 50);
+
+		switch (this.getProperties().getProperty("lblEspecialidad.perfil")) {
+		case "Clasicomano":
+			numeros(jtCaract1);
+
+			limitarCaracter(jtCaract1, 7);
+			break;
+
+		case "Contrarrelojero":
+			numerosDecimal(jtCaract1);
+
+			limitarCaracter(jtCaract1, 7);
+			break;
+
+		case "Escalador":
+			numerosDecimal(jtCaract1);
+			numerosDecimal(jtCaract2);
+
+			limitarCaracter(jtCaract1, 7);
+			limitarCaracter(jtCaract2, 7);
+			break;
+
+		case "Rodador":
+			numerosDecimal(jtCaract1);
+
+			limitarCaracter(jtCaract1, 7);
+			break;
+
+		case "Sprinter":
+			numerosDecimal(jtCaract1);
+			numerosDecimal(jtCaract1);
+			numerosDecimal(jtCaract1);
+
+			limitarCaracter(jtCaract1, 7);
+			limitarCaracter(jtCaract1, 7);
+			limitarCaracter(jtCaract1, 7);
+			break;
+		}
+
 	}
 
 	@Override
@@ -522,11 +621,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 		case "actualizarperfilciclista":
 			opcion = e.getActionCommand();
-			pnlDerecha.removeAll();
 			iniciarPanelDerecho();
-			pnlDerecha.repaint();
-			iniciarPanelIzquierdo();
-			pnlIzquierda.repaint();
 			break;
 
 		}
@@ -1019,5 +1114,13 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 	public void setImgCambio(boolean imgCambio) {
 		this.imgCambio = imgCambio;
+	}
+
+	public JComboBox<String> getJcFuncion() {
+		return jcFuncion;
+	}
+
+	public void setJcFuncion(JComboBox<String> jcFuncion) {
+		this.jcFuncion = jcFuncion;
 	}
 }

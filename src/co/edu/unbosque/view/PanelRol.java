@@ -218,15 +218,15 @@ public class PanelRol extends MainPanel implements ActionListener {
 	}
 
 	public void aplicarFuncionesValidacion() {
-		
+
 		numeros(jtCedula);
-		
+
 		letras(jtNombre);
-		
+
 		limitarCaracter(jtCedula, 10);
-		limitarCaracter(jtCorreo, 40);
-		limitarCaracter(jtContrasena, 20);
-		limitarCaracter(jtNombre, 40);
+		limitarCaracter(jtCorreo, 50);
+		limitarCaracter(jtContrasena, 30);
+		limitarCaracter(jtNombre, 50);
 
 		switch (opcion) {
 		case "ciclista":
@@ -241,12 +241,12 @@ public class PanelRol extends MainPanel implements ActionListener {
 			numeros(jtAniosExperiencia);
 
 			limitarCaracter(jtAniosExperiencia, 2);
-			limitarCaracter(jtIdentificador, 2);
 			break;
 
 		case "director":
 			letras(jtNacionalidad);
-			limitarCaracter(jtNacionalidad, 30);
+
+			limitarCaracter(jtNacionalidad, 40);
 			break;
 		}
 
@@ -264,11 +264,11 @@ public class PanelRol extends MainPanel implements ActionListener {
 		case "masajista":
 		case "director":
 			opcion = e.getActionCommand();
+			iniciarPanelDerecho();
+			aplicarFuncionesValidacion();
 			break;
 		}
 
-		iniciarPanelDerecho();
-		aplicarFuncionesValidacion();
 
 	}
 

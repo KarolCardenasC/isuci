@@ -15,12 +15,15 @@ public class VentanaUsuario extends JFrame {
 	private PanelCiclista pnlCiclista;
 	private PanelMasajista pnlMasajista;
 	private PanelDirector pnlDirector;
-	private String rol = "director";
+	private PanelAdministrador pnlAdministrador;
+	
+	private String rol = "administrador";
 
 	public VentanaUsuario() {
 		pnlCiclista = new PanelCiclista(this);
 		pnlMasajista = new PanelMasajista(this);
 		pnlDirector = new PanelDirector(this);
+		pnlAdministrador = new PanelAdministrador(this);
 		properties = FileHandler
 				.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties");
 		initComponents();
@@ -29,6 +32,9 @@ public class VentanaUsuario extends JFrame {
 
 	public void escogerRol() {
 		switch (rol) {
+		case "administrador":
+			panelAdministrador();
+			break;
 		case "ciclista":
 			panelCiclista();
 			break;
@@ -80,10 +86,10 @@ public class VentanaUsuario extends JFrame {
 		nuevoPanel(pnlMasajista);
 	}
 
-//	public void panelAdministrador()
-//	{
-//		nuevoPanel(new PanelAdministrador(this));
-//	}
+	public void panelAdministrador()
+	{
+		nuevoPanel(new PanelAdministrador(this));
+	}
 
 	public void panelCiclista() {
 		nuevoPanel(pnlCiclista);
@@ -135,6 +141,14 @@ public class VentanaUsuario extends JFrame {
 
 	public void setRol(String rol) {
 		this.rol = rol;
+	}
+
+	public PanelAdministrador getPnlAdministrador() {
+		return pnlAdministrador;
+	}
+
+	public void setPnlAdministrador(PanelAdministrador pnlAdministrador) {
+		this.pnlAdministrador = pnlAdministrador;
 	}
 
 }
