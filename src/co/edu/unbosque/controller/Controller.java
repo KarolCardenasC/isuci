@@ -59,7 +59,7 @@ public class Controller implements ActionListener {
 	 * INICIO DE EXCEPCIONES
 	 */
 	public void verificarCampoBlanco(String n, String campo) throws BlankFieldException {
-		if (n.equals("")) {
+		if (n == null || n.equals("")) {
 			throw new BlankFieldException(campo);
 		}
 	}
@@ -158,20 +158,22 @@ public class Controller implements ActionListener {
 			String contrasena = vf.getvL().getPnlRol().getJtContrasena().getText();
 			String genero = vf.getvL().getPnlRol().getJcGenero().getSelectedItem().toString();
 
-			switch (vf.getvL().getPnlRol().getOpcion()) {
-			case "ciclista":
-				verificarCampoBlanco(vf.getvL().getPnlRol().getJtIdentificador().getText(), "Identificador");
-				verificarCampoBlanco(vf.getvL().getPnlRol().getJtAniosExperiencia().getText(), "Años Experiencia");
-				verificarCampoBlancoItem(vf.getvL().getPnlRol().getJcEspecialidad().getSelectedIndex(), "Especialidad");
-				verificarCampoBlancoItem(vf.getvL().getPnlRol().getJcContextura().getSelectedIndex(), "Contextura");
+			if (vf.getCon().confirmarTextoVE("Esta seguro que quiere crear al ciclista " + nombre + "?") == 0) {
 
-				int identificador = Integer.parseInt(vf.getvL().getPnlRol().getJtIdentificador().getText());
-				verificarIdentificadorDuplicado(identificador);
-				int experiencia = Integer.parseInt(vf.getvL().getPnlRol().getJtAniosExperiencia().getText());
-				String especialidad = vf.getvL().getPnlRol().getJcEspecialidad().getSelectedItem().toString();
-				String contextura = vf.getvL().getPnlRol().getJcContextura().getSelectedItem().toString();
+				switch (vf.getvL().getPnlRol().getOpcion()) {
+				case "ciclista":
+					verificarCampoBlanco(vf.getvL().getPnlRol().getJtIdentificador().getText(), "Identificador");
+					verificarCampoBlanco(vf.getvL().getPnlRol().getJtAniosExperiencia().getText(), "Años Experiencia");
+					verificarCampoBlancoItem(vf.getvL().getPnlRol().getJcEspecialidad().getSelectedIndex(),
+							"Especialidad");
+					verificarCampoBlancoItem(vf.getvL().getPnlRol().getJcContextura().getSelectedIndex(), "Contextura");
 
-				if (vf.getCon().confirmarTextoVE("Esta seguro que quiere crear al ciclista " + nombre + "?") == 0) {
+					int identificador = Integer.parseInt(vf.getvL().getPnlRol().getJtIdentificador().getText());
+					verificarIdentificadorDuplicado(identificador);
+					int experiencia = Integer.parseInt(vf.getvL().getPnlRol().getJtAniosExperiencia().getText());
+					String especialidad = vf.getvL().getPnlRol().getJcEspecialidad().getSelectedItem().toString();
+					String contextura = vf.getvL().getPnlRol().getJcContextura().getSelectedItem().toString();
+
 					switch (especialidad) {
 					case "Ninguna":
 						mf.getCiclistaDAO().crear(new CiclistaDTO("ciclista.png", nombre, cedula, correo, usuario, id,
@@ -191,8 +193,9 @@ public class Controller implements ActionListener {
 								contrasena, genero, identificador, experiencia, 0, especialidad, contextura));
 						break;
 					case "Gregario":
-						mf.getGregarioDAO().crear(new GregarioDTO("ciclista.png", nombre, cedula, correo, usuario, id,
-								contrasena, genero, identificador, experiencia, 0, especialidad, contextura, "Ninguna"));
+						mf.getGregarioDAO()
+								.crear(new GregarioDTO("ciclista.png", nombre, cedula, correo, usuario, id, contrasena,
+										genero, identificador, experiencia, 0, especialidad, contextura, "Ninguna"));
 						break;
 					case "Rodador":
 						mf.getRodadorDAO().crear(new RodadorDTO("ciclista.png", nombre, cedula, correo, usuario, id,
@@ -212,47 +215,46 @@ public class Controller implements ActionListener {
 					vf.getvL().getPnlRol().getJtAniosExperiencia().setText("");
 					vf.getvL().getPnlRol().getJcContextura().setSelectedItem(1);
 					vf.getvL().getPnlRol().getJcEspecialidad().setSelectedItem(1);
-				}
-				break;
 
-			case "masajista":
-				verificarCampoBlanco(vf.getvL().getPnlRol().getJtAniosExperiencia().getText(), "Años Experiencia");
+					break;
 
-				int experienciaMsj = Integer.parseInt(vf.getvL().getPnlRol().getJtAniosExperiencia().getText());
+				case "masajista":
+					verificarCampoBlanco(vf.getvL().getPnlRol().getJtAniosExperiencia().getText(), "Años Experiencia");
 
-				if (vf.getCon().confirmarTextoVE("Esta seguro que quiere crear al masajista " + nombre + "?") == 0) {
+					int experienciaMsj = Integer.parseInt(vf.getvL().getPnlRol().getJtAniosExperiencia().getText());
+
 					mf.getMasajistaDAO().crear(new MasajistaDTO("masajista.png", nombre, cedula, correo, usuario, id,
 							contrasena, genero, experienciaMsj));
 
 					vf.getvL().getPnlRol().getJtAniosExperiencia().setText("");
-				}
-				break;
 
-			case "director":
-				verificarCampoBlanco(vf.getvL().getPnlRol().getJtNacionalidad().getText(), "Nacionalidad");
+					break;
 
-				String nacionalidad = vf.getvL().getPnlRol().getJtNacionalidad().getText();
-				if (vf.getCon().confirmarTextoVE("Esta seguro que quiere crear al masajista " + nombre + "?") == 0) {
+				case "director":
+					verificarCampoBlanco(vf.getvL().getPnlRol().getJtNacionalidad().getText(), "Nacionalidad");
+
+					String nacionalidad = vf.getvL().getPnlRol().getJtNacionalidad().getText();
 					mf.getDirectorDeportivoDAO().crear(new DirectorDeportivoDTO("director.png", nombre, cedula, correo,
 							usuario, id, contrasena, genero, nacionalidad));
 
 					vf.getvL().getPnlRol().getJtNacionalidad().setText("");
+
+					break;
 				}
-				break;
+
+				// Proceso de envio del correo
+				_correo.enviaCfd(correo, "Registro Usuario ISUCI", "Gracias por registrar su usuario: " + nombre
+						+ ", puede hacer uso de la herramienta con la contrasena registrada.", null);
+				vf.getCon().imprimirTextoVE("Se ha registrado a " + nombre + " exitosamente");
+
+				vf.getvL().getPnlRol().getJtNombre().setText("");
+				vf.getvL().getPnlRol().getJtCedula().setText("");
+				vf.getvL().getPnlRol().getJcGenero().setSelectedItem(-1);
+				vf.getvL().getPnlRol().getJtCorreo().setText("");
+				vf.getvL().getPnlRol().getJtContrasena().setText("");
+
+				vf.getvL().getPnlRol().getMainPanel().panelLogin();
 			}
-
-			// Proceso de envio del correo
-			_correo.enviaCfd(correo, "Registro Usuario ISUCI", "Gracias por registrar su usuario: " + nombre
-					+ ", puede hacer uso de la herramienta con la contrasena registrada.", null);
-			vf.getCon().imprimirTextoVE("Se ha registrado a " + nombre + " exitosamente");
-
-			vf.getvL().getPnlRol().getJtNombre().setText("");
-			vf.getvL().getPnlRol().getJtCedula().setText("");
-			vf.getvL().getPnlRol().getJcGenero().setSelectedItem(-1);
-			vf.getvL().getPnlRol().getJtCorreo().setText("");
-			vf.getvL().getPnlRol().getJtContrasena().setText("");
-
-			vf.getvL().getPnlRol().getMainPanel().panelLogin();
 
 		} catch (BlankFieldException e) {
 			vf.getCon().imprimirTextoVE(e.getMessage());
@@ -294,7 +296,6 @@ public class Controller implements ActionListener {
 			vf.getvU().getPnlAdministrador().getProperties().setProperty("lblId.perfil", admin.getId());
 			vf.getvU().getPnlAdministrador().getProperties().setProperty("lblContrasena.perfil", admin.getContrasena());
 			vf.getvU().getPnlAdministrador().getProperties().setProperty("lblGenero.perfil", admin.getGenero());
-			
 
 		} else if (masajista != null) {
 
@@ -519,9 +520,12 @@ public class Controller implements ActionListener {
 			}
 			String nombre = vf.getvU().getPnlDirector().getJtNombre().getText();
 			long cedula = Long.parseLong(vf.getvU().getPnlDirector().getJtCedula().getText());
+			String usuario = vf.getvU().getPnlDirector().getJtUsuario().getText();
 			String correo = vf.getvU().getPnlDirector().getJtCorreo().getText();
-			String usuario = vf.getvU().getPnlDirector().getJtCorreo().getText();
-			String id = vf.getvU().getPnlDirector().getJtCorreo().getText();
+			System.out.println(correo + ", " + usuario);
+			if (!correo.contains(usuario)) {
+				verificarGmailDuplicado(correo);
+			}
 			String contrasena = vf.getvU().getPnlDirector().getJtContrasena().getText();
 			String genero = vf.getvU().getPnlDirector().getJcGenero().getSelectedItem().toString();
 			String nacionalidad = vf.getvU().getPnlDirector().getJtNacionalidad().getText();
@@ -531,7 +535,7 @@ public class Controller implements ActionListener {
 
 				vf.getCon().imprimirTextoVE(
 						mf.getDirectorDeportivoDAO().actualizarPorCedula(cedula, new DirectorDeportivoDTO(img, nombre,
-								cedula, correo, usuario, id, contrasena, genero, nacionalidad)));
+								cedula, correo, correo, correo, contrasena, genero, nacionalidad)));
 
 				DirectorDeportivoDTO director = mf.getDirectorDeportivoDAO().buscarCedula(cedula);
 
@@ -551,9 +555,12 @@ public class Controller implements ActionListener {
 				vf.getvU().getPnlDirector().getPnlIzquierda().remove(vf.getvU().getPnlDirector().getLblImagenPerfil());
 				vf.getvU().getPnlDirector().getPnlIzquierda().remove(vf.getvU().getPnlDirector().getLblNombrePerfil());
 				vf.getvU().getPnlDirector().getPnlIzquierda().remove(vf.getvU().getPnlDirector().getLblRol());
+				vf.getvU().getPnlDirector().iniciarPanelDerecho();
 				vf.getvU().getPnlDirector().iniciarPanelIzquierdo();
 			}
 		} catch (BlankFieldException e) {
+			vf.getCon().imprimirTextoVE(e.getMessage());
+		} catch (DuplicateGmailException e) {
 			vf.getCon().imprimirTextoVE(e.getMessage());
 		}
 
@@ -577,9 +584,11 @@ public class Controller implements ActionListener {
 			}
 			String nombre = vf.getvU().getPnlMasajista().getJtNombre().getText();
 			long cedula = Long.parseLong(vf.getvU().getPnlMasajista().getJtCedula().getText());
-			String correo = vf.getvU().getPnlMasajista().getJtCorreo().getText();
 			String usuario = vf.getvU().getPnlMasajista().getJtCorreo().getText();
-			String id = vf.getvU().getPnlMasajista().getJtCorreo().getText();
+			String correo = vf.getvU().getPnlMasajista().getJtCorreo().getText();
+			if (!correo.contains(usuario)) {
+				verificarGmailDuplicado(correo);
+			}
 			String contrasena = vf.getvU().getPnlMasajista().getJtContrasena().getText();
 			String genero = vf.getvU().getPnlMasajista().getJcGenero().getSelectedItem().toString();
 			int anios = Integer.parseInt(vf.getvU().getPnlMasajista().getJtAniosExp().getText());
@@ -588,7 +597,7 @@ public class Controller implements ActionListener {
 					+ vf.getvU().getPnlMasajista().getProperties().getProperty("lblNombre.perfil") + "?") == 0) {
 
 				vf.getCon().imprimirTextoVE(mf.getMasajistaDAO().actualizarPorCedula(cedula,
-						new MasajistaDTO(img, nombre, cedula, correo, usuario, id, contrasena, genero, anios)));
+						new MasajistaDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero, anios)));
 
 				MasajistaDTO masajista = mf.getMasajistaDAO().buscarCedula(cedula);
 
@@ -610,10 +619,13 @@ public class Controller implements ActionListener {
 				vf.getvU().getPnlMasajista().getPnlIzquierda()
 						.remove(vf.getvU().getPnlMasajista().getLblNombrePerfil());
 				vf.getvU().getPnlMasajista().getPnlIzquierda().remove(vf.getvU().getPnlMasajista().getLblRol());
+				vf.getvU().getPnlMasajista().iniciarPanelDerecho();
 				vf.getvU().getPnlMasajista().iniciarPanelIzquierdo();
 			}
 
 		} catch (BlankFieldException e) {
+			vf.getCon().imprimirTextoVE(e.getMessage());
+		} catch (DuplicateGmailException e) {
 			vf.getCon().imprimirTextoVE(e.getMessage());
 		}
 
@@ -642,9 +654,11 @@ public class Controller implements ActionListener {
 			}
 			String nombre = vf.getvU().getPnlCiclista().getJtNombre().getText();
 			long cedula = Long.parseLong(vf.getvU().getPnlCiclista().getJtCedula().getText());
-			String correo = vf.getvU().getPnlCiclista().getJtCorreo().getText();
 			String usuario = vf.getvU().getPnlCiclista().getJtCorreo().getText();
-			String id = vf.getvU().getPnlCiclista().getJtCorreo().getText();
+			String correo = vf.getvU().getPnlCiclista().getJtCorreo().getText();
+			if (!correo.contains(usuario)) {
+				verificarGmailDuplicado(correo);
+			}
 			String contrasena = vf.getvU().getPnlCiclista().getJtContrasena().getText();
 			String genero = vf.getvU().getPnlCiclista().getJcGenero().getSelectedItem().toString();
 			int anios = Integer.parseInt(vf.getvU().getPnlCiclista().getJtAniosExp().getText());
@@ -662,7 +676,7 @@ public class Controller implements ActionListener {
 				case "Ninguna":
 					vf.getCon()
 							.imprimirTextoVE(mf.getCiclistaDAO().actualizarPorCedula(cedula,
-									new CiclistaDTO(img, nombre, cedula, correo, usuario, id, contrasena, genero,
+									new CiclistaDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
 											identificador, anios, tiempo, especialidad, contextura)));
 
 					CiclistaDTO ciclista = mf.getCiclistaDAO().buscarCedula(cedula);
@@ -675,7 +689,7 @@ public class Controller implements ActionListener {
 
 					vf.getCon()
 							.imprimirTextoVE(mf.getClasicomanoDAO().actualizarPorCedula(cedula,
-									new ClasicomanoDTO(img, nombre, cedula, correo, usuario, id, contrasena, genero,
+									new ClasicomanoDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
 											identificador, anios, tiempo, especialidad, contextura, clasicos)));
 
 					ClasicomanoDTO clasicomano = mf.getClasicomanoDAO().buscarCedula(cedula);
@@ -691,7 +705,7 @@ public class Controller implements ActionListener {
 
 					vf.getCon()
 							.imprimirTextoVE(mf.getContrarrelojeroDAO().actualizarPorCedula(cedula,
-									new ContrarrelojeroDTO(img, nombre, cedula, correo, usuario, id, contrasena, genero,
+									new ContrarrelojeroDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
 											identificador, anios, tiempo, especialidad, contextura, velocidadMax)));
 
 					ContrarrelojeroDTO contrarrelojero = mf.getContrarrelojeroDAO().buscarCedula(cedula);
@@ -709,7 +723,7 @@ public class Controller implements ActionListener {
 
 					vf.getCon()
 							.imprimirTextoVE(mf.getEscaladorDAO().actualizarPorCedula(cedula,
-									new EscaladorDTO(img, nombre, cedula, correo, usuario, id, contrasena, genero,
+									new EscaladorDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
 											identificador, anios, tiempo, especialidad, contextura, acelSubida,
 											rampa)));
 
@@ -729,7 +743,7 @@ public class Controller implements ActionListener {
 
 					vf.getCon()
 							.imprimirTextoVE(mf.getGregarioDAO().actualizarPorCedula(cedula,
-									new GregarioDTO(img, nombre, cedula, correo, usuario, id, contrasena, genero,
+									new GregarioDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
 											identificador, anios, tiempo, especialidad, contextura, funcion)));
 
 					GregarioDTO gregario = mf.getGregarioDAO().buscarCedula(cedula);
@@ -745,7 +759,7 @@ public class Controller implements ActionListener {
 
 					vf.getCon()
 							.imprimirTextoVE(mf.getRodadorDAO().actualizarPorCedula(cedula,
-									new RodadorDTO(img, nombre, cedula, correo, usuario, id, contrasena, genero,
+									new RodadorDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
 											identificador, anios, tiempo, especialidad, contextura, velocidadPedaleo)));
 
 					RodadorDTO rodador = mf.getRodadorDAO().buscarCedula(cedula);
@@ -765,7 +779,7 @@ public class Controller implements ActionListener {
 
 					vf.getCon()
 							.imprimirTextoVE(mf.getSprinterDAO().actualizarPorCedula(cedula,
-									new SprinterDTO(img, nombre, cedula, correo, usuario, id, contrasena, genero,
+									new SprinterDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
 											identificador, anios, tiempo, especialidad, contextura, metrosFinales,
 											potenciaVatios, velocidadSprint)));
 
@@ -806,10 +820,13 @@ public class Controller implements ActionListener {
 				vf.getvU().getPnlCiclista().getPnlIzquierda().remove(vf.getvU().getPnlCiclista().getLblImagenPerfil());
 				vf.getvU().getPnlCiclista().getPnlIzquierda().remove(vf.getvU().getPnlCiclista().getLblNombrePerfil());
 				vf.getvU().getPnlCiclista().getPnlIzquierda().remove(vf.getvU().getPnlCiclista().getLblRol());
+				vf.getvU().getPnlCiclista().iniciarPanelDerecho();
 				vf.getvU().getPnlCiclista().iniciarPanelIzquierdo();
 			}
 
 		} catch (BlankFieldException e) {
+			vf.getCon().imprimirTextoVE(e.getMessage());
+		} catch (DuplicateGmailException e) {
 			vf.getCon().imprimirTextoVE(e.getMessage());
 		}
 	}

@@ -220,7 +220,6 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 
 			lblCorreo = this.crearLabel("lblCorreo.titulo", 200, 510);
 			jtCorreo = this.crearTextField("lblCorreo.perfil", 200, 540);
-			jtCorreo.setEnabled(false);
 			pnlDerecha.add(lblCorreo);
 			pnlDerecha.add(jtCorreo);
 

@@ -37,7 +37,7 @@ public class MainPanel extends JPanel implements ActionListener {
 	private static Font fuenteLabelBoldPrincipal = new Font("Tahoma", Font.BOLD | Font.PLAIN, 15);
 	private static Color colorFuenteBoton = Color.white;
 	private static Color colorFuenteLabel = new Color(0, 0, 0);
-	private static Color colorTextField = new Color(215, 219, 221, 5);
+	private static Color colorTextField = new Color(215, 219, 221);
 
 	public MainPanel() {
 		properties = FileHandler

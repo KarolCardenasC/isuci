@@ -270,7 +270,6 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 			lblCorreo = this.crearLabel("lblCorreo.titulo", 200, 540);
 			jtCorreo = this.crearTextField("lblCorreo.perfil", 200, 570);
-			jtCorreo.setEnabled(false);
 			pnlDerecha.add(lblCorreo);
 			pnlDerecha.add(jtCorreo);
 

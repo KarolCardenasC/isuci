@@ -332,7 +332,6 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 			lblCorreo = this.crearLabel("lblCorreo.titulo", 100, 460);
 			jtCorreo = this.crearTextField("lblCorreo.perfil", 100, 490);
-			jtCorreo.setEnabled(false);
 			pnlDerecha.add(lblCorreo);
 			pnlDerecha.add(jtCorreo);
 
