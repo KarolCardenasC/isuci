@@ -123,9 +123,9 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 	public void initComponents() {
 		removeAll();
+		iniciarPanelInferior();
 		iniciarPanelDerecho();
 		iniciarPanelIzquierdo();
-		iniciarPanelInferior();
 
 	}
 
@@ -190,6 +190,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		case "perfilinicial":
 			lblImagen = this.crearLabel("", new Rectangle(200, 20, 600, 600), "directorIni.png");
 			pnlDerecha.add(lblImagen);
+			btnGuardar.setVisible(false);
 			break;
 
 		case "perfildirector":
@@ -243,6 +244,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			lblGenero = this.crearLabel("lblGenero.perfil", 600, 460);
 			pnlDerecha.add(lblGenero);
 
+			btnGuardar.setVisible(false);
 			break;
 
 		case "actualizarperfildirector":
@@ -302,6 +304,8 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			pnlDerecha.add(lblGenero);
 			pnlDerecha.add(jcGenero);
 
+			btnGuardar.setVisible(true);
+
 			imgCambio = false;
 
 			aplicarFuncionesValidacion();
@@ -331,6 +335,8 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			/*
 			 * INTENTAR PONER LAS CARTAS DE LOS CICLISTAS
 			 */
+
+			btnGuardar.setVisible(false);
 
 			mostrarCartas();
 

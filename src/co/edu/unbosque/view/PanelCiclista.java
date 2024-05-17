@@ -99,9 +99,9 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 	public void initComponents() {
 		removeAll();
+		iniciarPanelInferior();
 		iniciarPanelDerecho();
 		iniciarPanelIzquierdo();
-		iniciarPanelInferior();
 
 	}
 
@@ -163,6 +163,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		case "perfilinicial":
 			lblImagen = this.crearLabel("", new Rectangle(200, 20, 600, 600), "ciclistaIni.png");
 			pnlDerecha.add(lblImagen);
+			btnGuardar.setVisible(false);
 			break;
 
 		case "perfilciclista":
@@ -304,7 +305,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 				pnlDerecha.add(lblCaract3);
 				break;
 			}
-
+			btnGuardar.setVisible(false);
 			break;
 
 		case "actualizarperfilciclista":
@@ -404,107 +405,13 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 			pnlDerecha.add(lblContextura);
 			pnlDerecha.add(jcContextura);
 
-			switch (this.getProperties().getProperty("lblEspecialidad.perfil")) {
-			case "Ninguna":
-				jcEspecialidad.setSelectedIndex(0);
-				break;
-
-			case "Clasicomano":
-				jcEspecialidad.setSelectedIndex(1);
-
-				lblCaract1 = this.crearLabel("lblClasicosGanados.titulo", 720, 380);
-				jtCaract1 = this.crearTextField("lblClasicosGanados.perfil", 720, 410);
-				pnlDerecha.add(lblCaract1);
-				pnlDerecha.add(jtCaract1);
-				break;
-
-			case "Contrarrelojero":
-				jcEspecialidad.setSelectedIndex(2);
-
-				lblCaract1 = this.crearLabel("lblVelocidadMaxima.titulo", 720, 380);
-				jtCaract1 = this.crearTextField("lblVelocidadMaxima.perfil", 720, 410);
-				pnlDerecha.add(lblCaract1);
-				pnlDerecha.add(jtCaract1);
-				break;
-
-			case "Escalador":
-				jcEspecialidad.setSelectedIndex(3);
-
-				lblCaract1 = this.crearLabel("lblAceleracionSubida.titulo", 720, 380);
-				jtCaract1 = this.crearTextField("lblAceleracionSubida.perfil", 720, 410);
-				pnlDerecha.add(lblCaract1);
-				pnlDerecha.add(jtCaract1);
-
-				lblCaract2 = this.crearLabel("lblRampaSoportada.titulo", 720, 460);
-				jtCaract2 = this.crearTextField("lblRampaSoportada.perfil", 720, 490);
-				pnlDerecha.add(lblCaract2);
-				pnlDerecha.add(jtCaract2);
-				break;
-
-			case "Gregario":
-				jcEspecialidad.setSelectedIndex(4);
-
-				String[] listaFuncion = { "Ninguna", "Abastecedor", "Mantener ritmo", "Captura fugas",
-						"Posicionar líder", "Proteger líder" };
-
-				lblCaract1 = this.crearLabel("lblFuncionPeloton.titulo", 720, 380);
-				jcFuncion = this.crearComboBox(listaFuncion, 720, 410);
-				switch (this.getProperties().getProperty("lblFuncionPeloton.perfil")) {
-				case "Ninguna":
-					jcFuncion.setSelectedIndex(0);
-					break;
-				case "Abastecedor":
-					jcFuncion.setSelectedIndex(1);
-					break;
-				case "Mantener ritmo":
-					jcFuncion.setSelectedIndex(2);
-					break;
-				case "Captura fugas":
-					jcFuncion.setSelectedIndex(3);
-					break;
-				case "Posicionar líder":
-					jcFuncion.setSelectedIndex(4);
-					break;
-				case "Proteger líder":
-					jcFuncion.setSelectedIndex(5);
-					break;
-				}
-				pnlDerecha.add(lblCaract1);
-				pnlDerecha.add(jcFuncion);
-				break;
-
-			case "Rodador":
-				jcEspecialidad.setSelectedIndex(5);
-
-				lblCaract1 = this.crearLabel("lblVelocidadPedaleo.titulo", 720, 380);
-				jtCaract1 = this.crearTextField("lblVelocidadPedaleo.perfil", 720, 410);
-				pnlDerecha.add(lblCaract1);
-				pnlDerecha.add(jtCaract1);
-				break;
-
-			case "Sprinter":
-				jcEspecialidad.setSelectedIndex(6);
-
-				lblCaract1 = this.crearLabel("lblExplosion.titulo", 720, 380);
-				jtCaract1 = this.crearTextField("lblExplosion.perfil", 720, 410);
-				pnlDerecha.add(lblCaract1);
-				pnlDerecha.add(jtCaract1);
-
-				lblCaract2 = this.crearLabel("lblPotenciaVatios.titulo", 720, 460);
-				jtCaract2 = this.crearTextField("lblPotenciaVatios.perfil", 720, 490);
-				pnlDerecha.add(lblCaract2);
-				pnlDerecha.add(jtCaract2);
-
-				lblCaract3 = this.crearLabel("lblVelocidadSprint.titulo", 720, 540);
-				jtCaract3 = this.crearTextField("lblVelocidadSprint.perfil", 720, 570);
-				pnlDerecha.add(lblCaract3);
-				pnlDerecha.add(jtCaract3);
-				break;
-			}
+			especificos(this.getProperties().getProperty("lblEspecialidad.perfil"));
 
 			imgCambio = false;
 
 			aplicarFuncionesValidacion();
+
+			btnGuardar.setVisible(true);
 			break;
 		}
 
@@ -512,6 +419,106 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		pnlDerecha.revalidate();
 
 		add(pnlDerecha);
+	}
+
+	public void especificos(String especialidad) {
+		switch (especialidad) {
+		case "Ninguna":
+			jcEspecialidad.setSelectedIndex(0);
+			break;
+
+		case "Clasicomano":
+			jcEspecialidad.setSelectedIndex(1);
+
+			lblCaract1 = this.crearLabel("lblClasicosGanados.titulo", 720, 380);
+			jtCaract1 = this.crearTextField("lblClasicosGanados.perfil", 720, 410);
+			pnlDerecha.add(lblCaract1);
+			pnlDerecha.add(jtCaract1);
+			break;
+
+		case "Contrarrelojero":
+			jcEspecialidad.setSelectedIndex(2);
+
+			lblCaract1 = this.crearLabel("lblVelocidadMaxima.titulo", 720, 380);
+			jtCaract1 = this.crearTextField("lblVelocidadMaxima.perfil", 720, 410);
+			pnlDerecha.add(lblCaract1);
+			pnlDerecha.add(jtCaract1);
+			break;
+
+		case "Escalador":
+			jcEspecialidad.setSelectedIndex(3);
+
+			lblCaract1 = this.crearLabel("lblAceleracionSubida.titulo", 720, 380);
+			jtCaract1 = this.crearTextField("lblAceleracionSubida.perfil", 720, 410);
+			pnlDerecha.add(lblCaract1);
+			pnlDerecha.add(jtCaract1);
+
+			lblCaract2 = this.crearLabel("lblRampaSoportada.titulo", 720, 460);
+			jtCaract2 = this.crearTextField("lblRampaSoportada.perfil", 720, 490);
+			pnlDerecha.add(lblCaract2);
+			pnlDerecha.add(jtCaract2);
+			break;
+
+		case "Gregario":
+			jcEspecialidad.setSelectedIndex(4);
+
+			String[] listaFuncion = { "Ninguna", "Abastecedor", "Mantener ritmo", "Captura fugas", "Posicionar líder",
+					"Proteger líder" };
+
+			lblCaract1 = this.crearLabel("lblFuncionPeloton.titulo", 720, 380);
+			jcFuncion = this.crearComboBox(listaFuncion, 720, 410);
+			switch (this.getProperties().getProperty("lblFuncionPeloton.perfil")) {
+			case "Ninguna":
+				jcFuncion.setSelectedIndex(0);
+				break;
+			case "Abastecedor":
+				jcFuncion.setSelectedIndex(1);
+				break;
+			case "Mantener ritmo":
+				jcFuncion.setSelectedIndex(2);
+				break;
+			case "Captura fugas":
+				jcFuncion.setSelectedIndex(3);
+				break;
+			case "Posicionar líder":
+				jcFuncion.setSelectedIndex(4);
+				break;
+			case "Proteger líder":
+				jcFuncion.setSelectedIndex(5);
+				break;
+			}
+			pnlDerecha.add(lblCaract1);
+			pnlDerecha.add(jcFuncion);
+			break;
+
+		case "Rodador":
+			jcEspecialidad.setSelectedIndex(5);
+
+			lblCaract1 = this.crearLabel("lblVelocidadPedaleo.titulo", 720, 380);
+			jtCaract1 = this.crearTextField("lblVelocidadPedaleo.perfil", 720, 410);
+			pnlDerecha.add(lblCaract1);
+			pnlDerecha.add(jtCaract1);
+			break;
+
+		case "Sprinter":
+			jcEspecialidad.setSelectedIndex(6);
+
+			lblCaract1 = this.crearLabel("lblExplosion.titulo", 720, 380);
+			jtCaract1 = this.crearTextField("lblExplosion.perfil", 720, 410);
+			pnlDerecha.add(lblCaract1);
+			pnlDerecha.add(jtCaract1);
+
+			lblCaract2 = this.crearLabel("lblPotenciaVatios.titulo", 720, 460);
+			jtCaract2 = this.crearTextField("lblPotenciaVatios.perfil", 720, 490);
+			pnlDerecha.add(lblCaract2);
+			pnlDerecha.add(jtCaract2);
+
+			lblCaract3 = this.crearLabel("lblVelocidadSprint.titulo", 720, 540);
+			jtCaract3 = this.crearTextField("lblVelocidadSprint.perfil", 720, 570);
+			pnlDerecha.add(lblCaract3);
+			pnlDerecha.add(jtCaract3);
+			break;
+		}
 	}
 
 	public void iniciarPanelInferior() {
