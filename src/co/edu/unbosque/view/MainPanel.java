@@ -28,6 +28,16 @@ import javax.swing.text.DocumentFilter;
 
 import co.edu.unbosque.model.persistence.FileHandler;
 
+/**
+ * This class represents the main panel for the application's user interface. It
+ * provides methods to create various UI components with specific styles and
+ * behaviors.
+ *
+ * @author Moreno.JP
+ * @version 28/04/2024
+ *
+ */
+
 public class MainPanel extends JPanel implements ActionListener {
 
 	private Properties properties;
@@ -39,11 +49,25 @@ public class MainPanel extends JPanel implements ActionListener {
 	private static Color colorFuenteLabel = new Color(0, 0, 0);
 	private static Color colorTextField = new Color(215, 219, 221);
 
+	/**
+	 * Constructs a MainPanel and loads the properties file.
+	 */
+
 	public MainPanel() {
 		properties = FileHandler
 				.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties");
 
 	}
+
+	/**
+	 * Creates a JButton with specified title, position, and icon.
+	 *
+	 * @param titulo the title of the button
+	 * @param posX   the x position of the button
+	 * @param posY   the y position of the button
+	 * @param icono  the icon for the button
+	 * @return the created JButton
+	 */
 
 	public JButton crearBoton(String titulo, int posX, int posY, String icono) {
 		JButton boton = new JButton(titulo);
@@ -65,6 +89,15 @@ public class MainPanel extends JPanel implements ActionListener {
 		return boton;
 	}
 
+	/**
+	 * Creates an invisible JButton with specified action command, bounds, and icon.
+	 *
+	 * @param actCom the action command of the button
+	 * @param bounds the bounds of the button
+	 * @param icono  the icon for the button
+	 * @return the created JButton
+	 */
+
 	public JButton crearBotonInvisible(String actCom, Rectangle bounds, String icono) {
 		JButton boton = new JButton();
 		boton.setBounds(bounds);
@@ -84,6 +117,15 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		return boton;
 	}
+	
+	 /**
+     * Creates a JLabel with specified title and position.
+     *
+     * @param titulo the title of the label
+     * @param posX   the x position of the label
+     * @param posY   the y position of the label
+     * @return the created JLabel
+     */
 
 	public JLabel crearLabel(String titulo, int posX, int posY) {
 		JLabel label = new JLabel("<html>" + properties.getProperty(titulo));
@@ -95,6 +137,15 @@ public class MainPanel extends JPanel implements ActionListener {
 		return label;
 	}
 
+	 /**
+     * Creates a JLabel with specified title, bounds, and icon.
+     *
+     * @param titulo the title of the label
+     * @param bounds the bounds of the label
+     * @param icono  the icon for the label
+     * @return the created JLabel
+     */
+	
 	public JLabel crearLabel(String titulo, Rectangle bounds, String icono) {
 		JLabel label = new JLabel("<html>" + properties.getProperty(titulo));
 		if (!"".equals(icono)) {
@@ -109,6 +160,15 @@ public class MainPanel extends JPanel implements ActionListener {
 		return label;
 	}
 
+	/**
+     * Creates a JPasswordField with specified title, position, and font size.
+     *
+     * @param titulo the title of the password field
+     * @param posX   the x position of the password field
+     * @param posY   the y position of the password field
+     * @return the created JPasswordField
+     */
+	
 	public JPasswordField crearPasswordField(String titulo, int posX, int posY) {
 		JPasswordField password = new JPasswordField(titulo);
 
@@ -119,6 +179,13 @@ public class MainPanel extends JPanel implements ActionListener {
 		return password;
 	}
 
+	/**
+     * Creates an invisible JPasswordField with specified bounds.
+     *
+     * @param bounds the bounds of the password field
+     * @return the created JPasswordField
+     */
+	
 	public JPasswordField crearPasswordFieldInvisible(Rectangle bounds) {
 		JPasswordField password = new JPasswordField();
 
@@ -141,6 +208,14 @@ public class MainPanel extends JPanel implements ActionListener {
 		return textField;
 	}
 
+	/**
+     * Creates an invisible JTextField with specified text and bounds.
+     *
+     * @param texto  the text of the text field
+     * @param bounds the bounds of the text field
+     * @return the created JTextField
+     */
+	
 	public JTextField crearTextField(String texto, int posX, int posY) {
 		JTextField textField = new JTextField(properties.getProperty(texto));
 
@@ -150,6 +225,15 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		return textField;
 	}
+	
+	/**
+     * Creates a JTextField with specified text, position, and font size.
+     *
+     * @param texto the text of the text field
+     * @param posX  the x position of the text field
+     * @param posY  the y position of the text field
+     * @return the created JTextField
+     */
 
 	public JComboBox<String> crearComboBox(String[] lista, int posX, int posY) {
 		JComboBox<String> jComboBox = new JComboBox<>(lista);
@@ -160,6 +244,15 @@ public class MainPanel extends JPanel implements ActionListener {
 		return jComboBox;
 	}
 
+	/**
+     * Creates a JComboBox with specified list, position, and font size.
+     *
+     * @param lista the list of items in the combo box
+     * @param posX  the x position of the combo box
+     * @param posY  the y position of the combo box
+     * @return the created JComboBox
+     */
+	
 	public JComboBox<String> crearComboBoxInvisible(String[] lista, Rectangle bounds) {
 		JComboBox<String> jComboBox = new JComboBox<>(lista);
 		jComboBox.setBounds(bounds);
@@ -170,6 +263,12 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		return jComboBox;
 	}
+	
+	/**
+	 * Creates a JTable.
+	 *
+	 * @return the created JTable
+	 */
 
 	public JTable crearTable() {
 		JTable tabla = new JTable();
@@ -177,6 +276,12 @@ public class MainPanel extends JPanel implements ActionListener {
 		return tabla;
 	}
 
+	/**
+	 * Adds a key listener to a JTextField to allow only numeric input.
+	 *
+	 * @param a the JTextField to which the listener is added
+	 */
+	
 	public static void numeros(JTextField a) {
 		a.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -188,6 +293,12 @@ public class MainPanel extends JPanel implements ActionListener {
 		});
 	}
 	
+	/**
+	 * Adds a key listener to a JTextField to allow only numeric input with decimal point.
+	 *
+	 * @param a the JTextField to which the listener is added
+	 */
+
 	public static void numerosDecimal(JTextField a) {
 		a.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -202,6 +313,12 @@ public class MainPanel extends JPanel implements ActionListener {
 		});
 	}
 
+	/**
+	 * Adds a key listener to a JTextField to allow only alphabetic input.
+	 *
+	 * @param a the JTextField to which the listener is added
+	 */
+	
 	public static void letras(JTextField a) {
 		a.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -216,6 +333,13 @@ public class MainPanel extends JPanel implements ActionListener {
 		});
 	}
 
+	/**
+	 * Limits the number of characters in a JTextField.
+	 *
+	 * @param textField the JTextField to limit
+	 * @param limit     the maximum number of characters allowed
+	 */
+	
 	public static void limitarCaracter(JTextField textField, int limit) {
 		AbstractDocument doc = (AbstractDocument) textField.getDocument();
 		doc.setDocumentFilter(new DocumentFilter() {
@@ -230,17 +354,29 @@ public class MainPanel extends JPanel implements ActionListener {
 		});
 	}
 
+	/**
+	 * Gets the properties object.
+	 *
+	 * @return the properties object
+	 */
+	
 	public Properties getProperties() {
 		return properties;
 	}
 
+	/**
+	 * Sets the properties object.
+	 *
+	 * @param properties the properties object to set
+	 */
+	
 	public void setProperties(Properties properties) {
 		this.properties = properties;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		 // Implementation of action event handling goes here
 	}
 
 }

@@ -11,17 +11,40 @@ import javax.swing.JPanel;
 
 import co.edu.unbosque.model.CiclistaDTO;
 
+/**
+ * The Item class represents a graphical component in the form of a JPanel 
+ * that displays information about a CiclistaDTO object.
+ * 
+ * @author Moreno.JP
+ * @version 28/04/2024
+ * 
+ */
+
 public class Item extends JPanel {
 
 	private static CiclistaDTO ciclista;
 	private static JButton btnInfo;
 	private static JButton btnAdd;
 
+	/**
+     * Constructs an Item object with the given CiclistaDTO.
+     *
+     * @param ciclista the CiclistaDTO object containing the cyclist's information
+     */
+	
 	public Item(CiclistaDTO ciclista) {
 		this.ciclista = ciclista;
 		this.btnInfo = new JButton();
 	}
 
+	/**
+     * Creates a JPanel that displays the cyclist's information.
+     *
+     * @param x the x-coordinate of the panel
+     * @param y the y-coordinate of the panel
+     * @return a JPanel displaying the cyclist's information
+     */
+	
 	public static JPanel getItem(int x, int y) {
 		JPanel pnlItem = new JPanel();
 		pnlItem.setLayout(null);
@@ -44,16 +67,9 @@ public class Item extends JPanel {
 		lblIdent.setForeground(Color.BLACK);
 		pnlItem.add(lblIdent);
 
-		// Imagen
-
 		ImageIcon imagenInfo = new ImageIcon("imgs/infoCiclista.png");
 		ImageIcon imageIconInfo = new ImageIcon(imagenInfo.getImage().getScaledInstance(42, 42, Image.SCALE_DEFAULT));
-
-		/*
-		 * ImageIcon imagenCarta = new ImageIcon("imgs/carta.jpg"); ImageIcon
-		 * imageIconCarta = new ImageIcon( imagenCarta.getImage().getScaledInstance(200,
-		 * 300, Image.SCALE_DEFAULT));
-		 */
+		
 		JLabel imgCiclista = new JLabel();
 		imgCiclista.setBounds(50, 100, 120, 120);
 		ImageIcon img = new ImageIcon("imgs/" + ciclista.getImagen());
@@ -62,7 +78,6 @@ public class Item extends JPanel {
 		imgCiclista.setIcon(imageIcon);
 		pnlItem.add(imgCiclista);
 
-		// Boton cargar info
 		btnInfo.setBounds(149, 15, 42, 42);
 		btnInfo.setName("btnInfo_" + ciclista.getIdentificador());
 		btnInfo.setIcon(imageIconInfo);
@@ -70,19 +85,26 @@ public class Item extends JPanel {
 		btnInfo.setBorderPainted(false);
 		pnlItem.add(btnInfo);
 
-		/*
-		 * JLabel imgn = new JLabel(imageIconCarta); imgn.setBounds(0, 0, 200, 300);
-		 * pnlItem.add(imgn);
-		 */
-
 		return pnlItem;
 
 	}
 
+	/**
+     * Gets the button used to display cyclist information.
+     *
+     * @return the info button
+     */
+	
 	public JButton getBtnInfo() {
 		return btnInfo;
 	}
 
+	/**
+     * Sets the button used to display cyclist information.
+     *
+     * @param btnInfo the info button to set
+     */
+	
 	static void setBtnInfo(JButton btnInfo) {
 		Item.btnInfo = btnInfo;
 	}

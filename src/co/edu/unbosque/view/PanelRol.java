@@ -497,3 +497,4 @@ public class PanelRol extends MainPanel implements ActionListener {
 	}
 
 }
+

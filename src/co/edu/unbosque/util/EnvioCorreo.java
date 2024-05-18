@@ -43,14 +43,11 @@ public class EnvioCorreo {
 				multipart.addBodyPart(_texto);
 			}
 			
-			// Propiedades de la conexión
 			String cuenta[] = SMTP_USERNAME.split("@");
 			SMTP_SERVER(SMTP_USERNAME, cuenta[1]);
 			
-			// Preparamos la sesion
 			Session session = Session.getDefaultInstance(props);
 			
-			// Construimos el mensaje
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(destino));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));
@@ -60,18 +57,14 @@ public class EnvioCorreo {
 				message.setContent(multipart);
 			}
 			
-			// Lo enviamos.
 			Transport t = session.getTransport(PROTOCOL);
 			t.connect(SMTP_USERNAME, SMTP_PASSWORD);
 			t.sendMessage(message, message.getAllRecipients());
-			
-			// Cierre.
+
 			t.close();
-//			JOptionPane.showMessageDialog(null, "Mensaje Enviado", "NIMADRES", JOptionPane.INFORMATION_MESSAGE);
 			return true;
 		} catch (MessagingException | IOException e) {
-//			JOptionPane.showMessageDialog(null, "No se pudo enviar mensaje, intentelo mas tarde", "Fatal Error",
-//					JOptionPane.ERROR_MESSAGE);
+
 			return false;
 		}
 	}
