@@ -386,7 +386,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 			jcEspecialidad = this.crearComboBox(listaEspecialidad, 720, 250);
 			pnlDerecha.add(lblEspecialidad);
 			pnlDerecha.add(jcEspecialidad);
-			
+
 			btnCambio = this.crearBoton("Lista Habilidad", 920, 250, "");
 			pnlDerecha.add(btnCambio);
 
@@ -555,8 +555,6 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 			lblCaract3.setVisible(true);
 			break;
 		}
-		
-		aplicarFuncionesValidacion();
 	}
 
 	public void iniciarPanelInferior() {
@@ -588,7 +586,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		limitarCaracter(jtContrasena, 30);
 		limitarCaracter(jtNombre, 50);
 
-		switch (this.getProperties().getProperty("lblEspecialidad.perfil")) {
+		switch (jcEspecialidad.getSelectedItem().toString()) {
 		case "Clasicomano":
 			numeros(jtCaract1);
 
@@ -617,12 +615,12 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 		case "Sprinter":
 			numerosDecimal(jtCaract1);
-			numerosDecimal(jtCaract1);
-			numerosDecimal(jtCaract1);
+			numerosDecimal(jtCaract2);
+			numerosDecimal(jtCaract3);
 
 			limitarCaracter(jtCaract1, 7);
-			limitarCaracter(jtCaract1, 7);
-			limitarCaracter(jtCaract1, 7);
+			limitarCaracter(jtCaract2, 7);
+			limitarCaracter(jtCaract3, 7);
 			break;
 		}
 
@@ -669,6 +667,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 			break;
 		case "listahabilidad":
 			especificos(jcEspecialidad.getSelectedItem().toString());
+			aplicarFuncionesValidacion();
 			break;
 		}
 
