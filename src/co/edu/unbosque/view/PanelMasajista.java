@@ -1,5 +1,7 @@
 package co.edu.unbosque.view;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import co.edu.unbosque.model.persistence.FileHandler;
 
@@ -44,6 +47,8 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 	private JLabel lblContrasenaTit;
 	private JLabel lblGeneroTit;
 	private JLabel lblNombrePerfil;
+	private JLabel imagenPanel;
+	private JLabel imagenPanelIzq;
 
 	private JTextField jtNombre;
 	private JTextField jtCedula;
@@ -88,33 +93,42 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 		}
 
 		pnlIzquierda.setBounds(
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.horizontal")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.vertical")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.ancho")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.alto")));
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.horizontal")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.vertical")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.ancho")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.alto")));
 		pnlIzquierda.setLayout(null);
 
-		lblImagenPerfil = this.crearLabel("", new Rectangle(55, 50, 150, 150),
+		lblImagenPerfil = this.crearLabel("", new Rectangle(39, 21, 175, 185),
 				this.getProperties().getProperty("lblImagen.perfil"));
 		pnlIzquierda.add(lblImagenPerfil);
 
-		lblNombrePerfil = this.crearLabel("lblNombre.perfil", 25, 210);
+		lblNombrePerfil = this.crearLabel("lblNombre.perfil", 5, 235);
+		lblNombrePerfil.setSize(240, 60);
+		lblNombrePerfil.setForeground(new Color(245, 227, 187));
+		lblNombrePerfil.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlIzquierda.add(lblNombrePerfil);
 
-		lblRol = this.crearLabel("lblRol.masajista", 90, 240);
+		lblRol = this.crearLabel("lblRol.masajista", 5, 300);
+		lblRol.setFont(new Font("Tahoma", Font.BOLD | Font.PLAIN, 20));
+		lblRol.setForeground(Color.white);
+		lblRol.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlIzquierda.add(lblRol);
 
-		btnPerfil = this.crearBoton("Perfil Masajista", 20, 350, "");
+		btnPerfil = this.crearBotonInvisible("Perfil Masajista", new Rectangle(0, 360, 250, 65), "");
 		pnlIzquierda.add(btnPerfil);
 
-		btnActualizar = this.crearBoton("Actualizar Perfil Masajista", 20, 400, "");
+		btnActualizar = this.crearBotonInvisible("Actualizar Perfil Masajista", new Rectangle(0, 426, 250, 65), "");
 		pnlIzquierda.add(btnActualizar);
 
-		btnEliminar = this.crearBoton("Eliminar Perfil Masajista", 20, 450, "");
+		btnEliminar = this.crearBotonInvisible("Eliminar Perfil Masajista", new Rectangle(0, 492, 250, 65), "");
 		pnlIzquierda.add(btnEliminar);
 
-		btnCerrar = this.crearBoton("Cerrar Sesión Masajista", 20, 600, "");
+		btnCerrar = this.crearBotonInvisible("Cerrar Sesión Masajista", new Rectangle(0, 592, 250, 68), "");
 		pnlIzquierda.add(btnCerrar);
+
+		imagenPanelIzq = this.crearLabel("", new Rectangle(0, 0, 250, 660), "izquierdaMasajista.jpg");
+		pnlIzquierda.add(imagenPanelIzq);
 
 		pnlIzquierda.repaint();
 		pnlIzquierda.revalidate();
@@ -129,18 +143,19 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 			pnlDerecha.removeAll();
 		}
 
-		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.horizontal")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.vertical")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.ancho")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.alto")));
+		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.horizontal")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.vertical")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.ancho")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.alto")));
 		pnlDerecha.setLayout(null);
+
+		String imgDatos = "";
 
 		switch (opcion) {
 
 		case "perfilinicial":
-			lblImagen = this.crearLabel("", new Rectangle(200, 20, 600, 600), "masajistaIni.png");
-			pnlDerecha.add(lblImagen);
 			btnGuardar.setVisible(false);
+			imgDatos = "perfilInicialMasajista.jpg";
 			break;
 
 		case "perfilmasajista":
@@ -193,7 +208,7 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 
 			lblGenero = this.crearLabel("lblGenero.perfil", 600, 460);
 			pnlDerecha.add(lblGenero);
-			
+
 			btnGuardar.setVisible(false);
 
 			break;
@@ -254,15 +269,18 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 			}
 			pnlDerecha.add(lblGenero);
 			pnlDerecha.add(jcGenero);
-			
-			btnGuardar.setVisible(false);
+
+			btnGuardar.setVisible(true);
 
 			imgCambio = false;
 
 			aplicarFuncionesValidacion();
-			
+
 			break;
 		}
+
+		imagenPanel = this.crearLabel("", new Rectangle(0, 0, 1050, 600), imgDatos);
+		pnlDerecha.add(imagenPanel);
 
 		pnlDerecha.repaint();
 		pnlDerecha.revalidate();
@@ -280,6 +298,9 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 
 		btnGuardar = this.crearBoton("Guardar Masajista", 750, 10, "");
 		pnlInferior.add(btnGuardar);
+
+		imagenPanel = this.crearLabel("", new Rectangle(0, 0, 1050, 600), "panelInferior.jpg");
+		pnlInferior.add(imagenPanel);
 
 		add(pnlInferior);
 	}
@@ -307,16 +328,16 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 		case "imagenmasajista":
 			JFileChooser eleccion = new JFileChooser();
 
-			eleccion.setCurrentDirectory(new File("imgs"));
+			eleccion.setCurrentDirectory(new File("imgs/users"));
 			eleccion.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
 			eleccion.addPropertyChangeListener(JFileChooser.DIRECTORY_CHANGED_PROPERTY, new PropertyChangeListener() {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
 					File folderSelec = eleccion.getCurrentDirectory();
-					if (!folderSelec.getAbsolutePath().equals("imgs")) {
+					if (!folderSelec.getAbsolutePath().equals("imgs/users")) {
 
-						eleccion.setCurrentDirectory(new File("imgs"));
+						eleccion.setCurrentDirectory(new File("imgs/users"));
 					}
 				}
 			});
@@ -324,7 +345,7 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 			int resultado = eleccion.showOpenDialog(this);
 			if (resultado == JFileChooser.APPROVE_OPTION) {
 				String nombreArchivo = eleccion.getSelectedFile().getName();
-				imagen = nombreArchivo;
+				imagen = "users/" + nombreArchivo;
 				imgCambio = true;
 
 			}
@@ -661,5 +682,21 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 
 	public void setLblNombrePerfil(JLabel lblNombrePerfil) {
 		this.lblNombrePerfil = lblNombrePerfil;
+	}
+
+	public JLabel getImagenPanel() {
+		return imagenPanel;
+	}
+
+	public void setImagenPanel(JLabel imagenPanel) {
+		this.imagenPanel = imagenPanel;
+	}
+
+	public JLabel getImagenPanelIzq() {
+		return imagenPanelIzq;
+	}
+
+	public void setImagenPanelIzq(JLabel imagenPanelIzq) {
+		this.imagenPanelIzq = imagenPanelIzq;
 	}
 }

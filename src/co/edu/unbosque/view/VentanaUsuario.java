@@ -17,7 +17,7 @@ public class VentanaUsuario extends JFrame {
 	private PanelDirector pnlDirector;
 	private PanelAdministrador pnlAdministrador;
 	
-	private String rol = "administrador";
+	private String rol = "ADMINISTRADOR";
 
 	public VentanaUsuario() {
 		pnlCiclista = new PanelCiclista(this);
@@ -32,16 +32,16 @@ public class VentanaUsuario extends JFrame {
 
 	public void escogerRol() {
 		switch (rol) {
-		case "administrador":
+		case "ADMINISTRADOR":
 			panelAdministrador();
 			break;
-		case "ciclista":
+		case "CICLISTA":
 			panelCiclista();
 			break;
-		case "masajista":
+		case "MASAJISTA":
 			panelMasajista();
 			break;
-		case "director":
+		case "DIRECTOR":
 			panelDirectorDeportivo();
 			break;
 

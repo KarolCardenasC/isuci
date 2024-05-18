@@ -157,10 +157,10 @@ public class Controller implements ActionListener {
 			String contrasena = vf.getvL().getPnlRol().getJtContrasena().getText();
 			String genero = vf.getvL().getPnlRol().getJcGenero().getSelectedItem().toString();
 
-			if (vf.getCon().confirmarTextoVE("Esta seguro que quiere crear al ciclista " + nombre + "?") == 0) {
+			if (vf.getCon().confirmarTextoVE("Esta seguro que quiere crear al " + vf.getvL().getPnlRol().getOpcion().toLowerCase() + " " + nombre + "?") == 0) {
 
 				switch (vf.getvL().getPnlRol().getOpcion()) {
-				case "ciclista":
+				case "CICLISTA":
 					verificarCampoBlanco(vf.getvL().getPnlRol().getJtIdentificador().getText(), "Identificador");
 					verificarCampoBlanco(vf.getvL().getPnlRol().getJtAniosExperiencia().getText(), "Años Experiencia");
 					verificarCampoBlancoItem(vf.getvL().getPnlRol().getJcEspecialidad().getSelectedIndex(),
@@ -217,7 +217,7 @@ public class Controller implements ActionListener {
 
 					break;
 
-				case "masajista":
+				case "MASAJISTA":
 					verificarCampoBlanco(vf.getvL().getPnlRol().getJtAniosExperiencia().getText(), "Años Experiencia");
 
 					int experienciaMsj = Integer.parseInt(vf.getvL().getPnlRol().getJtAniosExperiencia().getText());
@@ -229,7 +229,7 @@ public class Controller implements ActionListener {
 
 					break;
 
-				case "director":
+				case "DIRECTOR":
 					verificarCampoBlanco(vf.getvL().getPnlRol().getJtNacionalidad().getText(), "Nacionalidad");
 
 					String nacionalidad = vf.getvL().getPnlRol().getJtNacionalidad().getText();
@@ -285,7 +285,7 @@ public class Controller implements ActionListener {
 
 		if (admin != null) {
 
-			vf.getvU().setRol("administrador");
+			vf.getvU().setRol("ADMINISTRADOR");
 			vf.getvU().getPnlAdministrador().getProperties().setProperty("lblImagen.perfil", admin.getImagen());
 			vf.getvU().getPnlAdministrador().getProperties().setProperty("lblNombre.perfil", admin.getNombre());
 			vf.getvU().getPnlAdministrador().getProperties().setProperty("lblCedula.perfil",
@@ -298,7 +298,7 @@ public class Controller implements ActionListener {
 
 		} else if (masajista != null) {
 
-			vf.getvU().setRol("masajista");
+			vf.getvU().setRol("MASAJISTA");
 
 			vf.getvU().getPnlMasajista().getProperties().setProperty("lblImagen.perfil", masajista.getImagen());
 			vf.getvU().getPnlMasajista().getProperties().setProperty("lblNombre.perfil", masajista.getNombre());
@@ -313,6 +313,7 @@ public class Controller implements ActionListener {
 					Integer.toString(masajista.getAniosExperiencia()));
 
 			vf.getvU().getPnlMasajista().iniciarPanelDerecho();
+			vf.getvU().getPnlMasajista().getPnlIzquierda().remove(vf.getvU().getPnlMasajista().getImagenPanelIzq());
 			vf.getvU().getPnlMasajista().getPnlIzquierda().remove(vf.getvU().getPnlMasajista().getLblImagenPerfil());
 			vf.getvU().getPnlMasajista().getPnlIzquierda().remove(vf.getvU().getPnlMasajista().getLblNombrePerfil());
 			vf.getvU().getPnlMasajista().getPnlIzquierda().remove(vf.getvU().getPnlMasajista().getLblRol());
@@ -320,7 +321,7 @@ public class Controller implements ActionListener {
 
 		} else if (director != null) {
 
-			vf.getvU().setRol("director");
+			vf.getvU().setRol("DIRECTOR");
 
 			vf.getvU().getPnlDirector().getProperties().setProperty("lblImagen.perfil", director.getImagen());
 			vf.getvU().getPnlDirector().getProperties().setProperty("lblNombre.perfil", director.getNombre());
@@ -342,12 +343,12 @@ public class Controller implements ActionListener {
 
 		} else if (ciclista != null) {
 
-			vf.getvU().setRol("ciclista");
+			vf.getvU().setRol("CICLISTA");
 			ciclistaProps = ciclista;
 
 		} else if (clasicomano != null) {
 
-			vf.getvU().setRol("ciclista");
+			vf.getvU().setRol("CICLISTA");
 			ciclistaProps = clasicomano;
 
 			vf.getvU().getPnlCiclista().getProperties().setProperty("lblClasicosGanados.perfil",
@@ -355,7 +356,7 @@ public class Controller implements ActionListener {
 
 		} else if (contrarrelojero != null) {
 
-			vf.getvU().setRol("ciclista");
+			vf.getvU().setRol("CICLISTA");
 			ciclistaProps = contrarrelojero;
 
 			vf.getvU().getPnlCiclista().getProperties().setProperty("lblVelocidadMaxima.perfil",
@@ -363,7 +364,7 @@ public class Controller implements ActionListener {
 
 		} else if (escalador != null) {
 
-			vf.getvU().setRol("ciclista");
+			vf.getvU().setRol("CICLISTA");
 			ciclistaProps = escalador;
 
 			vf.getvU().getPnlCiclista().getProperties().setProperty("lblAceleracionSubida.perfil",
@@ -373,7 +374,7 @@ public class Controller implements ActionListener {
 
 		} else if (gregario != null) {
 
-			vf.getvU().setRol("ciclista");
+			vf.getvU().setRol("CICLISTA");
 			ciclistaProps = gregario;
 
 			vf.getvU().getPnlCiclista().getProperties().setProperty("lblFuncionPeloton.perfil",
@@ -381,7 +382,7 @@ public class Controller implements ActionListener {
 
 		} else if (rodador != null) {
 
-			vf.getvU().setRol("ciclista");
+			vf.getvU().setRol("CICLISTA");
 			ciclistaProps = rodador;
 
 			vf.getvU().getPnlCiclista().getProperties().setProperty("lblVelocidadPedaleo.perfil",
@@ -389,7 +390,7 @@ public class Controller implements ActionListener {
 
 		} else if (sprinter != null) {
 
-			vf.getvU().setRol("ciclista");
+			vf.getvU().setRol("CICLISTA");
 			ciclistaProps = sprinter;
 
 			vf.getvU().getPnlCiclista().getProperties().setProperty("lblExplosion.perfil",
@@ -407,7 +408,7 @@ public class Controller implements ActionListener {
 		vf.getvL().getPnlLogin().getJtUsuario().setText("");
 		vf.getvL().getPnlLogin().getJtContrasena().setText("");
 
-		if (vf.getvU().getRol().equals("ciclista")) {
+		if (vf.getvU().getRol().equals("CICLISTA")) {
 
 			vf.getvU().getPnlCiclista().getProperties().setProperty("lblImagen.perfil", ciclistaProps.getImagen());
 			vf.getvU().getPnlCiclista().getProperties().setProperty("lblNombre.perfil", ciclistaProps.getNombre());
@@ -453,9 +454,9 @@ public class Controller implements ActionListener {
 		long cedulaDir = Long.parseLong(vf.getvU().getPnlDirector().getProperties().getProperty("lblCedula.perfil"));
 		long cedulaMas = Long.parseLong(vf.getvU().getPnlMasajista().getProperties().getProperty("lblCedula.perfil"));
 
-		if (vf.getCon().confirmarTextoVE("Esta seguro que quiere eliminar al " + rol + "?") == 0) {
+		if (vf.getCon().confirmarTextoVE("Esta seguro que quiere eliminar al " + rol.toLowerCase() + "?") == 0) {
 			switch (rol) {
-			case "ciclista":
+			case "CICLISTA":
 				switch (especialidad) {
 				case "Clasicomano":
 					vf.getCon().imprimirTextoVE(mf.getClasicomanoDAO().eliminarPorCedula(cedulaCic));
@@ -487,11 +488,11 @@ public class Controller implements ActionListener {
 				}
 				break;
 
-			case "masajista":
+			case "MASAJISTA":
 				vf.getCon().imprimirTextoVE(mf.getMasajistaDAO().eliminarPorCedula(cedulaMas));
 				break;
 
-			case "director":
+			case "DIRECTOR":
 				vf.getCon().imprimirTextoVE(mf.getDirectorDeportivoDAO().eliminarPorCedula(cedulaDir));
 				break;
 			}
@@ -615,6 +616,7 @@ public class Controller implements ActionListener {
 
 				vf.getvU().getPnlMasajista().getPnlIzquierda()
 						.remove(vf.getvU().getPnlMasajista().getLblImagenPerfil());
+				vf.getvU().getPnlMasajista().getPnlIzquierda().remove(vf.getvU().getPnlMasajista().getImagenPanelIzq());
 				vf.getvU().getPnlMasajista().getPnlIzquierda()
 						.remove(vf.getvU().getPnlMasajista().getLblNombrePerfil());
 				vf.getvU().getPnlMasajista().getPnlIzquierda().remove(vf.getvU().getPnlMasajista().getLblRol());
@@ -1058,15 +1060,15 @@ public class Controller implements ActionListener {
 
 		if (vf.getCon().confirmarTextoVE("Esta seguro que quiere cerrar sesión?") == 0) {
 			switch (rol) {
-			case "ciclista":
+			case "CICLISTA":
 				vf.getvU().getPnlCiclista().setOpcion("perfilinicial");
 				break;
 
-			case "masajista":
+			case "MASAJISTA":
 				vf.getvU().getPnlMasajista().setOpcion("perfilinicial");
 				break;
 
-			case "director":
+			case "DIRECTOR":
 				vf.getvU().getPnlDirector().setOpcion("perfilinicial");
 				break;
 			}

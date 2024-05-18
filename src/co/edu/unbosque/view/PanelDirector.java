@@ -135,10 +135,10 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		}
 
 		pnlIzquierda.setBounds(
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.horizontal")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.vertical")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.ancho")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlIzquierda.alto")));
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.horizontal")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.vertical")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.ancho")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.alto")));
 		pnlIzquierda.setLayout(null);
 
 		lblImagenPerfil = this.crearLabel("", new Rectangle(55, 50, 150, 150),
@@ -179,10 +179,10 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			pnlDerecha.removeAll();
 		}
 
-		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.horizontal")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.vertical")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.ancho")),
-				Integer.parseInt(this.getProperties().getProperty("panelDirector.pnlDerecha.alto")));
+		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.horizontal")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.vertical")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.ancho")),
+				Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.alto")));
 		pnlDerecha.setLayout(null);
 
 		switch (opcion) {

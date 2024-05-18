@@ -50,7 +50,7 @@ public class PanelRol extends MainPanel implements ActionListener {
 
 	private VentanaInicial mainPanel;
 
-	private String opcion = "ciclista";
+	private String opcion = "CICLISTA";
 
 	public PanelRol(VentanaInicial inicial) {
 		this.setProperties(
@@ -139,7 +139,7 @@ public class PanelRol extends MainPanel implements ActionListener {
 		String imgDatos = "";
 
 		switch (opcion) {
-		case "ciclista":
+		case "CICLISTA":
 
 			lblIdentificador = this.crearLabel("lblIdentificador.titulo", 390, 315);
 			jtIdentificador = this.crearTextFieldInvisible("", new Rectangle(400, 355, 230, 30));
@@ -169,9 +169,9 @@ public class PanelRol extends MainPanel implements ActionListener {
 
 			break;
 
-		case "masajista":
+		case "MASAJISTA":
 
-			lblAniosExperiencia = this.crearLabel("lblAniosExperiencia.titulo", 390, 320);
+			lblAniosExperiencia = this.crearLabel("lblAniosExperiencia.titulo", 390, 315);
 			jtAniosExperiencia = this.crearTextFieldInvisible("", new Rectangle(400, 355, 230, 30));
 			pnlDerecha.add(lblAniosExperiencia);
 			pnlDerecha.add(jtAniosExperiencia);
@@ -180,9 +180,9 @@ public class PanelRol extends MainPanel implements ActionListener {
 
 			break;
 
-		case "director":
+		case "DIRECTOR":
 
-			lblNacionalidad = this.crearLabel("lblNacionalidad.titulo", 390, 320);
+			lblNacionalidad = this.crearLabel("lblNacionalidad.titulo", 390, 315);
 			jtNacionalidad = this.crearTextFieldInvisible("", new Rectangle(400, 355, 220, 30));
 			pnlDerecha.add(lblNacionalidad);
 			pnlDerecha.add(jtNacionalidad);
@@ -233,7 +233,7 @@ public class PanelRol extends MainPanel implements ActionListener {
 		limitarCaracter(jtNombre, 50);
 
 		switch (opcion) {
-		case "ciclista":
+		case "CICLISTA":
 			numeros(jtAniosExperiencia);
 			numeros(jtIdentificador);
 
@@ -241,13 +241,13 @@ public class PanelRol extends MainPanel implements ActionListener {
 			limitarCaracter(jtIdentificador, 5);
 			break;
 
-		case "masajista":
+		case "MASAJISTA":
 			numeros(jtAniosExperiencia);
 
 			limitarCaracter(jtAniosExperiencia, 2);
 			break;
 
-		case "director":
+		case "DIRECTOR":
 			letras(jtNacionalidad);
 
 			limitarCaracter(jtNacionalidad, 40);
@@ -267,7 +267,7 @@ public class PanelRol extends MainPanel implements ActionListener {
 		case "ciclista":
 		case "masajista":
 		case "director":
-			opcion = e.getActionCommand();
+			opcion = e.getActionCommand().toUpperCase();
 			iniciarPanelDerecho();
 			aplicarFuncionesValidacion();
 			break;

@@ -44,7 +44,7 @@ public class MainPanel extends JPanel implements ActionListener {
 	private static Color colorPrincipal = new Color(0, 0, 64);
 	private static Font fuenteLabelPrincipal = new Font("Tahoma", Font.PLAIN, 15);
 	private static Font fuenteTextFieldPrincipal = new Font("Tahoma", Font.PLAIN, 15);
-	private static Font fuenteLabelBoldPrincipal = new Font("Tahoma", Font.BOLD | Font.PLAIN, 15);
+	private static Font fuenteLabelBoldPrincipal = new Font("Tahoma", Font.BOLD | Font.PLAIN, 16);
 	private static Color colorFuenteBoton = Color.white;
 	private static Color colorFuenteLabel = new Color(148, 105, 59);
 	private static Color colorTextField = new Color(215, 219, 221);
@@ -130,7 +130,7 @@ public class MainPanel extends JPanel implements ActionListener {
 	public JLabel crearLabel(String titulo, int posX, int posY) {
 		JLabel label = new JLabel("<html>" + properties.getProperty(titulo));
 
-		label.setBounds(new Rectangle(posX, posY, 250, 35));
+		label.setBounds(new Rectangle(posX, posY, 240, 35));
 		label.setForeground(colorFuenteLabel);
 		label.setFont(fuenteLabelBoldPrincipal);
 
