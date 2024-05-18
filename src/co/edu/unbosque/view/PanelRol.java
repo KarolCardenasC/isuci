@@ -78,19 +78,19 @@ public class PanelRol extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panelRol.pnlizquierda.alto")));
 		pnlIzquierda.setLayout(null);
 
-		btnCiclista = this.crearBotonInvisible("Ciclista", new Rectangle(92, 53, 135, 172), "");
+		btnCiclista = this.crearBotonInvisible("Ciclista", new Rectangle(12, 155, 272, 102), "");
 		pnlIzquierda.add(btnCiclista);
 
-		btnMasajista = this.crearBotonInvisible("Masajista", new Rectangle(88, 260, 140, 179), "");
+		btnMasajista = this.crearBotonInvisible("Masajista", new Rectangle(12, 330, 275, 102), "");
 		pnlIzquierda.add(btnMasajista);
 
-		btnDirector = this.crearBotonInvisible("Director", new Rectangle(89, 474, 140, 179), "");
+		btnDirector = this.crearBotonInvisible("Director", new Rectangle(12, 505, 275, 105), "");
 		pnlIzquierda.add(btnDirector);
 
-		btnVolver = this.crearBoton("Volver Login", 50, 5, "");
+		btnVolver = this.crearBotonInvisible("Volver Login", new Rectangle(16, 35, 180, 60), "");
 		pnlIzquierda.add(btnVolver);
 
-		imagen = this.crearLabel("", new Rectangle(0, 0, 300, 700), "roles.jpg");
+		imagen = this.crearLabel("", new Rectangle(0, 0, 300, 660), "rolesRegistro.jpg");
 		pnlIzquierda.add(imagen);
 		
 
@@ -109,30 +109,30 @@ public class PanelRol extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panelRol.pnlderecha.alto")));
 		pnlDerecha.setLayout(null);
 
-		lblNombre = this.crearLabel("lblNombre.titulo", 65, 120);
-		jtNombre = this.crearTextFieldInvisible("", new Rectangle(70, 155, 235, 30));
+		lblNombre = this.crearLabel("lblNombre.titulo", 60, 125);
+		jtNombre = this.crearTextFieldInvisible("", new Rectangle(70, 165, 210, 30));
 		pnlDerecha.add(lblNombre);
 		pnlDerecha.add(jtNombre);
 
-		lblCedula = this.crearLabel("lblCedula.titulo", 395, 120);
-		jtCedula = this.crearTextFieldInvisible("", new Rectangle(400, 155, 235, 30));
+		lblCedula = this.crearLabel("lblCedula.titulo", 390, 125);
+		jtCedula = this.crearTextFieldInvisible("", new Rectangle(400, 165, 235, 30));
 		pnlDerecha.add(lblCedula);
 		pnlDerecha.add(jtCedula);
 
 		String[] listaGenero = { "Hombre", "Mujer" };
 
-		lblGenero = this.crearLabel("lblGenero.titulo", 65, 220);
-		jcGenero = this.crearComboBoxInvisible(listaGenero, new Rectangle(70, 255, 235, 30));
+		lblGenero = this.crearLabel("lblGenero.titulo", 60, 215);
+		jcGenero = this.crearComboBoxInvisible(listaGenero, new Rectangle(70, 255, 215, 30));
 		pnlDerecha.add(lblGenero);
 		pnlDerecha.add(jcGenero);
 
-		lblCorreo = this.crearLabel("lblCorreo.titulo", 395, 220);
-		jtCorreo = this.crearTextFieldInvisible("", new Rectangle(400, 255, 235, 30));
+		lblCorreo = this.crearLabel("lblCorreo.titulo", 390, 215);
+		jtCorreo = this.crearTextFieldInvisible("", new Rectangle(400, 255, 210, 30));
 		pnlDerecha.add(lblCorreo);
 		pnlDerecha.add(jtCorreo);
 
-		lblContrasena = this.crearLabel("lblContrasena.titulo", 65, 320);
-		jtContrasena = this.crearTextFieldInvisible("", new Rectangle(70, 355, 235, 30));
+		lblContrasena = this.crearLabel("lblContrasena.titulo", 60, 315);
+		jtContrasena = this.crearTextFieldInvisible("", new Rectangle(70, 355, 210, 30));
 		pnlDerecha.add(lblContrasena);
 		pnlDerecha.add(jtContrasena);
 
@@ -141,13 +141,13 @@ public class PanelRol extends MainPanel implements ActionListener {
 		switch (opcion) {
 		case "ciclista":
 
-			lblIdentificador = this.crearLabel("lblIdentificador.titulo", 395, 320);
+			lblIdentificador = this.crearLabel("lblIdentificador.titulo", 390, 315);
 			jtIdentificador = this.crearTextFieldInvisible("", new Rectangle(400, 355, 230, 30));
 			pnlDerecha.add(lblIdentificador);
 			pnlDerecha.add(jtIdentificador);
 
-			lblAniosExperiencia = this.crearLabel("lblAniosExperiencia.titulo", 65, 420);
-			jtAniosExperiencia = this.crearTextFieldInvisible("", new Rectangle(70, 455, 230, 30));
+			lblAniosExperiencia = this.crearLabel("lblAniosExperiencia.titulo", 60, 420);
+			jtAniosExperiencia = this.crearTextFieldInvisible("", new Rectangle(70, 460, 230, 30));
 			pnlDerecha.add(lblAniosExperiencia);
 			pnlDerecha.add(jtAniosExperiencia);
 
@@ -155,44 +155,44 @@ public class PanelRol extends MainPanel implements ActionListener {
 					"Rodador", "Sprinter" };
 			String[] listaContextura = { "Ninguna", "Delgado", "Medio", "Grueso" };
 
-			lblEspecialidad = this.crearLabel("lblEspecialidad.titulo", 65, 520);
-			jcEspecialidad = this.crearComboBoxInvisible(listaEspecialidad, new Rectangle(70, 555, 230, 30));
+			lblEspecialidad = this.crearLabel("lblEspecialidad.titulo", 60, 525);
+			jcEspecialidad = this.crearComboBoxInvisible(listaEspecialidad, new Rectangle(70, 563, 215, 30));
 			pnlDerecha.add(lblEspecialidad);
 			pnlDerecha.add(jcEspecialidad);
 
-			lblContextura = this.crearLabel("lblContextura.titulo", 395, 420);
-			jcContextura = this.crearComboBoxInvisible(listaContextura, new Rectangle(400, 455, 230, 30));
+			lblContextura = this.crearLabel("lblContextura.titulo", 390, 420);
+			jcContextura = this.crearComboBoxInvisible(listaContextura, new Rectangle(405, 460, 215, 30));
 			pnlDerecha.add(lblContextura);
 			pnlDerecha.add(jcContextura);
 
-			imgDatos = "datosCic.jpg";
+			imgDatos = "datosCiclista.jpg";
 
 			break;
 
 		case "masajista":
 
-			lblAniosExperiencia = this.crearLabel("lblAniosExperiencia.titulo", 395, 320);
+			lblAniosExperiencia = this.crearLabel("lblAniosExperiencia.titulo", 390, 320);
 			jtAniosExperiencia = this.crearTextFieldInvisible("", new Rectangle(400, 355, 230, 30));
 			pnlDerecha.add(lblAniosExperiencia);
 			pnlDerecha.add(jtAniosExperiencia);
 
-			imgDatos = "datosGeneral.jpg";
+			imgDatos = "datosGenerales.jpg";
 
 			break;
 
 		case "director":
 
-			lblNacionalidad = this.crearLabel("lblNacionalidad.titulo", 395, 320);
-			jtNacionalidad = this.crearTextFieldInvisible("", new Rectangle(400, 355, 230, 30));
+			lblNacionalidad = this.crearLabel("lblNacionalidad.titulo", 390, 320);
+			jtNacionalidad = this.crearTextFieldInvisible("", new Rectangle(400, 355, 220, 30));
 			pnlDerecha.add(lblNacionalidad);
 			pnlDerecha.add(jtNacionalidad);
 
-			imgDatos = "datosGeneral.jpg";
+			imgDatos = "datosGenerales.jpg";
 
 			break;
 		}
 
-		imagen = this.crearLabel("", new Rectangle(0, 0, 700, 600), imgDatos);
+		imagen = this.crearLabel("", new Rectangle(0, 0, 680, 600), imgDatos);
 		pnlDerecha.add(imagen);
 
 		pnlDerecha.repaint();
@@ -209,13 +209,13 @@ public class PanelRol extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panelRol.pnlinferior.alto")));
 		pnlInferior.setLayout(null);
 
-		btnRegistro = this.crearBotonInvisible("Registro", new Rectangle(481, 5, 60, 53), "");
+		btnRegistro = this.crearBotonInvisible("Registro", new Rectangle(455, 3, 175, 53), "");
 		pnlInferior.add(btnRegistro);
 
 		/*btnVolver = this.crearBotonInvisible("Volver Login", new Rectangle(191, 5, 60, 53), "");
 		pnlInferior.add(btnVolver);*/
 
-		imagen = this.crearLabel("", new Rectangle(0, 0, 700, 65), "botonesRol.jpg");
+		imagen = this.crearLabel("", new Rectangle(0, 0, 680, 60), "botonRoles.jpg");
 		pnlInferior.add(imagen);
 
 		add(pnlInferior);

@@ -46,7 +46,7 @@ public class MainPanel extends JPanel implements ActionListener {
 	private static Font fuenteTextFieldPrincipal = new Font("Tahoma", Font.PLAIN, 15);
 	private static Font fuenteLabelBoldPrincipal = new Font("Tahoma", Font.BOLD | Font.PLAIN, 15);
 	private static Color colorFuenteBoton = Color.white;
-	private static Color colorFuenteLabel = new Color(0, 0, 0);
+	private static Color colorFuenteLabel = new Color(148, 105, 59);
 	private static Color colorTextField = new Color(215, 219, 221);
 
 	/**
@@ -256,8 +256,8 @@ public class MainPanel extends JPanel implements ActionListener {
 	public JComboBox<String> crearComboBoxInvisible(String[] lista, Rectangle bounds) {
 		JComboBox<String> jComboBox = new JComboBox<>(lista);
 		jComboBox.setBounds(bounds);
-		jComboBox.setBackground(new Color(205, 161, 98));
-		jComboBox.setBorder(new LineBorder(new Color(205, 161, 98), -2));
+		jComboBox.setBackground(new Color(245, 227, 187));
+		jComboBox.setBorder(new LineBorder(new Color(245, 227, 187), -2));
 		jComboBox.setFont(fuenteTextFieldPrincipal.deriveFont(fuenteTextFieldPrincipal.getSize() + 2f));
 		jComboBox.setSelectedIndex(-1);
 
