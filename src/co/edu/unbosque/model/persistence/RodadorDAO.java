@@ -78,7 +78,7 @@ public class RodadorDAO implements CRUDOperation<RodadorDTO> {
 	public RodadorDTO buscarCedula(long id) {
 
 		for (int i = 0; i < listaRodadores.size(); i++) {
-			if (listaRodadores.get(i).getIdentificador() == id) {
+			if (listaRodadores.get(i).getCedula() == id) {
 				return listaRodadores.get(i);
 
 			}

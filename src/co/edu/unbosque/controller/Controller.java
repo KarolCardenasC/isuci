@@ -2,7 +2,6 @@ package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.ClasicomanoDTO;
@@ -672,156 +671,180 @@ public class Controller implements ActionListener {
 			if (vf.getCon().confirmarTextoVE("Esta seguro que quiere actualizar al ciclista "
 					+ vf.getvU().getPnlCiclista().getProperties().getProperty("lblNombre.perfil") + "?") == 0) {
 
-				switch (especialidad) {
-				case "Ninguna":
-					vf.getCon()
-							.imprimirTextoVE(mf.getCiclistaDAO().actualizarPorCedula(cedula,
-									new CiclistaDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
-											identificador, anios, tiempo, especialidad, contextura)));
+				if (especialidad
+						.contains(vf.getvU().getPnlCiclista().getProperties().getProperty("lblEspecialidad.perfil"))) {
 
-					CiclistaDTO ciclista = mf.getCiclistaDAO().buscarCedula(cedula);
-					ciclistaProps = ciclista;
-					break;
+					switch (especialidad) {
+					case "Ninguna":
+						vf.getCon()
+								.imprimirTextoVE(mf.getCiclistaDAO().actualizarPorCedula(cedula,
+										new CiclistaDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
+												identificador, anios, tiempo, especialidad, contextura)));
 
-				case "Clasicomano":
-					verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Clasicos Ganados");
-					int clasicos = Integer.parseInt(vf.getvU().getPnlCiclista().getJtCaract1().getText());
+						CiclistaDTO ciclista = mf.getCiclistaDAO().buscarCedula(cedula);
+						ciclistaProps = ciclista;
+						break;
 
-					vf.getCon()
-							.imprimirTextoVE(mf.getClasicomanoDAO().actualizarPorCedula(cedula,
-									new ClasicomanoDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
-											identificador, anios, tiempo, especialidad, contextura, clasicos)));
+					case "Clasicomano":
+						verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Clasicos Ganados");
+						int clasicos = Integer.parseInt(vf.getvU().getPnlCiclista().getJtCaract1().getText());
 
-					ClasicomanoDTO clasicomano = mf.getClasicomanoDAO().buscarCedula(cedula);
-					ciclistaProps = clasicomano;
+						vf.getCon()
+								.imprimirTextoVE(mf.getClasicomanoDAO().actualizarPorCedula(cedula,
+										new ClasicomanoDTO(img, nombre, cedula, correo, correo, correo, contrasena,
+												genero, identificador, anios, tiempo, especialidad, contextura,
+												clasicos)));
 
-					vf.getvU().getPnlCiclista().getProperties().setProperty("lblClasicosGanados.perfil",
-							Integer.toString(clasicomano.getNumeroClasicosganados()));
-					break;
+						ClasicomanoDTO clasicomano = mf.getClasicomanoDAO().buscarCedula(cedula);
+						ciclistaProps = clasicomano;
 
-				case "Contrarrelojero":
-					verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Velocidad Máxima");
-					double velocidadMax = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
+						vf.getvU().getPnlCiclista().getProperties().setProperty("lblClasicosGanados.perfil",
+								Integer.toString(clasicomano.getNumeroClasicosganados()));
+						break;
 
-					vf.getCon()
-							.imprimirTextoVE(mf.getContrarrelojeroDAO().actualizarPorCedula(cedula,
-									new ContrarrelojeroDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
-											identificador, anios, tiempo, especialidad, contextura, velocidadMax)));
+					case "Contrarrelojero":
+						verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Velocidad Máxima");
+						double velocidadMax = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
 
-					ContrarrelojeroDTO contrarrelojero = mf.getContrarrelojeroDAO().buscarCedula(cedula);
-					ciclistaProps = contrarrelojero;
+						vf.getCon()
+								.imprimirTextoVE(mf.getContrarrelojeroDAO().actualizarPorCedula(cedula,
+										new ContrarrelojeroDTO(img, nombre, cedula, correo, correo, correo, contrasena,
+												genero, identificador, anios, tiempo, especialidad, contextura,
+												velocidadMax)));
 
-					vf.getvU().getPnlCiclista().getProperties().setProperty("lblVelocidadMaxima.perfil",
-							Double.toString(contrarrelojero.getVelocidadMaxima()));
-					break;
+						ContrarrelojeroDTO contrarrelojero = mf.getContrarrelojeroDAO().buscarCedula(cedula);
+						ciclistaProps = contrarrelojero;
 
-				case "Escalador":
-					verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Aceleración Subida");
-					verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract2().getText(), "Grado Rampa Soportada");
-					double acelSubida = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
-					double rampa = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract2().getText());
+						vf.getvU().getPnlCiclista().getProperties().setProperty("lblVelocidadMaxima.perfil",
+								Double.toString(contrarrelojero.getVelocidadMaxima()));
+						break;
 
-					vf.getCon()
-							.imprimirTextoVE(mf.getEscaladorDAO().actualizarPorCedula(cedula,
-									new EscaladorDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
-											identificador, anios, tiempo, especialidad, contextura, acelSubida,
-											rampa)));
+					case "Escalador":
+						verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(),
+								"Aceleración Subida");
+						verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract2().getText(),
+								"Grado Rampa Soportada");
+						double acelSubida = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
+						double rampa = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract2().getText());
 
-					EscaladorDTO escalador = mf.getEscaladorDAO().buscarCedula(cedula);
-					ciclistaProps = escalador;
+						vf.getCon()
+								.imprimirTextoVE(mf.getEscaladorDAO().actualizarPorCedula(cedula,
+										new EscaladorDTO(img, nombre, cedula, correo, correo, correo, contrasena,
+												genero, identificador, anios, tiempo, especialidad, contextura,
+												acelSubida, rampa)));
 
-					vf.getvU().getPnlCiclista().getProperties().setProperty("lblAceleracionSubida.perfil",
-							Double.toString(escalador.getAceleracionPromSubida()));
-					vf.getvU().getPnlCiclista().getProperties().setProperty("lblRampaSoportada.perfil",
-							Double.toString(escalador.getGradoRampaSoportada()));
-					break;
+						EscaladorDTO escalador = mf.getEscaladorDAO().buscarCedula(cedula);
+						ciclistaProps = escalador;
 
-				case "Gregario":
-					verificarCampoBlancoItem(vf.getvU().getPnlCiclista().getJcFuncion().getSelectedIndex(),
-							"Funcion Peloton");
-					String funcion = vf.getvU().getPnlCiclista().getJcFuncion().getSelectedItem().toString();
+						vf.getvU().getPnlCiclista().getProperties().setProperty("lblAceleracionSubida.perfil",
+								Double.toString(escalador.getAceleracionPromSubida()));
+						vf.getvU().getPnlCiclista().getProperties().setProperty("lblRampaSoportada.perfil",
+								Double.toString(escalador.getGradoRampaSoportada()));
+						break;
 
-					vf.getCon()
-							.imprimirTextoVE(mf.getGregarioDAO().actualizarPorCedula(cedula,
-									new GregarioDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
-											identificador, anios, tiempo, especialidad, contextura, funcion)));
+					case "Gregario":
+						verificarCampoBlancoItem(vf.getvU().getPnlCiclista().getJcFuncion().getSelectedIndex(),
+								"Funcion Peloton");
+						String funcion = vf.getvU().getPnlCiclista().getJcFuncion().getSelectedItem().toString();
 
-					GregarioDTO gregario = mf.getGregarioDAO().buscarCedula(cedula);
-					ciclistaProps = gregario;
+						vf.getCon()
+								.imprimirTextoVE(mf.getGregarioDAO().actualizarPorCedula(cedula,
+										new GregarioDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
+												identificador, anios, tiempo, especialidad, contextura, funcion)));
 
-					vf.getvU().getPnlCiclista().getProperties().setProperty("lblFuncionPeloton.perfil",
-							gregario.getFuncionPeloton());
-					break;
+						GregarioDTO gregario = mf.getGregarioDAO().buscarCedula(cedula);
+						ciclistaProps = gregario;
 
-				case "Rodador":
-					verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Velocidad Pedaleo");
-					double velocidadPedaleo = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
+						vf.getvU().getPnlCiclista().getProperties().setProperty("lblFuncionPeloton.perfil",
+								gregario.getFuncionPeloton());
+						break;
 
-					vf.getCon()
-							.imprimirTextoVE(mf.getRodadorDAO().actualizarPorCedula(cedula,
-									new RodadorDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
-											identificador, anios, tiempo, especialidad, contextura, velocidadPedaleo)));
+					case "Rodador":
+						verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Velocidad Pedaleo");
+						double velocidadPedaleo = Double
+								.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
 
-					RodadorDTO rodador = mf.getRodadorDAO().buscarCedula(cedula);
-					ciclistaProps = rodador;
+						vf.getCon()
+								.imprimirTextoVE(mf.getRodadorDAO().actualizarPorCedula(cedula,
+										new RodadorDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
+												identificador, anios, tiempo, especialidad, contextura,
+												velocidadPedaleo)));
 
-					vf.getvU().getPnlCiclista().getProperties().setProperty("lblVelocidadPedaleo.perfil",
-							Double.toString(rodador.getVelocidadPromPedaleo()));
-					break;
+						RodadorDTO rodador = mf.getRodadorDAO().buscarCedula(cedula);
+						ciclistaProps = rodador;
 
-				case "Sprinter":
-					verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Explosion");
-					verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract2().getText(), "Potencia Vatios");
-					verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract3().getText(), "Velocidad Sprint");
-					double metrosFinales = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
-					double potenciaVatios = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract2().getText());
-					double velocidadSprint = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract3().getText());
+						vf.getvU().getPnlCiclista().getProperties().setProperty("lblVelocidadPedaleo.perfil",
+								Double.toString(rodador.getVelocidadPromPedaleo()));
+						break;
 
-					vf.getCon()
-							.imprimirTextoVE(mf.getSprinterDAO().actualizarPorCedula(cedula,
-									new SprinterDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
-											identificador, anios, tiempo, especialidad, contextura, metrosFinales,
-											potenciaVatios, velocidadSprint)));
+					case "Sprinter":
+						verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Explosion");
+						verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract2().getText(), "Potencia Vatios");
+						verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract3().getText(), "Velocidad Sprint");
+						double metrosFinales = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
+						double potenciaVatios = Double
+								.parseDouble(vf.getvU().getPnlCiclista().getJtCaract2().getText());
+						double velocidadSprint = Double
+								.parseDouble(vf.getvU().getPnlCiclista().getJtCaract3().getText());
 
-					SprinterDTO sprinter = mf.getSprinterDAO().buscarCedula(cedula);
-					ciclistaProps = sprinter;
+						vf.getCon()
+								.imprimirTextoVE(mf.getSprinterDAO().actualizarPorCedula(cedula,
+										new SprinterDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
+												identificador, anios, tiempo, especialidad, contextura, metrosFinales,
+												potenciaVatios, velocidadSprint)));
 
-					vf.getvU().getPnlCiclista().getProperties().setProperty("lblExplosion.perfil",
-							Double.toString(sprinter.getExplosionMetrosFinales()));
-					vf.getvU().getPnlCiclista().getProperties().setProperty("lblPotenciaVatios.perfil",
-							Double.toString(sprinter.getPotenciaPromVatios()));
-					vf.getvU().getPnlCiclista().getProperties().setProperty("lblVelocidadSprint.perfil",
-							Double.toString(sprinter.getVelocidadPromSprintKm()));
-					break;
+						SprinterDTO sprinter = mf.getSprinterDAO().buscarCedula(cedula);
+						ciclistaProps = sprinter;
+
+						vf.getvU().getPnlCiclista().getProperties().setProperty("lblExplosion.perfil",
+								Double.toString(sprinter.getExplosionMetrosFinales()));
+						vf.getvU().getPnlCiclista().getProperties().setProperty("lblPotenciaVatios.perfil",
+								Double.toString(sprinter.getPotenciaPromVatios()));
+						vf.getvU().getPnlCiclista().getProperties().setProperty("lblVelocidadSprint.perfil",
+								Double.toString(sprinter.getVelocidadPromSprintKm()));
+						break;
+					}
+
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblImagen.perfil",
+							ciclistaProps.getImagen());
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblNombre.perfil",
+							ciclistaProps.getNombre());
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblCedula.perfil",
+							Long.toString(ciclistaProps.getCedula()));
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblCorreo.perfil",
+							ciclistaProps.getCorreo());
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblUsuario.perfil",
+							ciclistaProps.getUsuario());
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblId.perfil", ciclistaProps.getId());
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblContrasena.perfil",
+							ciclistaProps.getContrasena());
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblGenero.perfil",
+							ciclistaProps.getGenero());
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblAniosExperiencia.perfil",
+							Integer.toString(ciclistaProps.getAniosExperiencia()));
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblIdentificador.perfil",
+							Integer.toString(ciclistaProps.getIdentificador()));
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblTiempoAcumuladoMin.perfil",
+							Double.toString(ciclistaProps.getTiempoAcumuladoMin()));
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblEspecialidad.perfil",
+							ciclistaProps.getEspecialidad());
+					vf.getvU().getPnlCiclista().getProperties().setProperty("lblContextura.perfil",
+							ciclistaProps.getContextura());
+
+					vf.getvU().getPnlCiclista().getPnlIzquierda()
+							.remove(vf.getvU().getPnlCiclista().getLblImagenPerfil());
+					vf.getvU().getPnlCiclista().getPnlIzquierda()
+							.remove(vf.getvU().getPnlCiclista().getLblNombrePerfil());
+					vf.getvU().getPnlCiclista().getPnlIzquierda().remove(vf.getvU().getPnlCiclista().getLblRol());
+					vf.getvU().getPnlCiclista().iniciarPanelDerecho();
+					vf.getvU().getPnlCiclista().iniciarPanelIzquierdo();
+
+				} else {
+					eliminarCrearCiclista(
+							vf.getvU().getPnlCiclista().getProperties().getProperty("lblEspecialidad.perfil"), cedula,
+							especialidad, img, nombre, correo, contrasena, genero, identificador, anios, tiempo,
+							contextura);
 				}
-
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblImagen.perfil", ciclistaProps.getImagen());
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblNombre.perfil", ciclistaProps.getNombre());
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblCedula.perfil",
-						Long.toString(ciclistaProps.getCedula()));
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblCorreo.perfil", ciclistaProps.getCorreo());
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblUsuario.perfil",
-						ciclistaProps.getUsuario());
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblId.perfil", ciclistaProps.getId());
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblContrasena.perfil",
-						ciclistaProps.getContrasena());
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblGenero.perfil", ciclistaProps.getGenero());
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblAniosExperiencia.perfil",
-						Integer.toString(ciclistaProps.getAniosExperiencia()));
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblIdentificador.perfil",
-						Integer.toString(ciclistaProps.getIdentificador()));
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblTiempoAcumuladoMin.perfil",
-						Double.toString(ciclistaProps.getTiempoAcumuladoMin()));
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblEspecialidad.perfil",
-						ciclistaProps.getEspecialidad());
-				vf.getvU().getPnlCiclista().getProperties().setProperty("lblContextura.perfil",
-						ciclistaProps.getContextura());
-
-				vf.getvU().getPnlCiclista().getPnlIzquierda().remove(vf.getvU().getPnlCiclista().getLblImagenPerfil());
-				vf.getvU().getPnlCiclista().getPnlIzquierda().remove(vf.getvU().getPnlCiclista().getLblNombrePerfil());
-				vf.getvU().getPnlCiclista().getPnlIzquierda().remove(vf.getvU().getPnlCiclista().getLblRol());
-				vf.getvU().getPnlCiclista().iniciarPanelDerecho();
-				vf.getvU().getPnlCiclista().iniciarPanelIzquierdo();
 			}
 
 		} catch (BlankFieldException e) {
@@ -829,6 +852,205 @@ public class Controller implements ActionListener {
 		} catch (DuplicateGmailException e) {
 			vf.getCon().imprimirTextoVE(e.getMessage());
 		}
+	}
+
+	public void eliminarCrearCiclista(String especialidadEliminar, long cedula, String especialidadCrear, String img,
+			String nombre, String correo, String contrasena, String genero, int identificador, int anios, double tiempo,
+			String contextura) {
+		try {
+
+			CiclistaDTO ciclistaProps = new CiclistaDTO();
+			String mensaje = "no";
+
+			switch (especialidadCrear) {
+			case "Ninguna":
+				mf.getCiclistaDAO().crear(new CiclistaDTO(img, nombre, cedula, correo, correo, correo, contrasena,
+						genero, identificador, anios, tiempo, especialidadCrear, contextura));
+
+				CiclistaDTO ciclista = mf.getCiclistaDAO().buscarCedula(cedula);
+				ciclistaProps = ciclista;
+				mensaje = "si";
+				break;
+
+			case "Clasicomano":
+				verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Clasicos Ganados");
+				int clasicos = Integer.parseInt(vf.getvU().getPnlCiclista().getJtCaract1().getText());
+
+				mf.getClasicomanoDAO().crear(new ClasicomanoDTO(img, nombre, cedula, correo, correo, correo, contrasena,
+						genero, identificador, anios, tiempo, especialidadCrear, contextura, clasicos));
+
+				ClasicomanoDTO clasicomano = mf.getClasicomanoDAO().buscarCedula(cedula);
+				ciclistaProps = clasicomano;
+
+				vf.getvU().getPnlCiclista().getProperties().setProperty("lblClasicosGanados.perfil",
+						Integer.toString(clasicomano.getNumeroClasicosganados()));
+
+				mensaje = "si";
+				break;
+
+			case "Contrarrelojero":
+				verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Velocidad Máxima");
+				double velocidadMax = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
+
+				mf.getContrarrelojeroDAO().crear(new ContrarrelojeroDTO(img, nombre, cedula, correo, correo, correo,
+						contrasena, genero, identificador, anios, tiempo, especialidadCrear, contextura, velocidadMax));
+
+				ContrarrelojeroDTO contrarrelojero = mf.getContrarrelojeroDAO().buscarCedula(cedula);
+				ciclistaProps = contrarrelojero;
+
+				vf.getvU().getPnlCiclista().getProperties().setProperty("lblVelocidadMaxima.perfil",
+						Double.toString(contrarrelojero.getVelocidadMaxima()));
+
+				mensaje = "si";
+				break;
+
+			case "Escalador":
+				verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Aceleración Subida");
+				verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract2().getText(), "Grado Rampa Soportada");
+				double acelSubida = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
+				double rampa = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract2().getText());
+
+				mf.getEscaladorDAO().crear(new EscaladorDTO(img, nombre, cedula, correo, correo, correo, contrasena,
+						genero, identificador, anios, tiempo, especialidadCrear, contextura, acelSubida, rampa));
+
+				EscaladorDTO escalador = mf.getEscaladorDAO().buscarCedula(cedula);
+				ciclistaProps = escalador;
+
+				vf.getvU().getPnlCiclista().getProperties().setProperty("lblAceleracionSubida.perfil",
+						Double.toString(escalador.getAceleracionPromSubida()));
+				vf.getvU().getPnlCiclista().getProperties().setProperty("lblRampaSoportada.perfil",
+						Double.toString(escalador.getGradoRampaSoportada()));
+
+				mensaje = "si";
+				break;
+
+			case "Gregario":
+				verificarCampoBlancoItem(vf.getvU().getPnlCiclista().getJcFuncion().getSelectedIndex(),
+						"Funcion Peloton");
+				String funcion = vf.getvU().getPnlCiclista().getJcFuncion().getSelectedItem().toString();
+
+				mf.getGregarioDAO().crear(new GregarioDTO(img, nombre, cedula, correo, correo, correo, contrasena,
+						genero, identificador, anios, tiempo, especialidadCrear, contextura, funcion));
+
+				GregarioDTO gregario = mf.getGregarioDAO().buscarCedula(cedula);
+				ciclistaProps = gregario;
+
+				vf.getvU().getPnlCiclista().getProperties().setProperty("lblFuncionPeloton.perfil",
+						gregario.getFuncionPeloton());
+
+				mensaje = "si";
+				break;
+
+			case "Rodador":
+				verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Velocidad Pedaleo");
+				double velocidadPedaleo = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
+
+				mf.getRodadorDAO().crear(new RodadorDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
+						identificador, anios, tiempo, especialidadCrear, contextura, velocidadPedaleo));
+
+				RodadorDTO rodador = mf.getRodadorDAO().buscarCedula(cedula);
+				ciclistaProps = rodador;
+
+				vf.getvU().getPnlCiclista().getProperties().setProperty("lblVelocidadPedaleo.perfil",
+						Double.toString(rodador.getVelocidadPromPedaleo()));
+
+				mensaje = "si";
+				break;
+
+			case "Sprinter":
+				verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract1().getText(), "Explosion");
+				verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract2().getText(), "Potencia Vatios");
+				verificarCampoBlanco(vf.getvU().getPnlCiclista().getJtCaract3().getText(), "Velocidad Sprint");
+				double metrosFinales = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract1().getText());
+				System.out.println(metrosFinales);
+				double potenciaVatios = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract2().getText());
+				double velocidadSprint = Double.parseDouble(vf.getvU().getPnlCiclista().getJtCaract3().getText());
+
+				mf.getSprinterDAO()
+						.crear(new SprinterDTO(img, nombre, cedula, correo, correo, correo, contrasena, genero,
+								identificador, anios, tiempo, especialidadCrear, contextura, metrosFinales,
+								potenciaVatios, velocidadSprint));
+
+				SprinterDTO sprinter = mf.getSprinterDAO().buscarCedula(cedula);
+				ciclistaProps = sprinter;
+
+				vf.getvU().getPnlCiclista().getProperties().setProperty("lblExplosion.perfil",
+						Double.toString(sprinter.getExplosionMetrosFinales()));
+				vf.getvU().getPnlCiclista().getProperties().setProperty("lblPotenciaVatios.perfil",
+						Double.toString(sprinter.getPotenciaPromVatios()));
+				vf.getvU().getPnlCiclista().getProperties().setProperty("lblVelocidadSprint.perfil",
+						Double.toString(sprinter.getVelocidadPromSprintKm()));
+
+				mensaje = "si";
+				break;
+			}
+
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblImagen.perfil", ciclistaProps.getImagen());
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblNombre.perfil", ciclistaProps.getNombre());
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblCedula.perfil",
+					Long.toString(ciclistaProps.getCedula()));
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblCorreo.perfil", ciclistaProps.getCorreo());
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblUsuario.perfil", ciclistaProps.getUsuario());
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblId.perfil", ciclistaProps.getId());
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblContrasena.perfil",
+					ciclistaProps.getContrasena());
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblGenero.perfil", ciclistaProps.getGenero());
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblAniosExperiencia.perfil",
+					Integer.toString(ciclistaProps.getAniosExperiencia()));
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblIdentificador.perfil",
+					Integer.toString(ciclistaProps.getIdentificador()));
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblTiempoAcumuladoMin.perfil",
+					Double.toString(ciclistaProps.getTiempoAcumuladoMin()));
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblEspecialidad.perfil",
+					ciclistaProps.getEspecialidad());
+			vf.getvU().getPnlCiclista().getProperties().setProperty("lblContextura.perfil",
+					ciclistaProps.getContextura());
+
+			vf.getvU().getPnlCiclista().getPnlIzquierda().remove(vf.getvU().getPnlCiclista().getLblImagenPerfil());
+			vf.getvU().getPnlCiclista().getPnlIzquierda().remove(vf.getvU().getPnlCiclista().getLblNombrePerfil());
+			vf.getvU().getPnlCiclista().getPnlIzquierda().remove(vf.getvU().getPnlCiclista().getLblRol());
+			vf.getvU().getPnlCiclista().iniciarPanelDerecho();
+			vf.getvU().getPnlCiclista().iniciarPanelIzquierdo();
+
+			switch (especialidadEliminar) {
+			case "Ninguna":
+				mf.getCiclistaDAO().eliminarPorCedula(cedula);
+				break;
+			case "Clasicomano":
+				mf.getClasicomanoDAO().eliminarPorCedula(cedula);
+				break;
+
+			case "Contrarrelojero":
+				mf.getContrarrelojeroDAO().eliminarPorCedula(cedula);
+				break;
+
+			case "Escalador":
+				mf.getEscaladorDAO().eliminarPorCedula(cedula);
+				break;
+
+			case "Gregario":
+				mf.getGregarioDAO().eliminarPorCedula(cedula);
+				break;
+
+			case "Rodador":
+				mf.getRodadorDAO().eliminarPorCedula(cedula);
+				break;
+
+			case "Sprinter":
+				mf.getSprinterDAO().eliminarPorCedula(cedula);
+				break;
+			}
+
+			if (mensaje.contains("si")) {
+				vf.getCon().imprimirTextoVE("Se ha actualizado el ciclista con éxito");
+			}
+
+		} catch (
+
+		BlankFieldException e) {
+			vf.getCon().imprimirTextoVE(e.getMessage());
+		}
+
 	}
 
 	public void cerrarSesion() {

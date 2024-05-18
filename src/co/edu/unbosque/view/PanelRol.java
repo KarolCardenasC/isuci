@@ -87,8 +87,12 @@ public class PanelRol extends MainPanel implements ActionListener {
 		btnDirector = this.crearBotonInvisible("Director", new Rectangle(89, 474, 140, 179), "");
 		pnlIzquierda.add(btnDirector);
 
+		btnVolver = this.crearBoton("Volver Login", 50, 5, "");
+		pnlIzquierda.add(btnVolver);
+
 		imagen = this.crearLabel("", new Rectangle(0, 0, 300, 700), "roles.jpg");
 		pnlIzquierda.add(imagen);
+		
 
 		add(pnlIzquierda);
 	}
@@ -208,8 +212,8 @@ public class PanelRol extends MainPanel implements ActionListener {
 		btnRegistro = this.crearBotonInvisible("Registro", new Rectangle(481, 5, 60, 53), "");
 		pnlInferior.add(btnRegistro);
 
-		btnVolver = this.crearBotonInvisible("Volver Login", new Rectangle(191, 5, 60, 53), "");
-		pnlInferior.add(btnVolver);
+		/*btnVolver = this.crearBotonInvisible("Volver Login", new Rectangle(191, 5, 60, 53), "");
+		pnlInferior.add(btnVolver);*/
 
 		imagen = this.crearLabel("", new Rectangle(0, 0, 700, 65), "botonesRol.jpg");
 		pnlInferior.add(imagen);
@@ -497,4 +501,3 @@ public class PanelRol extends MainPanel implements ActionListener {
 	}
 
 }
-
