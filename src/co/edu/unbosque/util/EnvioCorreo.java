@@ -16,6 +16,14 @@ import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 
+/**
+ * The EnvioCorreo class provides functionality to send emails with or without attachments
+ * using SMTP servers such as Gmail and Outlook.
+ *
+ *@author Moreno.JP
+ * @version 26/04/2024
+ */
+
 public class EnvioCorreo {
 
 	private static final String PROTOCOL = "smtp";
@@ -27,6 +35,16 @@ public class EnvioCorreo {
 	
 	private Properties props = new Properties();
 
+	 /**
+     * Sends an email with the specified parameters.
+     *
+     * @param destino The recipient's email address.
+     * @param asunto The subject of the email.
+     * @param texto The body text of the email.
+     * @param archivo The file to be attached to the email, can be null.
+     * @return true if the email was sent successfully, false otherwise.
+     */
+	
 	public boolean enviaCfd(final String destino, final String asunto, final String texto, File archivo) {
 		try {
 			Multipart multipart = new MimeMultipart();
@@ -69,6 +87,13 @@ public class EnvioCorreo {
 		}
 	}
 
+	/**
+     * Configures the SMTP server properties based on the user's email domain.
+     *
+     * @param user The email username.
+     * @param cuenta The email domain.
+     */
+	
 	public void SMTP_SERVER(final String user, final String cuenta) {
 		switch (cuenta) {
 		case "gmail.com":
