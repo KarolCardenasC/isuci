@@ -102,91 +102,11 @@ public class EquipoDAO implements CRUDEquipo<EquipoDTO> {
 	public ArrayList<EquipoDTO> mostrarTodos() {
 		ArrayList<EquipoDTO> listaMostrar = new ArrayList<>();
 		listaEquipos.forEach(e -> {
-			EquipoDTO equipoTemp = new EquipoDTO(e.getNombre(), e.getTiempoCarrera(), e.getPais(),
-					e.getListaCiclistas(), e.getMasajista(), e.getDirectorDep());
+			EquipoDTO equipoTemp = new EquipoDTO(e.getNombre(), e.getTiempoCarrera(), e.getPais());
 
 			listaMostrar.add(equipoTemp);
 		});
 
 		return listaMostrar;
 	}
-
-	@Override
-	public void agregarCiclista(String equipo, CiclistaDTO data) {
-
-		for (int i = 0; i < listaEquipos.size(); i++) {
-			if (listaEquipos.get(i).getNombre().toLowerCase().equals(equipo.toLowerCase())) {
-				listaEquipos.get(i).getListaCiclistas().add(data);
-				FileHandler.abrirEscribirSerializable(SERIALIZED_FILE_NAME, listaEquipos);
-				break;
-			}
-		}
-
-	}
-
-	@Override
-	public String actualizarCiclistaPorCedula(String equipo, long id, CiclistaDTO newData) {
-		for (int i = 0; i < listaEquipos.size(); i++) {
-			if (listaEquipos.get(i).getNombre().toLowerCase().equals(equipo.toLowerCase())) {
-				String msj = "No existe un Ciclista con esa cédula";
-
-				for (int j = 0; j < listaEquipos.get(i).getListaCiclistas().size(); j++) {
-					if (listaEquipos.get(i).getListaCiclistas().get(i).getCedula() == id) {
-						listaEquipos.get(i).getListaCiclistas().set(i, newData);
-						FileHandler.abrirEscribirSerializable(SERIALIZED_FILE_NAME, listaEquipos);
-						msj = "El Ciclista se ha actualizado con exito";
-						break;
-					}
-				}
-
-				return msj;
-			}
-		}
-
-		return "No existe un equipo con ese nombre";
-	}
-
-	@Override
-	public String eliminarCiclistaPorCedula(String equipo, long id) {
-		for (int i = 0; i < listaEquipos.size(); i++) {
-			if (listaEquipos.get(i).getNombre().toLowerCase().equals(equipo.toLowerCase())) {
-				String msj = "No existe un Ciclista con esa cédula";
-
-				for (int j = 0; j < listaEquipos.get(i).getListaCiclistas().size(); j++) {
-					if (listaEquipos.get(i).getListaCiclistas().get(i).getCedula() == id) {
-						listaEquipos.get(i).getListaCiclistas().remove(i);
-						FileHandler.abrirEscribirSerializable(SERIALIZED_FILE_NAME, listaEquipos);
-						msj = "El Ciclista se ha eliminado con éxito";
-						break;
-					}
-				}
-
-				return msj;
-			}
-		}
-
-		return "No existe un equipo con ese nombre";
-	}
-
-	@Override
-	public ArrayList<CiclistaDTO> mostrarCiclistas(String equipo) {
-		for (int i = 0; i < listaEquipos.size(); i++) {
-			if (listaEquipos.get(i).getNombre().toLowerCase().equals(equipo.toLowerCase())) {
-				ArrayList<CiclistaDTO> listaMostrar = new ArrayList<>();
-				listaEquipos.get(i).getListaCiclistas().forEach(c -> {
-					CiclistaDTO ciclistaTemp = new CiclistaDTO(c.getImagen(), c.getNombre(), c.getCedula(),
-							c.getCorreo(), c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(),
-							c.getIdentificador(), c.getAniosExperiencia(), c.getTiempoAcumuladoMin(),
-							c.getEspecialidad(), c.getContextura(), c.getEquipo());
-
-					listaMostrar.add(ciclistaTemp);
-				});
-
-				return listaMostrar;
-			}
-		}
-
-		return null;
-	}
-
 }

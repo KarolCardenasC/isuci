@@ -443,7 +443,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 			opcion = e.getActionCommand();
 			if ("usuarios".equals(opcion)) {
 				UsuarioDAO UsuarioDAO = new UsuarioDAO();
-				mostrarTodos = UsuarioDAO.mostrarTodos();
+				mostrarTodos = UsuarioDAO.listaUsurios("");
 
 			}
 			iniciarPanelDerecho();

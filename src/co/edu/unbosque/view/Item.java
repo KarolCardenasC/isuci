@@ -61,6 +61,8 @@ public class Item extends JPanel {
 
 		String labelNombre = "<html>" + ciclista.getNombre();
 		String labelIdentificador = "<html>ID: " + Integer.toString(ciclista.getIdentificador());
+		String labelEspecialidad = "<html>" + ciclista.getEspecialidad();
+		String labelRol = "<html>" + ciclista.getRol();
 
 		JLabel lblNom = new JLabel(labelNombre);
 		lblNom.setBounds(15, -5, 150, 80);
@@ -69,18 +71,31 @@ public class Item extends JPanel {
 		pnlItem.add(lblNom);
 
 		JLabel lblIdent = new JLabel(labelIdentificador);
-		lblIdent.setBounds(70, 248, 125, 40);
+		lblIdent.setBounds(70, 200, 125, 40);
 		lblIdent.setFont(new Font("", 1, 20));
 		lblIdent.setForeground(Color.BLACK);
 		pnlItem.add(lblIdent);
+
+		JLabel lblRol = new JLabel(labelRol);
+		lblRol.setBounds(70, 245, 125, 20);
+		lblRol.setFont(new Font("", 1, 15));
+		lblRol.setForeground(Color.BLACK);
+		pnlItem.add(lblRol);
+		
+		JLabel lblEsp = new JLabel(labelEspecialidad);
+		lblEsp.setBounds(70, 270, 125, 20);
+		lblEsp.setFont(new Font("", 1, 15));
+		lblEsp.setForeground(Color.BLACK);
+		pnlItem.add(lblEsp);
+		
 
 		ImageIcon imagenInfo = new ImageIcon("imgs/infoCiclista.png");
 		ImageIcon imageIconInfo = new ImageIcon(imagenInfo.getImage().getScaledInstance(42, 42, Image.SCALE_DEFAULT));
 		
 		JLabel imgCiclista = new JLabel();
-		imgCiclista.setBounds(50, 100, 120, 120);
+		imgCiclista.setBounds(60, 90, 100, 100);
 		ImageIcon img = new ImageIcon("imgs/" + ciclista.getImagen());
-		ImageIcon imageIcon = new ImageIcon(img.getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT));
+		ImageIcon imageIcon = new ImageIcon(img.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
 
 		imgCiclista.setIcon(imageIcon);
 		pnlItem.add(imgCiclista);
@@ -103,7 +118,8 @@ public class Item extends JPanel {
 		pnlItem.setBackground(Color.cyan);
 		
 		String labelNombre = "<html>" + usuario.getNombre();
-		String labelCedula = "<html>ID: " + Long.toString(usuario.getCedula());
+		String labelCedula = "<html>CC: " + Long.toString(usuario.getCedula());
+		String labelRol = "<html>" + usuario.getRol();
 		
 		JLabel lblNom = new JLabel(labelNombre);
 		lblNom.setBounds(15, -5, 150, 80);
@@ -111,19 +127,25 @@ public class Item extends JPanel {
 		lblNom.setForeground(Color.BLACK);
 		pnlItem.add(lblNom);
 		
-		JLabel lblIdent = new JLabel(labelCedula);
-		lblIdent.setBounds(70, 248, 125, 40);
-		lblIdent.setFont(new Font("", 1, 20));
-		lblIdent.setForeground(Color.BLACK);
-		pnlItem.add(lblIdent);
+		JLabel lblCc = new JLabel(labelCedula);
+		lblCc.setBounds(20, 200, 165, 40);
+		lblCc.setFont(new Font("", 1, 20));
+		lblCc.setForeground(Color.BLACK);
+		pnlItem.add(lblCc);
+		
+		JLabel lblRol = new JLabel(labelRol);
+		lblRol.setBounds(50, 245, 145, 20);
+		lblRol.setFont(new Font("", 1, 15));
+		lblRol.setForeground(Color.BLACK);
+		pnlItem.add(lblRol);
 		
 		ImageIcon imagenInfo = new ImageIcon("imgs/infoUsuario.png");
 		ImageIcon imageIconInfo = new ImageIcon(imagenInfo.getImage().getScaledInstance(42, 42, Image.SCALE_DEFAULT));
 		
 		JLabel imgUsuario = new JLabel();
-		imgUsuario.setBounds(50, 100, 120, 120);
+		imgUsuario.setBounds(60, 90, 100, 100);
 		ImageIcon img = new ImageIcon("imgs/" + usuario.getImagen());
-		ImageIcon imageIcon = new ImageIcon(img.getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT));
+		ImageIcon imageIcon = new ImageIcon(img.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
 		
 		imgUsuario.setIcon(imageIcon);
 		pnlItem.add(imgUsuario);

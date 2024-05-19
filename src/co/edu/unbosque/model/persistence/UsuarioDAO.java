@@ -16,7 +16,7 @@ public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 	public UsuarioDAO() {
 		listaUsuarios = new ArrayList<>();
 		listaTodos = new ArrayList<>();
-		
+
 		leerArchivoSerializado();
 	}
 
@@ -108,35 +108,66 @@ public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 
 	@Override
 	public ArrayList<UsuarioDTO> mostrarTodos() {
+		ArrayList<UsuarioDTO> listaMostrar = new ArrayList<>();
+
+		listaUsuarios.forEach(u -> {
+			UsuarioDTO usuarioTemp = new UsuarioDTO(u.getImagen(), u.getNombre(), u.getCedula(), u.getCorreo(),
+					u.getUsuario(), u.getId(), u.getContrasena(), u.getGenero());
+
+			listaMostrar.add(usuarioTemp);
+		});
+
+		return listaMostrar;
+	}
+
+	public static ArrayList<UsuarioDTO> listaUsurios(String rol) {
 		CiclistaDAO ciclistas = new CiclistaDAO();
-		listaTodos.addAll(ciclistas.listaCiclistas("",""));
-		listaTodos.addAll(ciclistas.listaCiclistas("Ninguna",""));
-		obtenerMasajista();
-		obtenerDirector();
 		
+		switch (rol) {
+		case "MASAJISTA":
+			obtenerMasajista();
+			break;
+		case "DIRECTOR":
+			obtenerDirector();
+			break;
+		case "CICLISTA":
+			listaTodos.addAll(ciclistas.listaCiclistas("", ""));
+			listaTodos.addAll(ciclistas.listaCiclistas("Ninguna", ""));
+			break;
+
+		default:
+			listaTodos.addAll(ciclistas.listaCiclistas("", ""));
+			listaTodos.addAll(ciclistas.listaCiclistas("", ""));
+			obtenerMasajista();
+			obtenerDirector();
+			break;
+		}
+
 		return listaTodos;
 	}
-	
-	private void obtenerDirector() {
-		
+
+	private static void obtenerDirector() {
+
 		DirectorDeportivoDAO DirectorDAO = new DirectorDeportivoDAO();
 		DirectorDAO.mostrarTodos().forEach(p -> {
 			Predicate<UsuarioDTO> byDirec = skill -> (skill.getId() == p.getId());
 			var result = listaTodos.stream().filter(byDirec).collect(Collectors.toList());
 			if (result.size() == 0) {
+				p.setRol("Director");
 				listaTodos.add(p);
 			}
 
 		});
-		
+
 	}
 
-	private void obtenerMasajista() {
+	private static void obtenerMasajista() {
 		MasajistaDAO MasajistaDAO = new MasajistaDAO();
 		MasajistaDAO.mostrarTodos().forEach(p -> {
 			Predicate<UsuarioDTO> byCiclis = skill -> (skill.getId() == p.getId());
 			var result = listaTodos.stream().filter(byCiclis).collect(Collectors.toList());
 			if (result.size() == 0) {
+				p.setRol("Masajista");
 				listaTodos.add(p);
 			}
 
@@ -146,15 +177,15 @@ public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 	@Override
 	public UsuarioDTO verificarUsuario(String u, String c) {
 		for (UsuarioDTO usuario : listaUsuarios) {
-			if(usuario.getUsuario().equals(u)) {
-				if(usuario.getContrasena().equals(c)) {
+			if (usuario.getUsuario().equals(u)) {
+				if (usuario.getContrasena().equals(c)) {
 					return usuario;
 				}
 			}
 		}
 		return null;
 	}
-	
+
 	@Override
 	public UsuarioDTO buscarGmail(String g) {
 		for (int i = 0; i < listaUsuarios.size(); i++) {
@@ -165,6 +196,5 @@ public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 		}
 		return null;
 	}
-	
 
 }

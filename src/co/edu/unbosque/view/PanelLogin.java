@@ -15,6 +15,20 @@ import javax.swing.JTextField;
 
 import co.edu.unbosque.model.persistence.FileHandler;
 
+/**
+ * PanelLogin class represents the login panel in the application. It extends
+ * MainPanel and implements ActionListener to handle action events. This panel
+ * allows users to input their username and password to log in.
+ *
+ * @see MainPanel
+ * @see ActionListener
+ * @see FileHandler
+ * @see VentanaInicial
+ * @author Cardenas.K
+ * 
+ * @version 15/05/2024
+ */
+
 public class PanelLogin extends MainPanel implements ActionListener {
 
 	private JLabel lblRegistro;
@@ -26,6 +40,12 @@ public class PanelLogin extends MainPanel implements ActionListener {
 	private JTextField jtContrasena;
 	private VentanaInicial mainPanel;
 
+	/**
+	 * Constructs a new PanelLogin.
+	 * 
+	 * @param inicial the main window that contains this panel.
+	 */
+
 	public PanelLogin(VentanaInicial inicial) {
 		mainPanel = inicial;
 		this.setProperties(
@@ -34,12 +54,20 @@ public class PanelLogin extends MainPanel implements ActionListener {
 		initComponents();
 	}
 
+	/**
+	 * Applies character limits to the input fields for validation.
+	 */
+
 	public void aplicarFuncionesValidacion() {
 
 		limitarCaracter(jtUsuario, 50);
 		limitarCaracter(jtContrasena, 30);
 
 	}
+
+	/**
+	 * Initializes the components of the login panel.
+	 */
 
 	public void initComponents() {
 
@@ -79,78 +107,154 @@ public class PanelLogin extends MainPanel implements ActionListener {
 
 	}
 
+	/**
+	 * Handles action events.
+	 * 
+	 * @param e the action event
+	 */
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	}
+
+	/**
+	 * Returns the login button.
+	 * 
+	 * @return the login button
+	 */
 
 	public JButton getBtnIniciarSesion() {
 		return btnIniciarSesion;
 	}
 
+	/**
+	 * Sets the login button.
+	 * 
+	 * @param btnIniciarSesion the new login button
+	 */
+
 	public void setBtnIniciarSesion(JButton btnIniciarSesion) {
 		this.btnIniciarSesion = btnIniciarSesion;
 	}
+
+	/**
+	 * Returns the registration label.
+	 * 
+	 * @return the registration label
+	 */
 
 	public JLabel getLblRegistro() {
 		return lblRegistro;
 	}
 
+	/**
+	 * Sets the registration label.
+	 * 
+	 * @param lblRegistro the new registration label
+	 */
+
 	public void setLblRegistro(JLabel lblRegistro) {
 		this.lblRegistro = lblRegistro;
 	}
+
+	/**
+	 * Returns the username label.
+	 * 
+	 * @return the username label
+	 */
 
 	public JLabel getLblUsuario() {
 		return lblUsuario;
 	}
 
+	/**
+	 * Sets the username label.
+	 * 
+	 * @param lblUsuario the new username label
+	 */
+
 	public void setLblUsuario(JLabel lblUsuario) {
 		this.lblUsuario = lblUsuario;
 	}
+
+	/**
+	 * Returns the password label.
+	 * 
+	 * @return the password label
+	 */
 
 	public JLabel getLblContrasena() {
 		return lblContrasena;
 	}
 
+	/**
+	 * Sets the password label.
+	 * 
+	 * @param lblContrasena the new password label
+	 */
+
 	public void setLblContrasena(JLabel lblContrasena) {
 		this.lblContrasena = lblContrasena;
 	}
 
-	public JLabel getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(JLabel imagen) {
-		this.imagen = imagen;
-	}
+	/**
+	 * Returns the username text field.
+	 * 
+	 * @return the username text field
+	 */
 
 	public JTextField getJtUsuario() {
 		return jtUsuario;
 	}
 
+	/**
+	 * Sets the username text field.
+	 * 
+	 * @param jtUsuario the new username text field
+	 */
+
 	public void setJtUsuario(JTextField jtUsuario) {
 		this.jtUsuario = jtUsuario;
 	}
+
+	/**
+	 * Returns the password text field.
+	 * 
+	 * @return the password text field
+	 */
 
 	public JTextField getJtContrasena() {
 		return jtContrasena;
 	}
 
+	/**
+	 * Sets the password text field.
+	 * 
+	 * @param jtContrasena the new password text field
+	 */
+
 	public void setJtContrasena(JTextField jtContrasena) {
 		this.jtContrasena = jtContrasena;
 	}
+
+	/**
+	 * Returns the main panel (VentanaInicial).
+	 * 
+	 * @return the main panel
+	 */
 
 	public VentanaInicial getMainPanel() {
 		return mainPanel;
 	}
 
+	/**
+	 * Sets the main panel (VentanaInicial).
+	 * 
+	 * @param mainPanel the new main panel
+	 */
+
 	public void setMainPanel(VentanaInicial mainPanel) {
 		this.mainPanel = mainPanel;
 	}
-
-	/*
-	 * public String getRolUser() { return rolUser; }
-	 * 
-	 * public void setRolUser(String rolUser) { this.rolUser = rolUser; }
-	 */
 
 }

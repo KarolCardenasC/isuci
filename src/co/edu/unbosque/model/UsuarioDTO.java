@@ -20,6 +20,7 @@ public class UsuarioDTO implements Serializable {
 	private String id;
 	private String contrasena;
 	private String genero;
+	private String rol;
 
 	/**
      * Default constructor for the UsuarioDTO class.
@@ -214,7 +215,15 @@ public class UsuarioDTO implements Serializable {
 		this.genero = genero;
 	}
 
-	 /**
+	 public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+	/**
      * Returns a string representation of the user's information.
      *
      * @return A string with the user's information.

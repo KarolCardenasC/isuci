@@ -206,6 +206,7 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
 			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
 			if (result.size() == 0) {
+				p.setRol("Ciclista");
 				generalCiclista.add(p);
 			}
 
@@ -219,6 +220,7 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
 			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
 			if (result.size() == 0) {
+				p.setRol("Ciclista");
 				generalCiclista.add(p);
 			}
 
@@ -232,6 +234,7 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
 			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
 			if (result.size() == 0) {
+				p.setRol("Ciclista");
 				generalCiclista.add(p);
 			}
 
@@ -245,6 +248,7 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
 			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
 			if (result.size() == 0) {
+				p.setRol("Ciclista");
 				generalCiclista.add(p);
 			}
 
@@ -258,6 +262,7 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
 			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
 			if (result.size() == 0) {
+				p.setRol("Ciclista");
 				generalCiclista.add(p);
 			}
 
@@ -271,6 +276,7 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
 			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
 			if (result.size() == 0) {
+				p.setRol("Ciclista");
 				generalCiclista.add(p);
 			}
 
@@ -283,6 +289,7 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
 			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
 			if (result.size() == 0) {
+				p.setRol("Ciclista");
 				generalCiclista.add(p);
 			}
 

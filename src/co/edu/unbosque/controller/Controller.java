@@ -49,7 +49,7 @@ public class Controller implements ActionListener {
 		vf.getvU().getPnlCiclista().getBtnEliminar().addActionListener(this);
 		vf.getvU().getPnlMasajista().getBtnEliminar().addActionListener(this);
 		vf.getvU().getPnlDirector().getBtnEliminar().addActionListener(this);
-	
+
 		vf.getvU().getPnlDirector().getBtnEquipo().addActionListener(this);
 
 		vf.getvU().getPnlCiclista().getBtnCerrar().addActionListener(this);
@@ -166,6 +166,7 @@ public class Controller implements ActionListener {
 					+ vf.getvL().getPnlRol().getOpcion().toLowerCase() + " " + nombre + "?") == 0) {
 
 				switch (vf.getvL().getPnlRol().getOpcion()) {
+
 				case "CICLISTA":
 					verificarCampoBlanco(vf.getvL().getPnlRol().getJtIdentificador().getText(), "Identificador");
 					verificarCampoBlanco(vf.getvL().getPnlRol().getJtAniosExperiencia().getText(), "Años Experiencia");
@@ -1237,10 +1238,10 @@ public class Controller implements ActionListener {
 		case "cerrarsesiónadministrador":
 			cerrarSesion();
 			break;
-			
-		case"equipo":
+
+		case "equipo":
 			CiclistaDAO ciclistaDAO = new CiclistaDAO();
-			vf.getvU().getPnlDirector().setLstCiclistas(ciclistaDAO.listaCiclistas("","Ninguno"));
+			vf.getvU().getPnlDirector().setLstCiclistas(ciclistaDAO.listaCiclistas("", "Ninguno"));
 
 			break;
 
