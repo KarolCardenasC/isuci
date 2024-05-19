@@ -1,5 +1,6 @@
 package co.edu.unbosque.view;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -45,12 +46,14 @@ public class PanelLogin extends MainPanel implements ActionListener {
 		removeAll();
 
 		lblUsuario = this.crearLabel("lblUsuario.titulo", 610, 235);
+		lblUsuario.setForeground(Color.black);
 		add(lblUsuario);
 
 		jtUsuario = this.crearTextFieldInvisible("", new Rectangle(620, 275, 250, 30));
 		add(jtUsuario);
 
 		lblContrasena = this.crearLabel("lblContrasena.titulo", 610, 342);
+		lblContrasena.setForeground(Color.black);
 		add(lblContrasena);
 
 		jtContrasena = this.crearPasswordFieldInvisible(new Rectangle(620, 382, 230, 30));
@@ -60,6 +63,7 @@ public class PanelLogin extends MainPanel implements ActionListener {
 		add(btnIniciarSesion);
 
 		lblRegistro = this.crearLabel("lblRegistro.titulo", 685, 515);
+		lblRegistro.setForeground(Color.black);
 		add(lblRegistro);
 
 		imagen = this.crearLabel("", new Rectangle(0, 0, 1000, 700), "Ingresar.jpg");

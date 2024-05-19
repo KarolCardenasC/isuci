@@ -14,6 +14,7 @@ import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.RodadorDTO;
 import co.edu.unbosque.model.SprinterDTO;
 import co.edu.unbosque.model.UsuarioDTO;
+import co.edu.unbosque.model.persistence.CiclistaDAO;
 import co.edu.unbosque.util.exception.BlankFieldException;
 import co.edu.unbosque.util.exception.DuplicateGmailException;
 import co.edu.unbosque.util.exception.DuplicateIdException;
@@ -48,6 +49,8 @@ public class Controller implements ActionListener {
 		vf.getvU().getPnlCiclista().getBtnEliminar().addActionListener(this);
 		vf.getvU().getPnlMasajista().getBtnEliminar().addActionListener(this);
 		vf.getvU().getPnlDirector().getBtnEliminar().addActionListener(this);
+	
+		vf.getvU().getPnlDirector().getBtnEquipo().addActionListener(this);
 
 		vf.getvU().getPnlCiclista().getBtnCerrar().addActionListener(this);
 		vf.getvU().getPnlMasajista().getBtnCerrar().addActionListener(this);
@@ -313,6 +316,8 @@ public class Controller implements ActionListener {
 			vf.getvU().getPnlAdministrador().getProperties().setProperty("lblGenero.perfil", admin.getGenero());
 
 			vf.getvU().getPnlAdministrador().iniciarPanelDerecho();
+			vf.getvU().getPnlAdministrador().getPnlIzquierda()
+					.remove(vf.getvU().getPnlAdministrador().getImagenPanelIzq());
 			vf.getvU().getPnlAdministrador().getPnlIzquierda()
 					.remove(vf.getvU().getPnlAdministrador().getLblImagenPerfil());
 			vf.getvU().getPnlAdministrador().getPnlIzquierda()
@@ -1149,6 +1154,8 @@ public class Controller implements ActionListener {
 						administrador.getGenero());
 
 				vf.getvU().getPnlAdministrador().getPnlIzquierda()
+						.remove(vf.getvU().getPnlAdministrador().getImagenPanelIzq());
+				vf.getvU().getPnlAdministrador().getPnlIzquierda()
 						.remove(vf.getvU().getPnlAdministrador().getLblImagenPerfil());
 				vf.getvU().getPnlAdministrador().getPnlIzquierda()
 						.remove(vf.getvU().getPnlAdministrador().getLblNombrePerfil());
@@ -1229,6 +1236,12 @@ public class Controller implements ActionListener {
 		case "cerrarsesióndirector":
 		case "cerrarsesiónadministrador":
 			cerrarSesion();
+			break;
+			
+		case"equipo":
+			CiclistaDAO ciclistaDAO = new CiclistaDAO();
+			vf.getvU().getPnlDirector().setLstCiclistas(ciclistaDAO.listaCiclistas("","Ninguno"));
+
 			break;
 
 		default:
