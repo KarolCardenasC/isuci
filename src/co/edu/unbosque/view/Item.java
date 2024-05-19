@@ -6,6 +6,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -27,6 +28,8 @@ public class Item extends JPanel {
 	private static UsuarioDTO usuario;	
 	private static JButton btnInfo;
 	private static JButton btnAdd;
+	
+	private static JCheckBox chkSelect;
 
 	/**
      * Constructs an Item object with the given CiclistaDTO.
@@ -37,6 +40,7 @@ public class Item extends JPanel {
 	public Item(CiclistaDTO ciclista) {
 		this.ciclista = ciclista;
 		this.btnInfo = new JButton();
+		chkSelect = new JCheckBox();
 	}
 	
 	public Item(UsuarioDTO usuario) {
@@ -54,6 +58,7 @@ public class Item extends JPanel {
 	
 	public static JPanel getItem(int x, int y) {
 		JPanel pnlItem = new JPanel();
+		pnlItem.setName("Ciclista " + Integer.toString(ciclista.getIdentificador()));
 		pnlItem.setLayout(null);
 		pnlItem.setBounds(x, y, 200, 300);
 		pnlItem.setToolTipText("Ciclista " + Integer.toString(ciclista.getIdentificador()));
@@ -100,12 +105,18 @@ public class Item extends JPanel {
 		imgCiclista.setIcon(imageIcon);
 		pnlItem.add(imgCiclista);
 
-		btnInfo.setBounds(149, 15, 42, 42);
-		btnInfo.setName("btnInfo_" + ciclista.getIdentificador());
-		btnInfo.setIcon(imageIconInfo);
-		btnInfo.setContentAreaFilled(false);
-		btnInfo.setBorderPainted(false);
-		pnlItem.add(btnInfo);
+//		btnInfo.setBounds(149, 15, 42, 42);
+//		btnInfo.setName("btnInfo_" + ciclista.getIdentificador());
+//		btnInfo.setIcon(imageIconInfo);
+//		btnInfo.setContentAreaFilled(false);
+//		btnInfo.setBorderPainted(false);
+//		pnlItem.add(btnInfo);
+		
+		chkSelect.setBounds(149, 15, 42, 42);
+		chkSelect.setName("chkInfo_" + ciclista.getIdentificador());
+//		btnInfo.setContentAreaFilled(false);
+//		btnInfo.setBorderPainted(false);
+		pnlItem.add(chkSelect);		
 
 		return pnlItem;
 
@@ -180,5 +191,14 @@ public class Item extends JPanel {
 	static void setBtnInfo(JButton btnInfo) {
 		Item.btnInfo = btnInfo;
 	}
+	
+	public boolean getIsSelect()
+	{
+		return chkSelect.isSelected();
+	}
 
+	public CiclistaDTO getCiclista()
+	{
+		return this.ciclista;
+	}
 }

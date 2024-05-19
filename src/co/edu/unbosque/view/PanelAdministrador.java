@@ -114,7 +114,6 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 		this.setProperties(FileHandler
 				.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties"));
-//		pnlSimulacion = new PanelSimulacion(this);
 		usuarioPanel = inicial;
 		setLayout(null);
 		initComponents();
@@ -122,12 +121,10 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 	}
 
 	public void initComponents() {
-
 		removeAll();
 		iniciarPanelInferior();
 		iniciarPanelDerecho();
 		iniciarPanelIzquierdo();
-
 	}
 
 	public void iniciarPanelIzquierdo() {

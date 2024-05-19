@@ -1,9 +1,9 @@
 package co.edu.unbosque.view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,21 +11,18 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Properties;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import co.edu.unbosque.model.CiclistaDTO;
-import co.edu.unbosque.model.persistence.CiclistaDAO;
 import co.edu.unbosque.model.persistence.FileHandler;
 
 public class PanelDirector extends MainPanel implements ActionListener {
@@ -106,7 +103,6 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		iniciarPanelInferior();
 		iniciarPanelDerecho();
 		iniciarPanelIzquierdo();
-
 	}
 
 	public void iniciarPanelIzquierdo() {
@@ -350,7 +346,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			 * INTENTAR PONER LAS CARTAS DE LOS CICLISTAS
 			 */
 
-			btnGuardar.setVisible(false);
+			btnGuardar.setVisible(true);
 			mostrarCartas();
 
 			imgDatos = "equipoDirector.jpg";
@@ -370,14 +366,17 @@ public class PanelDirector extends MainPanel implements ActionListener {
 	}
 
 	public void iniciarPanelInferior() {
-		pnlInferior = new JPanel();
+		if (pnlInferior == null) {
+			pnlInferior = new JPanel();
+		}
 		pnlInferior.setBounds(Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.vertical")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.ancho")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.alto")));
 		pnlInferior.setLayout(null);
 
-		btnGuardar = this.crearBotonInvisible("Guardar Director", new Rectangle(720, 0, 200, 50), "btnGuardar.jpg");
+		btnGuardar = this.crearBotonInvisible("Guardar Equipo", new Rectangle(720, 0, 200, 50),
+				"btnGuardar.jpg");
 		pnlInferior.add(btnGuardar);
 
 		add(pnlInferior);
@@ -388,9 +387,9 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			return;
 		}
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(5, 200, 940, 440);
+		scrollPane.setBounds(5, 150, 1000, 440);
 
-		JPanel generalPanel = new JPanel();
+		generalPanel = new JPanel();
 		generalPanel.setLayout(null);
 		generalPanel.setBackground(Color.WHITE);
 
@@ -480,7 +479,20 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			opcion = e.getActionCommand();
 			iniciarPanelDerecho();
 			break;
-
+		case "guardarequipo":
+			for (Component component : generalPanel.getComponents()) {
+				if (component instanceof JPanel)
+				{
+					Item cicl = (Item)component;
+					if (cicl.getName().startsWith("Ciclista ") && cicl.getIsSelect())
+					{
+						JOptionPane.showMessageDialog(null,
+								"Ciclista seleccionado: " + cicl.getCiclista().getNombre(), "Mensaje",
+								JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			}
+			break;
 		}
 
 	}
