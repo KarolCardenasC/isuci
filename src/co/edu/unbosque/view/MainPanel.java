@@ -1,6 +1,7 @@
 package co.edu.unbosque.view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -22,6 +23,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -119,6 +123,38 @@ public class MainPanel extends JPanel implements ActionListener {
 		return boton;
 	}
 	
+	/**
+	 * Creates a JButton with specified title, position, and icon.
+	 *
+	 * @param nombre the title of the b
+	 * @param titulo the title of the button
+	 * @param posX   the x position of the button
+	 * @param posY   the y position of the button
+	 * @param icono  the icon for the button
+	 * @return the created JButton
+	 */
+
+	public JButton crearBotonMapas(String nombre, int posX, int posY, String icono) {
+		JButton boton = new JButton();
+		boton.setBounds(new Rectangle(posX, posY, 180, 180));
+
+		if (!"".equals(icono)) {
+			Image imagen = new ImageIcon("imgs/" + icono).getImage();
+			ImageIcon img = new ImageIcon(imagen.getScaledInstance(120, 120, Image.SCALE_SMOOTH));
+			boton.setIcon(img);
+		}
+
+		boton.setName(nombre);
+		boton.setActionCommand(nombre.replace(" ", "").toLowerCase());
+		boton.addActionListener(this);
+		boton.setFocusable(false);
+		boton.setBorderPainted(false);
+		boton.setBackground(colorPrincipal);
+		boton.setForeground(colorFuenteBoton);
+
+		return boton;
+	}
+	
 	 /**
      * Creates a JLabel with specified title and position.
      *
@@ -160,6 +196,58 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		return label;
 	}
+
+	 /**
+     * Creates a JLabel with specified title and position.
+     *
+     * @param titulo the title of the label
+     * @param posX   the x position of the label
+     * @param posY   the y position of the label
+     * @return the created JLabel
+     */
+
+	public JLabel crearLabelCenter(String titulo, int posX, int posY) {
+		JLabel label = new JLabel("<html>" + titulo, SwingConstants.CENTER);
+
+		label.setBounds(new Rectangle(posX, posY, 200, 35));
+		label.setForeground(colorFuenteLabel);
+		label.setFont(fuenteLabelBoldPrincipal);
+
+		return label;
+	}
+	
+	 /**
+     * Creates a JLabel with specified nombre, title, posX, posY, icon, and size.
+     * @param nombre the name of the label
+     * @param titulo the title of the label
+     * @param posX the position X of the label
+     * @param posY the position Y of the label
+     * @param icono the icon for the label
+     * @param tamanio the size of the label
+     * @return the created JLabel
+     */
+	
+	public JLabel crearLabelCarrera(String nombre, String titulo, int posX, int posY, String icono, int tamanio) {
+		JLabel label = new JLabel();
+		Image imagen = new ImageIcon("imgs/" + icono).getImage();
+		ImageIcon fondo = new ImageIcon(imagen.getScaledInstance(tamanio, tamanio, Image.SCALE_SMOOTH));
+		label.setIcon(fondo);
+		label.setAlignmentX(LEFT_ALIGNMENT);
+		label.setHorizontalTextPosition(SwingConstants.RIGHT);
+		label.setName(titulo);
+		label.setBounds(new Rectangle(posX, posY, 200, 200));
+
+		return label;
+	}
+
+	 /**
+    * Creates a JLabel with specified nombre, title, bounds, and icon.
+    * @param nombre the name of the label
+    * @param titulo the title of the label
+    * @param bounds the bounds of the label
+    * @param icono  the icon for the label
+    * @return the created JLabel
+    */
 	
 	public JLabel crearLabelWithName(String nombre, String titulo, Rectangle bounds, String icono) {
 		JLabel label = new JLabel("<html>" + titulo);
@@ -175,6 +263,15 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		return label;
 	}	
+
+	 /**
+    * Creates a JLabel with specified nombre, title, posX, posY.
+    * @param nombre the name of the label
+    * @param titulo the title of the label
+    * @param posX the position X of the label
+    * @param posY the position Y of the label
+    * @return the created JLabel
+    */
 	
 	public JLabel crearLabel(String nombre, String titulo, int posX, int posY) {
 		JLabel label = new JLabel("<html>" + titulo);
@@ -186,6 +283,12 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		return label;
 	}
+
+	 /**
+    * Creates a JprogressBar with specified bounds.
+    * @param bounds the bounds of the progressBar.l
+    * @return the created JProgressBar
+    */
 	
 	public JProgressBar crearProgressBar(Rectangle bounds)
 	{
@@ -237,6 +340,14 @@ public class MainPanel extends JPanel implements ActionListener {
 		return password;
 	}
 
+	/**
+     * Creates an invisible JTextField with specified text and bounds.
+     *
+     * @param texto  the text of the text field
+     * @param bounds the bounds of the text field
+     * @return the created JTextField
+     */
+	
 	public JTextField crearTextFieldInvisible(String texto, Rectangle bounds) {
 		JTextField textField = new JTextField(properties.getProperty(texto));
 
@@ -248,6 +359,16 @@ public class MainPanel extends JPanel implements ActionListener {
 		return textField;
 	}
 
+	/**
+     * Creates an JTextField with specified text and bounds.
+     *
+     * @param nombre the name of the text field
+     * @param texto  the text of the text field
+     * @param posX the position X of the text field
+     * @param posY the position Y of the text field
+     * @return the created JTextField
+     */
+	
 	public JTextField crearTextField(String nombre, String texto, int posX, int posY) {
 		JTextField textField = new JTextField(texto);
 
@@ -317,13 +438,41 @@ public class MainPanel extends JPanel implements ActionListener {
 	
 	/**
 	 * Creates a JTable.
-	 *
+	 * @param columnas columns of the table
+	 * @param columnasEditables configuration of the columns of table
+	 * @param tableModel model of the table
 	 * @return the created JTable
 	 */
 
-	public JTable crearTable() {
+	public JTable crearTable(String columnas[], boolean ColumnasEditables[], DefaultTableModel tableModel) {
 		JTable tabla = new JTable();
+		
+		// Configuración de la tabla
+		tabla.setModel(tableModel);
+		tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Desactiva el ajuste
+		// automático del ancho de las columnas
+		tabla.setRowHeight(40); // Ajusta la altura de las filas
 
+		// Desactivar la capacidad de cambiar el tamaño de las columnas desde la vista
+		tabla.getTableHeader().setResizingAllowed(false);
+
+		// Ajusta el ancho de las columnas según el contenido
+		for (int i = 0; i < tabla.getColumnCount(); i++) {
+			TableColumn column = tabla.getColumnModel().getColumn(i);
+			int width = (int) tabla.getTableHeader().getDefaultRenderer()
+					.getTableCellRendererComponent(tabla, column.getHeaderValue(), false, false, -1, i)
+					.getPreferredSize().getWidth();
+			for (int row = 0; row < tabla.getRowCount(); row++) {
+				TableCellRenderer renderer = tabla.getCellRenderer(row, i);
+				Component comp = tabla.prepareRenderer(renderer, row, i);
+				width = Math.max(comp.getPreferredSize().width + 1, width);
+			}
+			column.setPreferredWidth(width < 100 ? 100 : width);
+		}
+
+		tabla.getTableHeader().setReorderingAllowed(false);
+		tabla.getTableHeader().setFont(new Font("ITALIC", 1, 14));
+		
 		return tabla;
 	}
 

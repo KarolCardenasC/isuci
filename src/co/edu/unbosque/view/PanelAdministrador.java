@@ -10,15 +10,24 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.UsuarioDTO;
@@ -32,6 +41,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 	private JButton btnActualizar;
 	private JButton btnEliminar;
 	private JButton btnEquipo;
+	private JButton btnSimulacion;
 	private JButton btnCerrar;
 	private JButton btnPerfil;
 	private JButton btnGuardar;
@@ -83,7 +93,22 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 	private VentanaUsuario usuarioPanel;
 
-	private PanelSimulacion pnlSimulacion;
+	// Simulacion
+	private JTable tabla;
+	private String columnas[] = { "Equipo", "Corredor", "Tiempo", "Acción" };
+	private boolean ColumnasEditables[] = { false, false, false, true };
+	private Class tipo[] = new Class[] { java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+			java.lang.Boolean.class };
+	private String tipoSeleccionado;
+	private JTable tablaSimulacion;
+	private String columnasSimulacion[] = { "Equipo", "Corredor", "Tiempo" };
+	private boolean ColumnasSimulacionEditables[] = { false, false, false };
+
+	private JButton btnIniciarSimulacion;
+	private JProgressBar jpSimulacion;
+	private Timer timer;
+	private final int MAX_VAL = 100;
+	private ArrayList<CiclistaDTO> corredores;
 
 	public PanelAdministrador(VentanaUsuario inicial) {
 
@@ -140,6 +165,9 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 		btnEquipo = this.crearBotonInvisible("Usuarios", new Rectangle(0, 492, 250, 65), "");
 		pnlIzquierda.add(btnEquipo);
+		
+		btnSimulacion = this.crearBotonInvisible("Simulacion", new Rectangle(20, 558, 250, 65), "");
+		pnlIzquierda.add(btnSimulacion);
 
 		btnCerrar = this.crearBotonInvisible("Cerrar Sesión Administrador", new Rectangle(0, 592, 250, 68), "");
 		pnlIzquierda.add(btnCerrar);
@@ -297,12 +325,6 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 			break;
 
-//		case "simulacion":
-//
-//			removeAll();
-//			PanelSimulacion();
-//			break;
-
 		case "usuarios":
 
 			lblUsuario = this.crearLabel("lblCiclistasEquipo.titulo", 50, 170);
@@ -320,6 +342,23 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 			revalidate();
 
 			break;
+
+		case "simulacion":
+			seleccionarCarrera();
+			break;
+		case "montana":
+		case "curvas":
+		case "semi":
+		case "undia":
+		case "llano":
+			iniciarSimulacion();
+			break;
+		case "simular":
+			iniciarCarrera();
+			break;
+		case "resultados":
+			finalizarSimulacion();
+			break;		
 		}
 
 		imagenPanel = this.crearLabel("", new Rectangle(0, 0, 1050, 600), imgDatos);
@@ -440,17 +479,38 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		case "simulacion":
 
 		case "usuarios":
+		case "montana":
+		case "curvas":
+		case "semi":
+		case "undia":
+		case "llano":
 			opcion = e.getActionCommand();
 			if ("usuarios".equals(opcion)) {
 				UsuarioDAO UsuarioDAO = new UsuarioDAO();
-				mostrarTodos = UsuarioDAO.listaUsurios("");
-
+				mostrarTodos = UsuarioDAO.mostrarTodos();
 			}
 			iniciarPanelDerecho();
 			break;
-
+		case "simular":
+			corredores = new ArrayList<>();
+			if (Seleccionados(3)) {
+				for (int i = 0; i < tabla.getRowCount(); i++) {
+					boolean sel = tabla.getValueAt(i, 3) != null;
+					if (sel) {
+						CiclistaDTO newCorredor = new CiclistaDTO(i, 0, 0, "", "", "");
+						newCorredor.setNombre((String) tabla.getValueAt(i, 0));
+						corredores.add(newCorredor);
+					}
+				}
+				opcion = e.getActionCommand();
+				iniciarPanelDerecho();
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Antes de comenzar la simulacion, se debe seleccionar al menos un ciclista", "Mensaje",
+						JOptionPane.WARNING_MESSAGE);
+			}
+			break;
 		}
-
 	}
 
 	public void nuevoPanel(JPanel panelActual) {
@@ -459,10 +519,6 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		if (panelActual != null)
 			pnlDerecha.add(panelActual);
 
-	}
-
-	private void PanelSimulacion() {
-		nuevoPanel(pnlSimulacion);
 	}
 
 	public JButton getBtnImagen() {
@@ -849,12 +905,202 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		this.mostrarTodos = mostrarTodos;
 	}
 
-	public PanelSimulacion getPnlSimulacion() {
-		return pnlSimulacion;
+	// Funcion que valida si se ha seleccionado al menos 1 corredor
+	private boolean Seleccionados(int pos) {
+		int contador = 0;
+		boolean bandera = true;
+		for (int i = 0; i < tabla.getRowCount(); i++) {
+			boolean seleccion = tabla.getValueAt(i, pos) != null;
+			if (seleccion) {
+				contador++;
+			}
+		}
+		if (contador == 0) {
+			bandera = false;
+		}
+		return bandera;
 	}
 
-	public void setPnlSimulacion(PanelSimulacion pnlSimulacion) {
-		this.pnlSimulacion = pnlSimulacion;
+	private void seleccionarCarrera() {
+		JButton btnMap1 = crearBotonMapas("montana", 220, 100, "montana.jpg");
+		JLabel lblMap1 = crearLabelCenter("Montana", 220, 280);
+		pnlDerecha.add(btnMap1);
+		pnlDerecha.add(lblMap1);
+
+		JButton btnMap2 = crearBotonMapas("curvas", 440, 100, "curvas.jpg");
+		JLabel lblMap2 = crearLabelCenter("Llano con curvas", 440, 280);
+		pnlDerecha.add(btnMap2);
+		pnlDerecha.add(lblMap2);
+
+		JButton btnMap3 = crearBotonMapas("semi", 660, 100, "semi.jpg");
+		JLabel lblMap3 = crearLabelCenter("Semi Llano", 660, 280);
+		pnlDerecha.add(btnMap3);
+		pnlDerecha.add(lblMap3);
+
+		JButton btnMap4 = crearBotonMapas("undia", 330, 350, "undia.jpg");
+		JLabel lblMap4 = crearLabelCenter("Un solo dia", 330, 530);
+		pnlDerecha.add(btnMap4);
+		pnlDerecha.add(lblMap4);
+
+		JButton btnMap5 = crearBotonMapas("llano", 550, 350, "llano.jpg");
+		JLabel lblMap5 = crearLabelCenter("Llano en Recta", 550, 530);
+		pnlDerecha.add(btnMap5);
+		pnlDerecha.add(lblMap5);
 	}
+
+	// Funcion que crea la tabla para mostrar los ciclistas a ser seleccionados en
+	// la simulacion
+	private void iniciarSimulacion() {
+		corredores = new ArrayList<>();
+		tipoSeleccionado = opcion;
+
+		JLabel lblCarreraSeleccionada = crearLabelCarrera(tipoSeleccionado, "", 60, 200, tipoSeleccionado + ".jpg", 180);
+		JLabel lblTituloCarreraSeleccionada = crearLabelCenter(this.getProperties().getProperty("lblCarrera." + tipoSeleccionado), 60, 400);
+		pnlDerecha.add(lblCarreraSeleccionada);
+		pnlDerecha.add(lblTituloCarreraSeleccionada);
+
+		JLabel lblCorredores = crearLabel("lblCarrera.carrera.corredores", 300, 120);
+		pnlDerecha.add(lblCorredores);
+		
+		CiclistaDAO CiclistasDAO = new CiclistaDAO();
+		ArrayList<CiclistaDTO> lstCiclistas = CiclistasDAO.mostrarTodos();
+
+		btnIniciarSimulacion = this.crearBoton("Simular", 425, 480, "");
+		pnlDerecha.add(btnIniciarSimulacion);
+
+		DefaultTableModel tableModel = new DefaultTableModel(columnas, 0) {
+			public boolean isCellEditable(int row, int col) {
+				return ColumnasEditables[col];
+			}
+
+			public Class getColumnClass(int index) {
+				return tipo[index];
+			}
+		};
+
+		for (CiclistaDTO c : lstCiclistas) {
+			Object[] data = { c.getNombre(), c.getNombre(), c.getTiempoAcumuladoMin() };
+			tableModel.addRow(data);
+		}
+
+		tabla = crearTable(columnas, ColumnasEditables, tableModel);
+		JScrollPane jsPanel = new JScrollPane(tabla);
+		jsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		jsPanel.setBounds(300, 150, 650, 300);
+		pnlDerecha.add(jsPanel);
+	}
+
+	// Evento listener del timer que se ejecuta cada vez que pasa 1 segundo
+	private class UpdateBarListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Random random = new Random();
+			double tiempo = 0;
+
+			for (int i = 0; i < tablaSimulacion.getRowCount(); i++) {
+				CiclistaDTO corredor = corredores.get(i);
+				tiempo = corredor.getTiempoAcumuladoMin() + random.nextDouble(50);
+				corredor.setTiempoAcumuladoMin(tiempo);
+				tablaSimulacion.setValueAt(" " + String.format("%.2f", tiempo), i, 2);
+			}
+			try {
+				Thread.sleep(400);
+
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			int val = jpSimulacion.getValue();
+
+			if (val >= MAX_VAL) {
+				timer.stop();
+				JOptionPane.showMessageDialog(getRootPane(), "Finalizo la carrera.");
+				jpSimulacion.setValue(0);
+				Collections.sort(corredores, new Comparator<CiclistaDTO>() {
+					@Override
+					public int compare(CiclistaDTO p1, CiclistaDTO p2) {
+						return String.valueOf(p2.getTiempoAcumuladoMin())
+								.compareTo(String.valueOf(p1.getTiempoAcumuladoMin()));
+					}
+				});
+				opcion = "resultados";
+				iniciarPanelDerecho();
+				return;
+			}
+			jpSimulacion.setValue(++val);
+		}
+	}
+
+	private void iniciarCarrera() {
+		JLabel lblCarreraSeleccionada = crearLabelCarrera(tipoSeleccionado, "", 60, 200, tipoSeleccionado + ".jpg", 180);
+		JLabel lblTituloCarreraSeleccionada = crearLabelCenter(this.getProperties().getProperty("lblCarrera." + tipoSeleccionado), 60, 400);
+		pnlDerecha.add(lblCarreraSeleccionada);
+		pnlDerecha.add(lblTituloCarreraSeleccionada);
+		
+		DefaultTableModel modelResult = new DefaultTableModel(columnasSimulacion, 0) {
+			public boolean isCellEditable(int row, int col) {
+				return ColumnasSimulacionEditables[col];
+			}
+		};
+		DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+		modelocentrar.setHorizontalAlignment(SwingConstants.RIGHT);
+		modelocentrar.setFont(new Font("Tahoma", Font.BOLD | Font.PLAIN, 16));
+
+		for (CiclistaDTO c : corredores) {
+			Object[] data = { c.getNombre(), c.getNombre(), c.getTiempoAcumuladoMin() };
+			modelResult.addRow(data);
+		}
+
+		tablaSimulacion = crearTable(columnas, ColumnasEditables, modelResult);
+		tablaSimulacion.getColumnModel().getColumn(2).setCellRenderer(modelocentrar);
+
+		JScrollPane jsPanel = new JScrollPane(tablaSimulacion);
+		jsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		jsPanel.setBounds(300, 150, 530, 300);
+		pnlDerecha.add(jsPanel);
+
+		jpSimulacion = crearProgressBar(new Rectangle(350, 550, 350, 30));
+		pnlDerecha.add(jpSimulacion);
+
+		pnlDerecha.repaint();
+		pnlDerecha.revalidate();
+
+		timer = new Timer(10, new UpdateBarListener());
+		timer.start();
+
+	}
+	
+	private void finalizarSimulacion()
+	{
+		JLabel lblPrimerLugar = crearLabelCarrera("first_place", "", 425, 10, "first_place.png", 180);
+		JLabel lblCorredorPrimerLugar = crearLabelCenter(corredores.get(0).getNombre(), 425, 200);
+		JLabel lblTiempoPrimerLugar = crearLabelCenter(String.format("%.2f", corredores.get(0).getTiempoAcumuladoMin()), 425, 220);
+		pnlDerecha.add(lblPrimerLugar);
+		pnlDerecha.add(lblCorredorPrimerLugar);
+		pnlDerecha.add(lblTiempoPrimerLugar);
+		
+		JLabel lblSegundoLugar = crearLabelCarrera("second_place", "", 300, 230, "second_place.png", 80);
+		pnlDerecha.add(lblSegundoLugar);
+
+		JLabel lblTercerLugar = crearLabelCarrera("third_place", "", 650, 230, "third_place.png", 80);
+		pnlDerecha.add(lblTercerLugar);
+		
+		if (corredores.size() > 3)
+		{
+			JLabel lblCorredorSegundoLugar = crearLabelCenter(corredores.get(1).getNombre(), 250, 380);
+			JLabel lblTiempoSegundoLugar = crearLabelCenter(String.format("%.2f", corredores.get(1).getTiempoAcumuladoMin()), 250, 400);
+			pnlDerecha.add(lblCorredorSegundoLugar);
+			pnlDerecha.add(lblTiempoSegundoLugar);
+			
+			JLabel lblCorredorTercerLugar = crearLabelCenter(corredores.get(2).getNombre(), 580, 380);
+			JLabel lblTiempoTercerLugar = crearLabelCenter(String.format("%.2f", corredores.get(2).getTiempoAcumuladoMin()), 580, 400);
+			pnlDerecha.add(lblCorredorTercerLugar);
+			pnlDerecha.add(lblTiempoTercerLugar);
+		}
+
+	}
+	
 
 }
