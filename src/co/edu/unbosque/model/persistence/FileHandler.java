@@ -11,26 +11,42 @@ import java.io.PrintWriter;
 import java.util.Properties;
 import java.util.Scanner;
 
+/**
+ * The FileHandler class provides static methods for handling file operations such as reading and writing files,
+ * reading and writing serialized objects, loading and saving properties files, and verifying the existence of a folder
+ * for storing data.
+ * @author Osorio.V
+ * @version 15/05/2024
+ */
+
 public class FileHandler {
 
-	// =================== A PARTIR DE AQUI SON DE TEXTO ==================
 	private static File archivo;
 	private static Scanner lectorArchivo;
 	private static PrintWriter escritorArchivo;
 
-	// =================== A PARTIR DE AQUI SON DE SERIALIZABLE ==================
-	private static FileInputStream fis; // Ir a buscar el archivo
-	private static ObjectInputStream ois; // Lee un objeto completo encontrado en un archivo por fis
-	private static FileOutputStream fos; // Va y busca el archivo
-	private static ObjectOutputStream oos; // Escribe en el archivo encontrado por fos
+	private static FileInputStream fis;
+	private static ObjectInputStream ois;
+	private static FileOutputStream fos;
+	private static ObjectOutputStream oos;
 
+	/**
+     * Verifies the existence of a folder named "datos" for storing data. If the folder does not exist, it creates one.
+     */
+	
 	public static void verificarFolderDatos() {
 		archivo = new File("datos");
 		if (archivo.mkdir()) {
-			System.out.println("carpeta creada por primera vez en " + archivo.toURI()); // Verificar si la carpeta
-																						// existe
+			System.out.println("carpeta creada por primera vez en " + archivo.toURI());
 		}
 	}
+	
+	/**
+     * Opens a file for writing serialized objects. If the file does not exist, it creates a new one.
+     *
+     * @param url  The URL of the file.
+     * @param cont The object to be written to the file.
+     */
 
 	public static void abrirEscribirSerializable(String url, Object cont) {
 		archivo = new File(url);
@@ -51,17 +67,24 @@ public class FileHandler {
 		}
 
 	}
+
+	/**
+     * Opens a file for reading serialized objects.
+     *
+     * @param url The URL of the file.
+     * @return The deserialized object read from the file.
+     */
 	
 	public static Object abrirLeerSerializado(String url) {
 		Object contenido = null;
-		
+
 		archivo = new File(url);
 
 		try {
 			if (!archivo.exists()) {
 				archivo.createNewFile();
 			}
-			
+
 			fis = new FileInputStream(archivo);
 			ois = new ObjectInputStream(fis);
 
@@ -69,17 +92,24 @@ public class FileHandler {
 
 			fis.close();
 			ois.close();
-			
+
 		} catch (IOException e) {
 			System.out.println("No se pudo leer el archivo serializado(Entrada)");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error al obtener el contenido");
 			e.printStackTrace();
 		}
-		
-		return contenido;		
+
+		return contenido;
 	}
 
+	/**
+     * Opens a file for reading text content.
+     *
+     * @param url The URL of the file.
+     * @return The content read from the file as a String.
+     */
+	
 	public static String abrirLeerArchivo(String url) {
 
 		String contenido = "";
@@ -105,6 +135,13 @@ public class FileHandler {
 		return contenido;
 	}
 
+	/**
+     * Opens a file for writing text content.
+     *
+     * @param url  The URL of the file.
+     * @param cont The content to be written to the file.
+     */
+	
 	public static void abrirEscribirArchivo(String url, String cont) {
 		try {
 			archivo = new File(url);
@@ -122,27 +159,41 @@ public class FileHandler {
 		escritorArchivo.close();
 
 	}
-	//Valores claves a la derecha
-		public static Properties cargarArchivoPropiedades(String url) {
-			Properties prop = null;
-			try {
-				
-				prop = new Properties();
-				prop.load(new FileInputStream(url));
-			} catch (IOException e) {
-				System.out.println("Error al cargar el archivo de propiedades");
-				e.printStackTrace();
-			}
-			return prop;
-		}
-		public static void guardarArchivoPropiedades(String url, Properties prop) {
-			try {
-				prop.store(new FileWriter(url), "Escribiendo datos de propiedades");
-			} catch (IOException e) {
-				System.out.println("Error al guardar el archivo propiedades");
-				e.printStackTrace();
-			}
-		}
-	
-}
 
+	/**
+     * Loads properties from a properties file.
+     *
+     * @param url The URL of the properties file.
+     * @return A Properties object containing the loaded properties.
+     */
+	
+	public static Properties cargarArchivoPropiedades(String url) {
+		Properties prop = null;
+		try {
+
+			prop = new Properties();
+			prop.load(new FileInputStream(url));
+		} catch (IOException e) {
+			System.out.println("Error al cargar el archivo de propiedades");
+			e.printStackTrace();
+		}
+		return prop;
+	}
+
+	/**
+     * Saves properties to a properties file.
+     *
+     * @param url  The URL of the properties file.
+     * @param prop The Properties object containing the properties to be saved.
+     */
+	
+	public static void guardarArchivoPropiedades(String url, Properties prop) {
+		try {
+			prop.store(new FileWriter(url), "Escribiendo datos de propiedades");
+		} catch (IOException e) {
+			System.out.println("Error al guardar el archivo propiedades");
+			e.printStackTrace();
+		}
+	}
+
+}

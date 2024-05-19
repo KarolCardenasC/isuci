@@ -2,6 +2,15 @@ package co.edu.unbosque.model;
 
 import java.io.Serializable;
 
+/**
+ * MasajistaDTO represents a massage therapist with additional information about years of experience.
+ * It extends the UsuarioDTO class.
+ * @author Cardenas.K
+ * @version 10/05/2024
+ * @see UsuarioDTO
+ *
+ */
+
 public class MasajistaDTO extends UsuarioDTO implements Serializable {
 
 	private int aniosExperiencia;
@@ -28,7 +37,6 @@ public class MasajistaDTO extends UsuarioDTO implements Serializable {
 	public MasajistaDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
 			String contrasena, String genero) {
 		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
