@@ -10,11 +10,13 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 
 	private ArrayList<CiclistaDTO> listaCiclistas;
 	private static ArrayList<CiclistaDTO> generalCiclista;
+	private static ArrayList<CiclistaDTO> filtrarCiclistas;
 	private final String SERIALIZED_FILE_NAME = "datos/Ciclista.isuci";
 
 	public CiclistaDAO() {
 		listaCiclistas = new ArrayList<>();
 		generalCiclista = new ArrayList<>();
+		filtrarCiclistas = new ArrayList<>();
 		leerArchivoSerializado();
 	}
 
@@ -152,8 +154,29 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 		return null;
 	}
 
-	public static ArrayList<CiclistaDTO> listaCiclistas(String especialidad) {
+	public static ArrayList<CiclistaDTO> listaCiclistas(String especialidad,String equipo ) {
 		switch (especialidad) {
+		case "Clasicomano":
+			obtenerClasicomano();
+		break;
+		case "Contrarrelojeroa":
+			obtenerContrarrelojero();
+			break;
+		case "Escalador":
+			obtenerEscalador();
+			break;
+		case "Gregario":
+			obtenerGregario();
+			break;
+		case "Rodador":
+			obtenerRodador();
+			break;
+		case "Sprinter":
+			obtenerSprinter();
+			break;
+		case "Ninguna":
+			obtenerSin();
+		break;
 		default:
 			obtenerClasicomano();
 			obtenerContrarrelojero();
@@ -161,10 +184,21 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 			obtenerGregario();
 			obtenerRodador();
 			obtenerSprinter();
+			break;
+			 	        
+		}
+		if (!equipo.equals("")) {
+			filtrarCiclistas = new ArrayList<>();
+			generalCiclista.forEach(c ->{
+				if (c.getEquipo().equals(equipo)) {
+					filtrarCiclistas.add(c);
+				}
+			});
+			generalCiclista = filtrarCiclistas;
 		}
 		return generalCiclista;
 	}
-
+	
 	private static void obtenerSprinter() {
 		// TODO Auto-generated method stub
 		SprinterDAO SprinterDAO = new SprinterDAO();
@@ -234,6 +268,18 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 		// TODO Auto-generated method stub
 		ClasicomanoDAO clasicomanoDAO = new ClasicomanoDAO();
 		clasicomanoDAO.mostrarTodos().forEach(p -> {
+			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
+			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
+			if (result.size() == 0) {
+				generalCiclista.add(p);
+			}
+
+		});
+	}
+	private static void obtenerSin() {
+		// TODO Auto-generated method stub
+		CiclistaDAO CiclistaDAO = new CiclistaDAO();
+		CiclistaDAO.mostrarTodos().forEach(p -> {
 			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
 			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
 			if (result.size() == 0) {

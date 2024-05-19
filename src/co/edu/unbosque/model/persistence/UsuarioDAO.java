@@ -109,7 +109,8 @@ public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 	@Override
 	public ArrayList<UsuarioDTO> mostrarTodos() {
 		CiclistaDAO ciclistas = new CiclistaDAO();
-		listaTodos.addAll(ciclistas.listaCiclistas(""));
+		listaTodos.addAll(ciclistas.listaCiclistas("",""));
+		listaTodos.addAll(ciclistas.listaCiclistas("Ninguna",""));
 		obtenerMasajista();
 		obtenerDirector();
 		

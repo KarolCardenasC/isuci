@@ -478,10 +478,6 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 		case "equipo":
 			opcion = e.getActionCommand();
-			if ("equipo".equals(opcion)) {
-				CiclistaDAO ciclistaDAO = new CiclistaDAO();
-				lstCiclistas = ciclistaDAO.listaCiclistas(opcion);
-			}
 			iniciarPanelDerecho();
 			break;
 
