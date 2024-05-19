@@ -80,34 +80,6 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 		this.setProperties(FileHandler
 				.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties"));
-		lstCiclistas = new ArrayList<>();
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daaniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
-		lstCiclistas.add(
-				new CiclistaDTO("masajista.png", "Maria vValentina Osorio Romero", 1001425987, "maOsoa62@gmail.com",
-						"maOsoa62@gmail.com", "0321", "vale214", "Mujer", 0214, 13, 1.20, "Escalador", "Delgada"));
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daaniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
-		lstCiclistas.add(
-				new CiclistaDTO("masajista.png", "Maria vValentina Osorio Romero", 1001425987, "maOsoa62@gmail.com",
-						"maOsoa62@gmail.com", "0321", "vale214", "Mujer", 0214, 13, 1.20, "Escalador", "Delgada"));
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daaniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
-		lstCiclistas.add(
-				new CiclistaDTO("masajista.png", "Maria vValentina Osorio Romero", 1001425987, "maOsoa62@gmail.com",
-						"maOsoa62@gmail.com", "0321", "vale214", "Mujer", 0214, 13, 1.20, "Escalador", "Delgada"));
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
 		usuarioPanel = inicial;
 		setLayout(null);
 		initComponents();
@@ -150,10 +122,10 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		btnActualizar = this.crearBoton("Actualizar Perfil Administrador", 20, 350, "");
 		pnlIzquierda.add(btnActualizar);
 
-		btnEquipo = this.crearBoton("Equipo", 20, 400, "");
+		btnEquipo = this.crearBoton("Equipo Administrador", 20, 400, "");
 		pnlIzquierda.add(btnEquipo);
 
-		btnCerrar = this.crearBoton("Cerrar SesiÃ³n Administrador", 20, 600, "");
+		btnCerrar = this.crearBoton("Cerrar Sesión Administrador", 20, 600, "");
 		pnlIzquierda.add(btnCerrar);
 
 		pnlIzquierda.repaint();
@@ -288,7 +260,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 			break;
 
-		case "equipo":
+		case "equipoadministrador":
 
 			lblNombre = this.crearLabel("lblNombreEquipo.titulo", 50, 50);
 			jtNombre = this.crearTextField("", 200, 50);
@@ -328,7 +300,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.alto")));
 		pnlInferior.setLayout(null);
 
-		btnGuardar = this.crearBoton("Guardar Director", 750, 10, "");
+		btnGuardar = this.crearBoton("Guardar Administrador", 750, 10, "");
 		pnlInferior.add(btnGuardar);
 
 		add(pnlInferior);
@@ -422,7 +394,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 		case "actualizarperfiladministrador":
 
-		case "equipo":
+		case "equipoadministrador":
 			opcion = e.getActionCommand();
 			iniciarPanelDerecho();
 			break;

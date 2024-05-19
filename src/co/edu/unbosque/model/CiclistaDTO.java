@@ -20,6 +20,7 @@ public class CiclistaDTO extends UsuarioDTO implements Serializable {
 	private double tiempoAcumuladoMin;
 	private String especialidad;
 	private String contextura;
+	private String equipo;
 
 	/**
 	 * Default constructor for creating an empty CiclistaDTO object.
@@ -36,16 +37,18 @@ public class CiclistaDTO extends UsuarioDTO implements Serializable {
 	 * @param tiempoAcumuladoMin the accumulated time in minutes
 	 * @param especialidad       the specialty of the cyclist
 	 * @param contextura         the body type of the cyclist
+	 * @param equipo             the team of the cyclist
 	 */
 
 	public CiclistaDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
-			String contextura) {
+			String contextura, String equipo) {
 		super();
 		this.identificador = identificador;
 		this.aniosExperiencia = aniosExperiencia;
 		this.tiempoAcumuladoMin = tiempoAcumuladoMin;
 		this.especialidad = especialidad;
 		this.contextura = contextura;
+		this.equipo = equipo;
 	}
 
 	/**
@@ -65,17 +68,19 @@ public class CiclistaDTO extends UsuarioDTO implements Serializable {
 	 * @param tiempoAcumuladoMin the accumulated time in minutes
 	 * @param especialidad       the specialty of the cyclist
 	 * @param contextura         the body type of the cyclist
+	 * @param equipo             the team of the cyclist
 	 */
-
+	
 	public CiclistaDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
 			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
-			String especialidad, String contextura) {
+			String especialidad, String contextura, String equipo) {
 		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero);
 		this.identificador = identificador;
 		this.aniosExperiencia = aniosExperiencia;
 		this.tiempoAcumuladoMin = tiempoAcumuladoMin;
 		this.especialidad = especialidad;
 		this.contextura = contextura;
+		this.equipo = equipo;
 	}
 
 	/**
@@ -196,6 +201,26 @@ public class CiclistaDTO extends UsuarioDTO implements Serializable {
 	public void setContextura(String contextura) {
 		this.contextura = contextura;
 	}
+	
+	/**
+	 *  Gets the team of the cyclist.
+	 *  
+	 * @return the team
+	 */
+
+	public String getEquipo() {
+		return equipo;
+	}
+	
+	/**
+	 * Sets the team of the cyclist.
+	 * 
+	 * @param equipo
+	 */
+
+	public void setEquipo(String equipo) {
+		this.equipo = equipo;
+	}
 
 	/**
 	 * Returns a string representation of the CiclistaDTO object, including
@@ -208,7 +233,7 @@ public class CiclistaDTO extends UsuarioDTO implements Serializable {
 	public String toString() {
 		return super.toString() + "identificador: " + identificador + "\nAños Experiencia: " + aniosExperiencia
 				+ "\nTiempo Acumulado Minutos: " + tiempoAcumuladoMin + "\nEspecialidad: " + especialidad
-				+ "\nContextura: " + contextura + "\n";
+				+ "\nContextura: " + contextura + "\nEquipo: " + equipo + "\n";
 	}
 
 	/**

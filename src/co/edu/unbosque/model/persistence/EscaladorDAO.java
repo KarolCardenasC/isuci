@@ -107,7 +107,7 @@ public class EscaladorDAO implements CRUDOperation<EscaladorDTO> {
 		listaEscaladores.forEach(c -> {
 			EscaladorDTO escaladorTemp = new EscaladorDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(), c.getUsuario(), c.getId(),
 					c.getContrasena(), c.getGenero(), c.getIdentificador(), c.getAniosExperiencia(), c.getTiempoAcumuladoMin(),
-					c.getEspecialidad(), c.getContextura(), c.getAceleracionPromSubida(), c.getGradoRampaSoportada());
+					c.getEspecialidad(), c.getContextura(), c.getEquipo(), c.getAceleracionPromSubida(), c.getGradoRampaSoportada());
 
 			listaMostrar.add(escaladorTemp);
 		});

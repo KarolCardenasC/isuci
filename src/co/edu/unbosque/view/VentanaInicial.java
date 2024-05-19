@@ -37,7 +37,7 @@ public class VentanaInicial extends JFrame {
 		pnlFondo.setLayout(null);
 		pnlFondo.setSize(Integer.parseInt(properties.getProperty("ventanaInicial.ancho")),
 				Integer.parseInt(properties.getProperty("ventanaInicial.alto")));
-		pnlFondo.setLayout(new BorderLayout(0, 0));
+		pnlFondo.setLayout(new BorderLayout(0,0));
 		setContentPane(pnlFondo);
 	}
 

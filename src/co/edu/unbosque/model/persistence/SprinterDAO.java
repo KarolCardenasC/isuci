@@ -108,7 +108,7 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 		listaSprinters.forEach(c -> {
 			SprinterDTO sprinterTemp = new SprinterDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(),
 					c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getIdentificador(),
-					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura(),
+					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura(), c.getEquipo(),
 					c.getExplosionMetrosFinales(), c.getPotenciaPromVatios(), c.getVelocidadPromSprintKm());
 
 			listaMostrar.add(sprinterTemp);

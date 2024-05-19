@@ -19,8 +19,9 @@ public class SprinterDTO extends CiclistaDTO implements Serializable {
 	}
 
 	public SprinterDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
-			String contextura, double explosionMetrosFinales, double potenciaPromVatios, double velocidadPromSprintKm) {
-		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura);
+			String contextura, String equipo, double explosionMetrosFinales, double potenciaPromVatios,
+			double velocidadPromSprintKm) {
+		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura, equipo);
 		this.explosionMetrosFinales = explosionMetrosFinales;
 		this.potenciaPromVatios = potenciaPromVatios;
 		this.velocidadPromSprintKm = velocidadPromSprintKm;
@@ -28,10 +29,10 @@ public class SprinterDTO extends CiclistaDTO implements Serializable {
 
 	public SprinterDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
 			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
-			String especialidad, String contextura, double explosionMetrosFinales, double potenciaPromVatios,
-			double velocidadPromSprintKm) {
+			String especialidad, String contextura, String equipo, double explosionMetrosFinales,
+			double potenciaPromVatios, double velocidadPromSprintKm) {
 		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero, identificador, aniosExperiencia,
-				tiempoAcumuladoMin, especialidad, contextura);
+				tiempoAcumuladoMin, especialidad, contextura, equipo);
 		this.explosionMetrosFinales = explosionMetrosFinales;
 		this.potenciaPromVatios = potenciaPromVatios;
 		this.velocidadPromSprintKm = velocidadPromSprintKm;
@@ -47,15 +48,15 @@ public class SprinterDTO extends CiclistaDTO implements Serializable {
 	}
 
 	public SprinterDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
-			String contextura) {
-		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura);
+			String contextura, String equipo) {
+		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura, equipo);
 	}
 
 	public SprinterDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
 			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
-			String especialidad, String contextura) {
+			String especialidad, String contextura, String equipo) {
 		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero, identificador, aniosExperiencia,
-				tiempoAcumuladoMin, especialidad, contextura);
+				tiempoAcumuladoMin, especialidad, contextura, equipo);
 	}
 
 	public SprinterDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
@@ -93,11 +94,11 @@ public class SprinterDTO extends CiclistaDTO implements Serializable {
 				+ "\nPotencia Promedio en Vatios: " + potenciaPromVatios + "\nVelocidad Promedio Sprint Km/h: "
 				+ velocidadPromSprintKm + "\n";
 	}
-	
+
 	public String aumentarRitmo() {
 		return "EL sprinter ha aumentado el ritmo";
 	}
-	
+
 	public String disminuirRitmo() {
 		return "EL sprinter ha disminuido el ritmo";
 	}

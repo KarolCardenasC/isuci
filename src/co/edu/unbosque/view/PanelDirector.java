@@ -46,6 +46,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 	private JLabel lblId;
 	private JLabel lblContrasena;
 	private JLabel lblGenero;
+	private JLabel lblEquipo;
 	private JLabel lblCedulaTit;
 	private JLabel lblNacionalidadTit;
 	private JLabel lblCorreoTit;
@@ -53,6 +54,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 	private JLabel lblIdTit;
 	private JLabel lblContrasenaTit;
 	private JLabel lblGeneroTit;
+	private JLabel lblEquipoTit;
 	private JLabel lblTiempo;
 	private JLabel lblNombrePerfil;
 
@@ -64,6 +66,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 	private JTextField jtId;
 	private JTextField jtContrasena;
 	private JTextField jtTiempo;
+	private JTextField jtEquipo;
 
 	private JComboBox<String> jcGenero;
 
@@ -87,34 +90,6 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 		this.setProperties(FileHandler
 				.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties"));
-		lstCiclistas = new ArrayList<>();
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daaniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
-		lstCiclistas.add(
-				new CiclistaDTO("masajista.png", "Maria vValentina Osorio Romero", 1001425987, "maOsoa62@gmail.com",
-						"maOsoa62@gmail.com", "0321", "vale214", "Mujer", 0214, 13, 1.20, "Escalador", "Delgada"));
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daaniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
-		lstCiclistas.add(
-				new CiclistaDTO("masajista.png", "Maria vValentina Osorio Romero", 1001425987, "maOsoa62@gmail.com",
-						"maOsoa62@gmail.com", "0321", "vale214", "Mujer", 0214, 13, 1.20, "Escalador", "Delgada"));
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daaniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
-		lstCiclistas.add(
-				new CiclistaDTO("masajista.png", "Maria vValentina Osorio Romero", 1001425987, "maOsoa62@gmail.com",
-						"maOsoa62@gmail.com", "0321", "vale214", "Mujer", 0214, 13, 1.20, "Escalador", "Delgada"));
-		lstCiclistas.add(new CiclistaDTO("ciclista.png", "Daniel Fernando Arias Mondragon", 1031554865,
-				"dferMon45@gmail.com", "dferMon45@gmail.com", "125430", "danifer451", "Hombre", 1021, 10, 0.50,
-				"Gregario", "Delgada"));
 		usuarioPanel = inicial;
 		setLayout(null);
 		initComponents();
@@ -222,6 +197,9 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 			lblGeneroTit = this.crearLabel("lblGenero.titulo", 600, 440);
 			pnlDerecha.add(lblGeneroTit);
+			
+			lblEquipoTit = this.crearLabel("lblEquipo.titulo", 610, 20);
+			pnlDerecha.add(lblEquipoTit);
 
 			lblCedula = this.crearLabel("lblCedula.perfil", 200, 320);
 			pnlDerecha.add(lblCedula);
@@ -243,6 +221,9 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 			lblGenero = this.crearLabel("lblGenero.perfil", 600, 460);
 			pnlDerecha.add(lblGenero);
+			
+			lblEquipo = this.crearLabel("lblEquipo.perfil", 625, 52);
+			pnlDerecha.add(lblEquipo);
 
 			btnGuardar.setVisible(false);
 			break;
@@ -303,6 +284,11 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			}
 			pnlDerecha.add(lblGenero);
 			pnlDerecha.add(jcGenero);
+			
+			lblEquipo = this.crearLabel("lblEquipo.titulo", 600, 20);
+			jtEquipo = this.crearTextField("lblEquipo.perfil", 600, 52);
+			pnlDerecha.add(lblEquipo);
+			pnlDerecha.add(jtEquipo);
 
 			btnGuardar.setVisible(true);
 
@@ -846,6 +832,30 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 	public void setLblNombrePerfil(JLabel lblNombrePerfil) {
 		this.lblNombrePerfil = lblNombrePerfil;
+	}
+
+	public JLabel getLblEquipo() {
+		return lblEquipo;
+	}
+
+	public void setLblEquipo(JLabel lblEquipo) {
+		this.lblEquipo = lblEquipo;
+	}
+
+	public JLabel getLblEquipoTit() {
+		return lblEquipoTit;
+	}
+
+	public void setLblEquipoTit(JLabel lblEquipoTit) {
+		this.lblEquipoTit = lblEquipoTit;
+	}
+
+	public JTextField getJtEquipo() {
+		return jtEquipo;
+	}
+
+	public void setJtEquipo(JTextField jtEquipo) {
+		this.jtEquipo = jtEquipo;
 	}
 
 }

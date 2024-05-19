@@ -15,16 +15,16 @@ public class RodadorDTO extends CiclistaDTO implements Serializable {
 	}
 
 	public RodadorDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
-			String contextura, double velocidadPromPedaleo) {
-		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura);
+			String contextura, String equipo, double velocidadPromPedaleo) {
+		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura, equipo);
 		this.velocidadPromPedaleo = velocidadPromPedaleo;
 	}
 
 	public RodadorDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
 			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
-			String especialidad, String contextura, double velocidadPromPedaleo) {
+			String especialidad, String contextura, String equipo, double velocidadPromPedaleo) {
 		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero, identificador, aniosExperiencia,
-				tiempoAcumuladoMin, especialidad, contextura);
+				tiempoAcumuladoMin, especialidad, contextura, equipo);
 		this.velocidadPromPedaleo = velocidadPromPedaleo;
 	}
 
@@ -35,15 +35,15 @@ public class RodadorDTO extends CiclistaDTO implements Serializable {
 	}
 
 	public RodadorDTO(int identificador, int aniosExperiencia, double tiempoAcumuladoMin, String especialidad,
-			String contextura) {
-		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura);
+			String contextura, String equipo) {
+		super(identificador, aniosExperiencia, tiempoAcumuladoMin, especialidad, contextura, equipo);
 	}
 
 	public RodadorDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,
 			String contrasena, String genero, int identificador, int aniosExperiencia, double tiempoAcumuladoMin,
-			String especialidad, String contextura) {
+			String especialidad, String contextura, String equipo) {
 		super(imagen, nombre, cedula, correo, usuario, id, contrasena, genero, identificador, aniosExperiencia,
-				tiempoAcumuladoMin, especialidad, contextura);
+				tiempoAcumuladoMin, especialidad, contextura, equipo);
 	}
 
 	public RodadorDTO(String imagen, String nombre, long cedula, String correo, String usuario, String id,

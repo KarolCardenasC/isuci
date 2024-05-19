@@ -108,7 +108,7 @@ public class RodadorDAO implements CRUDOperation<RodadorDTO> {
 		listaRodadores.forEach(c -> {
 			RodadorDTO rodadorTemp = new RodadorDTO(c.getImagen(), c.getNombre(), c.getCedula(),
 					c.getCorreo(), c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getIdentificador(),
-					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura(),
+					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura(), c.getEquipo(),
 					c.getVelocidadPromPedaleo());
 
 			listaMostrar.add(rodadorTemp);

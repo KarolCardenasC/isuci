@@ -177,7 +177,7 @@ public class EquipoDAO implements CRUDEquipo<EquipoDTO> {
 					CiclistaDTO ciclistaTemp = new CiclistaDTO(c.getImagen(), c.getNombre(), c.getCedula(),
 							c.getCorreo(), c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(),
 							c.getIdentificador(), c.getAniosExperiencia(), c.getTiempoAcumuladoMin(),
-							c.getEspecialidad(), c.getContextura());
+							c.getEspecialidad(), c.getContextura(), c.getEquipo());
 
 					listaMostrar.add(ciclistaTemp);
 				});

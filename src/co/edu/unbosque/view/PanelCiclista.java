@@ -42,6 +42,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 	private JLabel lblTiempoAcumulado;
 	private JLabel lblEspecialidad;
 	private JLabel lblContextura;
+	private JLabel lblEquipo;
 	private JLabel lblCaract1;
 	private JLabel lblCaract2;
 	private JLabel lblCaract3;
@@ -56,6 +57,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 	private JLabel lblTiempoAcumuladoTit;
 	private JLabel lblEspecialidadTit;
 	private JLabel lblContexturaTit;
+	private JLabel lblEquipoTit;
 	private JLabel lblCaract1Tit;
 	private JLabel lblCaract2Tit;
 	private JLabel lblCaract3Tit;
@@ -72,6 +74,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 	private JTextField jtCaract1;
 	private JTextField jtCaract2;
 	private JTextField jtCaract3;
+	private JTextField jtEquipo;
 
 	private JComboBox<String> jcGenero;
 	private JComboBox<String> jcEspecialidad;
@@ -208,6 +211,9 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 			lblContexturaTit = this.crearLabel("lblContextura.titulo", 410, 480);
 			pnlDerecha.add(lblContexturaTit);
+			
+			lblEquipoTit = this.crearLabel("lblEquipo.titulo", 610, 20);
+			pnlDerecha.add(lblEquipoTit);
 
 			lblCedula = this.crearLabel("lblCedula.perfil", 100, 300);
 			pnlDerecha.add(lblCedula);
@@ -241,6 +247,9 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 			lblContextura = this.crearLabel("lblContextura.perfil", 410, 500);
 			pnlDerecha.add(lblContextura);
+			
+			lblEquipo = this.crearLabel("lblEquipo.perfil", 625, 52);
+			pnlDerecha.add(lblEquipo);
 
 			switch (this.getProperties().getProperty("lblEspecialidad.perfil")) {
 			case "Ninguna":
@@ -410,6 +419,11 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 			pnlDerecha.add(lblContextura);
 			pnlDerecha.add(jcContextura);
+			
+			lblEquipo = this.crearLabel("lblEquipo.titulo", 600, 20);
+			jtEquipo = this.crearTextField("lblEquipo.perfil", 600, 52);
+			pnlDerecha.add(lblEquipo);
+			pnlDerecha.add(jtEquipo);
 
 			lblCaract1 = this.crearLabel("", 720, 380);
 			jtCaract1 = this.crearTextField("", 720, 410);
@@ -1167,5 +1181,37 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 	public void setJcFuncion(JComboBox<String> jcFuncion) {
 		this.jcFuncion = jcFuncion;
+	}
+
+	public JButton getBtnCambio() {
+		return btnCambio;
+	}
+
+	public void setBtnCambio(JButton btnCambio) {
+		this.btnCambio = btnCambio;
+	}
+
+	public JLabel getLblEquipo() {
+		return lblEquipo;
+	}
+
+	public void setLblEquipo(JLabel lblEquipo) {
+		this.lblEquipo = lblEquipo;
+	}
+
+	public JLabel getLblEquipoTit() {
+		return lblEquipoTit;
+	}
+
+	public void setLblEquipoTit(JLabel lblEquipoTit) {
+		this.lblEquipoTit = lblEquipoTit;
+	}
+
+	public JTextField getJtEquipo() {
+		return jtEquipo;
+	}
+
+	public void setJtEquipo(JTextField jtEquipo) {
+		this.jtEquipo = jtEquipo;
 	}
 }

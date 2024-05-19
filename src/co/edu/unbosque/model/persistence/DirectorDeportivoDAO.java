@@ -106,7 +106,7 @@ public class DirectorDeportivoDAO implements CRUDOperation<DirectorDeportivoDTO>
 		ArrayList<DirectorDeportivoDTO> listaMostrar = new ArrayList<>();
 		listaDirectoresDeportivos.forEach(c -> {
 			DirectorDeportivoDTO directorDeportivoTemp = new DirectorDeportivoDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(), c.getUsuario(), c.getId(),
-					c.getContrasena(), c.getGenero(), c.getNacionalidad());
+					c.getContrasena(), c.getGenero(), c.getNacionalidad(),c.getEquipo());
 
 			listaMostrar.add(directorDeportivoTemp);
 		});

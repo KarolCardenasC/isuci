@@ -107,7 +107,7 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 		listaClasicomanos.forEach(c -> {
 			ClasicomanoDTO clasicomanoTemp = new ClasicomanoDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(), c.getUsuario(), c.getId(),
 					c.getContrasena(), c.getGenero(), c.getIdentificador(), c.getAniosExperiencia(), c.getTiempoAcumuladoMin(),
-					c.getEspecialidad(), c.getContextura(), c.getNumeroClasicosganados());
+					c.getEspecialidad(), c.getContextura(), c.getEquipo(), c.getNumeroClasicosganados());
 
 			listaMostrar.add(clasicomanoTemp);
 		});

@@ -1,16 +1,20 @@
 package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import co.edu.unbosque.model.CiclistaDTO;
 
 public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 
 	private ArrayList<CiclistaDTO> listaCiclistas;
+	private static ArrayList<CiclistaDTO> generalCiclista;
 	private final String SERIALIZED_FILE_NAME = "datos/Ciclista.isuci";
 
 	public CiclistaDAO() {
 		listaCiclistas = new ArrayList<>();
+		generalCiclista = new ArrayList<>();
 		leerArchivoSerializado();
 	}
 
@@ -106,7 +110,8 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 		listaCiclistas.forEach(c -> {
 			CiclistaDTO ciclistaTemp = new CiclistaDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(),
 					c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getIdentificador(),
-					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura());
+					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura(),
+					c.getEquipo());
 
 			listaMostrar.add(ciclistaTemp);
 		});
@@ -145,6 +150,97 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 			}
 		}
 		return null;
+	}
+
+	public static ArrayList<CiclistaDTO> listaCiclistas(String especialidad) {
+		switch (especialidad) {
+		default:
+			obtenerClasicomano();
+			obtenerContrarrelojero();
+			obtenerEscalador();
+			obtenerGregario();
+			obtenerRodador();
+			obtenerSprinter();
+		}
+		return generalCiclista;
+	}
+
+	private static void obtenerSprinter() {
+		// TODO Auto-generated method stub
+		SprinterDAO SprinterDAO = new SprinterDAO();
+		SprinterDAO.mostrarTodos().forEach(p -> {
+			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
+			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
+			if (result.size() == 0) {
+				generalCiclista.add(p);
+			}
+
+		});
+	}
+
+	private static void obtenerRodador() {
+		// TODO Auto-generated method stub
+		RodadorDAO RodadorDAO = new RodadorDAO();
+		RodadorDAO.mostrarTodos().forEach(p -> {
+			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
+			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
+			if (result.size() == 0) {
+				generalCiclista.add(p);
+			}
+
+		});
+	}
+
+	private static void obtenerGregario() {
+		// TODO Auto-generated method stub
+		GregarioDAO GregarioDAO = new GregarioDAO();
+		GregarioDAO.mostrarTodos().forEach(p -> {
+			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
+			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
+			if (result.size() == 0) {
+				generalCiclista.add(p);
+			}
+
+		});
+	}
+
+	private static void obtenerEscalador() {
+		// TODO Auto-generated method stub
+		EscaladorDAO EscaladorDAO = new EscaladorDAO();
+		EscaladorDAO.mostrarTodos().forEach(p -> {
+			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
+			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
+			if (result.size() == 0) {
+				generalCiclista.add(p);
+			}
+
+		});
+	}
+
+	private static void obtenerContrarrelojero() {
+		// TODO Auto-generated method stub
+		ContrarrelojeroDAO ContrarrelojeroDAO = new ContrarrelojeroDAO();
+		ContrarrelojeroDAO.mostrarTodos().forEach(p -> {
+			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
+			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
+			if (result.size() == 0) {
+				generalCiclista.add(p);
+			}
+
+		});
+	}
+
+	private static void obtenerClasicomano() {
+		// TODO Auto-generated method stub
+		ClasicomanoDAO clasicomanoDAO = new ClasicomanoDAO();
+		clasicomanoDAO.mostrarTodos().forEach(p -> {
+			Predicate<CiclistaDTO> byCiclis = skill -> (skill.getId() == p.getId());
+			var result = generalCiclista.stream().filter(byCiclis).collect(Collectors.toList());
+			if (result.size() == 0) {
+				generalCiclista.add(p);
+			}
+
+		});
 	}
 
 }

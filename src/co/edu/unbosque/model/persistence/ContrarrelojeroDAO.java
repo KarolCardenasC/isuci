@@ -107,7 +107,7 @@ public class ContrarrelojeroDAO implements CRUDOperation<ContrarrelojeroDTO> {
 		listaContrarrelojeros.forEach(c -> {
 			ContrarrelojeroDTO contrarrelojeroTemp = new ContrarrelojeroDTO(c.getImagen(), c.getNombre(), c.getCedula(),
 					c.getCorreo(), c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getIdentificador(),
-					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura(),
+					c.getAniosExperiencia(), c.getTiempoAcumuladoMin(), c.getEspecialidad(), c.getContextura(), c.getEquipo(),
 					c.getVelocidadMaxima());
 
 			listaMostrar.add(contrarrelojeroTemp);

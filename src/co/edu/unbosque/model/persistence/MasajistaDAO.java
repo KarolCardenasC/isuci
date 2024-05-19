@@ -106,7 +106,7 @@ public class MasajistaDAO implements CRUDOperation<MasajistaDTO> {
 		ArrayList<MasajistaDTO> listaMostrar = new ArrayList<>();
 		listaMasajistas.forEach(c -> {
 			MasajistaDTO masajistaTemp = new MasajistaDTO(c.getImagen(), c.getNombre(), c.getCedula(), c.getCorreo(),
-					c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getAniosExperiencia());
+					c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero(), c.getAniosExperiencia(),c.getEquipo());
 
 			listaMostrar.add(masajistaTemp);
 		});
