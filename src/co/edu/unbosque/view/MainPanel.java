@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JProgressBar;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -159,6 +160,45 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		return label;
 	}
+	
+	public JLabel crearLabelWithName(String nombre, String titulo, Rectangle bounds, String icono) {
+		JLabel label = new JLabel("<html>" + titulo);
+		if (!"".equals(icono)) {
+			Image imagen = new ImageIcon("imgs/" + icono).getImage();
+			ImageIcon fondo = new ImageIcon(imagen.getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+			label.setIcon(fondo);
+			label.setAlignmentX(LEFT_ALIGNMENT);
+		}
+		label.setHorizontalTextPosition(SwingConstants.RIGHT);
+		label.setName(titulo);
+		label.setBounds(bounds);
+
+		return label;
+	}	
+	
+	public JLabel crearLabel(String nombre, String titulo, int posX, int posY) {
+		JLabel label = new JLabel("<html>" + titulo);
+
+		label.setName(nombre);
+		label.setBounds(new Rectangle(posX, posY, 250, 35));
+		label.setForeground(colorFuenteLabel);
+		label.setFont(fuenteLabelBoldPrincipal);
+
+		return label;
+	}
+	
+	public JProgressBar crearProgressBar(Rectangle bounds)
+	{
+		JProgressBar jProgress = new JProgressBar();
+		
+		jProgress.setBounds(bounds);
+		jProgress.setForeground(colorFuenteLabel);
+		jProgress.setFont(fuenteLabelBoldPrincipal);
+		jProgress.setBorder(null);
+		jProgress.setStringPainted(true);
+		
+		return jProgress;
+	}
 
 	/**
      * Creates a JPasswordField with specified title, position, and font size.
@@ -208,6 +248,17 @@ public class MainPanel extends JPanel implements ActionListener {
 		return textField;
 	}
 
+	public JTextField crearTextField(String nombre, String texto, int posX, int posY) {
+		JTextField textField = new JTextField(texto);
+
+		textField.setName(nombre);
+		textField.setBounds(new Rectangle(posX, posY, 250, 40));
+		textField.setBorder(null);
+		textField.setFont(fuenteTextFieldPrincipal.deriveFont(fuenteTextFieldPrincipal.getSize() + 4f));
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		return textField;
+	}	
+	
 	/**
      * Creates an invisible JTextField with specified text and bounds.
      *

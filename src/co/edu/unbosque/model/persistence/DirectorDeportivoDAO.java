@@ -2,7 +2,7 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
-import co.edu.unbosque.model.CiclistaDTO;
+
 import co.edu.unbosque.model.DirectorDeportivoDTO;
 
 public class DirectorDeportivoDAO implements CRUDOperation<DirectorDeportivoDTO> {
@@ -15,6 +15,7 @@ public class DirectorDeportivoDAO implements CRUDOperation<DirectorDeportivoDTO>
 		leerArchivoSerializado();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void leerArchivoSerializado() {
 		Object contenido = FileHandler.abrirLeerSerializado(SERIALIZED_FILE_NAME);
 

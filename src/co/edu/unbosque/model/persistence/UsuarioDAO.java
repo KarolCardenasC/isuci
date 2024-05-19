@@ -1,6 +1,8 @@
 package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.UsuarioDTO;
@@ -8,10 +10,13 @@ import co.edu.unbosque.model.UsuarioDTO;
 public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 
 	private ArrayList<UsuarioDTO> listaUsuarios;
+	private static ArrayList<UsuarioDTO> listaTodos;
 	private final String SERIALIZED_FILE_NAME = "datos/Usuario.isuci";
 
 	public UsuarioDAO() {
 		listaUsuarios = new ArrayList<>();
+		listaTodos = new ArrayList<>();
+		
 		leerArchivoSerializado();
 	}
 
@@ -103,17 +108,40 @@ public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 
 	@Override
 	public ArrayList<UsuarioDTO> mostrarTodos() {
-		ArrayList<UsuarioDTO> listaMostrar = new ArrayList<>();
-		listaUsuarios.forEach(c -> {
-			UsuarioDTO usuarioTemp = new UsuarioDTO(c.getImagen(), c.getNombre(), c.getCedula(),
-					c.getCorreo(), c.getUsuario(), c.getId(), c.getContrasena(), c.getGenero());
-
-			listaMostrar.add(usuarioTemp);
-		});
-
-		return listaMostrar;
+		CiclistaDAO ciclistas = new CiclistaDAO();
+		listaTodos.addAll(ciclistas.listaCiclistas(""));
+		obtenerMasajista();
+		obtenerDirector();
+		
+		return listaTodos;
 	}
 	
+	private void obtenerDirector() {
+		
+		DirectorDeportivoDAO DirectorDAO = new DirectorDeportivoDAO();
+		DirectorDAO.mostrarTodos().forEach(p -> {
+			Predicate<UsuarioDTO> byDirec = skill -> (skill.getId() == p.getId());
+			var result = listaTodos.stream().filter(byDirec).collect(Collectors.toList());
+			if (result.size() == 0) {
+				listaTodos.add(p);
+			}
+
+		});
+		
+	}
+
+	private void obtenerMasajista() {
+		MasajistaDAO MasajistaDAO = new MasajistaDAO();
+		MasajistaDAO.mostrarTodos().forEach(p -> {
+			Predicate<UsuarioDTO> byCiclis = skill -> (skill.getId() == p.getId());
+			var result = listaTodos.stream().filter(byCiclis).collect(Collectors.toList());
+			if (result.size() == 0) {
+				listaTodos.add(p);
+			}
+
+		});
+	}
+
 	@Override
 	public UsuarioDTO verificarUsuario(String u, String c) {
 		for (UsuarioDTO usuario : listaUsuarios) {
@@ -136,5 +164,6 @@ public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 		}
 		return null;
 	}
+	
 
 }

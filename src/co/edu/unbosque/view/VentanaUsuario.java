@@ -88,7 +88,7 @@ public class VentanaUsuario extends JFrame {
 
 	public void panelAdministrador()
 	{
-		nuevoPanel(new PanelAdministrador(this));
+		nuevoPanel(pnlAdministrador);
 	}
 
 	public void panelCiclista() {

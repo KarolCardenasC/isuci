@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import co.edu.unbosque.model.CiclistaDTO;
+import co.edu.unbosque.model.persistence.CiclistaDAO;
 import co.edu.unbosque.model.persistence.FileHandler;
 
 public class PanelDirector extends MainPanel implements ActionListener {
@@ -109,8 +110,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			pnlIzquierda = new JPanel();
 		}
 
-		pnlIzquierda.setBounds(
-				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.horizontal")),
+		pnlIzquierda.setBounds(Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.vertical")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.ancho")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.alto")));
@@ -197,7 +197,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 			lblGeneroTit = this.crearLabel("lblGenero.titulo", 600, 440);
 			pnlDerecha.add(lblGeneroTit);
-			
+
 			lblEquipoTit = this.crearLabel("lblEquipo.titulo", 610, 20);
 			pnlDerecha.add(lblEquipoTit);
 
@@ -221,7 +221,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 			lblGenero = this.crearLabel("lblGenero.perfil", 600, 460);
 			pnlDerecha.add(lblGenero);
-			
+
 			lblEquipo = this.crearLabel("lblEquipo.perfil", 625, 52);
 			pnlDerecha.add(lblEquipo);
 
@@ -284,7 +284,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			}
 			pnlDerecha.add(lblGenero);
 			pnlDerecha.add(jcGenero);
-			
+
 			lblEquipo = this.crearLabel("lblEquipo.titulo", 600, 20);
 			jtEquipo = this.crearTextField("lblEquipo.perfil", 600, 52);
 			pnlDerecha.add(lblEquipo);
@@ -323,7 +323,6 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			 */
 
 			btnGuardar.setVisible(false);
-
 			mostrarCartas();
 
 			revalidate();
@@ -352,6 +351,9 @@ public class PanelDirector extends MainPanel implements ActionListener {
 	}
 
 	public void mostrarCartas() {
+		if (lstCiclistas == null) {
+			return;
+		}
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(5, 200, 940, 440);
 
@@ -443,6 +445,10 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 		case "equipo":
 			opcion = e.getActionCommand();
+			if ("equipo".equals(opcion)) {
+				CiclistaDAO ciclistaDAO = new CiclistaDAO();
+				lstCiclistas = ciclistaDAO.listaCiclistas(opcion);
+			}
 			iniciarPanelDerecho();
 			break;
 

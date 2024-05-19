@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import co.edu.unbosque.model.CiclistaDTO;
+import co.edu.unbosque.model.UsuarioDTO;
 
 /**
  * The Item class represents a graphical component in the form of a JPanel 
@@ -23,6 +24,7 @@ import co.edu.unbosque.model.CiclistaDTO;
 public class Item extends JPanel {
 
 	private static CiclistaDTO ciclista;
+	private static UsuarioDTO usuario;	
 	private static JButton btnInfo;
 	private static JButton btnAdd;
 
@@ -34,6 +36,11 @@ public class Item extends JPanel {
 	
 	public Item(CiclistaDTO ciclista) {
 		this.ciclista = ciclista;
+		this.btnInfo = new JButton();
+	}
+	
+	public Item(UsuarioDTO usuario) {
+		this.usuario = usuario;
 		this.btnInfo = new JButton();
 	}
 
@@ -87,6 +94,49 @@ public class Item extends JPanel {
 
 		return pnlItem;
 
+	}
+	public static JPanel getItemUsuarios(int x, int y) {
+		JPanel pnlItem = new JPanel();
+		pnlItem.setLayout(null);
+		pnlItem.setBounds(x, y, 200, 300);
+		pnlItem.setToolTipText("Usuario " + Long.toString(usuario.getCedula()));
+		pnlItem.setBackground(Color.cyan);
+		
+		String labelNombre = "<html>" + usuario.getNombre();
+		String labelCedula = "<html>ID: " + Long.toString(usuario.getCedula());
+		
+		JLabel lblNom = new JLabel(labelNombre);
+		lblNom.setBounds(15, -5, 150, 80);
+		lblNom.setFont(new Font("", 1, 15));
+		lblNom.setForeground(Color.BLACK);
+		pnlItem.add(lblNom);
+		
+		JLabel lblIdent = new JLabel(labelCedula);
+		lblIdent.setBounds(70, 248, 125, 40);
+		lblIdent.setFont(new Font("", 1, 20));
+		lblIdent.setForeground(Color.BLACK);
+		pnlItem.add(lblIdent);
+		
+		ImageIcon imagenInfo = new ImageIcon("imgs/infoUsuario.png");
+		ImageIcon imageIconInfo = new ImageIcon(imagenInfo.getImage().getScaledInstance(42, 42, Image.SCALE_DEFAULT));
+		
+		JLabel imgUsuario = new JLabel();
+		imgUsuario.setBounds(50, 100, 120, 120);
+		ImageIcon img = new ImageIcon("imgs/" + usuario.getImagen());
+		ImageIcon imageIcon = new ImageIcon(img.getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT));
+		
+		imgUsuario.setIcon(imageIcon);
+		pnlItem.add(imgUsuario);
+		
+		btnInfo.setBounds(149, 15, 42, 42);
+		btnInfo.setName("btnInfo_" + usuario.getCedula());
+		btnInfo.setIcon(imageIconInfo);
+		btnInfo.setContentAreaFilled(false);
+		btnInfo.setBorderPainted(false);
+		pnlItem.add(btnInfo);
+		
+		return pnlItem;
+		
 	}
 
 	/**

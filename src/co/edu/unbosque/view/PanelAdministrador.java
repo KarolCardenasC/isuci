@@ -19,7 +19,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import co.edu.unbosque.model.CiclistaDTO;
+import co.edu.unbosque.model.UsuarioDTO;
+import co.edu.unbosque.model.persistence.CiclistaDAO;
 import co.edu.unbosque.model.persistence.FileHandler;
+import co.edu.unbosque.model.persistence.UsuarioDAO;
 
 public class PanelAdministrador extends MainPanel implements ActionListener {
 
@@ -60,6 +63,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 	private JComboBox<String> jcGenero;
 
+	private JPanel pnlFondo;
 	private JPanel pnlDerecha;
 	private JPanel pnlIzquierda;
 	private JPanel pnlInferior;
@@ -67,19 +71,21 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 	private String imagen = this.getProperties().getProperty("lblImagen.perfil");
 	private String opcion = "perfilinicial";
 	private boolean imgCambio = false;
-
 	JLabel lblTitulo;
 	private JPanel generalPanel;
 	JScrollPane scrollPane;
 	private Item newItem;
-	private ArrayList<CiclistaDTO> lstCiclistas;
+	private ArrayList<UsuarioDTO> mostrarTodos;
 
 	private VentanaUsuario usuarioPanel;
+
+	private PanelSimulacion pnlSimulacion;
 
 	public PanelAdministrador(VentanaUsuario inicial) {
 
 		this.setProperties(FileHandler
 				.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties"));
+//		pnlSimulacion = new PanelSimulacion(this);
 		usuarioPanel = inicial;
 		setLayout(null);
 		initComponents();
@@ -87,6 +93,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 	}
 
 	public void initComponents() {
+
 		removeAll();
 		iniciarPanelDerecho();
 		iniciarPanelIzquierdo();
@@ -99,8 +106,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 			pnlIzquierda = new JPanel();
 		}
 
-		pnlIzquierda.setBounds(
-				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.horizontal")),
+		pnlIzquierda.setBounds(Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.vertical")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.ancho")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.alto")));
@@ -122,7 +128,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		btnActualizar = this.crearBoton("Actualizar Perfil Administrador", 20, 350, "");
 		pnlIzquierda.add(btnActualizar);
 
-		btnEquipo = this.crearBoton("Equipo Administrador", 20, 400, "");
+		btnEquipo = this.crearBoton("Usuarios", 20, 400, "");
 		pnlIzquierda.add(btnEquipo);
 
 		btnCerrar = this.crearBoton("Cerrar Sesión Administrador", 20, 600, "");
@@ -141,8 +147,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 			pnlDerecha.removeAll();
 		}
 
-		pnlDerecha.setBounds(
-				Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.horizontal")),
+		pnlDerecha.setBounds(Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.vertical")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.ancho")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.alto")));
@@ -260,17 +265,13 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 			break;
 
-		case "equipoadministrador":
+//		case "simulacion":
+//
+//			removeAll();
+//			PanelSimulacion();
+//			break;
 
-			lblNombre = this.crearLabel("lblNombreEquipo.titulo", 50, 50);
-			jtNombre = this.crearTextField("", 200, 50);
-			pnlDerecha.add(lblNombre);
-			pnlDerecha.add(jtNombre);
-
-			lblTiempo = this.crearLabel("lblTiempoEquipo.titulo", 50, 100);
-			jtTiempo = this.crearTextField("", 200, 100);
-			pnlDerecha.add(lblTiempo);
-			pnlDerecha.add(jtTiempo);
+		case "usuarios":
 
 			lblUsuario = this.crearLabel("lblCiclistasEquipo.titulo", 50, 170);
 			pnlDerecha.add(lblUsuario);
@@ -279,6 +280,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 			 * INTENTAR PONER LAS CARTAS DE LOS CICLISTAS
 			 */
 
+			btnGuardar.setVisible(false);
 			mostrarCartas();
 
 			revalidate();
@@ -307,6 +309,10 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 	}
 
 	public void mostrarCartas() {
+		if (mostrarTodos == null) {
+			return;
+		}
+
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(5, 200, 940, 440);
 
@@ -316,11 +322,11 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 		int x = 80;
 		int y = 60;
-		int heightFinal = lstCiclistas.size();
+		int heightFinal = mostrarTodos.size();
 
-		for (CiclistaDTO ciclista : lstCiclistas) {
-			newItem = new Item(ciclista);
-			generalPanel.add(newItem.getItem(x, y));
+		for (UsuarioDTO usuario : mostrarTodos) {
+			newItem = new Item(usuario);
+			generalPanel.add(newItem.getItemUsuarios(x, y));
 
 			if (x + 205 > 800) {
 				x = 80;
@@ -332,7 +338,6 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 		double res = Math.ceil(heightFinal / 4.0);
 		if (((res * 300) + 120) + (res * 5) > 700) {
-
 			heightFinal = (int) ((res * 300) + 120 + (res * 5));
 		} else {
 			heightFinal = 700;
@@ -394,13 +399,32 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 		case "actualizarperfiladministrador":
 
-		case "equipoadministrador":
+		case "simulacion":
+
+		case "usuarios":
 			opcion = e.getActionCommand();
+			if ("usuarios".equals(opcion)) {
+				UsuarioDAO UsuarioDAO = new UsuarioDAO();
+				mostrarTodos = UsuarioDAO.mostrarTodos();
+
+			}
 			iniciarPanelDerecho();
 			break;
 
 		}
 
+	}
+
+	public void nuevoPanel(JPanel panelActual) {
+		pnlDerecha.removeAll();
+
+		if (panelActual != null)
+			pnlDerecha.add(panelActual);
+
+	}
+
+	private void PanelSimulacion() {
+		nuevoPanel(pnlSimulacion);
 	}
 
 	public JButton getBtnImagen() {
@@ -745,14 +769,6 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 	public void setNewItem(Item newItem) {
 		this.newItem = newItem;
-	}
-
-	public ArrayList<CiclistaDTO> getLstCiclistas() {
-		return lstCiclistas;
-	}
-
-	public void setLstCiclistas(ArrayList<CiclistaDTO> lstCiclistas) {
-		this.lstCiclistas = lstCiclistas;
 	}
 
 	public VentanaUsuario getUsuarioPanel() {
