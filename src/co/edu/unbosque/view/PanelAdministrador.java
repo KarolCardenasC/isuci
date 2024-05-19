@@ -210,7 +210,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		case "actualizarperfiladministrador":
 
 			lblImagen = this.crearLabel("", new Rectangle(425, 20, 150, 150), "actualizarImagen.png");
-			btnImagen = this.crearBoton("Imagen Director", 400, 180, "");
+			btnImagen = this.crearBoton("Imagen Administrador", 400, 180, "");
 			pnlDerecha.add(lblImagen);
 			pnlDerecha.add(btnImagen);
 
@@ -371,16 +371,16 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		case "imagenadministrador":
 			JFileChooser eleccion = new JFileChooser();
 
-			eleccion.setCurrentDirectory(new File("imgs"));
+			eleccion.setCurrentDirectory(new File("imgs/users"));
 			eleccion.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
 			eleccion.addPropertyChangeListener(JFileChooser.DIRECTORY_CHANGED_PROPERTY, new PropertyChangeListener() {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
 					File folderSelec = eleccion.getCurrentDirectory();
-					if (!folderSelec.getAbsolutePath().equals("imgs")) {
+					if (!folderSelec.getAbsolutePath().equals("imgs/users")) {
 
-						eleccion.setCurrentDirectory(new File("imgs"));
+						eleccion.setCurrentDirectory(new File("imgs/users"));
 					}
 				}
 			});
@@ -388,7 +388,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 			int resultado = eleccion.showOpenDialog(this);
 			if (resultado == JFileChooser.APPROVE_OPTION) {
 				String nombreArchivo = eleccion.getSelectedFile().getName();
-				imagen = nombreArchivo;
+				imagen = "users/" + nombreArchivo;
 				imgCambio = true;
 
 			}

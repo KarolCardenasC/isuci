@@ -130,7 +130,7 @@ public class DirectorDeportivoDAO implements CRUDOperation<DirectorDeportivoDTO>
 	@Override
 	public DirectorDeportivoDTO buscarGmail(String g) {
 		for (int i = 0; i < listaDirectoresDeportivos.size(); i++) {
-			if (listaDirectoresDeportivos.get(i).getCorreo().contains(g)) {
+			if (listaDirectoresDeportivos.get(i).getCorreo().equals(g)) {
 				return listaDirectoresDeportivos.get(i);
 
 			}

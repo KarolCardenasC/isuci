@@ -132,7 +132,7 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 	@Override
 	public SprinterDTO buscarGmail(String g) {
 		for (int i = 0; i < listaSprinters.size(); i++) {
-			if (listaSprinters.get(i).getCorreo().contains(g)) {
+			if (listaSprinters.get(i).getCorreo().equals(g)) {
 				return listaSprinters.get(i);
 
 			}

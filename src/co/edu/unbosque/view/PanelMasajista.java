@@ -224,7 +224,7 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 			lblEquipo = this.crearLabel("lblEquipo.perfil", 625, 559);
 			pnlDerecha.add(lblEquipo);
 
-			imgDatos = "perfilDatosMasajista.jpg";
+			imgDatos = "perfilDatos.jpg";
 			
 			pnlInferior.setBackground(new Color(255, 255, 255));
 
@@ -322,8 +322,6 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.ancho")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.alto")));
 		pnlInferior.setLayout(null);
-		
-		pnlInferior.setBackground(new Color(255, 255, 255));
 
 		btnGuardar = this.crearBotonInvisible("Guardar Masajista", new Rectangle(720, 0, 200, 50), "btnGuardar.jpg");
 		pnlInferior.add(btnGuardar);

@@ -2,6 +2,7 @@ package co.edu.unbosque.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -20,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import co.edu.unbosque.model.CiclistaDTO;
@@ -58,6 +60,8 @@ public class PanelDirector extends MainPanel implements ActionListener {
 	private JLabel lblEquipoTit;
 	private JLabel lblTiempo;
 	private JLabel lblNombrePerfil;
+	private JLabel imagenPanel;
+	private JLabel imagenPanelIzq;
 
 	private JTextField jtNombre;
 	private JTextField jtCedula;
@@ -116,30 +120,39 @@ public class PanelDirector extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.alto")));
 		pnlIzquierda.setLayout(null);
 
-		lblImagenPerfil = this.crearLabel("", new Rectangle(55, 50, 150, 150),
+		lblImagenPerfil = this.crearLabel("", new Rectangle(49, 31, 155, 165),
 				this.getProperties().getProperty("lblImagen.perfil"));
 		pnlIzquierda.add(lblImagenPerfil);
 
-		lblNombrePerfil = this.crearLabel("lblNombre.perfil", 25, 210);
+		lblNombrePerfil = this.crearLabel("lblNombre.perfil", 10, 235);
+		lblNombrePerfil.setSize(230, 60);
+		lblNombrePerfil.setForeground(new Color(245, 227, 187));
+		lblNombrePerfil.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlIzquierda.add(lblNombrePerfil);
 
-		lblRol = this.crearLabel("lblRol.director", 50, 240);
+		lblRol = this.crearLabel("lblRol.masajista", 5, 300);
+		lblRol.setFont(new Font("Tahoma", Font.BOLD | Font.PLAIN, 20));
+		lblRol.setForeground(Color.white);
+		lblRol.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlIzquierda.add(lblRol);
-
-		btnPerfil = this.crearBoton("Perfil Director", 20, 300, "");
+		
+		btnPerfil = this.crearBotonInvisible("Perfil Director", new Rectangle(0, 363, 250, 48), "");
 		pnlIzquierda.add(btnPerfil);
 
-		btnActualizar = this.crearBoton("Actualizar Perfil Director", 20, 350, "");
+		btnActualizar = this.crearBotonInvisible("Actualizar Perfil Director", new Rectangle(0, 411, 250, 48), "");
 		pnlIzquierda.add(btnActualizar);
 
-		btnEliminar = this.crearBoton("Eliminar Perfil Director", 20, 400, "");
+		btnEliminar = this.crearBotonInvisible("Eliminar Perfil Director", new Rectangle(0, 459, 250, 48), "");
 		pnlIzquierda.add(btnEliminar);
 
-		btnEquipo = this.crearBoton("Equipo", 20, 450, "");
+		btnEquipo = this.crearBotonInvisible("Equipo", new Rectangle(0, 507, 250, 48), "");
 		pnlIzquierda.add(btnEquipo);
 
-		btnCerrar = this.crearBoton("Cerrar Sesión Director", 20, 600, "");
+		btnCerrar = this.crearBotonInvisible("Cerrar Sesión Director", new Rectangle(0, 592, 250, 68), "");
 		pnlIzquierda.add(btnCerrar);
+		
+		imagenPanelIzq = this.crearLabel("", new Rectangle(0, 0, 250, 660), "izquierdaDirector.jpg");
+		pnlIzquierda.add(imagenPanelIzq);
 
 		pnlIzquierda.repaint();
 		pnlIzquierda.revalidate();
@@ -160,123 +173,133 @@ public class PanelDirector extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlDerecha.alto")));
 		pnlDerecha.setLayout(null);
 
+		String imgDatos = "";
+
 		switch (opcion) {
 
 		case "perfilinicial":
-			lblImagen = this.crearLabel("", new Rectangle(200, 20, 600, 600), "directorIni.png");
-			pnlDerecha.add(lblImagen);
 			btnGuardar.setVisible(false);
+			imgDatos = "perfilInicialDirector.jpg";
+			pnlInferior.setBackground(new Color(255, 255, 255));
 			break;
 
 		case "perfildirector":
 
-			lblImagen = this.crearLabel("", new Rectangle(425, 50, 150, 150),
+			lblImagen = this.crearLabel("", new Rectangle(431, 25, 160, 155),
 					this.getProperties().getProperty("lblImagen.perfil"));
 			pnlDerecha.add(lblImagen);
 
-			lblNombre = this.crearLabel("lblNombre.perfil", 425, 230);
+			lblNombre = this.crearLabel("lblNombre.perfil", 345, 190);
+			lblNombre.setSize(360, 60);
+			lblNombre.setForeground(new Color(71, 30, 1));
+			lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 			pnlDerecha.add(lblNombre);
 
-			lblCedulaTit = this.crearLabel("lblCedula.titulo", 200, 300);
+			lblCedulaTit = this.crearLabel("lblCedula.titulo", 120, 240);
 			pnlDerecha.add(lblCedulaTit);
 
-			lblNacionalidadTit = this.crearLabel("lblNacionalidad.titulo", 200, 370);
+			lblNacionalidadTit = this.crearLabel("lblNacionalidad.titulo", 120, 335);
 			pnlDerecha.add(lblNacionalidadTit);
 
-			lblCorreoTit = this.crearLabel("lblCorreo.titulo", 200, 440);
+			lblCorreoTit = this.crearLabel("lblCorreo.titulo", 120, 427);
 			pnlDerecha.add(lblCorreoTit);
 
-			lblUsuarioTit = this.crearLabel("lblUsuario.titulo", 200, 510);
+			lblUsuarioTit = this.crearLabel("lblUsuario.titulo", 120, 525);
 			pnlDerecha.add(lblUsuarioTit);
 
-			lblIdTit = this.crearLabel("lblId.titulo", 600, 300);
+			lblIdTit = this.crearLabel("lblId.titulo", 610, 240);
 			pnlDerecha.add(lblIdTit);
 
-			lblContrasenaTit = this.crearLabel("lblContrasena.titulo", 600, 370);
+			lblContrasenaTit = this.crearLabel("lblContrasena.titulo", 610, 335);
 			pnlDerecha.add(lblContrasenaTit);
 
-			lblGeneroTit = this.crearLabel("lblGenero.titulo", 600, 440);
+			lblGeneroTit = this.crearLabel("lblGenero.titulo", 610, 427);
 			pnlDerecha.add(lblGeneroTit);
 
-			lblEquipoTit = this.crearLabel("lblEquipo.titulo", 610, 20);
+			lblEquipoTit = this.crearLabel("lblEquipo.titulo", 610, 525);
 			pnlDerecha.add(lblEquipoTit);
 
-			lblCedula = this.crearLabel("lblCedula.perfil", 200, 320);
+			lblCedula = this.crearLabel("lblCedula.perfil", 135, 274);
 			pnlDerecha.add(lblCedula);
 
-			lblNacionalidad = this.crearLabel("lblNacionalidad.perfil", 200, 390);
+			lblNacionalidad = this.crearLabel("lblNacionalidad.perfil", 135, 369);
 			pnlDerecha.add(lblNacionalidad);
 
-			lblCorreo = this.crearLabel("lblCorreo.perfil", 200, 460);
+			lblCorreo = this.crearLabel("lblCorreo.perfil", 135, 461);
+			lblCorreo.setSize(320, 35);
 			pnlDerecha.add(lblCorreo);
 
-			lblUsuario = this.crearLabel("lblUsuario.perfil", 200, 530);
+			lblUsuario = this.crearLabel("lblUsuario.perfil", 135, 559);
+			lblUsuario.setSize(320, 35);
 			pnlDerecha.add(lblUsuario);
 
-			lblId = this.crearLabel("lblId.perfil", 600, 320);
+			lblId = this.crearLabel("lblId.perfil", 625, 274);
+			lblId.setSize(320, 35);
 			pnlDerecha.add(lblId);
 
-			lblContrasena = this.crearLabel("lblContrasena.perfil", 600, 390);
+			lblContrasena = this.crearLabel("lblContrasena.perfil", 625, 369);
 			pnlDerecha.add(lblContrasena);
 
-			lblGenero = this.crearLabel("lblGenero.perfil", 600, 460);
+			lblGenero = this.crearLabel("lblGenero.perfil", 625, 461);
 			pnlDerecha.add(lblGenero);
 
-			lblEquipo = this.crearLabel("lblEquipo.perfil", 625, 52);
+			lblEquipo = this.crearLabel("lblEquipo.perfil", 625, 559);
 			pnlDerecha.add(lblEquipo);
+
+			imgDatos = "perfilDatos.jpg";
+
+			pnlInferior.setBackground(new Color(255, 255, 255));
 
 			btnGuardar.setVisible(false);
 			break;
 
 		case "actualizarperfildirector":
 
-			lblImagen = this.crearLabel("", new Rectangle(425, 20, 150, 150), "actualizarImagen.png");
-			btnImagen = this.crearBoton("Imagen Director", 400, 180, "");
-			pnlDerecha.add(lblImagen);
+			btnImagen = this.crearBotonInvisible("Imagen Director", new Rectangle(280, 12, 165, 160), "");
 			pnlDerecha.add(btnImagen);
 
-			lblNombre = this.crearLabel("lblNombre.titulo", 200, 300);
-			jtNombre = this.crearTextField("lblNombre.perfil", 200, 330);
+			lblNombre = this.crearLabel("lblNombre.titulo", 100, 185);
+			jtNombre = this.crearTextFieldInvisible("lblNombre.perfil", new Rectangle(120, 225, 335, 30));
 			pnlDerecha.add(lblNombre);
 			pnlDerecha.add(jtNombre);
 
-			lblCedula = this.crearLabel("lblCedula.titulo", 200, 380);
-			jtCedula = this.crearTextField("lblCedula.perfil", 200, 410);
+			lblCedula = this.crearLabel("lblCedula.titulo", 100, 275);
+			jtCedula = this.crearTextFieldInvisible("lblCedula.perfil", new Rectangle(120, 313, 335, 30));
 			jtCedula.setEnabled(false);
 			pnlDerecha.add(lblCedula);
 			pnlDerecha.add(jtCedula);
 
-			lblNacionalidad = this.crearLabel("lblNacionalidad.titulo", 200, 460);
-			jtNacionalidad = this.crearTextField("lblNacionalidad.perfil", 200, 490);
+			lblNacionalidad = this.crearLabel("lblNacionalidad.titulo", 100, 355);
+			jtNacionalidad = this.crearTextFieldInvisible("lblNacionalidad.perfil", new Rectangle(120, 393, 335, 30));
 			pnlDerecha.add(lblNacionalidad);
 			pnlDerecha.add(jtNacionalidad);
 
-			lblCorreo = this.crearLabel("lblCorreo.titulo", 200, 540);
-			jtCorreo = this.crearTextField("lblCorreo.perfil", 200, 570);
+			lblCorreo = this.crearLabel("lblCorreo.titulo", 100, 435);
+			jtCorreo = this.crearTextFieldInvisible("lblCorreo.perfil", new Rectangle(120, 475, 335, 30));
 			pnlDerecha.add(lblCorreo);
 			pnlDerecha.add(jtCorreo);
 
-			lblUsuario = this.crearLabel("lblUsuario.titulo", 600, 300);
-			jtUsuario = this.crearTextField("lblUsuario.perfil", 600, 330);
+			lblUsuario = this.crearLabel("lblUsuario.titulo", 100, 515);
+			jtUsuario = this.crearTextFieldInvisible("lblUsuario.perfil", new Rectangle(120, 554, 335, 30));
 			jtUsuario.setEnabled(false);
 			pnlDerecha.add(lblUsuario);
 			pnlDerecha.add(jtUsuario);
 
-			lblId = this.crearLabel("lblId.titulo", 600, 380);
-			jtId = this.crearTextField("lblId.perfil", 600, 410);
+			lblId = this.crearLabel("lblId.titulo", 555, 185);
+			jtId = this.crearTextFieldInvisible("lblId.perfil", new Rectangle(575, 225, 335, 30));
 			jtId.setEnabled(false);
 			pnlDerecha.add(lblId);
 			pnlDerecha.add(jtId);
 
-			lblContrasena = this.crearLabel("lblContrasena.titulo", 600, 460);
-			jtContrasena = this.crearTextField("lblContrasena.perfil", 600, 490);
+			lblContrasena = this.crearLabel("lblContrasena.titulo", 555, 275);
+			jtContrasena = this.crearTextFieldInvisible("lblContrasena.perfil", new Rectangle(575, 313, 335, 30));
 			pnlDerecha.add(lblContrasena);
 			pnlDerecha.add(jtContrasena);
 
 			String[] listaGenero = { "Hombre", "Mujer" };
 
-			lblGenero = this.crearLabel("lblGenero.titulo", 600, 540);
-			jcGenero = this.crearComboBox(listaGenero, 600, 570);
+			lblGenero = this.crearLabel("lblGenero.titulo", 555, 355);
+			jcGenero = this.crearComboBoxInvisible(listaGenero, new Rectangle(575, 393, 335, 30));
 			if (this.getProperties().getProperty("lblGenero.perfil").contains("Hombre")) {
 				jcGenero.setSelectedIndex(0);
 			} else {
@@ -285,10 +308,15 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			pnlDerecha.add(lblGenero);
 			pnlDerecha.add(jcGenero);
 
-			lblEquipo = this.crearLabel("lblEquipo.titulo", 600, 20);
-			jtEquipo = this.crearTextField("lblEquipo.perfil", 600, 52);
+			lblEquipo = this.crearLabel("lblEquipo.titulo", 555, 435);
+			jtEquipo = this.crearTextFieldInvisible("lblEquipo.perfil", new Rectangle(575, 475, 335, 30));
+			jtEquipo.setEnabled(false);
 			pnlDerecha.add(lblEquipo);
 			pnlDerecha.add(jtEquipo);
+
+			pnlInferior.setBackground(new Color(255, 243, 217));
+
+			imgDatos = "perfilActDirector.jpg";
 
 			btnGuardar.setVisible(true);
 
@@ -325,10 +353,15 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			btnGuardar.setVisible(false);
 			mostrarCartas();
 
+			imgDatos = "equipoDirector.jpg";
+
 			revalidate();
 
 			break;
 		}
+
+		imagenPanel = this.crearLabel("", new Rectangle(0, 0, 1050, 600), imgDatos);
+		pnlDerecha.add(imagenPanel);
 
 		pnlDerecha.repaint();
 		pnlDerecha.revalidate();
@@ -344,7 +377,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.alto")));
 		pnlInferior.setLayout(null);
 
-		btnGuardar = this.crearBoton("Guardar Director", 750, 10, "");
+		btnGuardar = this.crearBotonInvisible("Guardar Director", new Rectangle(720, 0, 200, 50), "btnGuardar.jpg");
 		pnlInferior.add(btnGuardar);
 
 		add(pnlInferior);
@@ -415,16 +448,16 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		case "imagendirector":
 			JFileChooser eleccion = new JFileChooser();
 
-			eleccion.setCurrentDirectory(new File("imgs"));
+			eleccion.setCurrentDirectory(new File("imgs/users"));
 			eleccion.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
 			eleccion.addPropertyChangeListener(JFileChooser.DIRECTORY_CHANGED_PROPERTY, new PropertyChangeListener() {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
 					File folderSelec = eleccion.getCurrentDirectory();
-					if (!folderSelec.getAbsolutePath().equals("imgs")) {
+					if (!folderSelec.getAbsolutePath().equals("imgs/users")) {
 
-						eleccion.setCurrentDirectory(new File("imgs"));
+						eleccion.setCurrentDirectory(new File("imgs/users"));
 					}
 				}
 			});
@@ -432,7 +465,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			int resultado = eleccion.showOpenDialog(this);
 			if (resultado == JFileChooser.APPROVE_OPTION) {
 				String nombreArchivo = eleccion.getSelectedFile().getName();
-				imagen = nombreArchivo;
+				imagen = "users/" + nombreArchivo;
 				imgCambio = true;
 
 			}
@@ -862,6 +895,22 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 	public void setJtEquipo(JTextField jtEquipo) {
 		this.jtEquipo = jtEquipo;
+	}
+
+	public JLabel getImagenPanel() {
+		return imagenPanel;
+	}
+
+	public void setImagenPanel(JLabel imagenPanel) {
+		this.imagenPanel = imagenPanel;
+	}
+
+	public JLabel getImagenPanelIzq() {
+		return imagenPanelIzq;
+	}
+
+	public void setImagenPanelIzq(JLabel imagenPanelIzq) {
+		this.imagenPanelIzq = imagenPanelIzq;
 	}
 
 }

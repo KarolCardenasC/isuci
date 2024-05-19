@@ -130,7 +130,7 @@ public class EscaladorDAO implements CRUDOperation<EscaladorDTO> {
 	@Override
 	public EscaladorDTO buscarGmail(String g) {
 		for (int i = 0; i < listaEscaladores.size(); i++) {
-			if (listaEscaladores.get(i).getCorreo().contains(g)) {
+			if (listaEscaladores.get(i).getCorreo().equals(g)) {
 				return listaEscaladores.get(i);
 
 			}

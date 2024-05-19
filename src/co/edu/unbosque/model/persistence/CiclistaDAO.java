@@ -134,7 +134,7 @@ public class CiclistaDAO implements CRUDOperation<CiclistaDTO> {
 	@Override
 	public CiclistaDTO buscarGmail(String g) {
 		for (int i = 0; i < listaCiclistas.size(); i++) {
-			if (listaCiclistas.get(i).getCorreo().contains(g)) {
+			if (listaCiclistas.get(i).getCorreo().equals(g)) {
 				return listaCiclistas.get(i);
 
 			}

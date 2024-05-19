@@ -132,7 +132,7 @@ public class RodadorDAO implements CRUDOperation<RodadorDTO> {
 	@Override
 	public RodadorDTO buscarGmail(String g) {
 		for (int i = 0; i < listaRodadores.size(); i++) {
-			if (listaRodadores.get(i).getCorreo().contains(g)) {
+			if (listaRodadores.get(i).getCorreo().equals(g)) {
 				return listaRodadores.get(i);
 
 			}

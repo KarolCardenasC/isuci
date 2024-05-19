@@ -43,6 +43,7 @@ public class Controller implements ActionListener {
 		vf.getvU().getPnlCiclista().getBtnGuardar().addActionListener(this);
 		vf.getvU().getPnlMasajista().getBtnGuardar().addActionListener(this);
 		vf.getvU().getPnlDirector().getBtnGuardar().addActionListener(this);
+		vf.getvU().getPnlAdministrador().getBtnGuardar().addActionListener(this);
 
 		vf.getvU().getPnlCiclista().getBtnEliminar().addActionListener(this);
 		vf.getvU().getPnlMasajista().getBtnEliminar().addActionListener(this);
@@ -361,6 +362,7 @@ public class Controller implements ActionListener {
 					director.getNacionalidad());
 
 			vf.getvU().getPnlDirector().iniciarPanelDerecho();
+			vf.getvU().getPnlDirector().getPnlIzquierda().remove(vf.getvU().getPnlDirector().getImagenPanelIzq());
 			vf.getvU().getPnlDirector().getPnlIzquierda().remove(vf.getvU().getPnlDirector().getLblImagenPerfil());
 			vf.getvU().getPnlDirector().getPnlIzquierda().remove(vf.getvU().getPnlDirector().getLblNombrePerfil());
 			vf.getvU().getPnlDirector().getPnlIzquierda().remove(vf.getvU().getPnlDirector().getLblRol());
@@ -550,7 +552,7 @@ public class Controller implements ActionListener {
 			String usuario = vf.getvU().getPnlDirector().getJtUsuario().getText();
 			String correo = vf.getvU().getPnlDirector().getJtCorreo().getText();
 			System.out.println(correo + ", " + usuario);
-			if (!correo.contains(usuario)) {
+			if (!correo.equals(usuario)) {
 				verificarGmailDuplicado(correo);
 			}
 			String contrasena = vf.getvU().getPnlDirector().getJtContrasena().getText();
@@ -581,6 +583,7 @@ public class Controller implements ActionListener {
 				vf.getvU().getPnlDirector().getProperties().setProperty("lblNacionalidad.perfil",
 						director.getNacionalidad());
 
+				vf.getvU().getPnlDirector().getPnlIzquierda().remove(vf.getvU().getPnlDirector().getImagenPanelIzq());
 				vf.getvU().getPnlDirector().getPnlIzquierda().remove(vf.getvU().getPnlDirector().getLblImagenPerfil());
 				vf.getvU().getPnlDirector().getPnlIzquierda().remove(vf.getvU().getPnlDirector().getLblNombrePerfil());
 				vf.getvU().getPnlDirector().getPnlIzquierda().remove(vf.getvU().getPnlDirector().getLblRol());
@@ -616,7 +619,7 @@ public class Controller implements ActionListener {
 			long cedula = Long.parseLong(vf.getvU().getPnlMasajista().getJtCedula().getText());
 			String usuario = vf.getvU().getPnlMasajista().getJtCorreo().getText();
 			String correo = vf.getvU().getPnlMasajista().getJtCorreo().getText();
-			if (!correo.contains(usuario)) {
+			if (!correo.equals(usuario)) {
 				verificarGmailDuplicado(correo);
 			}
 			String contrasena = vf.getvU().getPnlMasajista().getJtContrasena().getText();
@@ -690,7 +693,7 @@ public class Controller implements ActionListener {
 			long cedula = Long.parseLong(vf.getvU().getPnlCiclista().getJtCedula().getText());
 			String usuario = vf.getvU().getPnlCiclista().getJtCorreo().getText();
 			String correo = vf.getvU().getPnlCiclista().getJtCorreo().getText();
-			if (!correo.contains(usuario)) {
+			if (!correo.equals(usuario)) {
 				verificarGmailDuplicado(correo);
 			}
 			String contrasena = vf.getvU().getPnlCiclista().getJtContrasena().getText();
@@ -708,7 +711,7 @@ public class Controller implements ActionListener {
 					+ vf.getvU().getPnlCiclista().getProperties().getProperty("lblNombre.perfil") + "?") == 0) {
 
 				if (especialidad
-						.contains(vf.getvU().getPnlCiclista().getProperties().getProperty("lblEspecialidad.perfil"))) {
+						.equals(vf.getvU().getPnlCiclista().getProperties().getProperty("lblEspecialidad.perfil"))) {
 
 					switch (especialidad) {
 					case "Ninguna":
@@ -1084,7 +1087,7 @@ public class Controller implements ActionListener {
 				break;
 			}
 
-			if (mensaje.contains("si")) {
+			if (mensaje.equals("si")) {
 				vf.getCon().imprimirTextoVE("Se ha actualizado el ciclista con éxito");
 			}
 
@@ -1115,7 +1118,7 @@ public class Controller implements ActionListener {
 			long cedula = Long.parseLong(vf.getvU().getPnlAdministrador().getJtCedula().getText());
 			String usuario = vf.getvU().getPnlAdministrador().getJtUsuario().getText();
 			String correo = vf.getvU().getPnlAdministrador().getJtCorreo().getText();
-			if (!correo.contains(usuario)) {
+			if (!correo.equals(usuario)) {
 				verificarGmailDuplicado(correo);
 			}
 			String contrasena = vf.getvU().getPnlAdministrador().getJtContrasena().getText();

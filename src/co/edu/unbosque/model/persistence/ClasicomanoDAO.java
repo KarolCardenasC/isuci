@@ -130,7 +130,7 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 	@Override
 	public ClasicomanoDTO buscarGmail(String g) {
 		for (int i = 0; i < listaClasicomanos.size(); i++) {
-			if (listaClasicomanos.get(i).getCorreo().contains(g)) {
+			if (listaClasicomanos.get(i).getCorreo().equals(g)) {
 				return listaClasicomanos.get(i);
 
 			}

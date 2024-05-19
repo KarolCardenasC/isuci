@@ -131,7 +131,7 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 	@Override
 	public GregarioDTO buscarGmail(String g) {
 		for (int i = 0; i < listaGregarios.size(); i++) {
-			if (listaGregarios.get(i).getCorreo().contains(g)) {
+			if (listaGregarios.get(i).getCorreo().equals(g)) {
 				return listaGregarios.get(i);
 
 			}

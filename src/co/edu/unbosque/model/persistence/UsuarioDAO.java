@@ -157,7 +157,7 @@ public class UsuarioDAO implements CRUDOperation<UsuarioDTO> {
 	@Override
 	public UsuarioDTO buscarGmail(String g) {
 		for (int i = 0; i < listaUsuarios.size(); i++) {
-			if (listaUsuarios.get(i).getCorreo().contains(g)) {
+			if (listaUsuarios.get(i).getCorreo().equals(g)) {
 				return listaUsuarios.get(i);
 
 			}

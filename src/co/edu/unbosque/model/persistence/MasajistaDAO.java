@@ -129,7 +129,7 @@ public class MasajistaDAO implements CRUDOperation<MasajistaDTO> {
 	@Override
 	public MasajistaDTO buscarGmail(String g) {
 		for (int i = 0; i < listaMasajistas.size(); i++) {
-			if (listaMasajistas.get(i).getCorreo().contains(g)) {
+			if (listaMasajistas.get(i).getCorreo().equals(g)) {
 				return listaMasajistas.get(i);
 
 			}

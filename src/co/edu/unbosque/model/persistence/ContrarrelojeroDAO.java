@@ -131,7 +131,7 @@ public class ContrarrelojeroDAO implements CRUDOperation<ContrarrelojeroDTO> {
 	@Override
 	public ContrarrelojeroDTO buscarGmail(String g) {
 		for (int i = 0; i < listaContrarrelojeros.size(); i++) {
-			if (listaContrarrelojeros.get(i).getCorreo().contains(g)) {
+			if (listaContrarrelojeros.get(i).getCorreo().equals(g)) {
 				return listaContrarrelojeros.get(i);
 
 			}
