@@ -95,8 +95,7 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 			pnlIzquierda = new JPanel();
 		}
 
-		pnlIzquierda.setBounds(
-				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.horizontal")),
+		pnlIzquierda.setBounds(Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.horizontal")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.vertical")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.ancho")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlIzquierda.alto")));
@@ -106,8 +105,8 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 				this.getProperties().getProperty("lblImagen.perfil"));
 		pnlIzquierda.add(lblImagenPerfil);
 
-		lblNombrePerfil = this.crearLabel("lblNombre.perfil", 5, 235);
-		lblNombrePerfil.setSize(240, 60);
+		lblNombrePerfil = this.crearLabel("lblNombre.perfil", 10, 235);
+		lblNombrePerfil.setSize(230, 60);
 		lblNombrePerfil.setForeground(new Color(245, 227, 187));
 		lblNombrePerfil.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlIzquierda.add(lblNombrePerfil);
@@ -159,16 +158,17 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 		case "perfilinicial":
 			btnGuardar.setVisible(false);
 			imgDatos = "perfilInicialMasajista.jpg";
+			pnlInferior.setBackground(new Color(255, 255, 255));
 			break;
 
 		case "perfilmasajista":
 
-			lblImagen = this.crearLabel("", new Rectangle(425, 15, 180, 180),
+			lblImagen = this.crearLabel("", new Rectangle(431, 25, 160, 155),
 					this.getProperties().getProperty("lblImagen.perfil"));
 			pnlDerecha.add(lblImagen);
 
-			lblNombre = this.crearLabel("lblNombre.perfil", 405, 180);
-			lblNombre.setSize(240, 60);
+			lblNombre = this.crearLabel("lblNombre.perfil", 345, 190);
+			lblNombre.setSize(360, 60);
 			lblNombre.setForeground(new Color(71, 30, 1));
 			lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 			pnlDerecha.add(lblNombre);
@@ -185,16 +185,16 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 			lblUsuarioTit = this.crearLabel("lblUsuario.titulo", 120, 525);
 			pnlDerecha.add(lblUsuarioTit);
 
-			lblIdTit = this.crearLabel("lblId.titulo", 610, 285);
+			lblIdTit = this.crearLabel("lblId.titulo", 610, 240);
 			pnlDerecha.add(lblIdTit);
 
-			lblContrasenaTit = this.crearLabel("lblContrasena.titulo", 610, 385);
+			lblContrasenaTit = this.crearLabel("lblContrasena.titulo", 610, 335);
 			pnlDerecha.add(lblContrasenaTit);
 
-			lblGeneroTit = this.crearLabel("lblGenero.titulo", 610, 480);
+			lblGeneroTit = this.crearLabel("lblGenero.titulo", 610, 427);
 			pnlDerecha.add(lblGeneroTit);
-			
-			lblEquipoTit = this.crearLabel("lblEquipo.titulo", 610, 20);
+
+			lblEquipoTit = this.crearLabel("lblEquipo.titulo", 610, 525);
 			pnlDerecha.add(lblEquipoTit);
 
 			lblCedula = this.crearLabel("lblCedula.perfil", 135, 274);
@@ -211,20 +211,22 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 			lblUsuario.setSize(320, 35);
 			pnlDerecha.add(lblUsuario);
 
-			lblId = this.crearLabel("lblId.perfil", 625, 317);
+			lblId = this.crearLabel("lblId.perfil", 625, 274);
 			lblId.setSize(320, 35);
 			pnlDerecha.add(lblId);
 
-			lblContrasena = this.crearLabel("lblContrasena.perfil", 625, 417);
+			lblContrasena = this.crearLabel("lblContrasena.perfil", 625, 369);
 			pnlDerecha.add(lblContrasena);
 
-			lblGenero = this.crearLabel("lblGenero.perfil", 625, 512);
+			lblGenero = this.crearLabel("lblGenero.perfil", 625, 461);
 			pnlDerecha.add(lblGenero);
-			
-			lblEquipo = this.crearLabel("lblEquipo.perfil", 625, 52);
+
+			lblEquipo = this.crearLabel("lblEquipo.perfil", 625, 559);
 			pnlDerecha.add(lblEquipo);
-			
+
 			imgDatos = "perfilDatosMasajista.jpg";
+			
+			pnlInferior.setBackground(new Color(255, 255, 255));
 
 			btnGuardar.setVisible(false);
 
@@ -232,53 +234,51 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 
 		case "actualizarperfilmasajista":
 
-			lblImagen = this.crearLabel("", new Rectangle(425, 20, 150, 150), "actualizarImagen.png");
-			btnImagen = this.crearBoton("Imagen Masajista", 400, 180, "");
-			pnlDerecha.add(lblImagen);
+			btnImagen = this.crearBotonInvisible("Imagen Masajista", new Rectangle(280, 12, 165, 160), "");
 			pnlDerecha.add(btnImagen);
 
-			lblNombre = this.crearLabel("lblNombre.titulo", 200, 270);
-			jtNombre = this.crearTextField("lblNombre.perfil", 200, 300);
+			lblNombre = this.crearLabel("lblNombre.titulo", 100, 185);
+			jtNombre = this.crearTextFieldInvisible("lblNombre.perfil", new Rectangle(120, 225, 335, 30));
 			pnlDerecha.add(lblNombre);
 			pnlDerecha.add(jtNombre);
 
-			lblCedula = this.crearLabel("lblCedula.titulo", 200, 350);
-			jtCedula = this.crearTextField("lblCedula.perfil", 200, 380);
+			lblCedula = this.crearLabel("lblCedula.titulo", 100, 275);
+			jtCedula = this.crearTextFieldInvisible("lblCedula.perfil", new Rectangle(120, 313, 335, 30));
 			jtCedula.setEnabled(false);
 			pnlDerecha.add(lblCedula);
 			pnlDerecha.add(jtCedula);
 
-			lblAniosExp = this.crearLabel("lblAniosExperiencia.titulo", 200, 430);
-			jtAniosExp = this.crearTextField("lblAniosExperiencia.perfil", 200, 460);
+			lblAniosExp = this.crearLabel("lblAniosExperiencia.titulo", 100, 355);
+			jtAniosExp = this.crearTextFieldInvisible("lblAniosExperiencia.perfil", new Rectangle(120, 393, 335, 30));
 			pnlDerecha.add(lblAniosExp);
 			pnlDerecha.add(jtAniosExp);
 
-			lblCorreo = this.crearLabel("lblCorreo.titulo", 200, 510);
-			jtCorreo = this.crearTextField("lblCorreo.perfil", 200, 540);
+			lblCorreo = this.crearLabel("lblCorreo.titulo", 100, 435);
+			jtCorreo = this.crearTextFieldInvisible("lblCorreo.perfil", new Rectangle(120, 475, 335, 30));
 			pnlDerecha.add(lblCorreo);
 			pnlDerecha.add(jtCorreo);
 
-			lblUsuario = this.crearLabel("lblUsuario.titulo", 600, 270);
-			jtUsuario = this.crearTextField("lblUsuario.perfil", 600, 300);
+			lblUsuario = this.crearLabel("lblUsuario.titulo", 100, 515);
+			jtUsuario = this.crearTextFieldInvisible("lblUsuario.perfil", new Rectangle(120, 554, 335, 30));
 			jtUsuario.setEnabled(false);
 			pnlDerecha.add(lblUsuario);
 			pnlDerecha.add(jtUsuario);
 
-			lblId = this.crearLabel("lblId.titulo", 600, 350);
-			jtId = this.crearTextField("lblId.perfil", 600, 380);
+			lblId = this.crearLabel("lblId.titulo", 555, 185);
+			jtId = this.crearTextFieldInvisible("lblId.perfil", new Rectangle(575, 225, 335, 30));
 			jtId.setEnabled(false);
 			pnlDerecha.add(lblId);
 			pnlDerecha.add(jtId);
 
-			lblContrasena = this.crearLabel("lblContrasena.titulo", 600, 430);
-			jtContrasena = this.crearTextField("lblContrasena.perfil", 600, 460);
+			lblContrasena = this.crearLabel("lblContrasena.titulo", 555, 275);
+			jtContrasena = this.crearTextFieldInvisible("lblContrasena.perfil", new Rectangle(575, 313, 335, 30));
 			pnlDerecha.add(lblContrasena);
 			pnlDerecha.add(jtContrasena);
 
 			String[] listaGenero = { "Hombre", "Mujer" };
 
-			lblGenero = this.crearLabel("lblGenero.titulo", 600, 510);
-			jcGenero = this.crearComboBox(listaGenero, 600, 540);
+			lblGenero = this.crearLabel("lblGenero.titulo", 555, 355);
+			jcGenero = this.crearComboBoxInvisible(listaGenero, new Rectangle(575, 393, 335, 30));
 			if (this.getProperties().getProperty("lblGenero.perfil").contains("Hombre")) {
 				jcGenero.setSelectedIndex(0);
 			} else {
@@ -286,12 +286,15 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 			}
 			pnlDerecha.add(lblGenero);
 			pnlDerecha.add(jcGenero);
-			
-			lblEquipo = this.crearLabel("lblEquipo.titulo", 600, 20);
-			jtEquipo = this.crearTextField("lblEquipo.perfil", 600, 52);
+
+			lblEquipo = this.crearLabel("lblEquipo.titulo", 555, 435);
+			jtEquipo = this.crearTextFieldInvisible("lblEquipo.perfil", new Rectangle(575, 475, 335, 30));
+			jtEquipo.setEnabled(false);
 			pnlDerecha.add(lblEquipo);
 			pnlDerecha.add(jtEquipo);
 			
+			pnlInferior.setBackground(new Color(255, 243, 217));
+
 			imgDatos = "perfilActMasajista.jpg";
 
 			btnGuardar.setVisible(true);
@@ -319,12 +322,11 @@ public class PanelMasajista extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.ancho")),
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.alto")));
 		pnlInferior.setLayout(null);
+		
+		pnlInferior.setBackground(new Color(255, 255, 255));
 
-		btnGuardar = this.crearBoton("Guardar Masajista", 750, 10, "");
+		btnGuardar = this.crearBotonInvisible("Guardar Masajista", new Rectangle(720, 0, 200, 50), "btnGuardar.jpg");
 		pnlInferior.add(btnGuardar);
-
-		imagenPanel = this.crearLabel("", new Rectangle(0, 0, 1050, 600), "panelInferior.jpg");
-		pnlInferior.add(imagenPanel);
 
 		add(pnlInferior);
 	}
