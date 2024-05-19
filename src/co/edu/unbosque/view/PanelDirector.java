@@ -130,7 +130,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		lblNombrePerfil.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlIzquierda.add(lblNombrePerfil);
 
-		lblRol = this.crearLabel("lblRol.masajista", 5, 300);
+		lblRol = this.crearLabel("lblRol.director", 5, 300);
 		lblRol.setFont(new Font("Tahoma", Font.BOLD | Font.PLAIN, 20));
 		lblRol.setForeground(Color.white);
 		lblRol.setHorizontalAlignment(SwingConstants.CENTER);
