@@ -7,6 +7,7 @@ import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.ClasicomanoDTO;
 import co.edu.unbosque.model.ContrarrelojeroDTO;
 import co.edu.unbosque.model.DirectorDeportivoDTO;
+import co.edu.unbosque.model.EquipoDTO;
 import co.edu.unbosque.model.EscaladorDTO;
 import co.edu.unbosque.model.GregarioDTO;
 import co.edu.unbosque.model.MasajistaDTO;
@@ -51,6 +52,7 @@ public class Controller implements ActionListener {
 		vf.getvU().getPnlDirector().getBtnEliminar().addActionListener(this);
 
 		vf.getvU().getPnlDirector().getBtnEquipo().addActionListener(this);
+		vf.getvU().getPnlDirector().getBtnGuardarEquipo().addActionListener(this);
 
 		vf.getvU().getPnlCiclista().getBtnCerrar().addActionListener(this);
 		vf.getvU().getPnlMasajista().getBtnCerrar().addActionListener(this);
@@ -1242,6 +1244,85 @@ public class Controller implements ActionListener {
 		case "equipo":
 			CiclistaDAO ciclistaDAO = new CiclistaDAO();
 			vf.getvU().getPnlDirector().setLstCiclistas(ciclistaDAO.listaCiclistas("", "Ninguno"));
+
+			break;
+
+		case "guardarequipo":
+			try {
+				verificarCampoBlanco(vf.getvU().getPnlDirector().getJtNombre().getText(), "Equipo");
+				verificarCampoBlanco(vf.getvU().getPnlDirector().getJtTiempo().getText(), "Tiempo");
+				verificarCampoBlanco(vf.getvU().getPnlDirector().getJtNacionalidad().getText(), "Nacionalidad");
+				
+				System.out.println("Aqui");
+
+				String equipo = vf.getvU().getPnlDirector().getJtNombre().getText();
+				double tiempo = Double.parseDouble(vf.getvU().getPnlDirector().getJtTiempo().getText());
+				String nacionalidad = vf.getvU().getPnlDirector().getJtNacionalidad().getText();
+				// Guardar el Equipo
+
+				if (mf.getEquipoDAO().buscarNombre(equipo) == null
+						|| !mf.getEquipoDAO().buscarNombre(equipo).getNombre().equals(equipo)) {
+
+					mf.getEquipoDAO().crear(new EquipoDTO(equipo, tiempo, nacionalidad));
+				}else {
+					mf.getEquipoDAO().actualizarPorNombre(equipo, new EquipoDTO(equipo, tiempo, nacionalidad));
+				}
+				// Se recorren los usuarios seleccionados para ser actualizados
+				for (int i = 0; i < vf.getvU().getPnlDirector().getTabla().getRowCount(); i++) {
+					boolean sel = vf.getvU().getPnlDirector().getTabla().getValueAt(i, 5) != null;
+					if (sel) {
+						long c = Long.parseLong(vf.getvU().getPnlDirector().getTabla().getValueAt(i, 2).toString());
+						CiclistaDTO ciclista = mf.getCiclistaDAO().buscarCedula(c);
+						ClasicomanoDTO clasicomano = mf.getClasicomanoDAO().buscarCedula(c);
+						ContrarrelojeroDTO contrarrelojero = mf.getContrarrelojeroDAO().buscarCedula(c);
+						EscaladorDTO escalador = mf.getEscaladorDAO().buscarCedula(c);
+						GregarioDTO gregario = mf.getGregarioDAO().buscarCedula(c);
+						RodadorDTO rodador = mf.getRodadorDAO().buscarCedula(c);
+						SprinterDTO sprinter = mf.getSprinterDAO().buscarCedula(c);
+
+						if (ciclista != null) {
+
+							ciclista.setEquipo(equipo);
+
+							mf.getCiclistaDAO().actualizarPorCedula(c, ciclista);
+
+						} else if (clasicomano != null) {
+
+							clasicomano.setEquipo(equipo);
+							mf.getClasicomanoDAO().actualizarPorCedula(c, clasicomano);
+
+						} else if (contrarrelojero != null) {
+
+							contrarrelojero.setEquipo(equipo);
+							mf.getContrarrelojeroDAO().actualizarPorCedula(c, contrarrelojero);
+
+						} else if (escalador != null) {
+
+							escalador.setEquipo(equipo);
+							mf.getEscaladorDAO().actualizarPorCedula(c, escalador);
+
+						} else if (gregario != null) {
+
+							gregario.setEquipo(equipo);
+							mf.getGregarioDAO().actualizarPorCedula(c, gregario);
+
+						} else if (rodador != null) {
+
+							rodador.setEquipo(equipo);
+							mf.getRodadorDAO().actualizarPorCedula(c, rodador);
+
+						} else if (sprinter != null) {
+
+							sprinter.setEquipo(equipo);
+							mf.getSprinterDAO().actualizarPorCedula(c, sprinter);
+
+						}
+					}
+				}
+
+			} catch (BlankFieldException e1) {
+				e1.getMessage();
+			}
 
 			break;
 

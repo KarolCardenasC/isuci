@@ -87,7 +87,7 @@ public class MainPanel extends JPanel implements ActionListener {
 		boton.setActionCommand(titulo.replace(" ", "").toLowerCase());
 		boton.addActionListener(this);
 		boton.setBorderPainted(false);
-		boton.setBackground(colorPrincipal);
+		boton.setBackground(new Color(71, 30, 1));
 		boton.setHorizontalTextPosition(SwingConstants.RIGHT);
 		boton.setForeground(colorFuenteBoton);
 
@@ -149,7 +149,7 @@ public class MainPanel extends JPanel implements ActionListener {
 		boton.addActionListener(this);
 		boton.setFocusable(false);
 		boton.setBorderPainted(false);
-		boton.setBackground(colorPrincipal);
+		boton.setBackground(new Color(71, 30, 1));
 		boton.setForeground(colorFuenteBoton);
 
 		return boton;

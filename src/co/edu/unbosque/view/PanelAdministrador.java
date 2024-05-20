@@ -154,16 +154,16 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		lblRol.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlIzquierda.add(lblRol);
 
-		btnPerfil = this.crearBotonInvisible("Perfil Administrador", new Rectangle(0, 360, 250, 65), "");
+		btnPerfil = this.crearBotonInvisible("Perfil Administrador", new Rectangle(0, 337, 250, 65), "");
 		pnlIzquierda.add(btnPerfil);
 
-		btnActualizar = this.crearBotonInvisible("Actualizar Perfil Administrador", new Rectangle(0, 426, 250, 65), "");
+		btnActualizar = this.crearBotonInvisible("Actualizar Perfil Administrador", new Rectangle(0, 402, 250, 65), "");
 		pnlIzquierda.add(btnActualizar);
 
-		btnEquipo = this.crearBotonInvisible("Usuarios", new Rectangle(0, 492, 250, 65), "");
+		btnEquipo = this.crearBotonInvisible("Usuarios", new Rectangle(0, 467, 250, 65), "");
 		pnlIzquierda.add(btnEquipo);
-		
-		btnSimulacion = this.crearBotonInvisible("Simulacion", new Rectangle(20, 558, 250, 65), "");
+
+		btnSimulacion = this.crearBotonInvisible("Simulacion", new Rectangle(20, 532, 250, 60), "");
 		pnlIzquierda.add(btnSimulacion);
 
 		btnCerrar = this.crearBotonInvisible("Cerrar Sesión Administrador", new Rectangle(0, 592, 250, 68), "");
@@ -324,7 +324,8 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 		case "usuarios":
 
-			lblUsuario = this.crearLabel("lblCiclistasEquipo.titulo", 50, 170);
+			lblUsuario = this.crearLabel("lblCiclistasEquipo.titulo", 20, 50);
+			lblUsuario.setSize(400, 35);
 			pnlDerecha.add(lblUsuario);
 
 			/*
@@ -334,7 +335,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 			btnGuardar.setVisible(false);
 			mostrarCartas();
 
-			imgDatos = "listaUsuarios.jpg";
+			imgDatos = "simulacion.jpg";
 
 			revalidate();
 
@@ -342,6 +343,9 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 
 		case "simulacion":
 			seleccionarCarrera();
+			btnGuardar.setVisible(false);
+			imgDatos = "simulacion.jpg";
+			pnlInferior.setBackground(new Color(255, 243, 217));
 			break;
 		case "montana":
 		case "curvas":
@@ -349,13 +353,22 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		case "undia":
 		case "llano":
 			iniciarSimulacion();
+			btnGuardar.setVisible(false);
+			imgDatos = "simulacion.jpg";
+			pnlInferior.setBackground(new Color(255, 243, 217));
 			break;
 		case "simular":
 			iniciarCarrera();
+			btnGuardar.setVisible(false);
+			imgDatos = "simulacion.jpg";
+			pnlInferior.setBackground(new Color(255, 243, 217));
 			break;
 		case "resultados":
 			finalizarSimulacion();
-			break;		
+			btnGuardar.setVisible(false);
+			imgDatos = "podio.jpg";
+			pnlInferior.setBackground(new Color(255, 243, 217));
+			break;
 		}
 
 		imagenPanel = this.crearLabel("", new Rectangle(0, 0, 1050, 600), imgDatos);
@@ -388,11 +401,11 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		}
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(5, 200, 940, 440);
+		scrollPane.setBounds(20, 90, 1000, 500);
 
 		JPanel generalPanel = new JPanel();
 		generalPanel.setLayout(null);
-		generalPanel.setBackground(Color.WHITE);
+		generalPanel.setBackground(new Color(205, 161, 98));
 
 		int x = 80;
 		int y = 60;
@@ -484,7 +497,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 			opcion = e.getActionCommand();
 			if ("usuarios".equals(opcion)) {
 				UsuarioDAO UsuarioDAO = new UsuarioDAO();
-				mostrarTodos = UsuarioDAO.mostrarTodos();
+				mostrarTodos = UsuarioDAO.listaUsurios("");
 			}
 			iniciarPanelDerecho();
 			break;
@@ -494,7 +507,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 				for (int i = 0; i < tabla.getRowCount(); i++) {
 					boolean sel = tabla.getValueAt(i, 3) != null;
 					if (sel) {
-						CiclistaDTO newCorredor = new CiclistaDTO(i, 0, 0, "", (String) tabla.getValueAt(i, 1), "");
+						CiclistaDTO newCorredor = new CiclistaDTO(i, 0, 0, "", "", "");
 						newCorredor.setNombre((String) tabla.getValueAt(i, 0));
 						corredores.add(newCorredor);
 					}
@@ -951,14 +964,16 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		corredores = new ArrayList<>();
 		tipoSeleccionado = opcion;
 
-		JLabel lblCarreraSeleccionada = crearLabelCarrera(tipoSeleccionado, "", 60, 200, tipoSeleccionado + ".jpg", 180);
-		JLabel lblTituloCarreraSeleccionada = crearLabelCenter(this.getProperties().getProperty("lblCarrera." + tipoSeleccionado), 60, 400);
+		JLabel lblCarreraSeleccionada = crearLabelCarrera(tipoSeleccionado, "", 60, 200, tipoSeleccionado + ".jpg",
+				180);
+		JLabel lblTituloCarreraSeleccionada = crearLabelCenter(
+				this.getProperties().getProperty("lblCarrera." + tipoSeleccionado), 60, 400);
 		pnlDerecha.add(lblCarreraSeleccionada);
 		pnlDerecha.add(lblTituloCarreraSeleccionada);
 
 		JLabel lblCorredores = crearLabel("lblCarrera.carrera.corredores", 300, 120);
 		pnlDerecha.add(lblCorredores);
-		
+
 		CiclistaDAO CiclistasDAO = new CiclistaDAO();
 		ArrayList<CiclistaDTO> lstCiclistas = CiclistasDAO.mostrarTodos();
 
@@ -1031,11 +1046,13 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 	}
 
 	private void iniciarCarrera() {
-		JLabel lblCarreraSeleccionada = crearLabelCarrera(tipoSeleccionado, "", 60, 200, tipoSeleccionado + ".jpg", 180);
-		JLabel lblTituloCarreraSeleccionada = crearLabelCenter(this.getProperties().getProperty("lblCarrera." + tipoSeleccionado), 60, 400);
+		JLabel lblCarreraSeleccionada = crearLabelCarrera(tipoSeleccionado, "", 60, 200, tipoSeleccionado + ".jpg",
+				180);
+		JLabel lblTituloCarreraSeleccionada = crearLabelCenter(
+				this.getProperties().getProperty("lblCarrera." + tipoSeleccionado), 60, 400);
 		pnlDerecha.add(lblCarreraSeleccionada);
 		pnlDerecha.add(lblTituloCarreraSeleccionada);
-		
+
 		DefaultTableModel modelResult = new DefaultTableModel(columnasSimulacion, 0) {
 			public boolean isCellEditable(int row, int col) {
 				return ColumnasSimulacionEditables[col];
@@ -1068,36 +1085,36 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		timer.start();
 
 	}
-	
-	private void finalizarSimulacion()
-	{
+
+	private void finalizarSimulacion() {
 		JLabel lblPrimerLugar = crearLabelCarrera("first_place", "", 425, 10, "first_place.png", 180);
 		JLabel lblCorredorPrimerLugar = crearLabelCenter(corredores.get(0).getNombre(), 425, 200);
-		JLabel lblTiempoPrimerLugar = crearLabelCenter(String.format("%.2f", corredores.get(0).getTiempoAcumuladoMin()), 425, 220);
+		JLabel lblTiempoPrimerLugar = crearLabelCenter(String.format("%.2f", corredores.get(0).getTiempoAcumuladoMin()),
+				425, 220);
 		pnlDerecha.add(lblPrimerLugar);
 		pnlDerecha.add(lblCorredorPrimerLugar);
 		pnlDerecha.add(lblTiempoPrimerLugar);
-		
-		JLabel lblSegundoLugar = crearLabelCarrera("second_place", "", 300, 230, "second_place.png", 80);
+
+		JLabel lblSegundoLugar = crearLabelCarrera("second_place", "", 200, 130, "second_place.png", 80);
 		pnlDerecha.add(lblSegundoLugar);
 
-		JLabel lblTercerLugar = crearLabelCarrera("third_place", "", 650, 230, "third_place.png", 80);
+		JLabel lblTercerLugar = crearLabelCarrera("third_place", "", 800, 160, "third_place.png", 80);
 		pnlDerecha.add(lblTercerLugar);
-		
-		if (corredores.size() > 3)
-		{
-			JLabel lblCorredorSegundoLugar = crearLabelCenter(corredores.get(1).getNombre(), 250, 380);
-			JLabel lblTiempoSegundoLugar = crearLabelCenter(String.format("%.2f", corredores.get(1).getTiempoAcumuladoMin()), 250, 400);
+
+		if (corredores.size() > 3) {
+			JLabel lblCorredorSegundoLugar = crearLabelCenter(corredores.get(1).getNombre(), 150, 280);
+			JLabel lblTiempoSegundoLugar = crearLabelCenter(
+					String.format("%.2f", corredores.get(1).getTiempoAcumuladoMin()), 250, 400);
 			pnlDerecha.add(lblCorredorSegundoLugar);
 			pnlDerecha.add(lblTiempoSegundoLugar);
-			
-			JLabel lblCorredorTercerLugar = crearLabelCenter(corredores.get(2).getNombre(), 580, 380);
-			JLabel lblTiempoTercerLugar = crearLabelCenter(String.format("%.2f", corredores.get(2).getTiempoAcumuladoMin()), 580, 400);
+
+			JLabel lblCorredorTercerLugar = crearLabelCenter(corredores.get(2).getNombre(), 850, 310);
+			JLabel lblTiempoTercerLugar = crearLabelCenter(
+					String.format("%.2f", corredores.get(2).getTiempoAcumuladoMin()), 580, 400);
 			pnlDerecha.add(lblCorredorTercerLugar);
 			pnlDerecha.add(lblTiempoTercerLugar);
 		}
 
 	}
-	
 
 }

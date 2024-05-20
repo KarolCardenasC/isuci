@@ -15,7 +15,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import co.edu.unbosque.model.persistence.FileHandler;
-
+/**
+ * PanelCiclista class represents a panel for managing cyclist profiles.
+ * This class extends MainPanel and implements ActionListener.
+ *
+ * @author Moreno.JP
+ * @version 12/05/2024
+ */
 public class PanelCiclista extends MainPanel implements ActionListener {
 
 	private JButton btnImagen;
@@ -90,7 +96,11 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 	private boolean imgCambio = false;
 
 	private VentanaUsuario usuarioPanel;
-
+	 /**
+     * Constructs a PanelCiclista object with the specified VentanaUsuario.
+     *
+     * @param inicial the initial VentanaUsuario
+     */
 	public PanelCiclista(VentanaUsuario inicial) {
 
 		this.setProperties(FileHandler
@@ -100,7 +110,9 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		initComponents();
 
 	}
-
+	/**
+     * Initializes the components of the panel.
+     */
 	public void initComponents() {
 		removeAll();
 		iniciarPanelInferior();
@@ -108,7 +120,9 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		iniciarPanelIzquierdo();
 
 	}
-
+	/**
+     * Initializes the left panel of the interface.
+     */
 	public void iniciarPanelIzquierdo() {
 		if (pnlIzquierda == null) {
 			pnlIzquierda = new JPanel();
@@ -140,7 +154,7 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		btnEliminar = this.crearBoton("Eliminar Perfil Ciclista", 20, 450, "");
 		pnlIzquierda.add(btnEliminar);
 
-		btnCerrar = this.crearBoton("Cerrar Sesión Ciclista", 20, 600, "");
+		btnCerrar = this.crearBoton("Cerrar SesiÃ³n Ciclista", 20, 600, "");
 		pnlIzquierda.add(btnCerrar);
 
 		pnlIzquierda.repaint();
@@ -148,7 +162,9 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 		add(pnlIzquierda);
 	}
-
+	/**
+     * Initializes the right panel of the interface.
+     */
 	public void iniciarPanelDerecho() {
 		if (pnlDerecha == null) {
 			pnlDerecha = new JPanel();
@@ -440,8 +456,8 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 			pnlDerecha.add(lblCaract3);
 			pnlDerecha.add(jtCaract3);
 
-			String[] listaFuncion = { "Ninguna", "Abastecedor", "Mantener ritmo", "Captura fugas", "Posicionar líder",
-					"Proteger líder" };
+			String[] listaFuncion = { "Ninguna", "Abastecedor", "Mantener ritmo", "Captura fugas", "Posicionar lÃ­der",
+					"Proteger lÃ­der" };
 
 			jcFuncion = this.crearComboBox(listaFuncion, 720, 410);
 			jcFuncion.addActionListener(this);
@@ -464,7 +480,11 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 		add(pnlDerecha);
 	}
-
+	/**
+	 * This method displays specific fields and options based on the cyclist's specialty.
+	 *
+	 * @param especialidad the cyclist's specialty
+	 */
 	public void especificos(String especialidad) {
 
 		jtCaract1.setVisible(false);
@@ -530,10 +550,10 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 			case "Captura fugas":
 				jcFuncion.setSelectedIndex(3);
 				break;
-			case "Posicionar líder":
+			case "Posicionar lÃ­der":
 				jcFuncion.setSelectedIndex(4);
 				break;
-			case "Proteger líder":
+			case "Proteger lÃ­der":
 				jcFuncion.setSelectedIndex(5);
 				break;
 			}
@@ -570,7 +590,9 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 			break;
 		}
 	}
-
+	/**
+	 * Initializes the bottom panel of the user interface.
+	 */
 	public void iniciarPanelInferior() {
 		pnlInferior = new JPanel();
 		pnlInferior.setBounds(Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.horizontal")),
@@ -584,7 +606,10 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 
 		add(pnlInferior);
 	}
-
+	/**
+	 * Applies validation functions to the input fields based on the selected cyclist specialization.
+	 * Validates input fields for specific data types, limits the number of characters, and restricts input to certain characters.
+	 */
 	public void aplicarFuncionesValidacion() {
 
 		numeros(jtCedula);
@@ -639,7 +664,12 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		}
 
 	}
-
+	/**
+	 * Handles actions performed by the user interface components.
+	 * Performs different actions based on the action command associated with the event.
+	 * 
+	 * @param e The action event triggered by user interaction.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -686,7 +716,14 @@ public class PanelCiclista extends MainPanel implements ActionListener {
 		}
 
 	}
-
+	
+	/**
+	 * Getter/Setter method for [property description].
+	 * 
+	 * @return The [property name].
+	 * @param [property name] The new value for the [property name].
+	 */
+	
 	public JButton getBtnImagen() {
 		return btnImagen;
 	}

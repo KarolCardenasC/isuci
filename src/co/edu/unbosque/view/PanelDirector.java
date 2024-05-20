@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import co.edu.unbosque.model.CiclistaDTO;
+import co.edu.unbosque.model.persistence.EquipoDAO;
 import co.edu.unbosque.model.persistence.FileHandler;
 
 public class PanelDirector extends MainPanel implements ActionListener {
@@ -37,6 +38,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 	private JButton btnCerrar;
 	private JButton btnPerfil;
 	private JButton btnGuardar;
+	private JButton btnGuardarEquipo;
 
 	private JLabel lblImagenPerfil;
 	private JLabel lblRol;
@@ -97,7 +99,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 	private boolean ColumnasEditables[] = { false, false, false, false, false, true };
 	private Class tipo[] = new Class[] { java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
 			java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class };
-	
+
 	public PanelDirector(VentanaUsuario inicial) {
 
 		this.setProperties(FileHandler
@@ -142,7 +144,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		lblRol.setForeground(Color.white);
 		lblRol.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlIzquierda.add(lblRol);
-		
+
 		btnPerfil = this.crearBotonInvisible("Perfil Director", new Rectangle(0, 363, 250, 48), "");
 		pnlIzquierda.add(btnPerfil);
 
@@ -157,7 +159,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 		btnCerrar = this.crearBotonInvisible("Cerrar Sesión Director", new Rectangle(0, 592, 250, 68), "");
 		pnlIzquierda.add(btnCerrar);
-		
+
 		imagenPanelIzq = this.crearLabel("", new Rectangle(0, 0, 250, 660), "izquierdaDirector.jpg");
 		pnlIzquierda.add(imagenPanelIzq);
 
@@ -186,6 +188,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 		case "perfilinicial":
 			btnGuardar.setVisible(false);
+			btnGuardarEquipo.setVisible(false);
 			imgDatos = "perfilInicialDirector.jpg";
 			pnlInferior.setBackground(new Color(255, 255, 255));
 			break;
@@ -258,6 +261,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			pnlInferior.setBackground(new Color(255, 255, 255));
 
 			btnGuardar.setVisible(false);
+			btnGuardarEquipo.setVisible(false);
 			break;
 
 		case "actualizarperfildirector":
@@ -326,6 +330,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			imgDatos = "perfilActDirector.jpg";
 
 			btnGuardar.setVisible(true);
+			btnGuardarEquipo.setVisible(false);
 
 			imgCambio = false;
 
@@ -357,10 +362,11 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			 * INTENTAR PONER LAS CARTAS DE LOS CICLISTAS
 			 */
 
-			btnGuardar.setVisible(true);
 			mostrarCartas();
 
-			imgDatos = "equipoDirector.jpg";
+			btnGuardar.setVisible(false);
+			btnGuardarEquipo.setVisible(true);
+			imgDatos = "simulacion.jpg";
 
 			revalidate();
 
@@ -386,9 +392,10 @@ public class PanelDirector extends MainPanel implements ActionListener {
 				Integer.parseInt(this.getProperties().getProperty("panel.pnlinferior.alto")));
 		pnlInferior.setLayout(null);
 
-		btnGuardar = this.crearBotonInvisible("Guardar Equipo", new Rectangle(720, 0, 200, 50),
+		btnGuardar = this.crearBotonInvisible("Guardar Administrador", new Rectangle(720, 0, 200, 50),
 				"btnGuardar.jpg");
-		pnlInferior.add(btnGuardar);
+		btnGuardarEquipo = this.crearBotonInvisible("guardarequipo", new Rectangle(220, 0, 200, 50), "btnGuardar.jpg");
+		pnlInferior.add(btnGuardarEquipo);
 
 		add(pnlInferior);
 	}
@@ -397,7 +404,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		if (lstCiclistas == null) {
 			return;
 		}
-		
+
 		DefaultTableModel tableModel = new DefaultTableModel(columnas, 0) {
 			public boolean isCellEditable(int row, int col) {
 				return ColumnasEditables[col];
@@ -405,7 +412,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 			public Class getColumnClass(int index) {
 				return tipo[index];
-			}		
+			}
 		};
 
 		for (CiclistaDTO c : lstCiclistas) {
@@ -418,7 +425,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		jsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		jsPanel.setBounds(20, 200, 1000, 300);
 		pnlDerecha.add(jsPanel);
-		
+
 	}
 
 	public void aplicarFuncionesValidacion() {
@@ -475,26 +482,6 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		case "equipo":
 			opcion = e.getActionCommand();
 			iniciarPanelDerecho();
-			break;
-		case "guardarequipo":
-			String equipo = jtNombre.getText();
-			String tiempo = jtTiempo.getText();
-			String nacionalidad = jtNacionalidad.getText();
-			// Guardar el Equipo
-			
-			
-			// Se recorren los usuarios seleccionados para ser actualizados
-			for (int i = 0; i < tabla.getRowCount(); i++) {
-				boolean sel = tabla.getValueAt(i, 5) != null;
-				if (sel) {
-					CiclistaDTO newCorredor = new CiclistaDTO(Integer.parseInt(String.valueOf(tabla.getValueAt(i, 0))), 0, 0, "", 
-							(String) tabla.getValueAt(i, 4)
-							, equipo);
-					newCorredor.setNombre((String) tabla.getValueAt(i, 1));
-					// Guardar informacion en las listas
-				}
-			}
-			
 			break;
 		}
 
@@ -922,6 +909,54 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 	public void setImagenPanelIzq(JLabel imagenPanelIzq) {
 		this.imagenPanelIzq = imagenPanelIzq;
+	}
+
+	public ArrayList<Item> getLstItemCiclistas() {
+		return lstItemCiclistas;
+	}
+
+	public void setLstItemCiclistas(ArrayList<Item> lstItemCiclistas) {
+		this.lstItemCiclistas = lstItemCiclistas;
+	}
+
+	public JTable getTabla() {
+		return tabla;
+	}
+
+	public void setTabla(JTable tabla) {
+		this.tabla = tabla;
+	}
+
+	public String[] getColumnas() {
+		return columnas;
+	}
+
+	public void setColumnas(String[] columnas) {
+		this.columnas = columnas;
+	}
+
+	public boolean[] getColumnasEditables() {
+		return ColumnasEditables;
+	}
+
+	public void setColumnasEditables(boolean[] columnasEditables) {
+		ColumnasEditables = columnasEditables;
+	}
+
+	public Class[] getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Class[] tipo) {
+		this.tipo = tipo;
+	}
+
+	public JButton getBtnGuardarEquipo() {
+		return btnGuardarEquipo;
+	}
+
+	public void setBtnGuardarEquipo(JButton btnGuardarEquipo) {
+		this.btnGuardarEquipo = btnGuardarEquipo;
 	}
 
 }
