@@ -394,6 +394,7 @@ public class PanelDirector extends MainPanel implements ActionListener {
 
 		btnGuardar = this.crearBotonInvisible("Guardar Administrador", new Rectangle(720, 0, 200, 50),
 				"btnGuardar.jpg");
+		pnlInferior.add(btnGuardar);
 		btnGuardarEquipo = this.crearBotonInvisible("guardarequipo", new Rectangle(220, 0, 200, 50), "btnGuardar.jpg");
 		pnlInferior.add(btnGuardarEquipo);
 
