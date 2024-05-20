@@ -494,7 +494,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 				for (int i = 0; i < tabla.getRowCount(); i++) {
 					boolean sel = tabla.getValueAt(i, 3) != null;
 					if (sel) {
-						CiclistaDTO newCorredor = new CiclistaDTO(i, 0, 0, "", "", "");
+						CiclistaDTO newCorredor = new CiclistaDTO(i, 0, 0, "", (String) tabla.getValueAt(i, 1), "");
 						newCorredor.setNombre((String) tabla.getValueAt(i, 0));
 						corredores.add(newCorredor);
 					}

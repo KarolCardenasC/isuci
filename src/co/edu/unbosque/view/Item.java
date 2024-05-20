@@ -39,8 +39,9 @@ public class Item extends JPanel {
 	
 	public Item(CiclistaDTO ciclista) {
 		this.ciclista = ciclista;
-		this.btnInfo = new JButton();
+		btnInfo = new JButton();
 		chkSelect = new JCheckBox();
+		setName("Ciclista " + ciclista.getId());
 	}
 	
 	public Item(UsuarioDTO usuario) {
@@ -58,7 +59,7 @@ public class Item extends JPanel {
 	
 	public static JPanel getItem(int x, int y) {
 		JPanel pnlItem = new JPanel();
-		pnlItem.setName("Ciclista " + Integer.toString(ciclista.getIdentificador()));
+		pnlItem.setName("Ciclista " + ciclista.getId());
 		pnlItem.setLayout(null);
 		pnlItem.setBounds(x, y, 200, 300);
 		pnlItem.setToolTipText("Ciclista " + Integer.toString(ciclista.getIdentificador()));

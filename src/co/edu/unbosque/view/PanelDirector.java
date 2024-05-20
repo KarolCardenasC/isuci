@@ -13,14 +13,17 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.persistence.FileHandler;
@@ -83,17 +86,25 @@ public class PanelDirector extends MainPanel implements ActionListener {
 	JLabel lblTitulo;
 	private JPanel generalPanel;
 	JScrollPane scrollPane;
+	private ArrayList<Item> lstItemCiclistas;
 	private Item newItem;
 	private ArrayList<CiclistaDTO> lstCiclistas;
 
 	private VentanaUsuario usuarioPanel;
 
+	private JTable tabla;
+	private String columnas[] = { "ID", "Nombre", "Cedula", "Tipo", "Especialidad", "Acción" };
+	private boolean ColumnasEditables[] = { false, false, false, false, false, true };
+	private Class tipo[] = new Class[] { java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+			java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class };
+	
 	public PanelDirector(VentanaUsuario inicial) {
 
 		this.setProperties(FileHandler
 				.cargarArchivoPropiedades("src/co/edu/unbosque/model/persistence/ventanaUsuario.properties"));
 		usuarioPanel = inicial;
 		setLayout(null);
+		lstItemCiclistas = new ArrayList<>();
 		initComponents();
 
 	}
@@ -325,21 +336,21 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		case "equipo":
 
 			lblNombre = this.crearLabel("lblNombreEquipo.titulo", 50, 50);
-			jtNombre = this.crearTextField("", 200, 50);
+			jtNombre = this.crearTextField("", 50, 80);
 			pnlDerecha.add(lblNombre);
 			pnlDerecha.add(jtNombre);
 
-			lblTiempo = this.crearLabel("lblTiempoEquipo.titulo", 50, 100);
-			jtTiempo = this.crearTextField("", 200, 100);
+			lblTiempo = this.crearLabel("lblTiempoEquipo.titulo", 300, 50);
+			jtTiempo = this.crearTextField("", 300, 80);
 			pnlDerecha.add(lblTiempo);
 			pnlDerecha.add(jtTiempo);
 
-			lblNacionalidad = this.crearLabel("lblPaisEquipo.titulo", 450, 50);
-			jtNacionalidad = this.crearTextField("", 600, 50);
+			lblNacionalidad = this.crearLabel("lblPaisEquipo.titulo", 550, 50);
+			jtNacionalidad = this.crearTextField("", 550, 80);
 			pnlDerecha.add(lblNacionalidad);
 			pnlDerecha.add(jtNacionalidad);
 
-			lblUsuario = this.crearLabel("lblCiclistasEquipo.titulo", 50, 170);
+			lblUsuario = this.crearLabel("lblCiclistasEquipo.titulo", 50, 140);
 			pnlDerecha.add(lblUsuario);
 
 			/*
@@ -386,42 +397,28 @@ public class PanelDirector extends MainPanel implements ActionListener {
 		if (lstCiclistas == null) {
 			return;
 		}
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(5, 150, 1000, 440);
-
-		generalPanel = new JPanel();
-		generalPanel.setLayout(null);
-		generalPanel.setBackground(Color.WHITE);
-
-		int x = 80;
-		int y = 60;
-		int heightFinal = lstCiclistas.size();
-
-		for (CiclistaDTO ciclista : lstCiclistas) {
-			newItem = new Item(ciclista);
-			generalPanel.add(newItem.getItem(x, y));
-
-			if (x + 205 > 800) {
-				x = 80;
-				y += 305;
-			} else {
-				x += 205;
+		
+		DefaultTableModel tableModel = new DefaultTableModel(columnas, 0) {
+			public boolean isCellEditable(int row, int col) {
+				return ColumnasEditables[col];
 			}
+
+			public Class getColumnClass(int index) {
+				return tipo[index];
+			}		
+		};
+
+		for (CiclistaDTO c : lstCiclistas) {
+			Object[] data = { c.getIdentificador(), c.getNombre(), c.getCedula(), c.getRol(), c.getEspecialidad() };
+			tableModel.addRow(data);
 		}
 
-		double res = Math.ceil(heightFinal / 4.0);
-		if (((res * 300) + 120) + (res * 5) > 700) {
-
-			heightFinal = (int) ((res * 300) + 120 + (res * 5));
-		} else {
-			heightFinal = 700;
-		}
-
-		generalPanel.setBounds(0, 0, 940, heightFinal);
-		generalPanel.setPreferredSize(new Dimension(940, heightFinal));
-		scrollPane.setViewportView(generalPanel);
-
-		pnlDerecha.add(scrollPane);
+		tabla = crearTable(columnas, ColumnasEditables, tableModel);
+		JScrollPane jsPanel = new JScrollPane(tabla);
+		jsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		jsPanel.setBounds(20, 200, 1000, 300);
+		pnlDerecha.add(jsPanel);
+		
 	}
 
 	public void aplicarFuncionesValidacion() {
@@ -480,18 +477,18 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			iniciarPanelDerecho();
 			break;
 		case "guardarequipo":
-			for (Component component : generalPanel.getComponents()) {
-				if (component instanceof JPanel)
-				{
-					Item cicl = (Item)component;
-					if (cicl.getName().startsWith("Ciclista ") && cicl.getIsSelect())
-					{
-						JOptionPane.showMessageDialog(null,
-								"Ciclista seleccionado: " + cicl.getCiclista().getNombre(), "Mensaje",
-								JOptionPane.WARNING_MESSAGE);
-					}
+			String equipo = jtNombre.getText();
+			for (int i = 0; i < tabla.getRowCount(); i++) {
+				boolean sel = tabla.getValueAt(i, 5) != null;
+				if (sel) {
+					CiclistaDTO newCorredor = new CiclistaDTO(Integer.parseInt(String.valueOf(tabla.getValueAt(i, 0))), 0, 0, "", 
+							(String) tabla.getValueAt(i, 4)
+							, equipo);
+					newCorredor.setNombre((String) tabla.getValueAt(i, 1));
+					// Guardar informacion en las listas
 				}
 			}
+			
 			break;
 		}
 
