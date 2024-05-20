@@ -5,16 +5,29 @@ import java.util.ArrayList;
 import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.GregarioDTO;
 
+/**
+ * This class manages the CRUD operations for GregarioDTO objects,
+ * including serialization and deserialization from a file.
+ * 
+ * @author Moreno.JP
+ * @version 12/05/2024
+ */
+
 public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 
 	private ArrayList<GregarioDTO> listaGregarios;
 	private final String SERIALIZED_FILE_NAME = "datos/Gregario.isuci";
 
+	
 	public GregarioDAO() {
 		listaGregarios = new ArrayList<>();
 		leerArchivoSerializado();
 	}
 
+	/**
+	 * Reads the serialized file and initializes the list of Gregarios.
+	 */
+	
 	public void leerArchivoSerializado() {
 		Object contenido = FileHandler.abrirLeerSerializado(SERIALIZED_FILE_NAME);
 
@@ -26,6 +39,13 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 
 	}
 
+	/**
+	 * Checks if the provided index is valid.
+	 * 
+	 * @param index the index to check
+	 * @return a message indicating if the index is valid or not
+	 */
+	
 	public String checkIndex(int index) {
 		if (index < 0) {
 			return "La posición no puede tomar valores negativos";
@@ -37,6 +57,12 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 		return "g";
 	}
 
+	/**
+	 * Adds a new GregarioDTO to the list and serializes the updated list.
+	 * 
+	 * @param data the GregarioDTO to add
+	 */
+	
 	@Override
 	public void crear(GregarioDTO data) {
 		listaGregarios.add(data);
@@ -44,6 +70,14 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 
 	}
 
+	/**
+	 * Updates an existing GregarioDTO identified by its id.
+	 * 
+	 * @param id the id of the GregarioDTO to update
+	 * @param newData the new data for the GregarioDTO
+	 * @return a message indicating the result of the update operation
+	 */
+	
 	@Override
 	public String actualizarPorCedula(long id, GregarioDTO newData) {
 		String msj = "No existe un Gregario con esa cédula";
@@ -60,6 +94,13 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 		return msj;
 	}
 
+	/**
+	 * Searches for GregarioDTO objects by name.
+	 * 
+	 * @param n the name to search for
+	 * @return a list of GregarioDTO objects matching the name
+	 */
+	
 	@Override
 	public ArrayList<GregarioDTO> buscarNombre(String n) {
 
@@ -73,6 +114,13 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 		return gregarios;
 	}
 
+	/**
+	 * Searches for a GregarioDTO by its id.
+	 * 
+	 * @param id the id to search for
+	 * @return the matching GregarioDTO or null if not found
+	 */
+	
 	@Override
 	public GregarioDTO buscarCedula(long id) {
 
@@ -85,6 +133,13 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 		return null;
 	}
 
+	/**
+	 * Deletes a GregarioDTO identified by its id.
+	 * 
+	 * @param id the id of the GregarioDTO to delete
+	 * @return a message indicating the result of the delete operation
+	 */
+	
 	@Override
 	public String eliminarPorCedula(long id) {
 		String msj = "No existe un Gregario con esa cédula";
@@ -101,6 +156,12 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 		return msj;
 	}
 
+	/**
+	 * Returns a list of all GregarioDTO objects.
+	 * 
+	 * @return a list of all GregarioDTO objects
+	 */
+	
 	@Override
 	public ArrayList<GregarioDTO> mostrarTodos() {
 		ArrayList<GregarioDTO> listaMostrar = new ArrayList<>();
@@ -116,6 +177,14 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 		return listaMostrar;
 	}
 	
+	/**
+	 * Verifies the user's credentials.
+	 * 
+	 * @param u the username
+	 * @param c the password
+	 * @return the matching GregarioDTO or null if not found
+	 */
+	
 	@Override
 	public GregarioDTO verificarUsuario(String u, String c) {
 		for (GregarioDTO gregario : listaGregarios) {
@@ -128,6 +197,13 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 		return null;
 	}
 	
+	/**
+	 * Searches for a GregarioDTO by its email.
+	 * 
+	 * @param g the email to search for
+	 * @return the matching GregarioDTO or null if not found
+	 */
+	
 	@Override
 	public GregarioDTO buscarGmail(String g) {
 		for (int i = 0; i < listaGregarios.size(); i++) {
@@ -138,6 +214,13 @@ public class GregarioDAO implements CRUDOperation<GregarioDTO> {
 		}
 		return null;
 	}
+	
+	/**
+	 * Searches for a GregarioDTO by its identifier.
+	 * 
+	 * @param iden the identifier to search for
+	 * @return the matching GregarioDTO or null if not found
+	 */
 	
 	public GregarioDTO buscarIdentificador(int iden) {
 		for (int i = 0; i < listaGregarios.size(); i++) {

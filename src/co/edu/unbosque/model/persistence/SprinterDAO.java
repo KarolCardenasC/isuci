@@ -6,6 +6,14 @@ import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.SprinterDTO;
 import co.edu.unbosque.model.SprinterDTO;
 
+/**
+ * This class manages the CRUD operations for SprinterDTO objects,
+ * including serialization and deserialization from a file.
+ * 
+ * @autor Moreno.JP
+ * @version 12/05/2024
+ */
+
 public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 
 	private ArrayList<SprinterDTO> listaSprinters;
@@ -16,6 +24,10 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 		leerArchivoSerializado();
 	}
 
+	/**
+	 * Reads the serialized file and initializes the list of Sprinters.
+	 */
+	
 	public void leerArchivoSerializado() {
 		Object contenido = FileHandler.abrirLeerSerializado(SERIALIZED_FILE_NAME);
 
@@ -27,6 +39,13 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 
 	}
 
+	/**
+	 * Checks if the provided index is valid.
+	 * 
+	 * @param index the index to check
+	 * @return a message indicating if the index is valid or not
+	 */
+	
 	public String checkIndex(int index) {
 		if (index < 0) {
 			return "La posición no puede tomar valores negativos";
@@ -38,6 +57,12 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 		return "g";
 	}
 
+	/**
+	 * Adds a new SprinterDTO to the list and serializes the updated list.
+	 * 
+	 * @param data the SprinterDTO to add
+	 */
+	
 	@Override
 	public void crear(SprinterDTO data) {
 		listaSprinters.add(data);
@@ -45,6 +70,14 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 
 	}
 
+	/**
+	 * Updates an existing SprinterDTO identified by its id.
+	 * 
+	 * @param id the id of the SprinterDTO to update
+	 * @param newData the new data for the SprinterDTO
+	 * @return a message indicating the result of the update operation
+	 */
+	
 	@Override
 	public String actualizarPorCedula(long id, SprinterDTO newData) {
 		String msj = "No existe un Sprinter con esa cédula";
@@ -61,6 +94,13 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 		return msj;
 	}
 
+	/**
+	 * Searches for SprinterDTO objects by name.
+	 * 
+	 * @param n the name to search for
+	 * @return a list of SprinterDTO objects matching the name
+	 */
+	
 	@Override
 	public ArrayList<SprinterDTO> buscarNombre(String n) {
 
@@ -74,6 +114,13 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 		return sprinters;
 	}
 
+	/**
+	 * Searches for a SprinterDTO by its id.
+	 * 
+	 * @param id the id to search for
+	 * @return the matching SprinterDTO or null if not found
+	 */
+	
 	@Override
 	public SprinterDTO buscarCedula(long id) {
 
@@ -86,6 +133,13 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 		return null;
 	}
 
+	/**
+	 * Deletes a SprinterDTO identified by its id.
+	 * 
+	 * @param id the id of the SprinterDTO to delete
+	 * @return a message indicating the result of the delete operation
+	 */
+	
 	@Override
 	public String eliminarPorCedula(long id) {
 		String msj = "No existe un Sprinter con esa cédula";
@@ -101,7 +155,13 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 
 		return msj;
 	}
-
+	
+	/**
+	 * Returns a list of all SprinterDTO objects.
+	 * 
+	 * @return a list of all SprinterDTO objects
+	 */
+	
 	@Override
 	public ArrayList<SprinterDTO> mostrarTodos() {
 		ArrayList<SprinterDTO> listaMostrar = new ArrayList<>();
@@ -117,6 +177,14 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 		return listaMostrar;
 	}
 	
+	/**
+	 * Verifies the user's credentials.
+	 * 
+	 * @param u the username
+	 * @param c the password
+	 * @return the matching SprinterDTO or null if not found
+	 */
+	
 	@Override
 	public SprinterDTO verificarUsuario(String u, String c) {
 		for (SprinterDTO sprinter : listaSprinters) {
@@ -129,6 +197,13 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 		return null;
 	}
 	
+	/**
+	 * Searches for a SprinterDTO by its email.
+	 * 
+	 * @param g the email to search for
+	 * @return the matching SprinterDTO or null if not found
+	 */
+	
 	@Override
 	public SprinterDTO buscarGmail(String g) {
 		for (int i = 0; i < listaSprinters.size(); i++) {
@@ -139,6 +214,13 @@ public class SprinterDAO implements CRUDOperation<SprinterDTO> {
 		}
 		return null;
 	}
+	
+	/**
+	 * Searches for a SprinterDTO by its identifier.
+	 * 
+	 * @param iden the identifier to search for
+	 * @return the matching SprinterDTO or null if not found
+	 */
 	
 	public SprinterDTO buscarIdentificador(int iden) {
 		for (int i = 0; i < listaSprinters.size(); i++) {
