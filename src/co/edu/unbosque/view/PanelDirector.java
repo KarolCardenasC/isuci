@@ -478,6 +478,12 @@ public class PanelDirector extends MainPanel implements ActionListener {
 			break;
 		case "guardarequipo":
 			String equipo = jtNombre.getText();
+			String tiempo = jtTiempo.getText();
+			String nacionalidad = jtNacionalidad.getText();
+			// Guardar el Equipo
+			
+			
+			// Se recorren los usuarios seleccionados para ser actualizados
 			for (int i = 0; i < tabla.getRowCount(); i++) {
 				boolean sel = tabla.getValueAt(i, 5) != null;
 				if (sel) {
