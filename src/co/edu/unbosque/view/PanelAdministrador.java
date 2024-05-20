@@ -507,8 +507,8 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 				for (int i = 0; i < tabla.getRowCount(); i++) {
 					boolean sel = tabla.getValueAt(i, 3) != null;
 					if (sel) {
-						CiclistaDTO newCorredor = new CiclistaDTO(i, 0, 0, "", "", "");
-						newCorredor.setNombre((String) tabla.getValueAt(i, 0));
+						CiclistaDTO newCorredor = new CiclistaDTO(i, 0, 0, "", "", (String) tabla.getValueAt(i, 0));
+						newCorredor.setNombre((String) tabla.getValueAt(i, 1));
 						corredores.add(newCorredor);
 					}
 				}
@@ -975,7 +975,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		pnlDerecha.add(lblCorredores);
 
 		CiclistaDAO CiclistasDAO = new CiclistaDAO();
-		ArrayList<CiclistaDTO> lstCiclistas = CiclistasDAO.mostrarTodos();
+		ArrayList<CiclistaDTO> lstCiclistas = CiclistasDAO.listaCiclistas("", "");
 
 		btnIniciarSimulacion = this.crearBoton("Simular", 425, 480, "");
 		pnlDerecha.add(btnIniciarSimulacion);
@@ -991,7 +991,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		};
 
 		for (CiclistaDTO c : lstCiclistas) {
-			Object[] data = { c.getNombre(), c.getNombre(), c.getTiempoAcumuladoMin() };
+			Object[] data = { c.getEquipo(), c.getNombre(), c.getTiempoAcumuladoMin() };
 			tableModel.addRow(data);
 		}
 
@@ -1063,7 +1063,7 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 		modelocentrar.setFont(new Font("Tahoma", Font.BOLD | Font.PLAIN, 16));
 
 		for (CiclistaDTO c : corredores) {
-			Object[] data = { c.getNombre(), c.getNombre(), c.getTiempoAcumuladoMin() };
+			Object[] data = { c.getEquipo(), c.getNombre(), c.getTiempoAcumuladoMin() };
 			modelResult.addRow(data);
 		}
 
@@ -1087,30 +1087,30 @@ public class PanelAdministrador extends MainPanel implements ActionListener {
 	}
 
 	private void finalizarSimulacion() {
-		JLabel lblPrimerLugar = crearLabelCarrera("first_place", "", 425, 10, "first_place.png", 180);
-		JLabel lblCorredorPrimerLugar = crearLabelCenter(corredores.get(0).getNombre(), 425, 200);
+		JLabel lblPrimerLugar = crearLabelCarrera("first_place", "", 425, 5, "first_place.png", 180);
+		JLabel lblCorredorPrimerLugar = crearLabelCenter(corredores.get(0).getNombre(), 425, 180);
 		JLabel lblTiempoPrimerLugar = crearLabelCenter(String.format("%.2f", corredores.get(0).getTiempoAcumuladoMin()),
-				425, 220);
+				425, 210);
 		pnlDerecha.add(lblPrimerLugar);
 		pnlDerecha.add(lblCorredorPrimerLugar);
 		pnlDerecha.add(lblTiempoPrimerLugar);
 
-		JLabel lblSegundoLugar = crearLabelCarrera("second_place", "", 200, 130, "second_place.png", 80);
+		JLabel lblSegundoLugar = crearLabelCarrera("second_place", "", 200, 110, "second_place.png", 80);
 		pnlDerecha.add(lblSegundoLugar);
 
-		JLabel lblTercerLugar = crearLabelCarrera("third_place", "", 800, 160, "third_place.png", 80);
+		JLabel lblTercerLugar = crearLabelCarrera("third_place", "", 800, 140, "third_place.png", 80);
 		pnlDerecha.add(lblTercerLugar);
 
 		if (corredores.size() > 3) {
-			JLabel lblCorredorSegundoLugar = crearLabelCenter(corredores.get(1).getNombre(), 150, 280);
+			JLabel lblCorredorSegundoLugar = crearLabelCenter(corredores.get(1).getNombre(), 150, 260);
 			JLabel lblTiempoSegundoLugar = crearLabelCenter(
-					String.format("%.2f", corredores.get(1).getTiempoAcumuladoMin()), 250, 400);
+					String.format("%.2f", corredores.get(1).getTiempoAcumuladoMin()), 150, 280);
 			pnlDerecha.add(lblCorredorSegundoLugar);
 			pnlDerecha.add(lblTiempoSegundoLugar);
 
-			JLabel lblCorredorTercerLugar = crearLabelCenter(corredores.get(2).getNombre(), 850, 310);
+			JLabel lblCorredorTercerLugar = crearLabelCenter(corredores.get(2).getNombre(), 750, 290);
 			JLabel lblTiempoTercerLugar = crearLabelCenter(
-					String.format("%.2f", corredores.get(2).getTiempoAcumuladoMin()), 580, 400);
+					String.format("%.2f", corredores.get(2).getTiempoAcumuladoMin()), 750, 320);
 			pnlDerecha.add(lblCorredorTercerLugar);
 			pnlDerecha.add(lblTiempoTercerLugar);
 		}
