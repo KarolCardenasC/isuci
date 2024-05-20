@@ -4,17 +4,30 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model.CiclistaDTO;
 import co.edu.unbosque.model.ClasicomanoDTO;
-
+/**
+ * The ClasicomanoDAO class implements CRUD operations for the ClasicomanoDTO class.
+ * 
+ * @author Moreno.JP
+ * @version 12/05/2024
+ * 
+ */
 public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 
 	private ArrayList<ClasicomanoDTO> listaClasicomanos;
 	private final String SERIALIZED_FILE_NAME = "datos/Clasicomano.isuci";
+	 
+	/**
+     * Constructor for the ClasicomanoDAO class. Initializes the list of Clasicomanos and reads the serialized file.
+     */
 
 	public ClasicomanoDAO() {
 		listaClasicomanos = new ArrayList<>();
 		leerArchivoSerializado();
 	}
-
+	/**
+     * Reads the serialized file and initializes the list of Clasicomanos.
+     */
+	
 	public void leerArchivoSerializado() {
 		Object contenido = FileHandler.abrirLeerSerializado(SERIALIZED_FILE_NAME);
 
@@ -26,6 +39,12 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 
 	}
 
+	/**
+     * Checks if the index is valid for the list of Clasicomanos.
+     * @param index the index to check
+     * @return a message indicating the validity of the index
+     */
+	
 	public String checkIndex(int index) {
 		if (index < 0) {
 			return "La posición no puede tomar valores negativos";
@@ -37,6 +56,11 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 		return "g";
 	}
 
+	/**
+     * Adds a new Clasicomano to the list and serializes the list.
+     * @param data the Clasicomano to add
+     */
+	
 	@Override
 	public void crear(ClasicomanoDTO data) {
 		listaClasicomanos.add(data);
@@ -44,6 +68,13 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 
 	}
 
+	 /**
+     * Updates the Clasicomano with the specified ID.
+     * @param id the ID of the Clasicomano to update
+     * @param newData the new data for the Clasicomano
+     * @return a message indicating the result of the operation
+     */
+	
 	@Override
 	public String actualizarPorCedula(long id, ClasicomanoDTO newData) {
 		String msj = "No existe un Clasicomano con esa cédula";
@@ -60,6 +91,12 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 		return msj;
 	}
 
+	  /**
+     * Searches for Clasicomanos by name.
+     * @param n the name to search for
+     * @return a list of Clasicomanos with the specified name
+     */
+	
 	@Override
 	public ArrayList<ClasicomanoDTO> buscarNombre(String n) {
 
@@ -73,6 +110,13 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 		return clasicomanos;
 	}
 
+	
+	/**
+     * Searches for a Clasicomano by ID.
+     * @param id the ID to search for
+     * @return the Clasicomano with the specified ID, or null if not found
+     */
+	
 	@Override
 	public ClasicomanoDTO buscarCedula(long id) {
 
@@ -85,6 +129,12 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 		return null;
 	}
 
+	/**
+     * Deletes a Clasicomano by ID.
+     * @param id the ID of the Clasicomano to delete
+     * @return a message indicating the result of the operation
+     */
+	
 	@Override
 	public String eliminarPorCedula(long id) {
 		String msj = "No existe un Clasicomano con esa cédula";
@@ -101,6 +151,11 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 		return msj;
 	}
 
+	/**
+     * Returns a list of all Clasicomanos.
+     * @return a list of all Clasicomanos
+     */
+	
 	@Override
 	public ArrayList<ClasicomanoDTO> mostrarTodos() {
 		ArrayList<ClasicomanoDTO> listaMostrar = new ArrayList<>();
@@ -115,6 +170,13 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 		return listaMostrar;
 	}
 
+	/**
+     * Verifies the user's credentials.
+     * @param u the username
+     * @param c the password
+     * @return the Clasicomano with the specified credentials, or null if not found
+     */
+	
 	@Override
 	public ClasicomanoDTO verificarUsuario(String u, String c) {
 		for (ClasicomanoDTO clasicomano : listaClasicomanos) {
@@ -127,6 +189,12 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 		return null;
 	}
 	
+	/**
+     * Searches for a Clasicomano by email.
+     * @param g the email to search for
+     * @return the Clasicomano with the specified email, or null if not found
+     */
+	
 	@Override
 	public ClasicomanoDTO buscarGmail(String g) {
 		for (int i = 0; i < listaClasicomanos.size(); i++) {
@@ -137,6 +205,12 @@ public class ClasicomanoDAO implements CRUDOperation<ClasicomanoDTO> {
 		}
 		return null;
 	}
+	
+	/**
+     * Searches for a Clasicomano by identifier.
+     * @param iden the identifier to search for
+     * @return the Clasicomano with the specified identifier, or null if not found
+     */
 	
 	public ClasicomanoDTO buscarIdentificador(int iden) {
 		for (int i = 0; i < listaClasicomanos.size(); i++) {
